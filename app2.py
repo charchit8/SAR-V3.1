@@ -1535,7 +1535,7 @@ with col_d2:
         
         
         response1 = usellm(prompt) 
-        st.markdown(f'''*{response1}*''',unsafe_allow_html=True)
+        st.markdown(f'''{*response1*}''',unsafe_allow_html=True)
 
         selected_rad = st.radio(":blue", ["Yes", "No", "Refer for review"], horizontal=True,disabled=st.session_state.disabled)
         if selected_rad == "Refer for review":
