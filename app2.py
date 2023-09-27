@@ -1525,7 +1525,7 @@ with col_d2:
         prompt = f'''Act as a financial analyst and give concise answer to the question, with given Context.\n\n\
         First Find out if there is any suspicious activity based on the following-
         1. Transaction amount is above the $5,000 value threshold. 
-        2. If there is an indication of suspicion with involvement of multiple individuals other than the customer, Also, if there is mismatch of customer details such as name,address,phone number on merchant invoice. \n\n\
+        2. If there is mismatch of customer details such as name,address,phone number on merchant invoice (check for these details in the context). \n\n\
         3. Any potential suspect is identified.\n\n\     
         Based on the suspicious activity, answer if SAR filling is required or not.SAR refers to Suspicious activity Report, which is a document that financial institutions must file with the Financial Crimes Enforcement Network (FinCEN) based on the Bank Secrecy Act whenever there is a suspicious activity.\n\n\
         
