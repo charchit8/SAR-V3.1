@@ -811,8 +811,8 @@ with col2_up:
 
                 
 
-                    df_res = {'SAR Recommendation':response1} 
-                    df_res_new = pd.DataFrame(df_res.items(),columns=['Question','Answer'])
+                    # df_res = {'SAR Recommendation':response1} 
+                    # df_res_new = pd.DataFrame(df_res.items(),columns=['Question','Answer'])
 
                     # res_df_gpt_new = pd.concat([res_df_gpt, df_res_new], ignore_index=True)
                     # st.table(res_df_gpt_new)
@@ -1504,11 +1504,25 @@ with col_d2:
         st.markdown("""<span style="font-size: 24px;color:#0000FF">Is SAR filing required?</span>""", unsafe_allow_html=True)
 
         st.write("#### *SARA Recommendation*")
-        st.markdown("""<span style="font-size: 18px;">*Based on the following findings for the underlying case, under Bank Secrecy Act, it is recommended to file this case as a suspicious activity:*</span>""", unsafe_allow_html=True)
-        st.markdown("""<span style="font-size: 18px;">*1. Transaction amount is above the $5,000 value threshold*</span>""", unsafe_allow_html=True)
-        st.markdown("""<span style="font-size: 18px;">*2. There is an indication of suspicion with involvement of multiple individuals, mismatch of customer details on merchant invoice and identification of a potential suspect*.</span>""", unsafe_allow_html=True)           
+        # st.markdown("""<span style="font-size: 18px;">*Based on the following findings for the underlying case, under Bank Secrecy Act, it is recommended to file this case as a suspicious activity:*</span>""", unsafe_allow_html=True)
+        # st.markdown("""<span style="font-size: 18px;">*1. Transaction amount is above the $5,000 value threshold*</span>""", unsafe_allow_html=True)
+        # st.markdown("""<span style="font-size: 18px;">*2. There is an indication of suspicion with involvement of multiple individuals, mismatch of customer details on merchant invoice and identification of a potential suspect*.</span>""", unsafe_allow_html=True)           
                   
        
+        query = "Is SAR filling required?"
+        context_1 = docsearch.similarity_search(query, k=5)
+        prompt = f'''Act as a financial analyst and give concise answer to the question, with given Context.
+        Find out any suspicious activity based on [transaction amount,fraud type,suspect name not matching with the customer name, suspect address does not match with the customer address].
+        Based on the suspicious activity, answer if SAR filling is required or not. 
+        SAR refers to Suspicious activity Report, which is a document that financial institutions must file with the Financial Crimes Enforcement Network (FinCEN) whenever there is a suspicious activity.\n\n\
+        
+                Question: {query}\n\
+                Context: {context_1}\n\                      
+                Response: (Give me a concise response in pointers)'''
+        
+        response1 = usellm(prompt) 
+        st.write(response1)
+
         selected_rad = st.radio(":blue", ["Yes", "No", "Refer for review"], horizontal=True,disabled=st.session_state.disabled)
         if selected_rad == "Refer for review":
             email_regex = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
