@@ -1528,7 +1528,7 @@ with col_d2:
         
                 Question: {query}\n\
                 Context: {context_1}\n\                      
-                Response: '''
+                Response: (Give me a concise response in pointers. )'''
         
         
         response1 = usellm(prompt) 
