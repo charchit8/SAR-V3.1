@@ -1523,12 +1523,15 @@ with col_d2:
         query = "Is SAR filling required?"
         context_1 = docsearch.similarity_search(query, k=5)
         prompt = f'''Act as a financial analyst and give concise answer to the question, with given Context.\n\n\
+        Find out any suspicious activity based on the following-
+        1. Transaction amount is above the $5,000 value threshold. 
+        2. There is an indication of suspicion with involvement of multiple individuals, mismatch of customer details on merchant invoice. \n\n\
+        3. Any potential suspect is identified.\n\n\     
         Based on the suspicious activity, answer if SAR filling is required or not.SAR refers to Suspicious activity Report, which is a document that financial institutions must file with the Financial Crimes Enforcement Network (FinCEN) whenever there is a suspicious activity.\n\n\
-        Also, mention why SAR filling is required and whom to file.\n\n\
         
                 Question: {query}\n\
                 Context: {context_1}\n\                      
-                Response: (Give me a concise response in pointers. )'''
+                Response: (Give me a concise response in pointers. Also, mention why SAR filling is required and whom to file.)'''
         
         
         response1 = usellm(prompt) 
