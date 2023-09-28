@@ -931,11 +931,11 @@ with col2_up:
                     query = "Is this a Suspicious Activity?"
                     context_1 = docsearch.similarity_search(query, k=5)
                     prompt = f'''Act as a financial analyst and give concise answer if this can be reffered as suspicious activity or not, with given Context.
-                                Do proper analysis to identify this as a suspicious activity based on the following-
-                                If transaction amount is above the $5,000 value threshold, It can be considered as a suspicious activity considering the below factors as well:
-                                Mismatch in customer details such as name,address in the Invoice.
-                                Any potential suspect who used the card without the consent of the cardholder.\n\n\
-                                You should note that, if transaction amount is less than $5,000 and no suspect is identified, It can  not be addresses as a suspicious activity\n\n\
+                                Address this as a suspicious activity based on the following-
+                                1.If transaction amount is above the $5,000 value threshold.
+                                2.Mismatch in customer details such as name,address in the Invoice.Perform Name Enitity Recognition to identify Customer's name in cardholder information and compare with the name in Invoice.Check if there is any discrepencies in the names given.
+                                3.Any potential suspect who used the card without the consent of the cardholder.\n\n\
+                                You should note that, even if transaction amount is less than $5,000 and no suspect is identified, It can not be addresses as a suspicious activity\n\n\
                                 Question: {query}\n\
                                 Context: {context_1}\n\                      
                                 Response: (Give me a concise response in pointers)'''
