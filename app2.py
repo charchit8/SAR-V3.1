@@ -872,7 +872,6 @@ with col2_up:
                                 Response: (Give a short response in a single sentence.Do not add any extra Information, Explanation,Note.)'''
                     response = llama_llm(llama_13b,prompt_1)
                     chat_history[query] = response
-
                     
                     
                     query = "list the merchant name"
@@ -903,8 +902,7 @@ with col2_up:
                                 Context: {context_1}\n\
                                 Response: (Give me a concise response in one sentence.Do not add any prefix like 'Response' or 'Based on the document'. Do not add any extra Explanation, Note)'''
                     response = llama_llm(llama_13b,prompt_1)
-                    chat_history[query] = response
-                    
+                    chat_history[query] = response               
 
 
                     query = "What is the Fraud Type?"
@@ -915,8 +913,6 @@ with col2_up:
                                 Response: (Give me response in one sentence. Do not add prefix like 'Response' or 'based on the document. Do not give me any Explanation or Note)'''
                     response = llama_llm(llama_13b,prompt_1)
                     chat_history[query] = response
-
-
 
 
                     query = "When did the fraud occur?"
@@ -959,18 +955,8 @@ with col2_up:
                     response = llama_llm(llama_13b,prompt_1)
                     chat_history[query] = response
 
-                    try:
-                        res_df_llama = pd.DataFrame(list(chat_history.items()), columns=['Question','Answer'])
-                        res_df_llama.reset_index(drop=True, inplace=True)
-                        index_ = pd.Series([1,2,3,4,5,6,7,8,9,10])
-                        res_df_llama = res_df_llama.set_index([index_])
-                        # st.write(res_df_llama)
-                    except IndexError: 
-                        pass
-                    st.table(res_df_llama)
-                    st.session_state["tmp_table_llama"] = pd.concat([st.session_state.tmp_table_llama, res_df_llama], ignore_index=True)
-                
-                    
+
+
                     ## SARA Recommendation
                     query = "Is this a Suspicious Activity?"
                     context_1 = docsearch.similarity_search(query, k=5)
@@ -984,6 +970,20 @@ with col2_up:
                     response1 = llama_llm(llama_13b,prompt) 
                     st.write(response1)
                     st.session_state["sara_recommendation_llama"] = response1
+
+                    try:
+                        res_df_llama = pd.DataFrame(list(chat_history.items()), columns=['Question','Answer'])
+                        res_df_llama.reset_index(drop=True, inplace=True)
+                        index_ = pd.Series([1,2,3,4,5,6,7,8,9,10])
+                        res_df_llama = res_df_llama.set_index([index_])
+                        # st.write(res_df_llama)
+                    except IndexError: 
+                        pass
+                    st.table(res_df_llama)
+                    st.session_state["tmp_table_llama"] = pd.concat([st.session_state.tmp_table_llama, res_df_llama], ignore_index=True)
+                
+                    
+
 
                     st.markdown("### SARA Recommendation")
                     st.markdown(response1)
