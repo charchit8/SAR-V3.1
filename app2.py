@@ -797,29 +797,8 @@ with col2_up:
                     except:
                         e = Exception("")
                         st.exception(e)
-                                       
 
-                    query = "Is this a Suspicious Activity?"
-                    context_1 = docsearch.similarity_search(query, k=5)
-                    prompt = f'''Act as a financial analyst and give concise answer to the question, with given Context.
-                    This can be addressed as a suspicious activity based on [transaction amount,fraud type,suspect name not matching with the customer name, suspect address does not match with the customer address].\n\n\
-                    
-                                Question: {query}\n\
-                                Context: {context_1}\n\                      
-                                Response: (Give me a concise response in pointers)'''
-                    
-                    response1 = usellm(prompt) 
-                    st.session_state["sara_recommendation_gpt"] = response1
-
-                
-
-                    # df_res = {'SAR Recommendation':response1} 
-                    # df_res_new = pd.DataFrame(df_res.items(),columns=['Question','Answer'])
-
-                    # res_df_gpt_new = pd.concat([res_df_gpt, df_res_new], ignore_index=True)
-                    # st.table(res_df_gpt_new)
-
-                    # st.markdown(df_res_new)                
+                               
 
                     # try:
                         # res_df_gpt.Question = res_df_gpt.Question.apply(lambda x: x.split(".")[1])
@@ -837,17 +816,31 @@ with col2_up:
                     try:
                         res_df_gpt.reset_index(drop=True, inplace=True)
                         index_ = pd.Series([1,2,3,4,5,6,7,8,9,10])
-                        res_df_gpt = res_df_gpt.set_index([index_])
-
-                       
+                        res_df_gpt = res_df_gpt.set_index([index_])   
                     except IndexError: 
                         pass
+
                     st.table(res_df_gpt)
                     st.session_state["tmp_table_gpt"] = pd.concat([st.session_state.tmp_table_gpt, res_df_gpt], ignore_index=True)
-                
+
+
+                    #SARA Recommendation
+                    query = "Is this a Suspicious Activity?"
+                    context_1 = docsearch.similarity_search(query, k=5)
+                    prompt = f'''Act as a financial analyst and give concise answer to the question, with given Context.
+                    This can be addressed as a suspicious activity based on [transaction amount,fraud type,suspect name not matching with the customer name, suspect address does not match with the customer address].\n\n\
+                    
+                                Question: {query}\n\
+                                Context: {context_1}\n\                      
+                                Response: (Give me a concise response in pointers)'''
+                    
+                    response1 = usellm(prompt) 
+                    st.session_state["sara_recommendation_gpt"] = response1                
                     
                     st.markdown("### SARA Recommendation")
-                    st.write(response1)
+                    st.markdown(response1)
+
+
                     
                 elif st.session_state.llm == "Open-Source":
 
@@ -956,7 +949,17 @@ with col2_up:
                     chat_history[query] = response
 
 
-
+                    try:
+                        res_df_llama = pd.DataFrame(list(chat_history.items()), columns=['Question','Answer'])
+                        res_df_llama.reset_index(drop=True, inplace=True)
+                        index_ = pd.Series([1,2,3,4,5,6,7,8,9,10])
+                        res_df_llama = res_df_llama.set_index([index_])
+                        # st.write(res_df_llama)
+                    except IndexError: 
+                        pass
+                    st.table(res_df_llama)
+                    st.session_state["tmp_table_llama"] = pd.concat([st.session_state.tmp_table_llama, res_df_llama], ignore_index=True)
+                
                     ## SARA Recommendation
                     query = "Is this a Suspicious Activity?"
                     context_1 = docsearch.similarity_search(query, k=5)
@@ -966,23 +969,8 @@ with col2_up:
                                 Context: {context_1}\n\                      
                                 Response: (Give me a concise response in pointers)'''
                     response1 = llama_llm(llama_13b,prompt_1) 
-                    chat_history[query] = response1
-                    st.session_state["sara_recommendation_llama"] = response1
+                    st.session_state["sara_recommendation_llama"] = response1                    
 
-                    try:
-                        res_df_llama = pd.DataFrame(list(chat_history.items()), columns=['Question','Answer'])
-                        res_df_llama.reset_index(drop=True, inplace=True)
-                        index_ = pd.Series([1,2,3,4,5,6,7,8,9,10,11])
-                        res_df_llama = res_df_llama.set_index([index_])
-                        # st.write(res_df_llama)
-                    except IndexError: 
-                        pass
-                    st.table(res_df_llama)
-                    st.session_state["tmp_table_llama"] = pd.concat([st.session_state.tmp_table_llama, res_df_llama], ignore_index=True)
-                
-                    
-
-                    # SARA Recommendation
                     st.markdown("### SARA Recommendation")
                     st.markdown(response1)
 
