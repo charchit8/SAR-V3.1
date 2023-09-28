@@ -933,7 +933,7 @@ with col2_up:
                     prompt = f'''Act as a financial analyst and give concise answer to the question with given Context.
                                  If transaction amount is above the $5,000 value threshold, check for below points to make sure it is a suspicious activity.
                                 1.Perform Name Enitity Recognition to identify names given in the context. Check if there is mention of any name other than the customer name. If your answer is No then it is not a suspicious activity, If Yes then it can be considered as a suspicious activity.
-                                2.Is there mention of any potential suspect who used the card without the consent of the cardholder.
+                                2.Is there mention of any potential suspect name.
                                 Analyze above points properly and provide your response if it can be considered as a suspicious activity or not.\n\n\
                                 Question: {query}\n\
                                 Context: {context_1}\n\                      
