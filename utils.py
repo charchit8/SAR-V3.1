@@ -91,13 +91,15 @@ def convert_scanned_pdf_to_searchable_pdf(input_file, output_file):
     # Enhance contrast
     image = cv2.equalizeHist(image)
 
-    # Save preprocessed image
-    cv2.imwrite(f'{i}.png', image)
+    for files in input_file:
+        file = os.path.basename(files)
+        # Save preprocessed image
+        cv2.imwrite(f'{file}.png', image)
 
     # Perform OCR on preprocessed images using Tesseract
     text = ''
     for i in range(len(input_file)):
-        image = cv2.imread(f'{i}.png')
+        image = cv2.imread(f'{file}.png')
         text += pytesseract.image_to_string(image)
 
     # Add searchable layer to PDF using PyPDF2
