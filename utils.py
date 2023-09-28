@@ -71,7 +71,7 @@ def text_to_docs(text: str) -> List[Document]:
             doc_chunks.append(doc)
     return doc_chunks
 
-def convert_scanned_pdf_to_searchable_pdf(input_file, output_file):
+def convert_image_to_searchable_pdf(input_file, output_file):
     """
      Convert a Scanned PDF to Searchable PDF
 
@@ -126,5 +126,8 @@ def convert_scanned_pdf_to_searchable_pdf(input_file, output_file):
         pdf_writer.write(f)
 
     # Clean up temporary files
-    for i in range(len(images)):
-        os.remove(f'{i}.png')
+    for i in range(len(input_file)):
+        st.write(i)
+        # os.remove(f'{i}.png')
+
+        return output_file

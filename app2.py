@@ -16,7 +16,7 @@ import docx
 from gtts import gTTS
 import PyPDF2
 from PyPDF2 import PdfReader
-from utils import text_to_docs,convert_scanned_pdf_to_searchable_pdf
+from utils import text_to_docs,convert_image_to_searchable_pdf
 from langchain import PromptTemplate, LLMChain
 from langchain.chat_models import ChatOpenAI
 from langchain.chains import ConversationChain
@@ -719,17 +719,17 @@ with col1_up:
         
     
 
-    #file path for uploaded files
-    file_pth = []
-    for uploaded_file in pdf_files:
-        file_ext = tuple("pdf")
-        if uploaded_file.name.endswith(file_ext):
-            file_pth_= os.path.join(tmp_dir_, uploaded_file.name)
-            with open(file_pth_, "wb") as file_opn:
-                file_opn.write(uploaded_file.getbuffer())
-                file_pth.append(file_pth_)
-        else:
-            pass
+    # #file path for uploaded files
+    # file_pth = []
+    # for uploaded_file in pdf_files:
+    #     file_ext = tuple("pdf")
+    #     if uploaded_file.name.endswith(file_ext):
+    #         file_pth_= os.path.join(tmp_dir_, uploaded_file.name)
+    #         with open(file_pth_, "wb") as file_opn:
+    #             file_opn.write(uploaded_file.getbuffer())
+    #             file_pth.append(file_pth_)
+    #     else:
+    #         pass
                 
         
         
@@ -767,7 +767,9 @@ with col1_up:
         file_ext = tuple("png")
         if fetched_pdf.endswith(file_ext):
             selected_file_path = os.path.join(directoty_path, fetched_pdf)
-            convert_scanned_pdf_to_searchable_pdf(selected_file_path,'fetched_file_ocr.pdf')
+            file = convert_image_to_searchable_pdf(selected_file_path,'fetched_file_ocr.pdf')
+            file_pth = os.path.join(tmp_dir_,file)
+            temp_file_path.append(file_pth)
 
 
     #combining files in fetch evidence and upload evidence
@@ -783,7 +785,8 @@ with col1_up:
             pdf_files_ = pdf_files
         else: pass
 
-
+    st.write(temp_file_path)
+    
 with col2_up:
          #This is the embedding model
     model_name = "sentence-transformers/all-MiniLM-L6-v2"
