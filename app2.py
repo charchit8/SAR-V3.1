@@ -1571,10 +1571,10 @@ with col_d2:
             file_name=zip_file_name,
             disabled=st.session_state.disabled)
 
-        # # Cleanup: Delete the temporary directory and its contents
-        # for file_path in file_paths + [combined_doc_path]:
-        #     os.remove(file_path)
-        # os.rmdir(temp_dir)
+        # Cleanup: Delete the temporary directory and its contents
+        for file_path in file_paths + [combined_doc_path]:
+            os.remove(file_path)
+        os.rmdir(temp_dir)
 
     with col5_up:   
         # Adding Radio button
@@ -1643,11 +1643,15 @@ with col_d2:
                 st.info("Thanks for your review, Case has been assigned to the next reviewer")
 
 
-        # # # # Allow the user to clear all stored conversation sessions
-        # # if st.button("Reset Session"):
-        # #     reset_session_state()
-        # #     # st.cache_data.clear()
-        # #     # pdf_files.clear()
+        # # Allow the user to clear all stored conversation sessions
+        if st.button("Reset Session"):
+            reset_session_state()
+            st.cache_data.clear()
+            # pdf_files.clear()
+
+        for file_path in file_paths + [combined_doc_path]:
+            os.remove(temp_file_path)
+            os.rmdir(tmp_dir_)
 
 
 
