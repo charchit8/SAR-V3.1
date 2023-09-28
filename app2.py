@@ -703,9 +703,6 @@ with col1_up:
     def create_pdf(text,file_name):
         # Create a new FPDF object
         pdf = FPDF()
-        # # Open the text file and read its contents
-        # with open(input_file, 'r') as f:
-        #     text = f.read()
         # Add a new page to the PDF
         pdf.add_page()
         # Set the font and font size
@@ -753,7 +750,7 @@ with col1_up:
     #     if fetched_pdf.endswith(file_ext):
     #         selected_file_path = os.path.join(directoty_path, fetched_pdf)
     #         if is_searchable_pdf(selected_file_path)==False:
-    #             text = convert_scanned_pdf_to_searchable_pdf(selected_file_path)
+    #             text = convert_image_to_searchable_pdf(selected_file_path)
     #             st.write(text)
     #             create_pdf(text,'fetched_file.pdf')
     #         else:
@@ -762,16 +759,20 @@ with col1_up:
     #     else:
     #         pass
 
+       
+ 
     #for fetched files
-    st.write(temp_file_path)
-
     for fetched_pdf in fetched_files:
         file_ext = tuple("png")
         if fetched_pdf.endswith(file_ext):
             selected_file_path = os.path.join(directoty_path, fetched_pdf)
-            file = convert_image_to_searchable_pdf(selected_file_path,'fetched_file_ocr.pdf')
-            file_pth = os.path.join(tmp_dir_,file)
+            text = convert_image_to_searchable_pdf(selected_file_path)
+            st.write(text)
+            create_pdf(text,'fetched_file_ocr.pdf')
+        else:
+            file_pth = os.path.join(directoty_path, fetched_pdf)
             temp_file_path.append(file_pth)
+
 
 
     #combining files in fetch evidence and upload evidence

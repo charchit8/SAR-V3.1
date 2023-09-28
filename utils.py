@@ -71,7 +71,7 @@ def text_to_docs(text: str) -> List[Document]:
             doc_chunks.append(doc)
     return doc_chunks
 
-def convert_image_to_searchable_pdf(input_file, output_file):
+def convert_image_to_searchable_pdf(input_file):
     """
      Convert a Scanned PDF to Searchable PDF
 
@@ -102,32 +102,6 @@ def convert_image_to_searchable_pdf(input_file, output_file):
         image = cv2.imread(f'{file}.png')
         text += pytesseract.image_to_string(image)
 
-    # Add searchable layer to PDF using PyPDF2
-    pdf_writer = PyPDF2.PdfWriter()
-    with open(input_file, 'rb') as f:
-        pdf_reader = PyPDF2.PdfReader(f)
-        for i in range(pdf_reader.getNumPages()):
-            page = pdf_reader.getPage(i)
-            pdf_writer.addPage(page)
-            pdf_writer.addBookmark(f'Page {i+1}', i)
+    return text
 
-    pdf_writer.addMetadata({
-        '/Title': os.path.splitext(os.path.basename(input_file))[0],
-        '/Author': 'Doc Manager',
-        '/Subject': 'Searchable PDF',
-        '/Keywords': 'PDF, searchable, OCR',
-        '/Creator': 'Py script',
-        '/Producer': 'EXL Service',
-    })
-
-    pdf_writer.addAttachment('text.txt', text.encode())
-
-    with open(output_file, 'wb') as f:
-        pdf_writer.write(f)
-
-    # Clean up temporary files
-    for i in range(len(input_file)):
-        st.write(i)
-        # os.remove(f'{i}.png')
-
-        return output_file
+ 
