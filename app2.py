@@ -706,9 +706,10 @@ with col1_up:
         # Add a new page to the PDF
         pdf.add_page()
         # Set the font and font size
-        pdf.add_font("Arial", "", "arial.ttf", uni=True)
+        pdf.set_font('Arial', size=12)
+        encoded_text = text.encode("utf-8")
         # Write the text to the PDF
-        pdf.write(5, text)
+        pdf.write(5, encoded_text)
         # Save the PDF
         pdf.output(os.path.join(tmp_dir_,file_name))
         file_pth = os.path.join(tmp_dir_,file_name)
@@ -767,7 +768,7 @@ with col1_up:
         if fetched_pdf.endswith(file_ext):
             selected_file_path = os.path.join(directoty_path, fetched_pdf)
             text = convert_image_to_searchable_pdf(selected_file_path)
-            st.write(text)
+            # st.write(text)
             create_pdf(text,'fetched_file_ocr.pdf')
         else:
             file_pth = os.path.join(directoty_path, fetched_pdf)
