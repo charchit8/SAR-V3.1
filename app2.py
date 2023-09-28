@@ -698,6 +698,8 @@ with col1_up:
     #         pdf_files_ = pdf_files
     #     else: pass
 
+
+
     #Adding pytesseract here
     # To convert generated to pdf and save in temp direc.
     def create_pdf(text,file_name):
@@ -714,23 +716,33 @@ with col1_up:
         pdf.output(os.path.join(tmp_dir_,file_name))
         file_pth = os.path.join(tmp_dir_,file_name)
         temp_file_path.append(file_pth)
-        
-    
 
-    # #file path for uploaded files
-    # file_pth = []
-    # for uploaded_file in pdf_files:
-    #     file_ext = tuple("pdf")
-    #     if uploaded_file.name.endswith(file_ext):
-    #         file_pth_= os.path.join(tmp_dir_, uploaded_file.name)
-    #         with open(file_pth_, "wb") as file_opn:
-    #             file_opn.write(uploaded_file.getbuffer())
-    #             file_pth.append(file_pth_)
-    #     else:
-    #         pass
-                
+
+    # # # Pytesseract code 
+
+    #file path for uploaded files
+    file_pth = []
+    for uploaded_file in pdf_files:
+        file_ext = tuple("pdf")
+        if uploaded_file.name.endswith(file_ext):
+            file_pth_= os.path.join(tmp_dir_, uploaded_file.name)
+            with open(file_pth_, "wb") as file_opn:
+                file_opn.write(uploaded_file.getbuffer())
+                file_pth.append(file_pth_)
+        else:
+            pass
+
+    # For uploaded files
+    for file in file_pth:
+        if is_searchable_pdf(file)==False:
+            text = convert_image_to_searchable_pdf(file)
+            create_pdf(text,'uploaded_file.pdf')
+        else:
+            with open(file, "wb") as file_opn:
+                file_opn.write(file.getbuffer())
+                temp_file_path.append(file_opn)
         
-        
+                     
     
     # # # Pytesseract code 
     # # For uploaded files
@@ -751,7 +763,7 @@ with col1_up:
     #     if fetched_pdf.endswith(file_ext):
     #         selected_file_path = os.path.join(directoty_path, fetched_pdf)
     #         if is_searchable_pdf(selected_file_path)==False:
-    #             text = convert_image_to_searchable_pdf(selected_file_path)
+    #             text = convert_scanned_pdf_to_searchable_pdf(selected_file_path)
     #             st.write(text)
     #             create_pdf(text,'fetched_file.pdf')
     #         else:
@@ -789,7 +801,7 @@ with col1_up:
             pdf_files_ = pdf_files
         else: pass
 
-    st.write(temp_file_path)
+
 
 with col2_up:
          #This is the embedding model
