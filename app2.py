@@ -764,11 +764,10 @@ with col1_up:
 
     #for fetched files
     for fetched_pdf in fetched_files:
-        file_ext = tuple("pdf")
+        file_ext = tuple("png")
         if fetched_pdf.endswith(file_ext):
             selected_file_path = os.path.join(directoty_path, fetched_pdf)
-            if is_searchable_pdf(selected_file_path)==False:
-                convert_scanned_pdf_to_searchable_pdf(selected_file_path,'fetched_file_ocr.pdf')
+            convert_scanned_pdf_to_searchable_pdf(selected_file_path,'fetched_file_ocr.pdf')
 
 
     #combining files in fetch evidence and upload evidence
