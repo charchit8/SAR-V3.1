@@ -937,7 +937,7 @@ with col2_up:
                                 Analyze above points properly and provide your response if it can be considered as a suspicious activity or not.
                                 Question: {query}\n\
                                 Context: {context_1}\n\                      
-                                Response: (Give me a concise response)'''
+                                Response: (Give me a concise response in pointers.)'''
                     
                     response1 = usellm(prompt) 
                     st.session_state["sara_recommendation_gpt"] = response1                
