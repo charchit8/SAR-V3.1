@@ -28,11 +28,11 @@ from io import StringIO
 from io import BytesIO
 from usellm import Message, Options, UseLLM
 from huggingface_hub import login
-# import cv2
-# import pdfplumber
-# import pytesseract
-# from pdf2image import convert_from_path
-# from fpdf import FPDF
+import cv2
+import pdfplumber
+import pytesseract
+from pdf2image import convert_from_path
+from fpdf import FPDF
 
 
 #from playsound import playsound
@@ -664,103 +664,25 @@ with col1_up:
     temp_file_path= []
 
 
-    for uploaded_file in pdf_files:
-        file_ext = tuple("pdf")
-        if uploaded_file.name.endswith(file_ext):
-            file_pth = os.path.join(tmp_dir_, uploaded_file.name)
-            with open(file_pth, "wb") as file_opn:
-                file_opn.write(uploaded_file.getbuffer())
-                temp_file_path.append(file_pth)
-        else:
-            pass
-
-
-    for fetched_pdf in fetched_files:
-        file_ext = tuple("pdf")
-        if fetched_pdf.endswith(file_ext):
-            file_pth = os.path.join(directoty_path, fetched_pdf)
-            # st.write(file_pth)
-            temp_file_path.append(file_pth) 
-        else:
-            pass   
-
-    #combining files in fetch evidence and upload evidence
-    pdf_files_ = []
-    if temp_file_path:
-        if pdf_files and fetched_files:
-            file_names = [file.name for file in pdf_files]
-            file_names = file_names + fetched_files
-            pdf_files_ = file_names
-        elif fetched_files:
-            pdf_files_ = fetched_files
-        elif pdf_files:
-            pdf_files_ = pdf_files
-        else: pass
-
-    # #Adding pytesseract here
-    # # To convert generated to pdf and save in temp direc.
-    # def create_pdf(text,file_name):
-    #     # Create a new FPDF object
-    #     pdf = FPDF()
-    #     # # Open the text file and read its contents
-    #     # with open(input_file, 'r') as f:
-    #     #     text = f.read()
-    #     # Add a new page to the PDF
-    #     pdf.add_page()
-    #     # Set the font and font size
-    #     pdf.set_font('Arial', size=12)
-    #     # Write the text to the PDF
-    #     pdf.write(5, text)
-    #     # Save the PDF
-    #     pdf.output(os.path.join(tmp_dir_,file_name))
-    #     file_pth = os.path.join(tmp_dir_,file_name)
-    #     temp_file_path.append(file_pth)
-        
-    
-
-    # #file path for uploaded files
-    # file_pth = []
     # for uploaded_file in pdf_files:
     #     file_ext = tuple("pdf")
     #     if uploaded_file.name.endswith(file_ext):
-    #         file_pth_= os.path.join(tmp_dir_, uploaded_file.name)
-    #         with open(file_pth_, "wb") as file_opn:
+    #         file_pth = os.path.join(tmp_dir_, uploaded_file.name)
+    #         with open(file_pth, "wb") as file_opn:
     #             file_opn.write(uploaded_file.getbuffer())
-    #             file_pth.append(file_pth_)
-    #     else:
-    #         pass
-                
-        
-        
-    
-    # # # Pytesseract code 
-    # # For uploaded files
-    # for file in file_pth:
-    #     if is_searchable_pdf(file)==False:
-    #         text = convert_scanned_pdf_to_searchable_pdf(file)
-    #         create_pdf(text,'uploaded_file.pdf')
-    #     else:
-    #         with open(file, "wb") as file_opn:
-    #             file_opn.write(file.getbuffer())
-    #             temp_file_path.append(file_opn)
-  
-        
- 
-    # #for fetched files
-    # for fetched_pdf in fetched_files:
-    #     file_ext = tuple("pdf")
-    #     if fetched_pdf.endswith(file_ext):
-    #         selected_file_path = os.path.join(directoty_path, fetched_pdf)
-    #         if is_searchable_pdf(selected_file_path)==False:
-    #             text = convert_scanned_pdf_to_searchable_pdf(selected_file_path)
-    #             # st.write(text)
-    #             create_pdf(text,'fetched_file.pdf')
-    #         else:
-    #             file_pth = os.path.join(directoty_path, fetched_pdf)
     #             temp_file_path.append(file_pth)
     #     else:
     #         pass
 
+
+    # for fetched_pdf in fetched_files:
+    #     file_ext = tuple("pdf")
+    #     if fetched_pdf.endswith(file_ext):
+    #         file_pth = os.path.join(directoty_path, fetched_pdf)
+    #         # st.write(file_pth)
+    #         temp_file_path.append(file_pth) 
+    #     else:
+    #         pass   
 
     # #combining files in fetch evidence and upload evidence
     # pdf_files_ = []
@@ -774,6 +696,84 @@ with col1_up:
     #     elif pdf_files:
     #         pdf_files_ = pdf_files
     #     else: pass
+
+    #Adding pytesseract here
+    # To convert generated to pdf and save in temp direc.
+    def create_pdf(text,file_name):
+        # Create a new FPDF object
+        pdf = FPDF()
+        # # Open the text file and read its contents
+        # with open(input_file, 'r') as f:
+        #     text = f.read()
+        # Add a new page to the PDF
+        pdf.add_page()
+        # Set the font and font size
+        pdf.set_font('Arial', size=12)
+        # Write the text to the PDF
+        pdf.write(5, text)
+        # Save the PDF
+        pdf.output(os.path.join(tmp_dir_,file_name))
+        file_pth = os.path.join(tmp_dir_,file_name)
+        temp_file_path.append(file_pth)
+        
+    
+
+    #file path for uploaded files
+    file_pth = []
+    for uploaded_file in pdf_files:
+        file_ext = tuple("pdf")
+        if uploaded_file.name.endswith(file_ext):
+            file_pth_= os.path.join(tmp_dir_, uploaded_file.name)
+            with open(file_pth_, "wb") as file_opn:
+                file_opn.write(uploaded_file.getbuffer())
+                file_pth.append(file_pth_)
+        else:
+            pass
+                
+        
+        
+    
+    # # Pytesseract code 
+    # For uploaded files
+    for file in file_pth:
+        if is_searchable_pdf(file)==False:
+            text = convert_scanned_pdf_to_searchable_pdf(file)
+            create_pdf(text,'uploaded_file.pdf')
+        else:
+            with open(file, "wb") as file_opn:
+                file_opn.write(file.getbuffer())
+                temp_file_path.append(file_opn)
+  
+        
+ 
+    #for fetched files
+    for fetched_pdf in fetched_files:
+        file_ext = tuple("pdf")
+        if fetched_pdf.endswith(file_ext):
+            selected_file_path = os.path.join(directoty_path, fetched_pdf)
+            if is_searchable_pdf(selected_file_path)==False:
+                text = convert_scanned_pdf_to_searchable_pdf(selected_file_path)
+                # st.write(text)
+                create_pdf(text,'fetched_file.pdf')
+            else:
+                file_pth = os.path.join(directoty_path, fetched_pdf)
+                temp_file_path.append(file_pth)
+        else:
+            pass
+
+
+    #combining files in fetch evidence and upload evidence
+    pdf_files_ = []
+    if temp_file_path:
+        if pdf_files and fetched_files:
+            file_names = [file.name for file in pdf_files]
+            file_names = file_names + fetched_files
+            pdf_files_ = file_names
+        elif fetched_files:
+            pdf_files_ = fetched_files
+        elif pdf_files:
+            pdf_files_ = pdf_files
+        else: pass
 
 
 with col2_up:
@@ -908,7 +908,7 @@ with col2_up:
                                 If transaction amount is above the $5,000 value threshold, It can be considered as a suspicious activity considering the below factors as well:
                                 Mismatch in customer details such as name,address in the context.
                                 Any potential suspect who used the card without the consent of the cardholder.\n\n\
-                                But, if transaction amount is less than $5,000 and no suspect is identified, It can  not be addresses as a suspicious activity,
+                                But, if transaction amount is less than $5,000 and no suspect is identified, It can  not be addresses as a suspicious activity\n\n\
                                 Question: {query}\n\
                                 Context: {context_1}\n\                      
                                 Response: (Give me a concise response in pointers)'''
