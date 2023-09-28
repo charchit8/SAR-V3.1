@@ -706,7 +706,7 @@ with col1_up:
         # Add a new page to the PDF
         pdf.add_page()
         # Set the font and font size
-        pdf.set_font('Arial', size=12)
+        pdf.add_font("Arial", "", "arial.ttf", uni=True)
         # Write the text to the PDF
         pdf.write(5, text)
         # Save the PDF
