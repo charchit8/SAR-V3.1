@@ -1648,9 +1648,10 @@ with col_d2:
         reset_session_state()
         st.cache_data.clear()
         # pdf_files.clear()
+        # os.rmdir(tmp_dir_)
 
     
-    os.rmdir(tmp_dir_)
+
 
 
 
