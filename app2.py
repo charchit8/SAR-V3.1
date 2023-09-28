@@ -1571,10 +1571,10 @@ with col_d2:
             file_name=zip_file_name,
             disabled=st.session_state.disabled)
 
-    # Cleanup: Delete the temporary directory and its contents
-    for file_path in file_paths + [combined_doc_path]:
-        os.remove(file_path)
-    os.rmdir(tmp_dir)
+    # # Cleanup: Delete the temporary directory and its contents
+    # for file_path in file_paths + [combined_doc_path]:
+    #     os.remove(file_path)
+    # os.rmdir(tmp_dir)
 
     with col5_up:   
         # Adding Radio button
