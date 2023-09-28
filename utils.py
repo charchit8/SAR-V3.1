@@ -6,10 +6,10 @@ import streamlit.components.v1 as components
 from typing import List, Dict, Any
 from langchain.docstore.document import Document
 from langchain.text_splitter import RecursiveCharacterTextSplitter
-# import cv
-# import PyPDF2
-# import pytesseract
-# from pdf2image import convert_from_path
+import cv
+import PyPDF2
+import pytesseract
+from pdf2image import convert_from_path
 
 def st_audiorec():
 
