@@ -678,7 +678,7 @@ with col1_up:
     for fetched_pdf in fetched_files:
         file_ext = tuple("pdf")
         if fetched_pdf.endswith(file_ext):
-            file_pth = os.path.join('data/', fetched_pdf)
+            file_pth = os.path.join('data2/', fetched_pdf)
             # st.write(file_pth)
             temp_file_path.append(file_pth) 
         else:
@@ -696,9 +696,6 @@ with col1_up:
         elif pdf_files:
             pdf_files_ = pdf_files
         else: pass
-
-    st.write(temp_file_path)
-    st.write(fetched_files)
 
     # #Adding pytesseract here
     # # To convert generated to pdf and save in temp direc.
