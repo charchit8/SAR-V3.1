@@ -985,7 +985,7 @@ with col2_up:
                     st.session_state["sara_recommendation_llama"] = response1
 
                     st.markdown("### SARA Recommendation")
-                    st.write(response1)
+                    st.markdown(response1)
 
 
     st.markdown("---")
