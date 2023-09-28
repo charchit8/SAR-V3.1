@@ -938,7 +938,7 @@ with col2_up:
                                 
                                 Question: {query}\n\
                                 Context: {context_1}\n\                      
-                                Response: (Give me your response in pointers.)'''
+                                Response: (Give me your response in pointers. Reframe the sentence to provide a professional answer.)'''
                     
                     response1 = usellm(prompt) 
                     st.session_state["sara_recommendation_gpt"] = response1                
