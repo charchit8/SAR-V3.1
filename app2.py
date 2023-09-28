@@ -1580,7 +1580,7 @@ with col_d2:
         # Adding Radio button
             
         st.markdown("""<span style="font-size: 24px;color:#0000FF">Is SAR filing required?</span>""", unsafe_allow_html=True)
-        
+        _, docsearch = embedding_store(temp_file_path)
         if st.session_state.llm == "Closed-Source":
 
             st.write("#### *SARA Recommendation*")
