@@ -28,10 +28,11 @@ from io import StringIO
 from io import BytesIO
 from usellm import Message, Options, UseLLM
 from huggingface_hub import login
-# import cv2
-# import pdfplumber
-# import pytesseract
-# from pdf2image import convert_from_path
+import cv2
+import pdfplumber
+import pytesseract
+from pdf2image import convert_from_path
+from fpdf import FPDF
 
 
 #from playsound import playsound
@@ -181,6 +182,15 @@ def reset_session_state():
     session_state = st.session_state
     session_state.clear()
 
+
+# Function to add checkboxes to the DataFrame
+@st.cache_data
+def add_checkboxes_to_dataframe(df):
+    # Create a new column 'Select' with checkboxes
+    checkbox_values = [True] * (len(df) - 1) + [False]  # All True except the last row
+    df['Select'] = checkbox_values
+    return df
+
 # def merge_and_extract_text(pdf_list):
 #     merged_pdf = fitz.open()
 #     # Merge the PDF files
@@ -233,16 +243,6 @@ def extract_text_from_pdf(file_path):
             all_text.append(text)
     return "\n".join(all_text)
 
-
-
-
-# Function to add checkboxes to the DataFrame
-@st.cache_data
-def add_checkboxes_to_dataframe(df):
-    # Create a new column 'Select' with checkboxes
-    checkbox_values = [True] * (len(df) - 1) + [False]  # All True except the last row
-    df['Select'] = checkbox_values
-    return df
 
 # convert scanned pdf to searchable pdf
 def convert_scanned_pdf_to_searchable_pdf(input_file):
@@ -307,7 +307,7 @@ if "pdf_files" not in st.session_state:
     st.session_state.pdf_files = []
 
 # reading files from local directory from fetch evidence button
-directoty_path = "data/"
+directoty_path = "data2/"
 fetched_files = read_pdf_files(directoty_path)
 
 
@@ -682,10 +682,7 @@ with col1_up:
             # st.write(file_pth)
             temp_file_path.append(file_pth) 
         else:
-            pass
-
-
-    
+            pass   
 
     #combining files in fetch evidence and upload evidence
     pdf_files_ = []
@@ -699,6 +696,85 @@ with col1_up:
         elif pdf_files:
             pdf_files_ = pdf_files
         else: pass
+
+    # #Adding pytesseract here
+    # # To convert generated to pdf and save in temp direc.
+    # def create_pdf(text,file_name):
+    #     # Create a new FPDF object
+    #     pdf = FPDF()
+    #     # # Open the text file and read its contents
+    #     # with open(input_file, 'r') as f:
+    #     #     text = f.read()
+    #     # Add a new page to the PDF
+    #     pdf.add_page()
+    #     # Set the font and font size
+    #     pdf.set_font('Arial', size=12)
+    #     # Write the text to the PDF
+    #     pdf.write(5, text)
+    #     # Save the PDF
+    #     pdf.output(os.path.join(tmp_dir_,file_name))
+    #     file_pth = os.path.join(tmp_dir_,file_name)
+    #     temp_file_path.append(file_pth)
+        
+    
+
+    # #file path for uploaded files
+    # file_pth = []
+    # for uploaded_file in pdf_files:
+    #     file_ext = tuple("pdf")
+    #     if uploaded_file.name.endswith(file_ext):
+    #         file_pth_= os.path.join(tmp_dir_, uploaded_file.name)
+    #         with open(file_pth_, "wb") as file_opn:
+    #             file_opn.write(uploaded_file.getbuffer())
+    #             file_pth.append(file_pth_)
+    #     else:
+    #         pass
+                
+        
+        
+    
+    # # # Pytesseract code 
+    # # For uploaded files
+    # for file in file_pth:
+    #     if is_searchable_pdf(file)==False:
+    #         text = convert_scanned_pdf_to_searchable_pdf(file)
+    #         create_pdf(text,'uploaded_file.pdf')
+    #     else:
+    #         with open(file, "wb") as file_opn:
+    #             file_opn.write(file.getbuffer())
+    #             temp_file_path.append(file_opn)
+  
+        
+ 
+    # #for fetched files
+    # for fetched_pdf in fetched_files:
+    #     file_ext = tuple("pdf")
+    #     if fetched_pdf.endswith(file_ext):
+    #         selected_file_path = os.path.join(directoty_path, fetched_pdf)
+    #         if is_searchable_pdf(selected_file_path)==False:
+    #             text = convert_scanned_pdf_to_searchable_pdf(selected_file_path)
+    #             # st.write(text)
+    #             create_pdf(text,'fetched_file.pdf')
+    #         else:
+    #             file_pth = os.path.join(directoty_path, fetched_pdf)
+    #             temp_file_path.append(file_pth)
+    #     else:
+    #         pass
+
+
+    # #combining files in fetch evidence and upload evidence
+    # pdf_files_ = []
+    # if temp_file_path:
+    #     if pdf_files and fetched_files:
+    #         file_names = [file.name for file in pdf_files]
+    #         file_names = file_names + fetched_files
+    #         pdf_files_ = file_names
+    #     elif fetched_files:
+    #         pdf_files_ = fetched_files
+    #     elif pdf_files:
+    #         pdf_files_ = pdf_files
+    #     else: pass
+
 
 with col2_up:
          #This is the embedding model
