@@ -80,7 +80,7 @@ def convert_scanned_pdf_to_searchable_pdf(input_file, output_file):
     # images = convert_from_path(input_file)
 
     # Preprocess images using OpenCV
-    for i, image in enumerate(images):
+    for i, image in enumerate(input_file):
         # Convert image to grayscale
         image = cv2.cvtColor(np.array(image), cv2.COLOR_RGB2GRAY)
 
