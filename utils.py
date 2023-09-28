@@ -103,7 +103,7 @@ def convert_image_to_searchable_pdf(input_file, output_file):
         text += pytesseract.image_to_string(image)
 
     # Add searchable layer to PDF using PyPDF2
-    pdf_writer = PyPDF2.PdfFileWriter()
+    pdf_writer = PyPDF2.PdfWriter()
     with open(input_file, 'rb') as f:
         pdf_reader = PyPDF2.PdfFileReader(f)
         for i in range(pdf_reader.getNumPages()):
