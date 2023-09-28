@@ -1260,8 +1260,9 @@ with col3_up:
             elif st.session_state.llm == "Open-Source":
                 st.session_state.disabled=False
                 template = """Write a detailed summary of the text provided.
+                Return your response in a single paragraph.
                 ```{text}```
-                Response: (Return your response in a single paragraph.) """
+                Response: """
                 prompt = PromptTemplate(template=template,input_variables=["text"])
                 llm_chain_llama = LLMChain(prompt=prompt,llm=llama_13b)
 
