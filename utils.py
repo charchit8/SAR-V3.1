@@ -77,7 +77,7 @@ def convert_scanned_pdf_to_searchable_pdf(input_file, output_file):
 
     """
     # Convert PDF to images
-    images = convert_from_path(input_file)
+    # images = convert_from_path(input_file)
 
     # Preprocess images using OpenCV
     for i, image in enumerate(images):

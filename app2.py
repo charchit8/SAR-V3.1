@@ -16,7 +16,7 @@ import docx
 from gtts import gTTS
 import PyPDF2
 from PyPDF2 import PdfReader
-from utils import text_to_docs
+from utils import text_to_docs,convert_scanned_pdf_to_searchable_pdf
 from langchain import PromptTemplate, LLMChain
 from langchain.chat_models import ChatOpenAI
 from langchain.chains import ConversationChain
@@ -245,37 +245,37 @@ def extract_text_from_pdf(file_path):
     return "\n".join(all_text)
 
 
-# convert scanned pdf to searchable pdf
-def convert_scanned_pdf_to_searchable_pdf(input_file):
-    """
-     Convert a Scanned PDF to Searchable PDF
+# # convert scanned pdf to searchable pdf
+# def convert_scanned_pdf_to_searchable_pdf(input_file):
+#     """
+#      Convert a Scanned PDF to Searchable PDF
 
-    """
-    # Convert PDF to images
-    print("Running OCR")
-    images = convert_from_path(input_file)
+#     """
+#     # Convert PDF to images
+#     print("Running OCR")
+#     images = convert_from_path(input_file)
 
-    # Preprocess images using OpenCV
-    for i, image in enumerate(images):
-        # Convert image to grayscale
-        image = cv2.cvtColor(np.array(image), cv2.COLOR_RGB2GRAY)
+#     # Preprocess images using OpenCV
+#     for i, image in enumerate(images):
+#         # Convert image to grayscale
+#         image = cv2.cvtColor(np.array(image), cv2.COLOR_RGB2GRAY)
 
-        # Apply thresholding to remove noise
-        _, image = cv2.threshold(image, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
+#         # Apply thresholding to remove noise
+#         _, image = cv2.threshold(image, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
 
-        # Enhance contrast
-        image = cv2.equalizeHist(image)
+#         # Enhance contrast
+#         image = cv2.equalizeHist(image)
 
-        # Save preprocessed image
-        cv2.imwrite(f'{i}.png', image)
+#         # Save preprocessed image
+#         cv2.imwrite(f'{i}.png', image)
 
-    # Perform OCR on preprocessed images using Tesseract
-    text = ''
-    for i in range(len(images)):
-        image = cv2.imread(f'{i}.png')
-        text += pytesseract.image_to_string(image)
+#     # Perform OCR on preprocessed images using Tesseract
+#     text = ''
+#     for i in range(len(images)):
+#         image = cv2.imread(f'{i}.png')
+#         text += pytesseract.image_to_string(image)
     
-    return text
+#     return text
 
 
 # Setting globals
@@ -734,33 +734,41 @@ with col1_up:
         
         
     
-    # # Pytesseract code 
-    # For uploaded files
-    for file in file_pth:
-        if is_searchable_pdf(file)==False:
-            text = convert_scanned_pdf_to_searchable_pdf(file)
-            create_pdf(text,'uploaded_file.pdf')
-        else:
-            with open(file, "wb") as file_opn:
-                file_opn.write(file.getbuffer())
-                temp_file_path.append(file_opn)
+    # # # Pytesseract code 
+    # # For uploaded files
+    # for file in file_pth:
+    #     if is_searchable_pdf(file)==False:
+    #         text = convert_scanned_pdf_to_searchable_pdf(file)
+    #         create_pdf(text,'uploaded_file.pdf')
+    #     else:
+    #         with open(file, "wb") as file_opn:
+    #             file_opn.write(file.getbuffer())
+    #             temp_file_path.append(file_opn)
   
         
  
+    # #for fetched files
+    # for fetched_pdf in fetched_files:
+    #     file_ext = tuple("pdf")
+    #     if fetched_pdf.endswith(file_ext):
+    #         selected_file_path = os.path.join(directoty_path, fetched_pdf)
+    #         if is_searchable_pdf(selected_file_path)==False:
+    #             text = convert_scanned_pdf_to_searchable_pdf(selected_file_path)
+    #             st.write(text)
+    #             create_pdf(text,'fetched_file.pdf')
+    #         else:
+    #             file_pth = os.path.join(directoty_path, fetched_pdf)
+    #             temp_file_path.append(file_pth)
+    #     else:
+    #         pass
+
     #for fetched files
     for fetched_pdf in fetched_files:
         file_ext = tuple("pdf")
         if fetched_pdf.endswith(file_ext):
             selected_file_path = os.path.join(directoty_path, fetched_pdf)
             if is_searchable_pdf(selected_file_path)==False:
-                text = convert_scanned_pdf_to_searchable_pdf(selected_file_path)
-                st.write(text)
-                create_pdf(text,'fetched_file.pdf')
-            else:
-                file_pth = os.path.join(directoty_path, fetched_pdf)
-                temp_file_path.append(file_pth)
-        else:
-            pass
+                convert_scanned_pdf_to_searchable_pdf(selected_file_path,'fetched_file_ocr.pdf')
 
 
     #combining files in fetch evidence and upload evidence
