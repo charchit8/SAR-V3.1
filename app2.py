@@ -293,6 +293,8 @@ if "tmp_summary_llama" not in st.session_state:
     st.session_state["tmp_summary_llama"] = ''
 if "sara_recommendation_gpt" not in st.session_state:
     st.session_state["sara_recommendation_gpt"] = ''
+if "sara_recommendation_llama" not in st.session_state:
+    st.session_state["sara_recommendation_llama"] = ''
 if "case_num" not in st.session_state:
     st.session_state.case_num = ''
 if "fin_opt" not in st.session_state:
@@ -817,15 +819,7 @@ with col2_up:
                     # res_df_gpt_new = pd.concat([res_df_gpt, df_res_new], ignore_index=True)
                     # st.table(res_df_gpt_new)
 
-
-
-
-
-                    # st.markdown(df_res_new)
-                     
-                   
-                    
-                    
+                    # st.markdown(df_res_new)                
 
                     # try:
                         # res_df_gpt.Question = res_df_gpt.Question.apply(lambda x: x.split(".")[1])
@@ -976,7 +970,22 @@ with col2_up:
                     st.table(res_df_llama)
                     st.session_state["tmp_table_llama"] = pd.concat([st.session_state.tmp_table_llama, res_df_llama], ignore_index=True)
                 
-                
+                    
+                    ## SARA Recommendation
+                    query = "Is this a Suspicious Activity?"
+                    context_1 = docsearch.similarity_search(query, k=5)
+                    prompt = f'''Act as a financial analyst and give concise answer to the question, with given Context.
+                    This can be addressed as a suspicious activity based on [transaction amount,fraud type,suspect name not matching with the customer name, suspect address does not match with the customer address].\n\n\
+                    
+                                Question: {query}\n\
+                                Context: {context_1}\n\                      
+                                Response: (Give me a concise response in pointers)'''
+                    
+                    response1 = llama_llm(llama_13b,prompt) 
+                    st.session_state["sara_recommendation_llama"] = response1
+
+                    st.markdown("### SARA Recommendation")
+                    st.write(response1)
 
 
     st.markdown("---")
