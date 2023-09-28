@@ -698,6 +698,7 @@ with col1_up:
         else: pass
 
     st.write(temp_file_path)
+    st.write(fetched_files)
 
     # #Adding pytesseract here
     # # To convert generated to pdf and save in temp direc.
