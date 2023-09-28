@@ -982,6 +982,7 @@ with col2_up:
                                 Response: (Give me a concise response in pointers)'''
                     
                     response1 = llama_llm(llama_13b,prompt) 
+                    st.write(response1)
                     st.session_state["sara_recommendation_llama"] = response1
 
                     st.markdown("### SARA Recommendation")
