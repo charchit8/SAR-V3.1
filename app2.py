@@ -763,6 +763,8 @@ with col1_up:
     #         pass
 
     #for fetched files
+    st.write(temp_file_path)
+
     for fetched_pdf in fetched_files:
         file_ext = tuple("png")
         if fetched_pdf.endswith(file_ext):
