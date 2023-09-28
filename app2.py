@@ -707,9 +707,9 @@ with col1_up:
         pdf.add_page()
         # Set the font and font size
         pdf.set_font('Arial', size=12)
-        encoded_text = text.encode("utf-8")
+        pdf.cell(200, 10, txt=text.encode('utf-8').decode('latin-1'), ln = 1, align = 'C')
         # Write the text to the PDF
-        pdf.write(5, encoded_text)
+        # pdf.write(text.encode('utf-8').decode('latin-1'), ln = 1, align = 'C')
         # Save the PDF
         pdf.output(os.path.join(tmp_dir_,file_name))
         file_pth = os.path.join(tmp_dir_,file_name)
