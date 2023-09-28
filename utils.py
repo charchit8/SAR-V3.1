@@ -79,23 +79,24 @@ def convert_scanned_pdf_to_searchable_pdf(input_file, output_file):
     # Convert PDF to images
     # images = convert_from_path(input_file)
 
-    # Preprocess images using OpenCV
-    for i, image in enumerate(input_file):
-        # Convert image to grayscale
-        image = cv2.cvtColor(np.array(image), cv2.COLOR_RGB2GRAY)
+    # # Preprocess images using OpenCV
+    # for i, image in enumerate(input_file):
+    # Convert image to grayscale
+    image = cv2.imread(input_file)
+    image = cv2.cvtColor(np.array(image), cv2.COLOR_RGB2GRAY)
 
-        # Apply thresholding to remove noise
-        _, image = cv2.threshold(image, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
+    # Apply thresholding to remove noise
+    _, image = cv2.threshold(image, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
 
-        # Enhance contrast
-        image = cv2.equalizeHist(image)
+    # Enhance contrast
+    image = cv2.equalizeHist(image)
 
-        # Save preprocessed image
-        cv2.imwrite(f'{i}.png', image)
+    # Save preprocessed image
+    cv2.imwrite(f'{i}.png', image)
 
     # Perform OCR on preprocessed images using Tesseract
     text = ''
-    for i in range(len(images)):
+    for i in range(len(input_file)):
         image = cv2.imread(f'{i}.png')
         text += pytesseract.image_to_string(image)
 
