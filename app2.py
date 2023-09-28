@@ -1571,10 +1571,10 @@ with col_d2:
             file_name=zip_file_name,
             disabled=st.session_state.disabled)
 
-        # Cleanup: Delete the temporary directory and its contents
-        for file_path in file_paths + [combined_doc_path]:
-            os.remove(file_path)
-        os.rmdir(temp_dir)
+    # Cleanup: Delete the temporary directory and its contents
+    for file_path in file_paths + [combined_doc_path]:
+        os.remove(file_path)
+    os.rmdir(tmp_dir)
 
     with col5_up:   
         # Adding Radio button
@@ -1643,47 +1643,47 @@ with col_d2:
                 st.info("Thanks for your review, Case has been assigned to the next reviewer")
 
 
-        # # Allow the user to clear all stored conversation sessions
-        if st.button("Reset Session"):
-            reset_session_state()
-            st.cache_data.clear()
-            # pdf_files.clear()
+    # # Allow the user to clear all stored conversation sessions
+    if st.button("Reset Session"):
+        reset_session_state()
+        st.cache_data.clear()
+        # pdf_files.clear()
 
-        for file_path in file_paths + [combined_doc_path]:
-            os.remove(temp_file_path)
-            os.rmdir(tmp_dir_)
-
-
-
-        # Footer
-        st.markdown(
-            """
-            <style>
-            #MainMenu {visibility: hidden;}
-            footer {visibility: hidden;}
-            </style>
-            """
-            , unsafe_allow_html=True)
-        st.markdown('<div class="footer"><p></p></div>', unsafe_allow_html=True)
-
-        hide_st_style = """
-                    <style>
-                    #MainMenu {visibility: hidden;}
-                    footer {visibility: hidden;}
-                    header {visibility: hidden;}
-                    </style>
-                    """
-        st.markdown(hide_st_style, unsafe_allow_html=True)
+    for file_path in file_paths + [combined_doc_path]:
+        os.remove(temp_file_path)
+    os.rmdir(tmp_dir_)
 
 
-        padding = 0
-        st.markdown(f""" <style>
-            .reportview-container .main .block-container{{
-                padding-top: {padding}rem;
-                padding-right: {padding}rem;
-                padding-left: {padding}rem;
-                padding-bottom: {padding}rem;
-            }} </style> """, unsafe_allow_html=True)
+
+    # Footer
+    st.markdown(
+        """
+        <style>
+        #MainMenu {visibility: hidden;}
+        footer {visibility: hidden;}
+        </style>
+        """
+        , unsafe_allow_html=True)
+    st.markdown('<div class="footer"><p></p></div>', unsafe_allow_html=True)
+
+    hide_st_style = """
+                <style>
+                #MainMenu {visibility: hidden;}
+                footer {visibility: hidden;}
+                header {visibility: hidden;}
+                </style>
+                """
+    st.markdown(hide_st_style, unsafe_allow_html=True)
+
+
+    padding = 0
+    st.markdown(f""" <style>
+        .reportview-container .main .block-container{{
+            padding-top: {padding}rem;
+            padding-right: {padding}rem;
+            padding-left: {padding}rem;
+            padding-bottom: {padding}rem;
+        }} </style> """, unsafe_allow_html=True)
 
 
 
