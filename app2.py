@@ -932,7 +932,7 @@ with col2_up:
                     context_1 = docsearch.similarity_search(query, k=5)
                     prompt = f'''Act as a financial analyst and give concise answer if this can be reffered as suspicious activity or not, with given Context.
                                  If transaction amount is above the $5,000 value threshold, check for below points to make sure it is a suspicious activity.
-                                1.Check if the name mentioned in Invoice matches the customer name?If Yes then it is not a suspicious activity, If No- then it can be considered as a suspicious activity.
+                                1.Check if the name mentioned in Invoice matches the customer name?If Yes then it is not a suspicious activity, If No then it can be considered as a suspicious activity.
                                 2.Is there mention of any potential suspect who used the card without the consent of the cardholder.\n\n\
                                 Analysis above points properly and provide your answer if it can be considered as a suspicious activity or not.
                                 Question: {query}\n\
