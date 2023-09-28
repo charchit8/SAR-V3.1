@@ -697,6 +697,8 @@ with col1_up:
             pdf_files_ = pdf_files
         else: pass
 
+    st.write(temp_file_path)
+
     # #Adding pytesseract here
     # # To convert generated to pdf and save in temp direc.
     # def create_pdf(text,file_name):
