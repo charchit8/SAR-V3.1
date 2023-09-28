@@ -1649,8 +1649,8 @@ with col_d2:
         st.cache_data.clear()
         # pdf_files.clear()
 
-    for file_path in file_paths + [combined_doc_path]:
-        os.remove(temp_file_path)
+    for file_path in temp_file_path:
+        os.remove(file_path)
     os.rmdir(tmp_dir_)
 
 
