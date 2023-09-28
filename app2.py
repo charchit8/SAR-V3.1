@@ -786,7 +786,7 @@ with col1_up:
         else: pass
 
     st.write(temp_file_path)
-    
+
 with col2_up:
          #This is the embedding model
     model_name = "sentence-transformers/all-MiniLM-L6-v2"
