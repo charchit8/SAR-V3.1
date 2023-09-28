@@ -678,7 +678,7 @@ with col1_up:
     for fetched_pdf in fetched_files:
         file_ext = tuple("pdf")
         if fetched_pdf.endswith(file_ext):
-            file_pth = os.path.join('data2/', fetched_pdf)
+            file_pth = os.path.join(directoty_path, fetched_pdf)
             # st.write(file_pth)
             temp_file_path.append(file_pth) 
         else:
@@ -1542,7 +1542,7 @@ with col_d2:
 
     for fetched_pdf in fetched_files:
         # st.write(fetched_pdf)
-        file_pth = os.path.join('data2/', fetched_pdf)
+        file_pth = os.path.join(directoty_path, fetched_pdf)
         # st.write(file_pth)
         file_paths.append(file_pth)
 
