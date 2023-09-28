@@ -1240,7 +1240,6 @@ with col3_up:
         if st.button("Summarize",disabled=st.session_state.disabled):
             if st.session_state.llm == "Closed-Source":
                 st.session_state.disabled=False
-        
                 summ_dict_gpt = st.session_state.tmp_table_gpt.set_index('Question')['Answer'].to_dict()
                 # chat_history = resp_dict_obj['Summary']
                 memory = ConversationSummaryBufferMemory(llm=llm, max_token_limit=300)
@@ -1260,10 +1259,9 @@ with col3_up:
 
             elif st.session_state.llm == "Open-Source":
                 st.session_state.disabled=False
-                template = """Write a detailed summary.
-                Return your response in a single paragraph.
+                template = """Write a detailed summary of the text provided.
                 ```{text}```
-                Response: """
+                Response: (Return your response in a single paragraph.) """
                 prompt = PromptTemplate(template=template,input_variables=["text"])
                 llm_chain_llama = LLMChain(prompt=prompt,llm=llama_13b)
 
@@ -1276,9 +1274,7 @@ with col3_up:
 
     
     tmp_summary = []
-    tmp_table = pd.DataFrame()
-    
-    
+    tmp_table = pd.DataFrame()   
         
     try:
 
@@ -1385,11 +1381,18 @@ with col3_up:
         # save document
         # output_bytes = docx.Document.save(doc, 'output.docx')
         # st.download_button(label='Download Report', data=output_bytes, file_name='evidence.docx', mime='application/vnd.openxmlformats-officedocument.wordprocessingml.document')
-        paragraph = doc.add_paragraph()
-        paragraph = doc.add_paragraph()
-        doc.add_heading('SARA Recommendation', level=2)
-        doc.add_paragraph()       
-        paragraph = doc.add_paragraph(st.session_state["sara_recommendation_gpt"])
+        if st.session_state.llm == "Closed-Source":
+            paragraph = doc.add_paragraph()
+            paragraph = doc.add_paragraph()
+            doc.add_heading('SARA Recommendation', level=2)
+            doc.add_paragraph()       
+            paragraph = doc.add_paragraph(st.session_state["sara_recommendation_gpt"])
+        elif st.session_state.llm == "Open-Source":
+            paragraph = doc.add_paragraph()
+            paragraph = doc.add_paragraph()
+            doc.add_heading('SARA Recommendation', level=2)
+            doc.add_paragraph()       
+            paragraph = doc.add_paragraph(st.session_state["sara_recommendation_llama"])           
 
         bio = io.BytesIO()
         doc.save(bio)
