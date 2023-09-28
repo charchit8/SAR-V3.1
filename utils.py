@@ -6,7 +6,7 @@ import streamlit.components.v1 as components
 from typing import List, Dict, Any
 from langchain.docstore.document import Document
 from langchain.text_splitter import RecursiveCharacterTextSplitter
-import cv
+import cv2
 import PyPDF2
 import pytesseract
 from pdf2image import convert_from_path
