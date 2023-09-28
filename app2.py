@@ -754,7 +754,7 @@ with col1_up:
             selected_file_path = os.path.join(directoty_path, fetched_pdf)
             if is_searchable_pdf(selected_file_path)==False:
                 text = convert_scanned_pdf_to_searchable_pdf(selected_file_path)
-                # st.write(text)
+                st.write(text)
                 create_pdf(text,'fetched_file.pdf')
             else:
                 file_pth = os.path.join(directoty_path, fetched_pdf)
