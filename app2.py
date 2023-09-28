@@ -28,11 +28,11 @@ from io import StringIO
 from io import BytesIO
 from usellm import Message, Options, UseLLM
 from huggingface_hub import login
-import cv2
-import pdfplumber
-import pytesseract
-from pdf2image import convert_from_path
-from fpdf import FPDF
+# import cv2
+# import pdfplumber
+# import pytesseract
+# from pdf2image import convert_from_path
+# from fpdf import FPDF
 
 
 #from playsound import playsound
