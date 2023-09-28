@@ -828,7 +828,10 @@ with col2_up:
                     query = "Is this a Suspicious Activity?"
                     context_1 = docsearch.similarity_search(query, k=5)
                     prompt = f'''Act as a financial analyst and give concise answer to the question, with given Context.
-                    This can be addressed as a suspicious activity based on [transaction amount,fraud type,suspect name not matching with the customer name, suspect address does not match with the customer address].\n\n\
+                                This can be addressed as suspicious activity based on the following-
+                                1. Transaction amount is above the $5,000 value threshold.\n\
+                                2. There is mismatch of customer details such as name,address on merchant invoice.
+                                3. Any potential suspect is identified.\n\n\     
                     
                                 Question: {query}\n\
                                 Context: {context_1}\n\                      
