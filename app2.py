@@ -915,9 +915,9 @@ with col2_up:
                     
 
                     queries ="Please provide the following information regarding the possible fraud case: If transaction,disputed amount is above the $5000 threshold,\
-                    There is an indication of suspicion with involvement of multiple individuals whose details mismatch with customer details. (Customer details can be identified from Cardholder Information),\
-                    A potential suspect is identified, and based on the evidence, is this a suspicious activity (Summarize all the questions asked prior to this in a detailed manner),\
-                    that is the answer of whether this is a suspicious activity\"
+                              There is an indication of suspicion with involvement of multiple individuals whose details mismatch with customer details. (Customer details can be identified from Cardholder Information),\
+                              A potential suspect is identified, and based on the evidence, is this a suspicious activity (Summarize all the questions asked prior to this in a detailed manner),\
+                              that is the answer of whether this is a suspicious activity"
                     
                     contexts = docsearch.similarity_search(queries, k=5) 
                     prompt = f" Give answer to the questions as truthfully and in as detailed in the form of sentences\
