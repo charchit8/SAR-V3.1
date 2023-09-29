@@ -1599,7 +1599,7 @@ with col_d2:
             prompt = f'''Act as a financial analyst and give concise answer to the question, with given Context.\n\n\
             SAR refers to Suspicious activity Report, which is a document that financial institutions must file with the Financial Crimes Enforcement Network (FinCEN) based on the Bank Secrecy Act whenever there is a suspicious activity.\n\n\
             To confirm this as a suspicious activity-
-            1. The Transaction amount is above $5000 threshold.
+            1. What is the transaction amount mentioned in context.
             2. Details mentioned in Invoice doesnot match with customer details. (customer name, address can be identified from Cardholder Information).
             3. Any potential suspect is identified.\n\n\     
             If no suspicious activity is detected based on above mentioned points, write your response as - There is no indication of suspicious actuvity.Therefore,no requirement to file SAR with FinCEN.\n\n\
