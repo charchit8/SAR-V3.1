@@ -1601,7 +1601,7 @@ with col_d2:
             If no suspicious activity is detected based on above mentioned points, write your response as - There is no indication of suspicious actuvity.Therefore,no requirement to file SAR with FinCEN.\n\n\
                     Question: {query}\n\
                     Context: {context_1}\n\                      
-                    Response: (Give me a concise response in pointers.Mention whom to file based on Bank Secrecy Act. Write your response in a professional manner.)'''
+                    Response: (Give me a concise response in pointers.Mention whom to file based on Bank Secrecy Act.)'''
             
             
             response1 = usellm(prompt) 
