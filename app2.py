@@ -904,13 +904,13 @@ with col2_up:
                     query = "Is this a Suspicious Activity?"
                     context_1 = docsearch.similarity_search(query, k=5)
                     prompt = f'''Act as a financial analyst and give concise answer to the question as truthfully as possible with given Context.
-                                If the Transaction amount is above the $5,000 value threshold. Check for below point to make sure if it is a suspicious activity or not-
+                                If transaction amount is above the $5,000 value threshold. Check for below point to make sure if it is a suspicious activity or not-
                                 1. There is an indication of suspicion with involvement of multiple individuals whose details mismatch with customer details. (Customer details can be identified from Cardholder Information)
                                 2. A potential suspect is identified.
                                 Analyse above points properly and answer if there is any fraud/suspicious activity happening.\n\n\
                                 Question: {query}\n\
                                 Context: {context_1}\n\                      
-                                Response: (Give me your response in pointers. Reframe the sentence to provide a professional answer.)'''
+                                Response: (Give me your response in pointers.)'''
                     
                                             
                     response1 = usellm(prompt) 
