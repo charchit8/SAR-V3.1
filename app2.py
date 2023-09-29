@@ -904,8 +904,8 @@ with col2_up:
                     query = "Is this a Suspicious Activity?"
                     context_1 = docsearch.similarity_search(query, k=5)
                     prompt = f'''Act as a financial analyst and give concise answer to the question as truthfully as possible with given Context.
-                                If transaction amount is below the $5000 value threshold than there is no suspicious activity in this case. But,
-                                If transaction amount is above the $5,000 value threshold than check for below point to make sure if it is a suspicious activity or not-
+                                If transaction/disputed amount is below the $5000 value threshold than there is no suspicious activity in this case. But,
+                                If transaction/disputed amount is above the $5,000 value threshold than check for below point to make sure if it is a suspicious activity or not-
                                 1. There is an indication of suspicion with involvement of multiple individuals whose details mismatch with customer details. (Customer details can be identified from Cardholder Information)
                                 2. A potential suspect is identified.
                                 Analyse above points properly and answer if there is any fraud/suspicious activity happening.\n\n\
