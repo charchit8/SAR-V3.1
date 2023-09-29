@@ -723,6 +723,8 @@ with col1_up:
 
     # For uploaded files
     for file in file_pth:
+        st.write(file)
+        st.write(file.name)
         file_ext1 = tuple("pdf")
         file_ext2 = tuple(["png","jpeg"])
         if file.endswith(file_ext1):
