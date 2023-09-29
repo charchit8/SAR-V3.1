@@ -753,7 +753,6 @@ with col1_up:
     #         pass          
        
        
-with st.spinner("OCR Initiated..."): 
     #for fetched files
     for fetched_pdf in fetched_files:
         file_ext1 = tuple("pdf")
