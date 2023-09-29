@@ -926,7 +926,7 @@ with col2_up:
                         3. If a potential suspect is identified.\n\n\
                         Based the above findings, identify if this can be consider as Suspicious Activity or not.\n\n\
                         Context: {contexts}\n\
-                        Response  "
+                        Response (Do not write criteria in the Response you give instead write based on my analysis.) "
                          
                                          
                     response1 = usellm(prompt) 
