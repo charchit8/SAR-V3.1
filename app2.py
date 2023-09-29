@@ -734,6 +734,7 @@ with col1_up:
                     file_opn.write(file.getbuffer())
                     temp_file_path.append(file_opn)           
         elif file.endswith(file_ext2):
+            st.write(file)
             text = convert_image_to_searchable_pdf(file)
             create_pdf(text,file) 
         else:
