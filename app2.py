@@ -809,6 +809,14 @@ with col2_up:
         separators=["\n\n", "\n", " ", ""]
     )
   
+    
+    try:
+        if temp_file_path:
+            docs, docsearch = embedding_store(temp_file_path)
+        else:
+            pass
+    except Exception:
+        pass
 
        
 
@@ -842,9 +850,7 @@ with col2_up:
             st.markdown(df_fixed.style.hide(axis="index").to_html(), unsafe_allow_html=True)
 
     with st.spinner('Wait for it...'):
-        if temp_file_path is not None:
-            _, docsearch = embedding_store(temp_file_path)
-        if st.button("Generate Insights",disabled=st.session_state.disabled):
+          if st.button("Generate Insights",disabled=st.session_state.disabled):
                 if st.session_state.llm == "Closed-Source":
                     queries ="Please provide the following information regarding the possible fraud case: What is the name of the customer name,\
                     has any suspect been reported, list the merchant name, how was the bank notified, when was the bank notified, what is the fraud type,\
@@ -1060,16 +1066,6 @@ with col2_up:
 
 
     st.markdown("---")
-
-    # For input box outside of template4
-    try:
-        if temp_file_path:
-            docs, docsearch = embedding_store(temp_file_path)
-        else:
-            pass
-    except Exception:
-        pass
-
 
     # Text Input
     # st.markdown("""<span style="font-size: 24px; ">Ask Additional Questions</span>""", unsafe_allow_html=True)
@@ -1585,10 +1581,8 @@ with col_d2:
         # Adding Radio button
              
         st.markdown("""<span style="font-size: 24px;color:#0000FF">Is SAR filing required?</span>""", unsafe_allow_html=True)
-        
-        if temp_file_path is not None:
-            _, docsearch = embedding_store(temp_file_path)
 
+        if st.session_state.llm == "Closed-Source":
             st.write("#### *SARA Recommendation*")
             # st.markdown("""<span style="font-size: 18px;">*Based on the following findings for the underlying case, under Bank Secrecy Act, it is recommended to file this case as a suspicious activity:*</span>""", unsafe_allow_html=True)
             # st.markdown("""<span style="font-size: 18px;">*1. Transaction amount is above the $5,000 value threshold*</span>""", unsafe_allow_html=True)
