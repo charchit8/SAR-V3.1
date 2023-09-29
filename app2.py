@@ -1605,11 +1605,11 @@ with col_d2:
             query = "Is SAR filling required?"
             context_1 = docsearch.similarity_search(query, k=5)
             prompt = f'''Act as a financial analyst and give concise answer to the question, with given Context.\n\n\
-            If transaction amount is above the $5,000 value threshold, you needcheck below points to confirm this as a suspicious activity-
-            1. There is mention of other details that donot matches customer details such as name,address.
-            2. Any potential suspect is identified.\n\n\     
             SAR refers to Suspicious activity Report, which is a document that financial institutions must file with the Financial Crimes Enforcement Network (FinCEN) based on the Bank Secrecy Act whenever there is a suspicious activity.\n\n\
-            If transaction amount is less than $5000 threshold and no suspicious activity is detected, write your response as - There is no indication of suspicious actuvity, there is no requirement to file SAR with FinCEN.\n\n\
+            If transaction amount is above the $5,000 value threshold, you need to check below points to confirm this as a suspicious activity-
+            1. There is mention of other details that donot matches customer details such as name,address. (It would be great if you can identify name and address)
+            2. Any potential suspect is identified.\n\n\     
+            Else, if transaction amount is less than $5000 threshold and no suspicious activity is detected, write your response as - There is no indication of suspicious actuvity, there is no requirement to file SAR with FinCEN.\n\n\
             
                     Question: {query}\n\
                     Context: {context_1}\n\                      
