@@ -874,10 +874,8 @@ with col2_up:
                     response = usellm(prompts)
 
                     try:
-
                         resp_dict_obj = json.loads(response)
                         res_df_gpt = pd.DataFrame(resp_dict_obj.items(), columns=['Question','Answer'])
-                    
                     except:
                         e = Exception("")
                         st.exception(e)
