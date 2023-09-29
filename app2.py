@@ -780,7 +780,7 @@ with col1_up:
             pdf_files_ = pdf_files
         else: pass
 
-    st.write(temp_file_path)
+    # st.write(temp_file_path)
 
 with col2_up:
          #This is the embedding model
