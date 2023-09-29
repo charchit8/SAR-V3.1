@@ -1607,7 +1607,7 @@ with col_d2:
             If transaction/disputed amount is < 5000 USD threshold and no suspicious activity is detected based on above mentioned points, write your response as - There is no indication of suspicious activity.Therefore,no requirement to file SAR with FinCEN.\n\n\
                     Question: {query}\n\
                     Context: {context_1}\n\                      
-                    Response: (Give me a concise response in pointers.Mention whom to file based on Bank Secrecy Act.)'''
+                    Response: (Based on your analysis give a concise response in pointers.Mention whom to file based on Bank Secrecy Act.)'''
             
             
             response1 = usellm(prompt) 
