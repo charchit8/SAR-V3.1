@@ -767,20 +767,20 @@ with st.spinner("OCR Initiated..."):
             pass
       
  
-   #combining files in fetch evidence and upload evidence
-    pdf_files_ = []
-    if temp_file_path:
-        if pdf_files and fetched_files:
-            file_names = [file.name for file in pdf_files]
-            file_names = file_names + fetched_files
-            pdf_files_ = file_names
-        elif fetched_files:
-            pdf_files_ = fetched_files
-        elif pdf_files:
-            pdf_files_ = pdf_files
-        else: pass
-    st.write(pdf_files_)
-    # st.write(temp_file_path)
+#    #combining files in fetch evidence and upload evidence
+#     pdf_files_ = []
+#     if temp_file_path:
+#         if pdf_files and fetched_files:
+#             file_names = [file.name for file in pdf_files]
+#             file_names = file_names + fetched_files
+#             pdf_files_ = file_names
+#         elif fetched_files:
+#             pdf_files_ = fetched_files
+#         elif pdf_files:
+#             pdf_files_ = pdf_files
+#         else: pass
+#     st.write(pdf_files_)
+    st.write(temp_file_path)
 
 
 with col2_up:
