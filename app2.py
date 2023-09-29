@@ -703,43 +703,54 @@ with st.spinner("OCR Initiated..."):
         file_pth = os.path.join(tmp_dir_,file_name)
         temp_file_path.append(file_pth)
 
+    for uploaded_file in pdf_files:
+        file_ext = tuple("pdf")
+        if uploaded_file.name.endswith(file_ext):
+            file_pth = os.path.join(tmp_dir_, uploaded_file.name)
+            with open(file_pth, "wb") as file_opn:
+                file_opn.write(uploaded_file.getbuffer())
+                temp_file_path.append(file_pth)
+        else:
+            pass
 
     # # # Pytesseract code 
 
-    #file path for uploaded files
-    file_pth = []
-    for uploaded_file in pdf_files:
-        file_ext1 = tuple("pdf")
-        file_ext2 = tuple(["png","jpeg"])
-        if uploaded_file.name.endswith(file_ext1):
-            file_pth_= os.path.join(tmp_dir_, uploaded_file.name)
-            with open(file_pth_, "wb") as file_opn:
-                file_opn.write(uploaded_file.getbuffer())
-                file_pth.append(file_opn)
-        elif uploaded_file.name.endswith(file_ext2):
-            file_pth_= os.path.join(tmp_dir_, uploaded_file.name)
-            file_pth.append(file_pth_)
-        else:
-            pass
-    st.write(file_pth)
-    # For uploaded files
-    for file in file_pth:
-        st.write(file)
-        file_ext1 = tuple("pdf")
-        file_ext2 = tuple(["png","jpeg"])
-        if file.endswith(file_ext1):
-            if is_searchable_pdf(file)==False:
-                text = convert_scanned_pdf_to_searchable_pdf(file)
-                create_pdf(text,'uploaded_file.pdf')
-            else:
-                with open(file, "wb") as file_opn:
-                    file_opn.write(file.getbuffer())
-                    temp_file_path.append(file_opn)           
-        elif file.endswith(file_ext2):
-            text = convert_image_to_searchable_pdf(file)
-            create_pdf(text,'uploaded_file.pdf') 
-        else:
-            pass          
+    # #file path for uploaded files
+    # file_pth = []
+    # for uploaded_file in pdf_files:
+    #     file_ext1 = tuple("pdf")
+    #     file_ext2 = tuple(["png","jpeg"])
+    #     if uploaded_file.name.endswith(file_ext1):
+    #         file_pth_= os.path.join(tmp_dir_, uploaded_file.name)
+    #         with open(file_pth_, "wb") as file_opn:
+    #             file_opn.write(uploaded_file.getbuffer())
+    #             file_pth.append(file_opn)
+    #     elif uploaded_file.name.endswith(file_ext2):
+    #         file_pth_= os.path.join(tmp_dir_, uploaded_file.name)
+    #         file_pth.append(file_pth_)
+    #     else:
+    #         pass
+
+ 
+
+    # # For uploaded files
+    # for file in file_pth:
+    #     st.write(file.name)
+    #     file_ext1 = tuple("pdf")
+    #     file_ext2 = tuple(["png","jpeg"])
+    #     if file.endswith(file_ext1):
+    #         if is_searchable_pdf(file)==False:
+    #             text = convert_scanned_pdf_to_searchable_pdf(file)
+    #             create_pdf(text,'uploaded_file.pdf')
+    #         else:
+    #             with open(file, "wb") as file_opn:
+    #                 file_opn.write(file.getbuffer())
+    #                 temp_file_path.append(file_opn)           
+    #     elif file.endswith(file_ext2):
+    #         text = convert_image_to_searchable_pdf(file)
+    #         create_pdf(text,'uploaded_file.pdf') 
+    #     else:
+    #         pass          
        
        
  
