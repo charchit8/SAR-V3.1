@@ -910,9 +910,8 @@ with col2_up:
                                 Analyse above points properly and answer if there is any fraud/suspicious activity happening.\n\n\
                                 Question: {query}\n\
                                 Context: {context_1}\n\                      
-                                Response: (Give me your response in pointers.)'''
-                    
-                                            
+                                Response: (Give me your response in pointers.)'''  
+                                         
                     response1 = usellm(prompt) 
                     st.session_state["sara_recommendation_gpt"] = response1                
                     
