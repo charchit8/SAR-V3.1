@@ -759,9 +759,9 @@ with col1_up:
             selected_file_path = os.path.join(directoty_path, fetched_pdf)
             text = convert_image_to_searchable_pdf(selected_file_path)
             file_name = os.path.basename(selected_file_path)
-            x = file_name.split('.')
-            st.write(x)
-            create_pdf(text,f'{file_name}.pdf')
+            split_name = file_name.split('.')
+            st.write(split_name[0])
+            create_pdf(text,f'{split_name[0]}.pdf')
 
         else:
             pass
