@@ -908,7 +908,7 @@ with col2_up:
                     prompt = f'''Act as a financial analyst and give concise answer to the question as truthfully as possible with given Context.
                                 check for below point to make sure if it is a suspicious activity or not-
                                 1. The Transaction amount is above the $5,000 value threshold.
-                                2. Invoice is billed to someone other than customer (customer details can be identified from cardholder information).
+                                2. Invoice is billed to someone other than customer (customer name and address can be identified from Cardholder Information).
                                 3. A potential suspect is identified.
                                 Analyse above points properly and answer if there is any fraud/suspicious activity happening.\n\n\
                                 Question: {query}\n\
@@ -1581,7 +1581,7 @@ with col_d2:
 
     with col5_up:   
         # Adding Radio button
-            
+             
         st.markdown("""<span style="font-size: 24px;color:#0000FF">Is SAR filing required?</span>""", unsafe_allow_html=True)
         _, docsearch = embedding_store(temp_file_path)
         if st.session_state["tmp_summary_gpt"] is not None:
@@ -1596,8 +1596,8 @@ with col_d2:
             prompt = f'''Act as a financial analyst and give concise answer to the question, with given Context.\n\n\
             SAR refers to Suspicious activity Report, which is a document that financial institutions must file with the Financial Crimes Enforcement Network (FinCEN) based on the Bank Secrecy Act whenever there is a suspicious activity.\n\n\
             To confirm this as a suspicious activity-
-            1. Transaction amount is above $5000 threshold.
-            2. Invoice is billed to someone other than customer.
+            1. Tge Transaction amount is above $5000 threshold.
+            2. Invoice is billed to someone other than customer (customer name and address can be identified from Cardholder Information).
             3. Any potential suspect is identified.\n\n\     
             If no suspicious activity is detected based on above mentioned points, write your response as - There is no indication of suspicious actuvity.Therefore,no requirement to file SAR with FinCEN.\n\n\
                     Question: {query}\n\
