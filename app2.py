@@ -1599,12 +1599,12 @@ with col_d2:
             context_1 = docsearch.similarity_search(query, k=5)
             prompt = f'''Act as a financial analyst and give concise answer to the question, with given Context.\n\n\
             SAR refers to Suspicious activity Report, which is a document that financial institutions must file with the Financial Crimes Enforcement Network (FinCEN) based on the Bank Secrecy Act whenever there is a suspicious activity.\n\n\
-            If transaction amount is above the $5,000 value threshold, you need to check below points to confirm this as a suspicious activity (One or more points from below needs to be identified to make sure this as a suspicious activity)-
-            1. There is mention of other details that donot matches customer details. 
-            2. Check on whose name Invoice is billed. If that is different from customer name.
-            3. Any potential suspect is identified.\n\n\     
-            Else, if transaction amount is less than $5000 threshold and no suspicious activity is detected, write your response as - There is no indication of suspicious actuvity, there is no requirement to file SAR with FinCEN.\n\n\
-            
+            If transaction amount is above the $5,000 value threshold, you need to check below points to confirm this as a suspicious activity-
+            1. Check for the customer name and address in Cardholder Information?
+            2. If you find any names and addresses that donot matches with customer details then it can be considered as a suspicious activity.
+            3. Check on whose name Invoice is billed. If that is different from customer name.
+            4. Any potential suspect is identified.\n\n\     
+            If no suspicious activity is detected, write your response as - There is no indication of suspicious actuvity.Therefore,no requirement to file SAR with FinCEN.\n\n\
                     Question: {query}\n\
                     Context: {context_1}\n\                      
                     Response: (Give me a concise response in pointers. Also, mention whom to file based on Bank Secrecy Act.)'''
