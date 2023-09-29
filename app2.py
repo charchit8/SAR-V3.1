@@ -913,7 +913,6 @@ with col2_up:
                                 Transaction amount is above the $5,000 value threshold, check for below point to make sure if it is a suspicious activity or not.
                                 1.Check for the customer name and address in Cardholder Information?
                                 2.If you find any names and addresses that donot matches with customer details then it can be considered as a suspicious activity.
-                                3.If no names other than the customer are available then it is not a suspicous activity.
                                 Analyse above points properly and answer if there is any fraud/suspicious activity happening.\n\n\
                                 Question: {query}\n\
                                 Context: {context_1}\n\                      
