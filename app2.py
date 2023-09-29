@@ -1588,7 +1588,7 @@ with col_d2:
             
         st.markdown("""<span style="font-size: 24px;color:#0000FF">Is SAR filing required?</span>""", unsafe_allow_html=True)
         _, docsearch = embedding_store(temp_file_path)
-        if st.session_state["tmp_table_gpt"] is not None:
+        if st.session_state["tmp_summary_gpt"] is not None:
 
             st.write("#### *SARA Recommendation*")
             # st.markdown("""<span style="font-size: 18px;">*Based on the following findings for the underlying case, under Bank Secrecy Act, it is recommended to file this case as a suspicious activity:*</span>""", unsafe_allow_html=True)
