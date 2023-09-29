@@ -844,10 +844,9 @@ with col2_up:
             st.markdown(df_fixed.style.hide(axis="index").to_html(), unsafe_allow_html=True)
 
     with st.spinner('Wait for it...'):
+        if temp_file_path is not None:
+            _, docsearch = embedding_store(temp_file_path)
         if st.button("Generate Insights",disabled=st.session_state.disabled):
-            if temp_file_path is not None:
-                # File handling logic
-                _, docsearch = embedding_store(temp_file_path)
                 if st.session_state.llm == "Closed-Source":
                     queries ="Please provide the following information regarding the possible fraud case: What is the name of the customer name,\
                     has any suspect been reported, list the merchant name, how was the bank notified, when was the bank notified, what is the fraud type,\
