@@ -920,13 +920,13 @@ with col2_up:
                               that is the answer of whether this is a suspicious activity"
                     
                     contexts = docsearch.similarity_search(queries, k=5) 
-                    prompt = f" Find answer to the questions as truthfully and in as detailed as possible as per given context only,\n\n\
+                    prompt = f" You are professional Fraud Analyst. Find answer to the questions as truthfully and in as detailed as possible as per given context only,\n\n\
                         1. if the transaction/disputed amount is above the $5,000 value threshold.\n\n\
                         2. If there is an indication of suspicion with involvement of multiple individuals whose details mismatch with customer details (Customer details can be identified from Cardholder Information).\n\n\
                         3. If a potential suspect is identified.\n\n\
                         Based the above findings, identify if this can be consider as Suspicious Activity or not.\n\n\
                         Context: {contexts}\n\
-                        Response (Do not write criteria in the Response you give instead write based on my analysis.) "
+                        Response (Give response based on your analysis.) "
                          
                                          
                     response1 = usellm(prompt) 
