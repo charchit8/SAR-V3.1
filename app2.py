@@ -922,6 +922,9 @@ with col2_up:
                     contexts = docsearch.similarity_search(queries, k=5) 
                     prompt = f" Give answer to the questions as truthfully and in as detailed in the form of sentences\
                     as possible as per given context only,\n\n\
+                        1. The transaction/disputed amount is above the $5,000 value threshold\n\n\
+                        2. There is an indication of suspicion with involvement of multiple individuals whose details mismatch with customer details.\n\n\
+                        3. A potential suspect is identified.\n\n\
                         Context: {contexts}\n\
                         Response  "
                          
