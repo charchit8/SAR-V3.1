@@ -660,7 +660,7 @@ with col1_up:
                 st.image(uploaded_file, use_column_width=True)
 
 #creating temp directory to have all the files at one place for accessing
-with st.spinner("OCR Initiated..."):
+
     
     tmp_dir_ = tempfile.mkdtemp()
     temp_file_path= []
@@ -753,7 +753,7 @@ with st.spinner("OCR Initiated..."):
     #         pass          
        
        
- 
+with st.spinner("OCR Initiated..."): 
     #for fetched files
     for fetched_pdf in fetched_files:
         file_ext1 = tuple("pdf")
@@ -779,20 +779,7 @@ with st.spinner("OCR Initiated..."):
             pass
       
  
-#    #combining files in fetch evidence and upload evidence
-#     pdf_files_ = []
-#     if temp_file_path:
-#         if pdf_files and fetched_files:
-#             file_names = [file.name for file in pdf_files]
-#             file_names = file_names + fetched_files
-#             pdf_files_ = file_names
-#         elif fetched_files:
-#             pdf_files_ = fetched_files
-#         elif pdf_files:
-#             pdf_files_ = pdf_files
-#         else: pass
-#     st.write(pdf_files_)
-    st.write(temp_file_path)
+    # st.write(temp_file_path)
 
 
 with col2_up:
