@@ -854,7 +854,7 @@ with col2_up:
                     prompts = f" Give a the answer to the below questions as truthfully and in as detailed in the form of sentences\
                     as possible as per given context only,\n\n\
                             What is the victim's name?\n\
-                            What is the suspect's name?(If no suspect name is mentioned write, There is no suspect name.)\n\
+                            What is the suspect's name?\n\
                             List the merchant name\n\
                             How was the bank notified?\n\
                             When was the bank notified?\n\
@@ -907,7 +907,7 @@ with col2_up:
                     context_1 = docsearch.similarity_search(query, k=5)
                     prompt = f'''Act as a financial analyst and give concise answer to the question as truthfully as possible with given Context.
                                 If transaction amount is above the $5,000 value threshold, check for below point to make sure if it is a suspicious activity or not.
-                                1. If you find any names and addresses that donot matches with customer details then it can be considered as a suspicious activity.
+                                1. If you find multiple names and addresses in the context that donot matches with customer details then it can be considered as a suspicious activity.
                                 2. A potential suspect is identified.
                                 Analyse above points properly and answer if there is any fraud/suspicious activity happening.\n\n\
                                 Question: {query}\n\
