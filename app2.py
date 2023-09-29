@@ -901,17 +901,30 @@ with col2_up:
 
 
                     #SARA Recommendation
-                    query = "Is this a Suspicious Activity?"
-                    context_1 = docsearch.similarity_search(query, k=5)
-                    prompt = f'''Act as a financial analyst and give concise answer to the question as truthfully as possible with given Context.
-                                If transaction/disputed amount is below the $5000 value threshold than there is no suspicious activity in this case. But,
-                                If transaction/disputed amount is above the $5,000 value threshold than check for below point to make sure if it is a suspicious activity or not-
-                                1. There is an indication of suspicion with involvement of multiple individuals whose details mismatch with customer details. (Customer details can be identified from Cardholder Information)
-                                2. A potential suspect is identified.
-                                Analyse above points properly and answer if there is any fraud/suspicious activity happening.\n\n\
-                                Question: {query}\n\
-                                Context: {context_1}\n\                      
-                                Response: (Give me your response in pointers.)'''  
+                    # query = "Is this a Suspicious Activity?"
+                    # context_1 = docsearch.similarity_search(query, k=5)
+                    # prompt = f'''Act as a financial analyst and give concise answer to the question as truthfully as possible with given Context.
+                    #             If transaction/disputed amount is below the $5000 value threshold than there is no suspicious activity in this case. But,
+                    #             If transaction/disputed amount is above the $5,000 value threshold than check for below point to make sure if it is a suspicious activity or not-
+                    #             1. There is an indication of suspicion with involvement of multiple individuals whose details mismatch with customer details. (Customer details can be identified from Cardholder Information)
+                    #             2. A potential suspect is identified.
+                    #             Analyse above points properly and answer if there is any fraud/suspicious activity happening.\n\n\
+                    #             Question: {query}\n\
+                    #             Context: {context_1}\n\                      
+                    #             Response: (Give me your response in pointers.)''' 
+                    
+
+                    queries ="Please provide the following information regarding the possible fraud case: If transaction,disputed amount is above the $5000 threshold,\
+                    There is an indication of suspicion with involvement of multiple individuals whose details mismatch with customer details. (Customer details can be identified from Cardholder Information),\
+                    A potential suspect is identified, and based on the evidence, is this a suspicious activity(Summarize all the questions asked prior to this in a detailed manner),\
+                    that's the answer of whether this is a suspicious activity\"
+                    
+                    contexts = docsearch.similarity_search(queries, k=5) 
+                    prompt = f" Give answer to the questions as truthfully and in as detailed in the form of sentences\
+                    as possible as per given context only,\n\n\
+                        Context: {contexts}\n\
+                        Response  "
+                         
                                          
                     response1 = usellm(prompt) 
                     st.session_state["sara_recommendation_gpt"] = response1                
