@@ -913,26 +913,19 @@ with col2_up:
 
 
                     #SARA Recommendation
-                    # query = "Is this a Suspicious Activity?"
-                    # context_1 = docsearch.similarity_search(query, k=5)
-                    # prompt = f'''Act as a financial analyst and give concise answer to the question as truthfully as possible with given Context.
-                    #             If transaction amount is above the $5,000 value threshold, then check for below point to make sure if it is a suspicious activity or not.
-                    #             1.Check if the name mentioned in Invoice matches the customer name in Cardholder Information? If both the name matches then it is not a suspicious activity.
-                    #             2.If you find multiple different names and multiple addresses then it can be considered as a suspicious activity.
-                    #             Analyse above points properly and answer if there is any fraud/suspicious activity happening.\n\n\
-                                
-                    #             Question: {query}\n\
-                    #             Context: {context_1}\n\                      
-                    #             Response: (Give me your response in pointers. Reframe the sentence to provide a professional answer.)'''
-                    
                     query = "Is this a Suspicious Activity?"
                     context_1 = docsearch.similarity_search(query, k=5)
                     prompt = f'''Act as a financial analyst and give concise answer to the question as truthfully as possible with given Context.
-                                 Analyse properly and answer if there is any fraud/suspicious activity happening.\n\n\
+                                If transaction amount is above the $5,000 value threshold, then check for below point to make sure if it is a suspicious activity or not.
+                                1.Check if the name mentioned in Invoice matches the customer name in Cardholder Information? If both the name matches then it is not a suspicious activity.
+                                2.If you find multiple different names and multiple addresses then it can be considered as a suspicious activity.
+                                Analyse above points properly and answer if there is any fraud/suspicious activity happening.\n\n\
                                 
                                 Question: {query}\n\
                                 Context: {context_1}\n\                      
-                                Response: (Give me your response in pointers. Reframe the sentence to provide a professional answer.)'''    
+                                Response: (Give me your response in pointers. Reframe the sentence to provide a professional answer.)'''
+                    
+                                            
                     response1 = usellm(prompt) 
                     st.session_state["sara_recommendation_gpt"] = response1                
                     
