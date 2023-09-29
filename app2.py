@@ -750,8 +750,9 @@ with col1_up:
             if is_searchable_pdf(selected_file_path)==False:
                 text = convert_scanned_pdf_to_searchable_pdf(selected_file_path)
                 file_name = os.path.basename(selected_file_path)
-                st.write(file_name)
-                create_pdf(text,f'{file_name}.pdf')
+                file_name = os.path.basename(selected_file_path)
+                split_name = file_name.split('.')
+                create_pdf(text,f'{split_name[0]}.pdf')
             else:
                 file_pth = os.path.join(directoty_path, fetched_pdf)
                 temp_file_path.append(file_pth)
@@ -760,7 +761,6 @@ with col1_up:
             text = convert_image_to_searchable_pdf(selected_file_path)
             file_name = os.path.basename(selected_file_path)
             split_name = file_name.split('.')
-            st.write(split_name[0])
             create_pdf(text,f'{split_name[0]}.pdf')
 
         else:
