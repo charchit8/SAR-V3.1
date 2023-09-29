@@ -730,9 +730,7 @@ with col1_up:
         if file.endswith(file_ext1):
             if is_searchable_pdf(file)==False:
                 text = convert_scanned_pdf_to_searchable_pdf(file)
-                file_name = os.path.basename(selected_file_path)
-                split_name = file_name.split('.')
-                create_pdf(text,f'{split_name[0]}.pdf')
+                create_pdf(text,'uploaded_file.pdf')
             else:
                 with open(file, "wb") as file_opn:
                     file_opn.write(file.getbuffer())
@@ -740,9 +738,7 @@ with col1_up:
         elif file.endswith(file_ext2):
             st.write(file)
             text = convert_image_to_searchable_pdf(file)
-            split_name = file_name.split('.')
-            # st.write(split_name[0])
-            create_pdf(text,f'{split_name[0]}.pdf') 
+            create_pdf(text,'uploaded_file.pdf') 
         else:
             pass          
        
