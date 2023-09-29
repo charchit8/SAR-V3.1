@@ -921,8 +921,8 @@ with col2_up:
                     
                     contexts = docsearch.similarity_search(queries, k=5) 
                     prompt = f" Find answer to the questions as truthfully and in as detailed as possible as per given context only,\n\n\
-                        1. The transaction/disputed amount is above the $5,000 value threshold\n\n\
-                        2. There is an indication of suspicion with involvement of multiple individuals whose details mismatch with customer details.\n\n\
+                        1. The transaction/disputed amount is above the $5,000 value threshold.\n\n\
+                        2. There is an indication of suspicion with involvement of multiple individuals whose details mismatch with customer details (Customer details can be identified from Cardholder Information).\n\n\
                         3. A potential suspect is identified.\n\n\
                         Context: {contexts}\n\
                         Response (Analyze the above findings and respond if this can be consider as Suspicious Activity or not.) "
