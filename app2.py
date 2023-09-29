@@ -1594,7 +1594,7 @@ with col_d2:
             context_1 = docsearch.similarity_search(query, k=5)
             prompt = f'''Act as a financial analyst and give concise answer to the question, with given Context.\n\n\
             SAR refers to Suspicious activity Report, which is a document that financial institutions must file with the Financial Crimes Enforcement Network (FinCEN) based on the Bank Secrecy Act whenever there is a suspicious activity.\n\n\
-            you need to check below points to confirm this as a suspicious activity-
+            To confirm this as a suspicious activity follow below mention points-
             1. Transaction amount is above $5000 threshold.
             2. Invoice is billed to someone other than customer.
             3. Any potential suspect is identified.\n\n\     
