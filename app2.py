@@ -908,7 +908,7 @@ with col2_up:
                     prompt = f'''Act as a financial analyst and give concise answer to the question as truthfully as possible with given Context.
                                 check for below point to make sure if it is a suspicious activity or not-
                                 1. If transaction amount is above the $5,000 value threshold.
-                                2. Invoice is billed to someone other than customer.
+                                2. Invoice is billed to someone other than customer (customer details can be identified from cardholder information).
                                 3. A potential suspect is identified.
                                 Analyse above points properly and answer if there is any fraud/suspicious activity happening.\n\n\
                                 Question: {query}\n\
