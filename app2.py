@@ -713,9 +713,7 @@ with st.spinner("OCR Initiated..."):
         file_ext2 = tuple(["png","jpeg"])
         if uploaded_file.name.endswith(file_ext1):
             file_pth_= os.path.join(tmp_dir_, uploaded_file.name)
-            with open(file_pth_, "wb") as file_opn:
-                file_opn.write(uploaded_file.getbuffer())
-                file_pth.append(file_pth_)
+            file_pth.append(file_pth_)
         elif uploaded_file.name.endswith(file_ext2):
             file_pth_= os.path.join(tmp_dir_, uploaded_file.name)
             file_pth.append(file_pth_)
