@@ -104,4 +104,7 @@ def convert_image_to_searchable_pdf(input_file):
 
     return text
 
+
+
+
  
