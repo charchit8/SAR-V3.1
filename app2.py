@@ -759,8 +759,8 @@ with col1_up:
             selected_file_path = os.path.join(directoty_path, fetched_pdf)
             text = convert_image_to_searchable_pdf(selected_file_path)
             file_name = os.path.basename(selected_file_path)
-            file_name = os.path.basename(file_name)
-            st.write(file_name)
+            x = file_name.split('.')
+            st.write(x)
             create_pdf(text,f'{file_name}.pdf')
 
         else:
@@ -780,7 +780,7 @@ with col1_up:
             pdf_files_ = pdf_files
         else: pass
 
-
+    st.write(temp_file_path)
 
 with col2_up:
          #This is the embedding model
