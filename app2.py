@@ -666,25 +666,25 @@ with col1_up:
     temp_file_path= []
 
 
-    # for uploaded_file in pdf_files:
-    #     file_ext = tuple("pdf")
-    #     if uploaded_file.name.endswith(file_ext):
-    #         file_pth = os.path.join(tmp_dir_, uploaded_file.name)
-    #         with open(file_pth, "wb") as file_opn:
-    #             file_opn.write(uploaded_file.getbuffer())
-    #             temp_file_path.append(file_pth)
-    #     else:
-    #         pass
+    for uploaded_file in pdf_files:
+        file_ext = tuple("pdf")
+        if uploaded_file.name.endswith(file_ext):
+            file_pth = os.path.join(tmp_dir_, uploaded_file.name)
+            with open(file_pth, "wb") as file_opn:
+                file_opn.write(uploaded_file.getbuffer())
+                temp_file_path.append(file_pth)
+        else:
+            pass
 
 
-    # for fetched_pdf in fetched_files:
-    #     file_ext = tuple("pdf")
-    #     if fetched_pdf.endswith(file_ext):
-    #         file_pth = os.path.join(directoty_path, fetched_pdf)
-    #         # st.write(file_pth)
-    #         temp_file_path.append(file_pth) 
-    #     else:
-    #         pass   
+    for fetched_pdf in fetched_files:
+        file_ext = tuple("pdf")
+        if fetched_pdf.endswith(file_ext):
+            file_pth = os.path.join(directoty_path, fetched_pdf)
+            # st.write(file_pth)
+            temp_file_path.append(file_pth) 
+        else:
+            pass   
 
      #Adding pytesseract here
     # To convert generated to pdf and save in temp direc.
@@ -702,16 +702,6 @@ with col1_up:
         pdf.output(os.path.join(tmp_dir_,file_name))
         file_pth = os.path.join(tmp_dir_,file_name)
         temp_file_path.append(file_pth)
-
-    for uploaded_file in pdf_files:
-        file_ext = tuple("pdf")
-        if uploaded_file.name.endswith(file_ext):
-            file_pth = os.path.join(tmp_dir_, uploaded_file.name)
-            with open(file_pth, "wb") as file_opn:
-                file_opn.write(uploaded_file.getbuffer())
-                temp_file_path.append(file_pth)
-        else:
-            pass
 
     # # # Pytesseract code 
 
@@ -753,29 +743,29 @@ with col1_up:
     #         pass          
        
        
-    #for fetched files
-    for fetched_pdf in fetched_files:
-        file_ext1 = tuple("pdf")
-        file_ext2 = tuple(["png","jpeg"])
-        if fetched_pdf.endswith(file_ext1):
-            selected_file_path = os.path.join(directoty_path, fetched_pdf)
-            if is_searchable_pdf(selected_file_path)==False:
-                text = convert_scanned_pdf_to_searchable_pdf(selected_file_path)
-                file_name = os.path.basename(selected_file_path)
-                split_name = file_name.split('.')
-                create_pdf(text,f'{split_name[0]}.pdf')
-            else:
-                file_pth = os.path.join(directoty_path, fetched_pdf)
-                temp_file_path.append(file_pth)
-        elif fetched_pdf.endswith(file_ext2):
-            selected_file_path = os.path.join(directoty_path, fetched_pdf)
-            text = convert_image_to_searchable_pdf(selected_file_path)
-            file_name = os.path.basename(selected_file_path)
-            split_name = file_name.split('.')
-            create_pdf(text,f'{split_name[0]}.pdf')
+    # #for fetched files
+    # for fetched_pdf in fetched_files:
+    #     file_ext1 = tuple("pdf")
+    #     file_ext2 = tuple(["png","jpeg"])
+    #     if fetched_pdf.endswith(file_ext1):
+    #         selected_file_path = os.path.join(directoty_path, fetched_pdf)
+    #         if is_searchable_pdf(selected_file_path)==False:
+    #             text = convert_scanned_pdf_to_searchable_pdf(selected_file_path)
+    #             file_name = os.path.basename(selected_file_path)
+    #             split_name = file_name.split('.')
+    #             create_pdf(text,f'{split_name[0]}.pdf')
+    #         else:
+    #             file_pth = os.path.join(directoty_path, fetched_pdf)
+    #             temp_file_path.append(file_pth)
+    #     elif fetched_pdf.endswith(file_ext2):
+    #         selected_file_path = os.path.join(directoty_path, fetched_pdf)
+    #         text = convert_image_to_searchable_pdf(selected_file_path)
+    #         file_name = os.path.basename(selected_file_path)
+    #         split_name = file_name.split('.')
+    #         create_pdf(text,f'{split_name[0]}.pdf')
 
-        else:
-            pass
+    #     else:
+    #         pass
       
  
     # st.write(temp_file_path)
@@ -916,7 +906,7 @@ with col2_up:
                     prompt = f'''Act as a financial analyst and give concise answer to the question as truthfully as possible with given Context.
                                 check for below point to make sure if it is a suspicious activity or not-
                                 1. The Transaction amount is above the $5,000 value threshold.
-                                2. Details mentioned in Invoice doesnot match with customer detail. (customer name, address can be identified from Cardholder Information).
+                                2. There is an indication of suspicion with involvement of multiple individuals whose details mismatch with customer details. (Customer details can be identified from Cardholder Information)
                                 3. A potential suspect is identified.
                                 Analyse above points properly and answer if there is any fraud/suspicious activity happening.\n\n\
                                 Question: {query}\n\
@@ -1594,7 +1584,7 @@ with col_d2:
             SAR refers to Suspicious activity Report, which is a document that financial institutions must file with the Financial Crimes Enforcement Network (FinCEN) based on the Bank Secrecy Act whenever there is a suspicious activity.\n\n\
             To confirm this as a suspicious activity-
             1. The transaction amount is above $5000 threshold. (Check for transaction amount mentioned in the context, do mathematical calculation to check if transaction amount is above $5000 or not)
-            2. If name, address mentioned in Invoice doesnot match with customer details. (customer name, address can be identified from Cardholder Information).
+            2. There is an indication of suspicion with involvement of multiple individuals whose details mismatch with customer details. (Customer details can be identified from Cardholder Information)
             3. Any potential suspect is identified.\n\n\     
             If no suspicious activity is detected based on above mentioned points, write your response as - There is no indication of suspicious actuvity.Therefore,no requirement to file SAR with FinCEN.\n\n\
                     Question: {query}\n\
