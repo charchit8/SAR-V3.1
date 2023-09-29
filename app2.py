@@ -925,6 +925,7 @@ with col2_up:
                         2. If there is an indication of suspicion with involvement of multiple individuals whose details mismatch with customer details (Customer details can be identified from Cardholder Information).\n\n\
                         3. If a potential suspect is identified.\n\n\
                         Based the above findings, identify if this can be consider as Suspicious Activity or not.\n\n\
+                        If transaction/disputed amount is below the $5000 threshold and no suspicious activity is detected based on above mentioned points, write your response as - There is no indication of suspicious activity.\n\n\
                         Context: {contexts}\n\
                         Response (Give response based on your analysis.) "
                          
@@ -1603,7 +1604,7 @@ with col_d2:
             1. The transaction/disputed amount is above $5000 threshold. 
             2. There is an indication of suspicion with involvement of multiple individuals whose details mismatch with customer details. (Customer details can be identified from Cardholder Information)
             3. Any potential suspect is identified.\n\n\     
-            If transaction/disputed amount is less than $5000 threshold and no suspicious activity is detected based on above mentioned points, write your response as - There is no indication of suspicious actuvity.Therefore,no requirement to file SAR with FinCEN.\n\n\
+            If transaction/disputed amount is less than $5000 threshold and no suspicious activity is detected based on above mentioned points, write your response as - There is no indication of suspicious activity.Therefore,no requirement to file SAR with FinCEN.\n\n\
                     Question: {query}\n\
                     Context: {context_1}\n\                      
                     Response: (Give me a concise response in pointers.Mention whom to file based on Bank Secrecy Act.)'''
