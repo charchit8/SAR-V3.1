@@ -665,42 +665,27 @@ with col1_up:
     temp_file_path= []
 
 
-    # for uploaded_file in pdf_files:
-    #     file_ext = tuple("pdf")
-    #     if uploaded_file.name.endswith(file_ext):
-    #         file_pth = os.path.join(tmp_dir_, uploaded_file.name)
-    #         with open(file_pth, "wb") as file_opn:
-    #             file_opn.write(uploaded_file.getbuffer())
-    #             temp_file_path.append(file_pth)
-    #     else:
-    #         pass
+    for uploaded_file in pdf_files:
+        file_ext = tuple("pdf")
+        if uploaded_file.name.endswith(file_ext):
+            file_pth = os.path.join(tmp_dir_, uploaded_file.name)
+            with open(file_pth, "wb") as file_opn:
+                file_opn.write(uploaded_file.getbuffer())
+                temp_file_path.append(file_pth)
+        else:
+            pass
 
 
-    # for fetched_pdf in fetched_files:
-    #     file_ext = tuple("pdf")
-    #     if fetched_pdf.endswith(file_ext):
-    #         file_pth = os.path.join(directoty_path, fetched_pdf)
-    #         # st.write(file_pth)
-    #         temp_file_path.append(file_pth) 
-    #     else:
-    #         pass   
+    for fetched_pdf in fetched_files:
+        file_ext = tuple("pdf")
+        if fetched_pdf.endswith(file_ext):
+            file_pth = os.path.join(directoty_path, fetched_pdf)
+            # st.write(file_pth)
+            temp_file_path.append(file_pth) 
+        else:
+            pass   
 
-    # #combining files in fetch evidence and upload evidence
-    # pdf_files_ = []
-    # if temp_file_path:
-    #     if pdf_files and fetched_files:
-    #         file_names = [file.name for file in pdf_files]
-    #         file_names = file_names + fetched_files
-    #         pdf_files_ = file_names
-    #     elif fetched_files:
-    #         pdf_files_ = fetched_files
-    #     elif pdf_files:
-    #         pdf_files_ = pdf_files
-    #     else: pass
-
-
-
-    #Adding pytesseract here
+     #Adding pytesseract here
     # To convert generated to pdf and save in temp direc.
     def create_pdf(text,file_name):
         # Create a new FPDF object
@@ -720,27 +705,27 @@ with col1_up:
 
     # # # Pytesseract code 
 
-    #file path for uploaded files
-    file_pth = []
-    for uploaded_file in pdf_files:
-        file_ext = tuple("pdf")
-        if uploaded_file.name.endswith(file_ext):
-            file_pth_= os.path.join(tmp_dir_, uploaded_file.name)
-            with open(file_pth_, "wb") as file_opn:
-                file_opn.write(uploaded_file.getbuffer())
-                file_pth.append(file_pth_)
-        else:
-            pass
+    # #file path for uploaded files
+    # file_pth = []
+    # for uploaded_file in pdf_files:
+    #     file_ext = tuple("pdf")
+    #     if uploaded_file.name.endswith(file_ext):
+    #         file_pth_= os.path.join(tmp_dir_, uploaded_file.name)
+    #         with open(file_pth_, "wb") as file_opn:
+    #             file_opn.write(uploaded_file.getbuffer())
+    #             file_pth.append(file_pth_)
+    #     else:
+    #         pass
 
-    # For uploaded files
-    for file in file_pth:
-        if is_searchable_pdf(file)==False:
-            text = convert_image_to_searchable_pdf(file)
-            create_pdf(text,'uploaded_file.pdf')
-        else:
-            with open(file, "wb") as file_opn:
-                file_opn.write(file.getbuffer())
-                temp_file_path.append(file_opn)
+    # # For uploaded files
+    # for file in file_pth:
+    #     if is_searchable_pdf(file)==False:
+    #         text = convert_image_to_searchable_pdf(file)
+    #         create_pdf(text,'uploaded_file.pdf')
+    #     else:
+    #         with open(file, "wb") as file_opn:
+    #             file_opn.write(file.getbuffer())
+    #             temp_file_path.append(file_opn)
         
                      
     
@@ -774,17 +759,17 @@ with col1_up:
 
        
  
-    #for fetched files
-    for fetched_pdf in fetched_files:
-        file_ext = tuple("png")
-        if fetched_pdf.endswith(file_ext):
-            selected_file_path = os.path.join(directoty_path, fetched_pdf)
-            text = convert_image_to_searchable_pdf(selected_file_path)
-            # st.write(text)
-            create_pdf(text,'fetched_file_ocr.pdf')
-        else:
-            file_pth = os.path.join(directoty_path, fetched_pdf)
-            temp_file_path.append(file_pth)
+    # #for fetched files
+    # for fetched_pdf in fetched_files:
+    #     file_ext = tuple("png")
+    #     if fetched_pdf.endswith(file_ext):
+    #         selected_file_path = os.path.join(directoty_path, fetched_pdf)
+    #         text = convert_image_to_searchable_pdf(selected_file_path)
+    #         # st.write(text)
+    #         create_pdf(text,'fetched_file_ocr.pdf')
+    #     else:
+    #         file_pth = os.path.join(directoty_path, fetched_pdf)
+    #         temp_file_path.append(file_pth)
 
 
 
