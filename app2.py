@@ -811,6 +811,7 @@ with col2_up:
   
     if temp_file_path is not None:
         _, docsearch = embedding_store(temp_file_path)
+        st.write(docsearch)
 
 # Creating header
     col1,col2 = st.columns(2)
