@@ -780,9 +780,8 @@ with st.spinner("OCR Initiated..."):
             pdf_files_ = pdf_files
         else: pass
 
-# st.write(temp_file_path)
-if temp_file_path is not None:
-    _, docsearch = embedding_store(temp_file_path)
+    # st.write(temp_file_path)
+
 
 with col2_up:
          #This is the embedding model
@@ -812,7 +811,9 @@ with col2_up:
         separators=["\n\n", "\n", " ", ""]
     )
   
-
+    if temp_file_path is not None:
+        _, docsearch = embedding_store(temp_file_path)
+        
 # Creating header
     col1,col2 = st.columns(2)
     with col1:
