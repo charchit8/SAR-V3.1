@@ -727,17 +727,15 @@ with col1_up:
         file_ext2 = tuple(["png","jpeg"])
         if file.endswith(file_ext1):
             if is_searchable_pdf(file)==False:
-                with st.spinner('OCR Running...'):
-                    text = convert_scanned_pdf_to_searchable_pdf(file)
-                    create_pdf(text,'uploaded_file.pdf')
+                text = convert_scanned_pdf_to_searchable_pdf(file)
+                create_pdf(text,'uploaded_file.pdf')
             else:
                 with open(file, "wb") as file_opn:
                     file_opn.write(file.getbuffer())
                     temp_file_path.append(file_opn)           
         elif file.endswith(file_ext2):
-            with st.spinner('OCR Running...'):
-                text = convert_image_to_searchable_pdf(file)
-                create_pdf(text,'uploaded_file.pdf') 
+            text = convert_image_to_searchable_pdf(file)
+            create_pdf(text,'uploaded_file.pdf') 
         else:
             pass          
        
@@ -750,21 +748,19 @@ with col1_up:
         if fetched_pdf.endswith(file_ext1):
             selected_file_path = os.path.join(directoty_path, fetched_pdf)
             if is_searchable_pdf(selected_file_path)==False:
-                with st.spinner('OCR Running...'):
-                    text = convert_scanned_pdf_to_searchable_pdf(selected_file_path)
-                    file_name = os.path.basename(selected_file_path)
-                    split_name = file_name.split('.')
-                    create_pdf(text,f'{split_name[0]}.pdf')
+                text = convert_scanned_pdf_to_searchable_pdf(selected_file_path)
+                file_name = os.path.basename(selected_file_path)
+                split_name = file_name.split('.')
+                create_pdf(text,f'{split_name[0]}.pdf')
             else:
                 file_pth = os.path.join(directoty_path, fetched_pdf)
                 temp_file_path.append(file_pth)
         elif fetched_pdf.endswith(file_ext2):
             selected_file_path = os.path.join(directoty_path, fetched_pdf)
-            with st.spinner('OCR Running...'):
-                text = convert_image_to_searchable_pdf(selected_file_path)
-                file_name = os.path.basename(selected_file_path)
-                split_name = file_name.split('.')
-                create_pdf(text,f'{split_name[0]}.pdf')
+            text = convert_image_to_searchable_pdf(selected_file_path)
+            file_name = os.path.basename(selected_file_path)
+            split_name = file_name.split('.')
+            create_pdf(text,f'{split_name[0]}.pdf')
 
         else:
             pass
