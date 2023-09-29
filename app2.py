@@ -724,6 +724,7 @@ with st.spinner("OCR Initiated..."):
     st.write(file_pth)
     # For uploaded files
     for file in file_pth:
+        st.write(file)
         file_ext1 = tuple("pdf")
         file_ext2 = tuple(["png","jpeg"])
         if file.endswith(file_ext1):
