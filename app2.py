@@ -926,10 +926,12 @@ with col2_up:
                         2. There is an indication of suspicion with involvement of multiple individuals whose details mismatch with customer details.\n\n\
                         3. A potential suspect is identified.\n\n\
                         Context: {contexts}\n\
-                        Response  "
+                        Response (Analyze the above findings and respond if this can be consider as Suspicious Activity or not.) "
                          
                                          
                     response1 = usellm(prompt) 
+
+
                     st.session_state["sara_recommendation_gpt"] = response1                
                     
                     st.markdown("### SARA Recommendation")
