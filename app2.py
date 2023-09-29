@@ -252,7 +252,6 @@ def convert_scanned_pdf_to_searchable_pdf(input_file):
 
     """
     # Convert PDF to images
-    print("Running OCR")
     images = convert_from_path(input_file)
 
     # Preprocess images using OpenCV
@@ -662,7 +661,9 @@ with col1_up:
 
 #creating temp directory to have all the files at one place for accessing
 with st.spinner("OCR Initiated..."):
+    
     tmp_dir_ = tempfile.mkdtemp()
+    @st.cache_data
     temp_file_path= []
 
 
@@ -779,7 +780,7 @@ with st.spinner("OCR Initiated..."):
         elif pdf_files:
             pdf_files_ = pdf_files
         else: pass
-
+    st.write(pdf_files_)
     # st.write(temp_file_path)
 
 
@@ -813,7 +814,7 @@ with col2_up:
   
     if temp_file_path is not None:
         _, docsearch = embedding_store(temp_file_path)
-        
+
 # Creating header
     col1,col2 = st.columns(2)
     with col1:
