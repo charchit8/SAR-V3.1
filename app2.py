@@ -738,8 +738,7 @@ with col1_up:
         elif file.endswith(file_ext2):
             st.write(file)
             text = convert_image_to_searchable_pdf(file)
-            file_name = file.splittext('.')
-            st.write(file_name)
+            split_name = file_name.split('.')
             # st.write(split_name[0])
             create_pdf(text,f'{split_name[0]}.pdf') 
         else:
