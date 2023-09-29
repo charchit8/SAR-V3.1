@@ -809,9 +809,8 @@ with col2_up:
         separators=["\n\n", "\n", " ", ""]
     )
   
-    if temp_file_path is not None:
-        _, docsearch = embedding_store(temp_file_path)
-        st.write(docsearch)
+
+       
 
 # Creating header
     col1,col2 = st.columns(2)
@@ -843,7 +842,8 @@ with col2_up:
             st.markdown(df_fixed.style.hide(axis="index").to_html(), unsafe_allow_html=True)
 
     with st.spinner('Wait for it...'):
-       
+        if temp_file_path is not None:
+            _, docsearch = embedding_store(temp_file_path)
         if st.button("Generate Insights",disabled=st.session_state.disabled):
                 if st.session_state.llm == "Closed-Source":
                     queries ="Please provide the following information regarding the possible fraud case: What is the name of the customer name,\
@@ -1586,14 +1586,14 @@ with col_d2:
              
         st.markdown("""<span style="font-size: 24px;color:#0000FF">Is SAR filing required?</span>""", unsafe_allow_html=True)
         
-        if st.session_state["tmp_summary_gpt"] is not None:
+        if temp_file_path is not None:
+            _, docsearch = embedding_store(temp_file_path)
 
             st.write("#### *SARA Recommendation*")
             # st.markdown("""<span style="font-size: 18px;">*Based on the following findings for the underlying case, under Bank Secrecy Act, it is recommended to file this case as a suspicious activity:*</span>""", unsafe_allow_html=True)
             # st.markdown("""<span style="font-size: 18px;">*1. Transaction amount is above the $5,000 value threshold*</span>""", unsafe_allow_html=True)
             # st.markdown("""<span style="font-size: 18px;">*2. There is an indication of suspicion with involvement of multiple individuals, mismatch of customer details on merchant invoice and identification of a potential suspect*.</span>""", unsafe_allow_html=True)           
-
-            st.write(docsearch)       
+      
             query = "Is SAR filling required?"
             context_1 = docsearch.similarity_search(query, k=5)
             prompt = f'''Act as a financial analyst and give concise answer to the question, with given Context.\n\n\
