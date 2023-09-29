@@ -663,7 +663,6 @@ with col1_up:
 with st.spinner("OCR Initiated..."):
     
     tmp_dir_ = tempfile.mkdtemp()
-    @st.cache_data
     temp_file_path= []
 
 
