@@ -661,6 +661,7 @@ with col1_up:
                 st.image(uploaded_file, use_column_width=True)
 
 #creating temp directory to have all the files at one place for accessing
+with st.spinner("OCR Initiated..."):
     tmp_dir_ = tempfile.mkdtemp()
     temp_file_path= []
 
@@ -779,7 +780,9 @@ with col1_up:
             pdf_files_ = pdf_files
         else: pass
 
-    # st.write(temp_file_path)
+# st.write(temp_file_path)
+if temp_file_path is not None:
+    _, docsearch = embedding_store(temp_file_path)
 
 with col2_up:
          #This is the embedding model
@@ -840,8 +843,7 @@ with col2_up:
             st.markdown(df_fixed.style.hide(axis="index").to_html(), unsafe_allow_html=True)
 
     with st.spinner('Wait for it...'):
-        if temp_file_path is not None:
-            _, docsearch = embedding_store(temp_file_path)
+       
         if st.button("Generate Insights",disabled=st.session_state.disabled):
                 if st.session_state.llm == "Closed-Source":
                     queries ="Please provide the following information regarding the possible fraud case: What is the name of the customer name,\
@@ -1583,7 +1585,7 @@ with col_d2:
         # Adding Radio button
              
         st.markdown("""<span style="font-size: 24px;color:#0000FF">Is SAR filing required?</span>""", unsafe_allow_html=True)
-        _, docsearch = embedding_store(temp_file_path)
+        
         if st.session_state["tmp_summary_gpt"] is not None:
 
             st.write("#### *SARA Recommendation*")
