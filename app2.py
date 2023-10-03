@@ -307,7 +307,7 @@ if "pdf_files" not in st.session_state:
     st.session_state.pdf_files = []
 
 # reading files from local directory from fetch evidence button
-directoty_path = "data/"
+directoty_path = "data3/"
 fetched_files = read_pdf_files(directoty_path)
 
 
