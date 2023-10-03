@@ -923,7 +923,7 @@ with col2_up:
                     prompt = f" You are professional Fraud Analyst. Find answer to the questions as truthfully and in as detailed as possible as per given context only,\n\n\
                         1. The transaction/disputed amount > 5,000 USD value threshold. \n\n\
                         2. There is an indication of suspicion with involvement of multiple individuals/suspect whose details mismatch with customer details. (Customer details can be identified from cardholder's information) \n\n\
-                        3. A potential suspect name is identified.\n\n\
+                        3. A potential suspect is identified.\n\n\
                         Based the above findings, identify if this can be consider as Suspicious Activity or not.\n\n\
                         If transaction/disputed amount is < 5000 USD threshold and no suspicious activity is detected based on above mentioned points, write your response as - There is no indication of suspicious activity.\n\n\
                         Context: {contexts}\n\
@@ -1601,8 +1601,8 @@ with col_d2:
             prompt = f'''Act as a financial analyst and give concise answer to the question, with given Context.\n\n\
             SAR refers to Suspicious activity Report, which is a document that financial institutions must file with the Financial Crimes Enforcement Network (FinCEN) based on the Bank Secrecy Act whenever there is a suspicious activity.\n\n\
             To confirm this as a suspicious activity-
-            1. The transaction/disputed amount is > 5000 USD threshold.\n\n\
-            2. There is an indication of suspicion with involvement of multiple individuals whose details mismatch with customer details. (Customer details can be identified from Cardholder Information)\n\n\
+            1. The transaction/disputed amount is > 5000 USD threshold.
+            2. There is an indication of suspicion with involvement of multiple individuals whose details mismatch with customer details. (Customer details can be identified from Cardholder Information)
             3. Any potential suspect is identified. \n\n\
             If transaction/disputed amount is < 5000 USD threshold and no suspicious activity is detected based on above mentioned points, write your response as - There is no indication of suspicious activity.Therefore,no requirement to file SAR with FinCEN.\n\n\
                     Question: {query}\n\
