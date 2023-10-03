@@ -1613,6 +1613,8 @@ with col_d2:
             response1 = usellm(prompt) 
             st.markdown(f'''<em>{response1}</em>''',unsafe_allow_html=True)
 
+            st.warning('This is the disclaimer')
+
         # if st.session_state.llm == "Open-Source":
 
         #     st.write("#### *SARA Recommendation*")
