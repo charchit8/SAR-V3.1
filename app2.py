@@ -1675,12 +1675,12 @@ with col_d2:
                 st.info("Thanks for your review, Case has been assigned to the next reviewer")
 
 
-        # # Allow the user to clear all stored conversation sessions
-        if st.button("Reset Session"):
-            reset_session_state()
-            st.cache_data.clear()
-            # pdf_files.clear()
-            # os.rmdir(tmp_dir_)
+    # # Allow the user to clear all stored conversation sessions
+    if st.button("Reset Session"):
+        reset_session_state()
+        st.cache_data.clear()
+        # pdf_files.clear()
+        # os.rmdir(tmp_dir_)
 
 
 
