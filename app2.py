@@ -1601,8 +1601,9 @@ with col_d2:
         # Adding Radio button
              
         st.markdown("""<span style="font-size: 24px;color:#0000FF">Is SAR filing required?</span>""", unsafe_allow_html=True)
-      
+        
         if st.session_state['tmp_table_gpt'] is not None:
+            
             st.write("#### *SARA Recommendation*")
             # st.markdown("""<span style="font-size: 18px;">*Based on the following findings for the underlying case, under Bank Secrecy Act, it is recommended to file this case as a suspicious activity:*</span>""", unsafe_allow_html=True)
             # st.markdown("""<span style="font-size: 18px;">*1. Transaction amount is above the $5,000 value threshold*</span>""", unsafe_allow_html=True)
@@ -1622,8 +1623,8 @@ with col_d2:
                     Response: (Based on your analysis give a concise response in pointers.Mention whom to file based on Bank Secrecy Act.)'''
             
             
-            response1 = usellm(prompt) 
-            st.markdown(f'''<em>{response1}</em>''',unsafe_allow_html=True)
+            response_sara_gpt = usellm(prompt) 
+            st.markdown(f'''<em>{response_sara_gpt}</em>''',unsafe_allow_html=True)
 
             st.warning('Please carefully review the recommendation and case details before the final submission',icon="⚠️")
  
@@ -1643,9 +1644,9 @@ with col_d2:
                     Response: (Give me a concise response in points.)'''
             
             
-            response1 = llama_llm(llama_13b,prompt)
+            response_sara_llama = llama_llm(llama_13b,prompt)
             # st.markdown(response1)
-            st.markdown(f'''<em>{response1}</em>''',unsafe_allow_html=True)
+            st.markdown(f'''<em>{response_sara_llama}</em>''',unsafe_allow_html=True)
 
 
             st.warning('Please carefully review the recommendation and case details before the final submission',icon="⚠️")
