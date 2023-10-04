@@ -1602,6 +1602,9 @@ with col_d2:
              
         st.markdown("""<span style="font-size: 24px;color:#0000FF">Is SAR filing required?</span>""", unsafe_allow_html=True)
         if doc:
+            st.write('True')
+        else:
+            st.write(False)
         # if st.session_state['sara_recommendation_gpt'] is not None:
             st.write("#### *SARA Recommendation*")
             # st.markdown("""<span style="font-size: 18px;">*Based on the following findings for the underlying case, under Bank Secrecy Act, it is recommended to file this case as a suspicious activity:*</span>""", unsafe_allow_html=True)
