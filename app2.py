@@ -1628,7 +1628,7 @@ with col_d2:
             
             
             response_sara_gpt = usellm(prompt) 
-            st.markdown(f'''<em style="font-size: 18px;">{response_sara_gpt}</em>''',unsafe_allow_html=True)
+            st.markdown(f'''<em style="font-size: 25px;">{response_sara_gpt}</em>''',unsafe_allow_html=True)
 
             st.warning('Please carefully review the recommendation and case details before the final submission',icon="⚠️")
         
@@ -1651,7 +1651,7 @@ with col_d2:
             
             response_sara_llama = llama_llm(llama_13b,prompt)
             # st.markdown(response1)
-            st.markdown(f'''<em style="font-size: 18px;">{response_sara_llama}</em>''',unsafe_allow_html=True)
+            st.markdown(f'''<em style="font-size: 25px;">{response_sara_llama}</em>''',unsafe_allow_html=True)
 
 
             st.warning('Please carefully review the recommendation and case details before the final submission',icon="⚠️")
