@@ -1222,7 +1222,7 @@ with col2_up:
 
                     
                 elif query.lower() == "what is the suspect's name?":
-                    prompt_1 = f''''Perform Name Enitity Recognition to identify the Suspect name as accurately as possible, given the context. Suspect is the Person who has committed the fraud with the Customer. Respond saying "The Suspect Name is not Present" if there is no suspect in the given context.\n\n\
+                    prompt_1 = f''''Perform Name Enitity Recognition to identify the Suspect name as accurately as possible, given the context. Suspect is the Person who has committed the fraud with the Customer (customer is the cardholder). Respond saying "The Suspect Name is not Present" if there is no suspect in the given context.\n\n\
                                 Question: {query}\n\
                                 Context: {context_1}\n\
                                 Response: (Give me response in one sentence.Do not give me any Explanation or Note)'''
@@ -1270,7 +1270,7 @@ with col2_up:
 
                         
                 elif query.lower() == "was the disputed amount greater than 5000 usd?":
-                    prompt_1 = f''' You need to act as a Financial analyst to identify the disputed amount and perform a mathematical calculation to check if the disputed amount is greater than 5000 or no, given the context. Give a relevant and concise response.
+                    prompt_1 = f''' You need to act as a Financial analyst to identify the disputed amount and perform a mathematical calculation to check if the disputed amount is greater than 5000 or not, given the context. Give a relevant and concise response.
                                 Kindly do not provide any extra [Explanation, Note, Description] block below the Response.\n\n\
                                 Question: {query}\n\
                                 Context: {context_1}\n\
@@ -1630,11 +1630,11 @@ with col_d2:
             context_1 = docsearch.similarity_search(query, k=5)
             prompt = f'''Act as a financial analyst and give concise answer to the question, with given Context.\n\n\
             SAR refers to Suspicious activity Report, which is a document that financial institutions must file with the Financial Crimes Enforcement Network (FinCEN) based on the Bank Secrecy Act whenever there is a suspicious activity.\n\n\
-            Chcek below points to confirm this as a suspicious activity-
-            1. If the transaction/disputed amount is > 5000 USD threshold.
-            2. There is an indication of suspicion with involvement of multiple individuals whose details mismatch with customer details. (Customer details can be identified from Cardholder Information)
-            3. Any potential suspect name is identified. \n\n\
-            If transaction/disputed amount is < 5000 USD threshold and no suspicious activity is detected based on above mentioned points, write your response as - There is no indication of suspicious activity.Therefore,no requirement to file SAR with FinCEN.\n\n\
+            You need to act as a Financial analyst, to check below points to confirm this as a suspicious activity or not-
+            1.  Identify the disputed amount and perform a mathematical calculation to check if the disputed amount is greater than 5000 or not? If amount is < 5000 USD then there is no suspicious activity, else if amount is > 5000 USD,this can be considered as suspicious activity. 
+            2. Identify multiple individual name in the context compare with the customer name (customer name can be identified from cardholder information). If details match then there is no suspicious activity, else if details donot match, this can be considered as suspicious activity.
+            3. Any potential suspect name is identified? Suspect is the Person who has committed the fraud with the Customer (customer is the cardholder).\n\n\
+            If no suspicious activity is detected based on above mentioned points, write your response as - There is no indication of suspicious activity.Therefore,no requirement to file SAR with FinCEN.\n\n\
                     Question: {query}\n\
                     Context: {context_1}\n\                      
                     Response: (Give a concise response in pointers.Mention whom to file based on Bank Secrecy Act.)'''
