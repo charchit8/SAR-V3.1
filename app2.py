@@ -685,10 +685,10 @@ with col1_up:
             temp_file_path.append(file_pth) 
         else:
             pass   
-    if st.session_state['tmp_table_gpt'] is not None:
-        st.write('True')
-    else:
-        st.write('False')
+    # if st.session_state['tmp_table_gpt'] is not None:
+    #     st.write('True')
+    # else:
+    #     st.write('False')
      #Adding pytesseract here
     # To convert generated to pdf and save in temp direc.
     def create_pdf(text,file_name):
@@ -1605,7 +1605,7 @@ with col_d2:
              
         st.markdown("""<span style="font-size: 24px;color:#0000FF">Is SAR filing required?</span>""", unsafe_allow_html=True)
         
-
+   
         if st.session_state['tmp_table_gpt'] is not None:
                        
             st.write("#### *SARA Recommendation*")
@@ -1631,7 +1631,8 @@ with col_d2:
             st.markdown(f'''<em>{response_sara_gpt}</em>''',unsafe_allow_html=True)
 
             st.warning('Please carefully review the recommendation and case details before the final submission',icon="⚠️")
- 
+            
+            os.remove(response_sara_gpt)
         
         elif st.session_state['tmp_table_llama'] is not None:
             query = "Give your recommendation if SAR filling is required or not?"
@@ -1655,7 +1656,7 @@ with col_d2:
 
             st.warning('Please carefully review the recommendation and case details before the final submission',icon="⚠️")
       
-   
+            os.remove(response_sara_llama)
         selected_rad = st.radio(":blue", ["Yes", "No", "Refer for review"], horizontal=True,disabled=st.session_state.disabled)
         if selected_rad == "Refer for review":
             email_regex = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
