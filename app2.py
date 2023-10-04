@@ -1641,8 +1641,8 @@ with col_d2:
             
             
             response1 = llama_llm(llama_13b,prompt)
-            st.markdown(response1)
-            # st.markdown(f'''<em> {response1} </em>''',unsafe_allow_html=True)
+            # st.markdown(response1)
+            st.markdown(f'''<em> {response1} </em>''',unsafe_allow_html=True)
 
 
             st.warning('Please carefully review and assess this AI-generated content for accuracy and appropriateness before official submission',icon="⚠️")
