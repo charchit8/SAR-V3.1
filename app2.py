@@ -685,7 +685,10 @@ with col1_up:
             temp_file_path.append(file_pth) 
         else:
             pass   
-
+    if st.session_state['tmp_table_gpt'] is not None:
+        st.write('True')
+    else:
+        st.write('False')
      #Adding pytesseract here
     # To convert generated to pdf and save in temp direc.
     def create_pdf(text,file_name):
@@ -1602,10 +1605,6 @@ with col_d2:
              
         st.markdown("""<span style="font-size: 24px;color:#0000FF">Is SAR filing required?</span>""", unsafe_allow_html=True)
         
-        if tmp_table is None:
-            st.write('True')
-        else:
-            st.write('False')
 
         if st.session_state['tmp_table_gpt'] is not None:
                        
@@ -1675,12 +1674,12 @@ with col_d2:
                 st.info("Thanks for your review, Case has been assigned to the next reviewer")
 
 
-# # Allow the user to clear all stored conversation sessions
-if st.button("Reset Session"):
-    reset_session_state()
-    st.cache_data.clear()
-    # pdf_files.clear()
-    # os.rmdir(tmp_dir_)
+        # # Allow the user to clear all stored conversation sessions
+        if st.button("Reset Session"):
+            reset_session_state()
+            st.cache_data.clear()
+            # pdf_files.clear()
+            # os.rmdir(tmp_dir_)
 
 
 
