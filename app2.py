@@ -1624,6 +1624,9 @@ with col_d2:
             
             response1 = usellm(prompt) 
             st.markdown(f'''<em>{response1}</em>''',unsafe_allow_html=True)
+
+            st.warning('Please carefully review and assess this AI-generated content for accuracy and appropriateness before official submission',icon="⚠️")
+ 
         
         elif st.session_state.llm == "Open-Source":
             query = "Give your recommendation if SAR filling is required or not?"
