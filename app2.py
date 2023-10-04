@@ -1602,7 +1602,7 @@ with col_d2:
              
         st.markdown("""<span style="font-size: 24px;color:#0000FF">Is SAR filing required?</span>""", unsafe_allow_html=True)
 
-        if st.session_state.llm == "Closed-Source":
+        if st.session_state['sara_recommendation_gpt'] is not None:
             st.write("#### *SARA Recommendation*")
             # st.markdown("""<span style="font-size: 18px;">*Based on the following findings for the underlying case, under Bank Secrecy Act, it is recommended to file this case as a suspicious activity:*</span>""", unsafe_allow_html=True)
             # st.markdown("""<span style="font-size: 18px;">*1. Transaction amount is above the $5,000 value threshold*</span>""", unsafe_allow_html=True)
@@ -1611,7 +1611,7 @@ with col_d2:
             query = "Give your recommendation if SAR filling is required or not?"
             context_1 = docsearch.similarity_search(query, k=5)
             prompt = f'''Act as a financial analyst and give concise answer to the question, with given Context.\n\n\
-            SAR refers to Suspicious activity Report, which is a document that financial institutions must file with the Financial Crimes Enforcement Network (FinCEN) based on the Bank Secrecy Act whenever there is a suspicious activity.\n\n\
+              which is a document that financial institutions must file with the Financial Crimes Enforcement Network (FinCEN) based on the Bank Secrecy Act whenever there is a suspicious activity.\n\n\
             To confirm this as a suspicious activity-
             1. The transaction/disputed amount is > 5000 USD threshold.
             2. There is an indication of suspicion with involvement of multiple individuals whose details mismatch with customer details. (Customer details can be identified from Cardholder Information)
@@ -1628,7 +1628,7 @@ with col_d2:
             st.warning('Please carefully review and assess the AI-generated content before the official submission',icon="⚠️")
  
         
-        elif st.session_state.llm == "Open-Source":
+        elif st.session_state['sara_recommendation_llama'] is not None:
             query = "Give your recommendation if SAR filling is required or not?"
             context_1 = docsearch.similarity_search(query, k=5)
             prompt = f'''Act as a financial analyst and give concise answer to the question, with given Context.\n\n\
