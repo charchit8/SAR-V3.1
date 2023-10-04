@@ -1625,7 +1625,7 @@ with col_d2:
             response1 = usellm(prompt) 
             st.markdown(f'''<em>{response1}</em>''',unsafe_allow_html=True)
 
-            st.warning('Please carefully review and assess the AI-generated content before the official submission',icon="⚠️")
+            st.warning('Please carefully review the recommendation and case details before the final submission',icon="⚠️")
  
         
         elif st.session_state['sara_recommendation_llama'] is not None:
@@ -1648,7 +1648,7 @@ with col_d2:
             st.markdown(f'''<em>{response1}</em>''',unsafe_allow_html=True)
 
 
-            st.warning('Please carefully review and assess the AI-generated content before the official submission',icon="⚠️")
+            st.warning('Please carefully review the recommendation and case details before the final submission',icon="⚠️")
       
    
         selected_rad = st.radio(":blue", ["Yes", "No", "Refer for review"], horizontal=True,disabled=st.session_state.disabled)
