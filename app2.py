@@ -1632,7 +1632,7 @@ with col_d2:
 
             st.warning('Please carefully review the recommendation and case details before the final submission',icon="⚠️")
             
-            os.remove(response_sara_gpt)
+            del(response_sara_gpt)
         
         elif st.session_state['tmp_table_llama'] is not None:
             query = "Give your recommendation if SAR filling is required or not?"
@@ -1656,7 +1656,7 @@ with col_d2:
 
             st.warning('Please carefully review the recommendation and case details before the final submission',icon="⚠️")
       
-            os.remove(response_sara_llama)
+            del(response_sara_llama)
         selected_rad = st.radio(":blue", ["Yes", "No", "Refer for review"], horizontal=True,disabled=st.session_state.disabled)
         if selected_rad == "Refer for review":
             email_regex = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
