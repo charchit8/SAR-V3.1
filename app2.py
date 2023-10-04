@@ -1640,12 +1640,12 @@ with col_d2:
             If no suspicious activity is detected based on above mentioned points, write your response as - There is no indication of suspicious activity.Therefore,no requirement to file SAR with FinCEN.\n\n\
                     Question: {query}\n\
                     Context: {context_1}\n\                      
-                    Response: (Give me a concise response in pointers only.)'''
+                    Response: (Give me a concise response in bullet points.)'''
             
             
             response1 = llama_llm(llama_13b,prompt)
             # st.markdown(response1)
-            st.markdown(f'''<em> {response1} </em>''',unsafe_allow_html=True)
+            st.markdown(f'''<em>{response1}</em>''',unsafe_allow_html=True)
 
 
             st.warning('Please carefully review and assess the AI-generated content before the official submission',icon="⚠️")
