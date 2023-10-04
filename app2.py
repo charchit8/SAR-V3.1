@@ -1602,7 +1602,7 @@ with col_d2:
              
         st.markdown("""<span style="font-size: 24px;color:#0000FF">Is SAR filing required?</span>""", unsafe_allow_html=True)
         
-        if tmp_table is not None:
+        if tmp_table is None:
             st.write('True')
         else:
             st.write('False')
