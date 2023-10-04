@@ -1059,14 +1059,26 @@ with col2_up:
                     st.session_state["tmp_table_llama"] = pd.concat([st.session_state.tmp_table_llama, res_df_llama], ignore_index=True)
                 
                     ## SARA Recommendation
-                    query = "Is this a Suspicious Activity?"
-                    context_1 = docsearch.similarity_search(query, k=5)
-                    prompt_1 = f'''Act as a financial analyst and give concise answer to the question, with given Context.
-                    This can be addressed as a suspicious activity based on [transaction amount,fraud type,suspect name not matching with the customer name, suspect address does not match with the customer address].\n\n\
-                                Question: {query}\n\
-                                Context: {context_1}\n\                      
-                                Response: (Give me a concise response in pointers)'''
-                    response1 = llama_llm(llama_13b,prompt_1) 
+
+                    queries ="Please provide the following information from the context: If transaction,disputed amount is above the $5000 threshold,\
+                              There is an indication of suspicion with involvement of multiple individuals whose details mismatch with customer details. (Customer details can be identified from Cardholder Information),\
+                              A potential suspect is identified, Mention of an individual/suspect whose details such as name and address mismatch with customer details and based on the evidence, is this a suspicious activity (Summarize all the questions asked prior to this in a detailed manner),\
+                              that is the answer of whether this is a suspicious activity"
+                    
+                    contexts = docsearch.similarity_search(queries, k=5) 
+                    prompt = f" You are professional Fraud Analyst. Find answer to the questions as truthfully and in as detailed as possible as per given context only,\n\n\
+                        1. The transaction/disputed amount > 5,000 USD value threshold. \n\n\
+                        2. There is an indication of suspicion with involvement of multiple individuals/suspect whose details mismatch with customer details. (Customer details can be identified from cardholder's information) \n\n\
+                        3. If a potential suspect is identified who made the transaction.\n\n\
+                        Based the above findings, identify if this can be consider as Suspicious Activity or not.\n\n\
+                        If transaction/disputed amount is < 5000 USD threshold and no suspicious activity is detected based on above mentioned points, write your response as - There is no indication of suspicious activity.\n\n\
+                        Context: {contexts}\n\
+                        Response (Give your response in pointers.)"
+                         
+                                         
+                    response1 = llama_llm(llama_13b,prompt)           
+                    
+                    
                     st.session_state["sara_recommendation_llama"] = response1                    
 
                     st.markdown("### SARA Recommendation")
@@ -1612,9 +1624,28 @@ with col_d2:
             
             response1 = usellm(prompt) 
             st.markdown(f'''<em>{response1}</em>''',unsafe_allow_html=True)
+        
+        elif st.session_state.llm == "Open-Source":
+            query = "Give your recommendation if SAR filling is required or not?"
+            context_1 = docsearch.similarity_search(query, k=5)
+            prompt = f'''Act as a financial analyst and give concise answer to the question, with given Context.\n\n\
+            SAR refers to Suspicious activity Report, which is a document that financial institutions must file with the Financial Crimes Enforcement Network (FinCEN) based on the Bank Secrecy Act whenever there is a suspicious activity.\n\n\
+            To confirm this as a suspicious activity-
+            1. The transaction/disputed amount is > 5000 USD threshold.
+            2. There is an indication of suspicion with involvement of multiple individuals whose details mismatch with customer details. (Customer details can be identified from Cardholder Information)
+            3. Any potential suspect is identified. \n\n\
+            If transaction/disputed amount is < 5000 USD threshold and no suspicious activity is detected based on above mentioned points, write your response as - There is no indication of suspicious activity.Therefore,no requirement to file SAR with FinCEN.\n\n\
+                    Question: {query}\n\
+                    Context: {context_1}\n\                      
+                    Response: (Based on your analysis give a concise response in pointers.Mention whom to file based on Bank Secrecy Act.)'''
+            
+            
+            response1 = llama_llm(llama_13b,prompt)
+            st.markdown(f'''<em>{response1}</em>''',unsafe_allow_html=True)
+
 
             st.warning('Please carefully review and assess this AI-generated content for accuracy and appropriateness before official submission',icon="⚠️")
-
+      
         # if st.session_state.llm == "Open-Source":
 
         #     st.write("#### *SARA Recommendation*")
