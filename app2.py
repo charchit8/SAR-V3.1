@@ -902,21 +902,7 @@ with col2_up:
 
                     st.table(res_df_gpt)
                     st.session_state["tmp_table_gpt"] = pd.concat([st.session_state.tmp_table_gpt, res_df_gpt], ignore_index=True)
-
-
-                    #SARA Recommendation
-                    # query = "Is this a Suspicious Activity?"
-                    # context_1 = docsearch.similarity_search(query, k=5)
-                    # prompt = f'''Act as a financial analyst and give concise answer to the question as truthfully as possible with given Context.
-                    #             If transaction/disputed amount is below the $5000 value threshold than there is no suspicious activity in this case. But,
-                    #             If transaction/disputed amount is above the $5,000 value threshold than check for below point to make sure if it is a suspicious activity or not-
-                    #             1. There is an indication of suspicion with involvement of multiple individuals whose details mismatch with customer details. (Customer details can be identified from Cardholder Information)
-                    #             2. A potential suspect is identified.
-                    #             Analyse above points properly and answer if there is any fraud/suspicious activity happening.\n\n\
-                    #             Question: {query}\n\
-                    #             Context: {context_1}\n\                      
-                    #             Response: (Give me your response in pointers.)''' 
-                    
+                  
 
                     queries ="Please provide the following information from the context: If transaction,disputed amount is above the $5000 threshold,\
                               There is an indication of suspicion with involvement of multiple individuals whose details mismatch with customer details. (Customer details can be identified from Cardholder Information),\
@@ -926,7 +912,7 @@ with col2_up:
                     contexts = docsearch.similarity_search(queries, k=5) 
                     prompt = f" You are professional Fraud Analyst. Find answer to the questions as truthfully and in as detailed as possible as per given context only,\n\n\
                         If The transaction/disputed amount > 5,000 USD value threshold, then check below points to address this as a suspicious activity.\n\n\
-                        1. There is an indication of suspicion with involvement of multiple individuals/suspect who might have used the card for transaction but whose details mismatch with customer details. (Customer details can be identified from cardholder's information) \n\n\
+                        1. Involvement of multiple individuals/suspect who might have used the card for transaction but whose details mismatch with customer details (Customer details can be identified from cardholder's information) suggest that there is an indication of suspicion.\n\n\
                         2. If a potential suspect is identified who made the transaction.\n\n\
                         Based the above findings, identify if this can be consider as Suspicious Activity or not.\n\n\
                         If transaction/disputed amount is < 5000 USD threshold and no suspicious activity is detected based on above mentioned points, write your response as - There is no indication of suspicious activity.\n\n\
@@ -1620,7 +1606,7 @@ with col_d2:
                 prompt = f'''Act as a financial analyst and give concise answer to the question, with given Context.\n\n\
                 which is a document that financial institutions must file with the Financial Crimes Enforcement Network (FinCEN) based on the Bank Secrecy Act whenever there is a suspicious activity.\n\n\
                 If the transaction/disputed amount is > 5000 USD threshold, then check below points to address this as a suspicious activity:
-                1. There is an indication of suspicion with involvement of multiple individuals who might have used the card for transaction without customer's permission and whose details mismatch with customer details. (Customer details can be identified from Cardholder Information)
+                1. Involvement of multiple individuals who might have used the card for transaction without customer's permission and whose details mismatch with customer details (Customer details can be identified from Cardholder Information) suggest that there is an indiaction of suspicion.\n\n\
                 2. Any potential suspect is identified. \n\n\
                 If transaction/disputed amount is < 5000 USD threshold and no suspicious activity is detected based on above mentioned points, write your response as - There is no indication of suspicious activity.Therefore,no requirement to file SAR with FinCEN.\n\n\
                         Question: {query}\n\
