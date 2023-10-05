@@ -904,12 +904,9 @@ with col2_up:
                     st.session_state["tmp_table_gpt"] = pd.concat([st.session_state.tmp_table_gpt, res_df_gpt], ignore_index=True)
                   
 
-                    queries ="Please provide the following information from the context: If transaction,disputed amount is above the $5000 threshold,\
-                              There is an indication of suspicion with involvement of multiple individuals whose details mismatch with customer details. (Customer details can be identified from Cardholder Information),\
-                              A potential suspect is identified, Mention of an individual/suspect whose details such as name and address mismatch with customer details and based on the evidence, is this a suspicious activity (Summarize all the questions asked prior to this in a detailed manner),\
-                              that is the answer of whether this is a suspicious activity"
+                    query ="Is this is a Suspicious activity or not?"
                     
-                    contexts = docsearch.similarity_search(queries, k=5) 
+                    contexts = docsearch.similarity_search(query, k=5) 
                     prompt = f" You are professional Fraud Analyst. Find answer to the questions as truthfully and in as detailed as possible as per given context only,\n\n\
                         If The transaction/disputed amount > 5,000 USD value threshold, then check below points to address this as a suspicious activity.\n\n\
                         1. There is an indication of suspicion with involvement of multiple individuals on whose name invoice is billed and whose details mismatch with customer details. (Customer details can be identified from Cardholder Information)\n\n\
