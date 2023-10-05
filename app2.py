@@ -843,7 +843,10 @@ with col2_up:
             st.markdown(df_fixed.style.hide(axis="index").to_html(), unsafe_allow_html=True)
 
     with st.spinner('Wait for it...'):
-          if st.button("Generate Insights",disabled=st.session_state.disabled):
+          generate_button =  st.button("Generate Insights",disabled=st.session_state.disabled)
+
+          if generate_button:
+
                 if st.session_state.llm == "Closed-Source":
                     queries ="Please provide the following information regarding the possible fraud case: What is the name of the customer name,\
                     has any suspect been reported, list the merchant name, how was the bank notified, when was the bank notified, what is the fraud type,\
@@ -1605,61 +1608,59 @@ with col_d2:
              
         st.markdown("""<span style="font-size: 24px;color:#0000FF">Is SAR filing required?</span>""", unsafe_allow_html=True)
         
+        if generate_button:
 
-        # del(tmp_table)
-        # st.write(tmp_table)
-        tmp_table = pd.DataFrame()
-        if st.session_state['llm'] == "Closed-Source" & tmp_table is None:
-                       
-            st.write("#### *SARA Recommendation*")
-            # st.markdown("""<span style="font-size: 18px;">*Based on the following findings for the underlying case, under Bank Secrecy Act, it is recommended to file this case as a suspicious activity:*</span>""", unsafe_allow_html=True)
-            # st.markdown("""<span style="font-size: 18px;">*1. Transaction amount is above the $5,000 value threshold*</span>""", unsafe_allow_html=True)
-            # st.markdown("""<span style="font-size: 18px;">*2. There is an indication of suspicion with involvement of multiple individuals, mismatch of customer details on merchant invoice and identification of a potential suspect*.</span>""", unsafe_allow_html=True)           
-      
-            query = "Give your recommendation if SAR filling is required or not?"
-            context_1 = docsearch.similarity_search(query, k=5)
-            prompt = f'''Act as a financial analyst and give concise answer to the question, with given Context.\n\n\
-              which is a document that financial institutions must file with the Financial Crimes Enforcement Network (FinCEN) based on the Bank Secrecy Act whenever there is a suspicious activity.\n\n\
-            To confirm this as a suspicious activity-
-            1. The transaction/disputed amount is > 5000 USD threshold.
-            2. There is an indication of suspicion with involvement of multiple individuals whose details mismatch with customer details. (Customer details can be identified from Cardholder Information)
-            3. Any potential suspect is identified. \n\n\
-            If transaction/disputed amount is < 5000 USD threshold and no suspicious activity is detected based on above mentioned points, write your response as - There is no indication of suspicious activity.Therefore,no requirement to file SAR with FinCEN.\n\n\
-                    Question: {query}\n\
-                    Context: {context_1}\n\                      
-                    Response: (Based on your analysis give a concise response in pointers.Mention whom to file based on Bank Secrecy Act.)'''
-            
-            
-            response_sara_gpt = usellm(prompt) 
-            st.markdown(f'''<em>{response_sara_gpt}</em>''',unsafe_allow_html=True)
-
-            st.warning('Please carefully review the recommendation and case details before the final submission',icon="⚠️")
+            if st.session_state['llm'] == "Closed-Source":
+                        
+                st.write("#### *SARA Recommendation*")
+                # st.markdown("""<span style="font-size: 18px;">*Based on the following findings for the underlying case, under Bank Secrecy Act, it is recommended to file this case as a suspicious activity:*</span>""", unsafe_allow_html=True)
+                # st.markdown("""<span style="font-size: 18px;">*1. Transaction amount is above the $5,000 value threshold*</span>""", unsafe_allow_html=True)
+                # st.markdown("""<span style="font-size: 18px;">*2. There is an indication of suspicion with involvement of multiple individuals, mismatch of customer details on merchant invoice and identification of a potential suspect*.</span>""", unsafe_allow_html=True)           
         
-            del(response_sara_gpt)
+                query = "Give your recommendation if SAR filling is required or not?"
+                context_1 = docsearch.similarity_search(query, k=5)
+                prompt = f'''Act as a financial analyst and give concise answer to the question, with given Context.\n\n\
+                which is a document that financial institutions must file with the Financial Crimes Enforcement Network (FinCEN) based on the Bank Secrecy Act whenever there is a suspicious activity.\n\n\
+                To confirm this as a suspicious activity-
+                1. The transaction/disputed amount is > 5000 USD threshold.
+                2. There is an indication of suspicion with involvement of multiple individuals whose details mismatch with customer details. (Customer details can be identified from Cardholder Information)
+                3. Any potential suspect is identified. \n\n\
+                If transaction/disputed amount is < 5000 USD threshold and no suspicious activity is detected based on above mentioned points, write your response as - There is no indication of suspicious activity.Therefore,no requirement to file SAR with FinCEN.\n\n\
+                        Question: {query}\n\
+                        Context: {context_1}\n\                      
+                        Response: (Based on your analysis give a concise response in pointers.Mention whom to file based on Bank Secrecy Act.)'''
+                
+                
+                response_sara_gpt = usellm(prompt) 
+                st.markdown(f'''<em>{response_sara_gpt}</em>''',unsafe_allow_html=True)
+
+                st.warning('Please carefully review the recommendation and case details before the final submission',icon="⚠️")
+            
+                del(response_sara_gpt)
+            
+            elif st.session_state['llm'] == "Open-Source":
+                query = "Give your recommendation if SAR filling is required or not?"
+                context_1 = docsearch.similarity_search(query, k=5)
+                prompt = f'''Act as a financial analyst and give concise answer to the question, with given Context.\n\n\
+                SAR refers to Suspicious activity Report, which is a document that financial institutions must file with the Financial Crimes Enforcement Network (FinCEN) based on the Bank Secrecy Act whenever there is a suspicious activity.\n\n\
+                You need to act as a Financial analyst, to check below points to confirm this as a suspicious activity or not-
+                1.  Identify the disputed amount and perform a mathematical calculation to check if the disputed amount is greater than 5000 or not? If amount is < 5000 USD then there is no suspicious activity, else if amount is > 5000 USD,this can be considered as suspicious activity. 
+                2. Identify multiple individual name in the context compare with the customer name (customer name can be identified from cardholder information). If details match then there is no suspicious activity, else if details donot match, this can be considered as suspicious activity.
+                3. Any potential suspect name is identified? Suspect is the Person who has committed the fraud with the Customer (customer is the cardholder).\n\n\
+                If no suspicious activity is detected based on above mentioned points, write your response as - There is no indication of suspicious activity.Therefore,no requirement to file SAR with FinCEN.\n\n\
+                        Question: {query}\n\
+                        Context: {context_1}\n\                      
+                        Response: (Give me a concise response in points.)'''
+                
+                
+                response_sara_llama = llama_llm(llama_13b,prompt)
+                # st.markdown(response1)
+                st.markdown(f'''<em>{response_sara_llama}</em>''',unsafe_allow_html=True)
+
+
+                st.warning('Please carefully review the recommendation and case details before the final submission',icon="⚠️")
         
-        elif st.session_state['llm'] == "Open-Source" & tmp_table is None:
-            query = "Give your recommendation if SAR filling is required or not?"
-            context_1 = docsearch.similarity_search(query, k=5)
-            prompt = f'''Act as a financial analyst and give concise answer to the question, with given Context.\n\n\
-            SAR refers to Suspicious activity Report, which is a document that financial institutions must file with the Financial Crimes Enforcement Network (FinCEN) based on the Bank Secrecy Act whenever there is a suspicious activity.\n\n\
-            You need to act as a Financial analyst, to check below points to confirm this as a suspicious activity or not-
-            1.  Identify the disputed amount and perform a mathematical calculation to check if the disputed amount is greater than 5000 or not? If amount is < 5000 USD then there is no suspicious activity, else if amount is > 5000 USD,this can be considered as suspicious activity. 
-            2. Identify multiple individual name in the context compare with the customer name (customer name can be identified from cardholder information). If details match then there is no suspicious activity, else if details donot match, this can be considered as suspicious activity.
-            3. Any potential suspect name is identified? Suspect is the Person who has committed the fraud with the Customer (customer is the cardholder).\n\n\
-            If no suspicious activity is detected based on above mentioned points, write your response as - There is no indication of suspicious activity.Therefore,no requirement to file SAR with FinCEN.\n\n\
-                    Question: {query}\n\
-                    Context: {context_1}\n\                      
-                    Response: (Give me a concise response in points.)'''
-            
-            
-            response_sara_llama = llama_llm(llama_13b,prompt)
-            # st.markdown(response1)
-            st.markdown(f'''<em>{response_sara_llama}</em>''',unsafe_allow_html=True)
-
-
-            st.warning('Please carefully review the recommendation and case details before the final submission',icon="⚠️")
-      
-            del(response_sara_llama)
+                
         selected_rad = st.radio(":blue", ["Yes", "No", "Refer for review"], horizontal=True,disabled=st.session_state.disabled)
         if selected_rad == "Refer for review":
             email_regex = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
