@@ -1600,7 +1600,7 @@ with col_d2:
                 prompt = f'''Act as a financial analyst and give concise answer to the question, with given Context.\n\n\
                 which is a document that financial institutions must file with the Financial Crimes Enforcement Network (FinCEN) based on the Bank Secrecy Act whenever there is a suspicious activity.\n\n\
                 If the transaction/disputed amount is > 5000 USD threshold, then check below points to address this as a suspicious activity:
-                1.Merchant Invoice is addressed to someone else other than customer (Customer details can be identified from Cardholder Information, compare customer details with the name and address to whom invoice is bolled to), If details mismatch then there is an indication of suspision, else there is no suspicious activity.\n\n\
+                1.Merchant Invoice is billed to someone else other than customer (Customer details can be identified from Cardholder Information), If details mismatch then there is an indication of suspision, else there is no suspicious activity.\n\n\
                 2.A potential suspect is identified who made the transaction. \n\n\
                 If transaction/disputed amount is < 5000 USD threshold and no suspicious activity is detected based on above mentioned points, write your response as - There is no indication of suspicious activity.Therefore,no requirement to file SAR with FinCEN.\n\n\
                         Question: {query}\n\
