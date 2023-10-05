@@ -1606,9 +1606,9 @@ with col_d2:
         st.markdown("""<span style="font-size: 24px;color:#0000FF">Is SAR filing required?</span>""", unsafe_allow_html=True)
         
 
-        del(tmp_table)
+        # del(tmp_table)
         # st.write(tmp_table)
-
+        tmp_table = pd.DataFrame()
         if st.session_state['llm'] == "Closed-Source" and tmp_table is None:
                        
             st.write("#### *SARA Recommendation*")
