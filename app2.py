@@ -925,9 +925,9 @@ with col2_up:
                     
                     contexts = docsearch.similarity_search(queries, k=5) 
                     prompt = f" You are professional Fraud Analyst. Find answer to the questions as truthfully and in as detailed as possible as per given context only,\n\n\
-                        1. The transaction/disputed amount > 5,000 USD value threshold. \n\n\
-                        2. There is an indication of suspicion with involvement of multiple individuals/suspect whose details mismatch with customer details. (Customer details can be identified from cardholder's information) \n\n\
-                        3. If a potential suspect is identified who made the transaction.\n\n\
+                        If The transaction/disputed amount > 5,000 USD value threshold, then check below points to address this as a suspicious activity.\n\n\
+                        1. There is an indication of suspicion with involvement of multiple individuals/suspect whose details mismatch with customer details. (Customer details can be identified from cardholder's information) \n\n\
+                        2. If a potential suspect is identified who made the transaction.\n\n\
                         Based the above findings, identify if this can be consider as Suspicious Activity or not.\n\n\
                         If transaction/disputed amount is < 5000 USD threshold and no suspicious activity is detected based on above mentioned points, write your response as - There is no indication of suspicious activity.\n\n\
                         Context: {contexts}\n\
