@@ -1606,10 +1606,10 @@ with col_d2:
         st.markdown("""<span style="font-size: 24px;color:#0000FF">Is SAR filing required?</span>""", unsafe_allow_html=True)
         
 
-        # reset_session_state()
+        reset_session_state()
         st.write(tmp_table)
 
-        if st.session_state['tmp_table_gpt'] is None:
+        if st.session_state['llm']=="Closed-Source" and tmp_table is None:
                        
             st.write("#### *SARA Recommendation*")
             # st.markdown("""<span style="font-size: 18px;">*Based on the following findings for the underlying case, under Bank Secrecy Act, it is recommended to file this case as a suspicious activity:*</span>""", unsafe_allow_html=True)
@@ -1637,7 +1637,7 @@ with col_d2:
         
             del(response_sara_gpt)
         
-        elif st.session_state['tmp_table_llama'] is None:
+        elif st.session_state['llm']=="Open-Source" and tmp_table is None:
             query = "Give your recommendation if SAR filling is required or not?"
             context_1 = docsearch.similarity_search(query, k=5)
             prompt = f'''Act as a financial analyst and give concise answer to the question, with given Context.\n\n\
