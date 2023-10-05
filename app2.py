@@ -666,25 +666,25 @@ with col1_up:
     temp_file_path= []
 
 
-    for uploaded_file in pdf_files:
-        file_ext = tuple("pdf")
-        if uploaded_file.name.endswith(file_ext):
-            file_pth = os.path.join(tmp_dir_, uploaded_file.name)
-            with open(file_pth, "wb") as file_opn:
-                file_opn.write(uploaded_file.getbuffer())
-                temp_file_path.append(file_pth)
-        else:
-            pass
+    # for uploaded_file in pdf_files:
+    #     file_ext = tuple("pdf")
+    #     if uploaded_file.name.endswith(file_ext):
+    #         file_pth = os.path.join(tmp_dir_, uploaded_file.name)
+    #         with open(file_pth, "wb") as file_opn:
+    #             file_opn.write(uploaded_file.getbuffer())
+    #             temp_file_path.append(file_pth)
+    #     else:
+    #         pass
 
 
-    for fetched_pdf in fetched_files:
-        file_ext = tuple("pdf")
-        if fetched_pdf.endswith(file_ext):
-            file_pth = os.path.join(directoty_path, fetched_pdf)
-            # st.write(file_pth)
-            temp_file_path.append(file_pth) 
-        else:
-            pass   
+    # for fetched_pdf in fetched_files:
+    #     file_ext = tuple("pdf")
+    #     if fetched_pdf.endswith(file_ext):
+    #         file_pth = os.path.join(directoty_path, fetched_pdf)
+    #         # st.write(file_pth)
+    #         temp_file_path.append(file_pth) 
+    #     else:
+    #         pass   
  
 
     #Adding pytesseract here
@@ -706,67 +706,67 @@ with col1_up:
 
     # # # Pytesseract code 
 
-    # #file path for uploaded files
-    # file_pth = []
-    # for uploaded_file in pdf_files:
-    #     file_ext1 = tuple("pdf")
-    #     file_ext2 = tuple(["png","jpeg"])
-    #     if uploaded_file.name.endswith(file_ext1):
-    #         file_pth_= os.path.join(tmp_dir_, uploaded_file.name)
-    #         with open(file_pth_, "wb") as file_opn:
-    #             file_opn.write(uploaded_file.getbuffer())
-    #             file_pth.append(file_opn)
-    #     elif uploaded_file.name.endswith(file_ext2):
-    #         file_pth_= os.path.join(tmp_dir_, uploaded_file.name)
-    #         file_pth.append(file_pth_)
-    #     else:
-    #         pass
+    #file path for uploaded files
+    file_pth = []
+    for uploaded_file in pdf_files:
+        file_ext1 = tuple("pdf")
+        file_ext2 = tuple(["png","jpeg"])
+        if uploaded_file.name.endswith(file_ext1):
+            file_pth_= os.path.join(tmp_dir_, uploaded_file.name)
+            with open(file_pth_, "wb") as file_opn:
+                file_opn.write(uploaded_file.getbuffer())
+                file_pth.append(file_opn)
+        elif uploaded_file.name.endswith(file_ext2):
+            file_pth_= os.path.join(tmp_dir_, uploaded_file.name)
+            file_pth.append(file_pth_)
+        else:
+            pass
 
  
 
-    # # For uploaded files
-    # for file in file_pth:
-    #     st.write(file.name)
-    #     file_ext1 = tuple("pdf")
-    #     file_ext2 = tuple(["png","jpeg"])
-    #     if file.endswith(file_ext1):
-    #         if is_searchable_pdf(file)==False:
-    #             text = convert_scanned_pdf_to_searchable_pdf(file)
-    #             create_pdf(text,'uploaded_file.pdf')
-    #         else:
-    #             with open(file, "wb") as file_opn:
-    #                 file_opn.write(file.getbuffer())
-    #                 temp_file_path.append(file_opn)           
-    #     elif file.endswith(file_ext2):
-    #         text = convert_image_to_searchable_pdf(file)
-    #         create_pdf(text,'uploaded_file.pdf') 
-    #     else:
-    #         pass          
+    # For uploaded files
+    for file in file_pth:
+        st.write(file.name)
+        file_ext1 = tuple("pdf")
+        file_ext2 = tuple(["png","jpeg"])
+        if file.endswith(file_ext1):
+            if is_searchable_pdf(file)==False:
+                text = convert_scanned_pdf_to_searchable_pdf(file)
+                create_pdf(text,'uploaded_file.pdf')
+            else:
+                with open(file, "wb") as file_opn:
+                    file_opn.write(file.getbuffer())
+                    temp_file_path.append(file_opn)           
+        elif file.endswith(file_ext2):
+            text = convert_image_to_searchable_pdf(file)
+            create_pdf(text,'uploaded_file.pdf') 
+        else:
+            pass          
        
        
-    # #for fetched files
-    # for fetched_pdf in fetched_files:
-    #     file_ext1 = tuple("pdf")
-    #     file_ext2 = tuple(["png","jpeg"])
-    #     if fetched_pdf.endswith(file_ext1):
-    #         selected_file_path = os.path.join(directoty_path, fetched_pdf)
-    #         if is_searchable_pdf(selected_file_path)==False:
-    #             text = convert_scanned_pdf_to_searchable_pdf(selected_file_path)
-    #             file_name = os.path.basename(selected_file_path)
-    #             split_name = file_name.split('.')
-    #             create_pdf(text,f'{split_name[0]}.pdf')
-    #         else:
-    #             file_pth = os.path.join(directoty_path, fetched_pdf)
-    #             temp_file_path.append(file_pth)
-    #     elif fetched_pdf.endswith(file_ext2):
-    #         selected_file_path = os.path.join(directoty_path, fetched_pdf)
-    #         text = convert_image_to_searchable_pdf(selected_file_path)
-    #         file_name = os.path.basename(selected_file_path)
-    #         split_name = file_name.split('.')
-    #         create_pdf(text,f'{split_name[0]}.pdf')
+    #for fetched files
+    for fetched_pdf in fetched_files:
+        file_ext1 = tuple("pdf")
+        file_ext2 = tuple(["png","jpeg"])
+        if fetched_pdf.endswith(file_ext1):
+            selected_file_path = os.path.join(directoty_path, fetched_pdf)
+            if is_searchable_pdf(selected_file_path)==False:
+                text = convert_scanned_pdf_to_searchable_pdf(selected_file_path)
+                file_name = os.path.basename(selected_file_path)
+                split_name = file_name.split('.')
+                create_pdf(text,f'{split_name[0]}.pdf')
+            else:
+                file_pth = os.path.join(directoty_path, fetched_pdf)
+                temp_file_path.append(file_pth)
+        elif fetched_pdf.endswith(file_ext2):
+            selected_file_path = os.path.join(directoty_path, fetched_pdf)
+            text = convert_image_to_searchable_pdf(selected_file_path)
+            file_name = os.path.basename(selected_file_path)
+            split_name = file_name.split('.')
+            create_pdf(text,f'{split_name[0]}.pdf')
 
-    #     else:
-    #         pass
+        else:
+            pass
       
  
     # st.write(temp_file_path)
@@ -1606,7 +1606,7 @@ with col_d2:
                 prompt = f'''Act as a financial analyst and give concise answer to the question, with given Context.\n\n\
                 which is a document that financial institutions must file with the Financial Crimes Enforcement Network (FinCEN) based on the Bank Secrecy Act whenever there is a suspicious activity.\n\n\
                 If the transaction/disputed amount is > 5000 USD threshold, then check below points to address this as a suspicious activity:
-                1. Identify involvement of multiple individuals\suspect who might have used the card for transaction without customer's permission and whose details mismatch with customer details (Customer details can be identified from Cardholder Information) suggests that there is an indiaction of suspicion.\n\n\
+                1. If involvement of multiple individuals\suspect who might have used the card for transaction without customer's permission and whose details mismatch with customer details (Customer details can be identified from Cardholder Information) suggests that there is an indiaction of suspicion.\n\n\
                 2. Any potential suspect is identified who made the transaction. \n\n\
                 If transaction/disputed amount is < 5000 USD threshold and no suspicious activity is detected based on above mentioned points, write your response as - There is no indication of suspicious activity.Therefore,no requirement to file SAR with FinCEN.\n\n\
                         Question: {query}\n\
