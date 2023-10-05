@@ -912,7 +912,7 @@ with col2_up:
                     contexts = docsearch.similarity_search(queries, k=5) 
                     prompt = f" You are professional Fraud Analyst. Find answer to the questions as truthfully and in as detailed as possible as per given context only,\n\n\
                         If The transaction/disputed amount > 5,000 USD value threshold, then check below points to address this as a suspicious activity.\n\n\
-                        1. Involvement of multiple individuals/suspect who might have used the card for transaction but whose details mismatch with customer details (Customer details can be identified from cardholder's information) suggest that there is an indication of suspicion.\n\n\
+                        1. Involvement of multiple individuals/suspect who might have used the card for transaction (Transaction can be checked from Merchant Invoice) but whose details mismatch with customer details (Customer details can be identified from cardholder's information) suggest that there is an indication of suspicion.\n\n\
                         2. If a potential suspect is identified who made the transaction.\n\n\
                         Based the above findings, identify if this can be consider as Suspicious Activity or not.\n\n\
                         If transaction/disputed amount is < 5000 USD threshold and no suspicious activity is detected based on above mentioned points, write your response as - There is no indication of suspicious activity.\n\n\
@@ -1607,7 +1607,7 @@ with col_d2:
                 which is a document that financial institutions must file with the Financial Crimes Enforcement Network (FinCEN) based on the Bank Secrecy Act whenever there is a suspicious activity.\n\n\
                 If the transaction/disputed amount is > 5000 USD threshold, then check below points to address this as a suspicious activity:
                 1.Merchant Invoice is addressed to someone else other than customer (Customer details can be identified from Cardholder Information, compare customer details with the name and address to whom invoice is bolled to), If details mismatch then there is an indication of suspision, else there is no suspicious activity.\n\n\
-                2. If any potential suspect is identified who made the transaction then it can be considered as suspicious activity, else this is not a suspicious activity. \n\n\
+                2.If any potential suspect is identified who made the transaction then it can be considered as suspicious activity, else this is not a suspicious activity. \n\n\
                 If transaction/disputed amount is < 5000 USD threshold and no suspicious activity is detected based on above mentioned points, write your response as - There is no indication of suspicious activity.Therefore,no requirement to file SAR with FinCEN.\n\n\
                         Question: {query}\n\
                         Context: {context_1}\n\                      
