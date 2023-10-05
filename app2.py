@@ -1607,7 +1607,7 @@ with col_d2:
         
 
         del(tmp_table)
-        st.write(tmp_table)
+        # st.write(tmp_table)
 
         if st.session_state['llm'] == "Closed-Source" and tmp_table is None:
                        
