@@ -774,7 +774,8 @@ with col1_up:
 
 with col2_up:
          #This is the embedding model
-    model_name = "sentence-transformers/all-MiniLM-L6-v2"
+    model_name = "thenlper/gte-small"
+    # model_name = "sentence-transformers/all-MiniLM-L6-v2"
     # model_name = "hkunlp/instructor-large"
     
     # Memory setup for gpt-3.5
@@ -908,7 +909,7 @@ with col2_up:
                     contexts = docsearch.similarity_search(query, k=5) 
                     prompt = f" You are professional Fraud Analyst. Find answer to the questions as truthfully and in as detailed as possible as per given context only,\n\n\
                         If The transaction/disputed amount > 5,000 USD value threshold, then check below points to address this as a suspicious activity.\n\n\
-                        1. If Invoice is bolled to someone else other than the customer. (Customer details can be identified from Cardholder Information)\n\n\
+                        1. If Invoice is bolled to someone other than the customer. (Customer is someone with whom fraud has taken place,whose details can be identified from Cardholder Information)\n\n\
                         2. If a potential suspect is identified who made the transaction.\n\n\
                         Based the above findings, identify if this can be consider as Suspicious Activity or not.\n\n\
                         If transaction/disputed amount is < 5000 USD threshold and no suspicious activity is detected based on above mentioned points, write your response as - There is no indication of suspicious activity.\n\n\
