@@ -1606,7 +1606,8 @@ with col_d2:
         st.markdown("""<span style="font-size: 24px;color:#0000FF">Is SAR filing required?</span>""", unsafe_allow_html=True)
         
 
-        reset_session_state()
+        # reset_session_state()
+        st.write(tmp_table)
 
         if st.session_state['tmp_table_gpt'] is None:
                        
