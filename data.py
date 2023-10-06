@@ -130,8 +130,7 @@ def data_display(directory_path,fetched_files):
 def create_temp_file(directory_path,fetched_files):
     tmp_dir_ = tempfile.mkdtemp()
     temp_file_path= []
-    st.write(directory_path)
-    st.write(fetched_files)
+
     for uploaded_file in st.session_state.pdf_files:
         file_ext = tuple("pdf")
         if uploaded_file.name.endswith(file_ext):
@@ -147,7 +146,7 @@ def create_temp_file(directory_path,fetched_files):
         file_ext = tuple("pdf")
         if fetched_pdf.endswith(file_ext):
             file_pth = os.path.join(directory_path, fetched_pdf)
-            # st.write(file_pth)
+            st.write(file_pth)
             temp_file_path.append(file_pth) 
         else:
             pass   
