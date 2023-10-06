@@ -914,7 +914,7 @@ with col2_up:
                         If transaction/disputed amount is < 5000 USD threshold and no suspect is identified, write your response as - There is no indication of suspicious activity.\n\n\
                         Based the above findings, identify if this can be consider as Suspicious Activity or not.\n\n\
                         Context: {contexts}\n\
-                        Response (Give your response in pointers.)"
+                        Response (Give me a concise response in three-four pointers.)"
                     response1 = usellm(prompt) 
 
                  
