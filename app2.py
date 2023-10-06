@@ -498,6 +498,10 @@ st.markdown("""
 
 <style>
             
+.katex .mathnormal {
+    font-family: "Source Sans Pro", sans-serif;
+}
+            
 .css-uvn0xz p {
     word-break: normal;
 }
