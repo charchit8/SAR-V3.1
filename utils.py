@@ -347,10 +347,15 @@ def convert_image_to_searchable_pdf(input_file):
     return text
 
 
+
+
+
+
 @st.cache_resource
 def embed(model_name):
     hf_embeddings = HuggingFaceEmbeddings(model_name=model_name)
     return hf_embeddings
+
 
 @st.cache_data
 def embedding_store(pdf_files):
@@ -359,6 +364,14 @@ def embedding_store(pdf_files):
     text = ""
     for page in final_pdf.pages:
         text += page.extract_text()
+
+    # Chunking with overlap
+    text_splitter = RecursiveCharacterTextSplitter(
+    chunk_size = 1000,
+    chunk_overlap  = 100,
+    length_function = len,
+    separators=["\n\n", "\n", " ", ""]
+)
     texts =  text_splitter.split_text(text)
     docs = text_to_docs(texts)
     docsearch = FAISS.from_documents(docs, hf_embeddings)
@@ -385,6 +398,37 @@ def merge_and_extract_text(pdf_list):
         all_text.append(text)
     
     return ' '.join(all_text)
+
+
+
+@st.cache_data
+def usellm(prompt):
+    """
+    Getting GPT-3.5 Model into action
+    """
+    service = UseLLM(service_url="https://usellm.org/api/llm")
+    messages = [
+      Message(role="system", content="You are a fraud analyst, who is an expert at finding out suspicious activities"),
+      Message(role="user", content=f"{prompt}"),
+      ]
+    options = Options(messages=messages)
+    response = service.chat(options)
+    return response.content
+
+
+
+llama_13b = HuggingFaceHub(
+            repo_id="meta-llama/Llama-2-13b-chat-hf",
+            model_kwargs={"temperature":0.01, 
+                        "min_new_tokens":100, 
+                        "max_new_tokens":500})
+
+
+@st.cache_data
+def llama_llm(_llm,prompt):
+    response = _llm.predict(prompt)
+    return response
+
 
 
 
