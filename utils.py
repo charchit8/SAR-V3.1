@@ -347,6 +347,46 @@ def convert_image_to_searchable_pdf(input_file):
     return text
 
 
+@st.cache_resource
+def embed(model_name):
+    hf_embeddings = HuggingFaceEmbeddings(model_name=model_name)
+    return hf_embeddings
+
+@st.cache_data
+def embedding_store(pdf_files):
+    merged_pdf = merge_pdfs(pdf_files)
+    final_pdf = PyPDF2.PdfReader(merged_pdf)
+    text = ""
+    for page in final_pdf.pages:
+        text += page.extract_text()
+    texts =  text_splitter.split_text(text)
+    docs = text_to_docs(texts)
+    docsearch = FAISS.from_documents(docs, hf_embeddings)
+    return docs, docsearch
+    
+@st.cache_data
+def merge_and_extract_text(pdf_list):
+    """
+    Helper function to merge PDFs and extract text
+    """
+    pdf_merger = PyPDF2.PdfMerger()
+    for pdf in pdf_list:
+        with open(pdf, 'rb') as file:
+            pdf_merger.append(file)
+    output_pdf = BytesIO()
+    pdf_merger.write(output_pdf)
+    pdf_merger.close()
+    
+    # Extract text from merged PDF
+    merged_pdf = PyPDF2.PdfReader(output_pdf)
+    all_text = []
+    for page in merged_pdf.pages:
+        text = page.extract_text()
+        all_text.append(text)
+    
+    return ' '.join(all_text)
+
+
 
 
 
