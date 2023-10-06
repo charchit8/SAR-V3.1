@@ -78,6 +78,7 @@ def merge_pdfs(pdf_list):
     output_pdf = BytesIO()
     pdf_merger.write(output_pdf)
     pdf_merger.close()
+    st.write(output_pdf)
     return output_pdf
 
 
@@ -349,34 +350,6 @@ def convert_image_to_searchable_pdf(input_file):
 
 
 
-
-
-@st.cache_resource
-def embed(model_name):
-    hf_embeddings = HuggingFaceEmbeddings(model_name=model_name)
-    return hf_embeddings
-
-
-@st.cache_data
-def embedding_store(pdf_files,hf_embeddings):
-    merged_pdf = merge_pdfs(pdf_files)
-    final_pdf = PyPDF2.PdfReader(merged_pdf)
-    text = ""
-    for page in final_pdf.pages:
-        text += page.extract_text()
-
-    # Chunking with overlap
-    text_splitter = RecursiveCharacterTextSplitter(
-    chunk_size = 1000,
-    chunk_overlap  = 100,
-    length_function = len,
-    separators=["\n\n", "\n", " ", ""]
-)
-    texts =  text_splitter.split_text(text)
-    docs = text_to_docs(texts)
-    docsearch = FAISS.from_documents(docs, hf_embeddings)
-    return docs, docsearch
-    
 @st.cache_data
 def merge_and_extract_text(pdf_list):
     """
@@ -399,21 +372,6 @@ def merge_and_extract_text(pdf_list):
     
     return ' '.join(all_text)
 
-
-
-@st.cache_data
-def usellm(prompt):
-    """
-    Getting GPT-3.5 Model into action
-    """
-    service = UseLLM(service_url="https://usellm.org/api/llm")
-    messages = [
-      Message(role="system", content="You are a fraud analyst, who is an expert at finding out suspicious activities"),
-      Message(role="user", content=f"{prompt}"),
-      ]
-    options = Options(messages=messages)
-    response = service.chat(options)
-    return response.content
 
 
 
