@@ -498,13 +498,6 @@ st.markdown("""
 
 <style>
             
-.katex .mathnormal {
-    font-family: "Source Sans Pro", sans-serif;
-}
-            
-.css-uvn0xz p {
-    word-break: normal;
-}
 
 .st-d5 {
     line-height: 1;
@@ -1619,6 +1612,7 @@ with col_d2:
                 
                 
                 response_sara_gpt = usellm(prompt) 
+                response_sara_gpt = response_sara_gpt.replace("$", "/$")
                 st.markdown(f'''<em>{response_sara_gpt}</em>''',unsafe_allow_html=True)
 
                 st.warning('Please carefully review the recommendation and case details before the final submission',icon="⚠️")
