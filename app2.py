@@ -1601,7 +1601,7 @@ with col_d2:
                 context_1 = docsearch.similarity_search(query, k=5)
                 prompt = f'''Act as a financial analyst and give concise answer to the question, with given Context.\n\n\
                 which is a document that financial institutions must file with the Financial Crimes Enforcement Network (FinCEN) based on the Bank Secrecy Act whenever there is a suspicious activity.\n\n\
-                If The transaction/disputed amount > 5,000 USD value threshold and a potential suspect name is identified? Then this can be addressed as a suspicious activity.\n\n\
+                If The transaction/disputed amount > 5,000 USD value threshold and a potential suspect name is identified? Then only this can be addressed as a suspicious activity and there is a need to File SAR with finCEN.\n\n\
                 Even if the transaction/disputed amount > 5,000 USD value threshold, but no suspect is identified then this cannot be considered as a suspicious activity. \n\n\
                 Suspect is the person who has committed the fraud with the Customer (customer is the cardholder).\n\n\
                 If transaction/disputed amount is < 5000 USD threshold and no suspect is identified, write your response as - There is no indication of suspicious activity.Therefore,no requirement to file SAR with FinCEN.\n\n\
