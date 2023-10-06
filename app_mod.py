@@ -305,71 +305,71 @@ elif selected_option_case_type == "Insider Trading":
     st.markdown("### :red[Insider Trading]")
 # st.markdown('---')
 
-if selected_option_case_type == "Fraud transaction dispute":
-
-    if selected_option == "SAR-2023-24680":
-        st.session_state.case_num = "SAR-2023-24680"
-    
-        col1,col2 = st.columns(2)
-        # Row 1
-        with col1:
-            st.markdown("##### **Case number&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:** SAR-2023-24680")
-            st.markdown("##### **Customer name  :** John Brown")
 
 
-        with col2:
-            st.markdown("##### **Case open date&nbsp;&nbsp;&nbsp;&nbsp;:** Feb 02, 2021")
-            st.markdown("##### **Case type&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:** Fraud transaction")
+if selected_option == "SAR-2023-24680":
+    st.session_state.case_num = "SAR-2023-24680"
+
+    col1,col2 = st.columns(2)
+    # Row 1
+    with col1:
+        st.markdown("##### **Case number&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:** SAR-2023-24680")
+        st.markdown("##### **Customer name  :** John Brown")
 
 
-        # Row 2
-        with col1:
-            st.markdown("##### **Customer ID&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:** 9659754")
+    with col2:
+        st.markdown("##### **Case open date&nbsp;&nbsp;&nbsp;&nbsp;:** Feb 02, 2021")
+        st.markdown("##### **Case type&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:** Fraud transaction")
 
 
-        with col2:
-            st.markdown("##### **Case Status&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:** Open")
-
-    elif selected_option == "SAR-2023-13579":
-        st.session_state.case_num = "SAR-2023-13579"
-    
-        col1,col2 = st.columns(2)
-        # Row 1
-        with col1:
-            st.markdown("##### **Case number&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:** SAR-2023-13579")
-            st.markdown("##### **Customer name  :** John Brown")
+    # Row 2
+    with col1:
+        st.markdown("##### **Customer ID&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:** 9659754")
 
 
-        with col2:
-            st.markdown("##### **Case open date&nbsp;&nbsp;&nbsp;&nbsp;:** Feb 02, 2021")
-            st.markdown("##### **Case type&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:** Fraud transaction")
+    with col2:
+        st.markdown("##### **Case Status&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:** Open")
+
+elif selected_option == "SAR-2023-13579":
+    st.session_state.case_num = "SAR-2023-13579"
+
+    col1,col2 = st.columns(2)
+    # Row 1
+    with col1:
+        st.markdown("##### **Case number&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:** SAR-2023-13579")
+        st.markdown("##### **Customer name  :** John Brown")
 
 
-        # Row 2
-        with col1:
-            st.markdown("##### **Customer ID&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:** 9659754")
+    with col2:
+        st.markdown("##### **Case open date&nbsp;&nbsp;&nbsp;&nbsp;:** Feb 02, 2021")
+        st.markdown("##### **Case type&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:** Fraud transaction")
 
 
-        with col2:
-            st.markdown("##### **Case Status&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:** Open")
-
-    st.markdown("---")
-
+    # Row 2
+    with col1:
+        st.markdown("##### **Customer ID&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:** 9659754")
 
 
-    if st.session_state.case_num is not None:
-            
-        col1_up, col2_up, col3_up, col4_up, col5_up = st.tabs(["Data", "Generate Insights","Summarization","Download Report", "Make a Decision"])
+    with col2:
+        st.markdown("##### **Case Status&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:** Open")
 
-        with col1_up:
-            if st.session_state.case_num == "SAR-2023-24680":
-                directory_path = "data/"
-                fetched_files = read_pdf_files(directory_path)
-                data_fetched_uploaded(directory_path,fetched_files)
+st.markdown("---")
+
+
+
+if st.session_state.case_num is not None:
         
-            elif st.session_state.case_num == "SAR-2023-13579":
-                directory_path = "data2/"
-                fetched_files = read_pdf_files(directory_path)
-                data_fetched_uploaded(directory_path,fetched_files)
+    col1_up, col2_up, col3_up, col4_up, col5_up = st.tabs(["Data", "Generate Insights","Summarization","Download Report", "Make a Decision"])
+
+    with col1_up:
+        if st.session_state.case_num == "SAR-2023-24680":
+            directory_path = "data/"
+            fetched_files = read_pdf_files(directory_path)
+            data_fetched_uploaded(directory_path,fetched_files)
+    
+        elif st.session_state.case_num == "SAR-2023-13579":
+            directory_path = "data2/"
+            fetched_files = read_pdf_files(directory_path)
+            data_fetched_uploaded(directory_path,fetched_files)
 
 
