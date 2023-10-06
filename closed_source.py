@@ -30,7 +30,7 @@ def embed(model_name):
     return hf_embeddings
 
 
-
+@st.cache_data
 def embedding_store(temp_file_path,hf_embeddings):
     merged_pdf = merge_pdfs(temp_file_path)
     final_pdf = PyPDF2.PdfReader(merged_pdf)
