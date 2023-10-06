@@ -3,6 +3,7 @@ from utils import *
     
 tmp_dir_ = tempfile.mkdtemp()
 temp_file_path= []
+pdf_files = []
 
 # To convert generated to pdf and save in temp direc.
 def create_pdf(text,file_name):
@@ -21,7 +22,7 @@ def create_pdf(text,file_name):
     temp_file_path.append(file_pth)
 
 
-def data_fetched_uploaded(directory_path,fetched_files):
+def data_display(directory_path,fetched_files):
     
     # reading files from local directory from fetch evidence button
 
@@ -99,7 +100,7 @@ def data_fetched_uploaded(directory_path,fetched_files):
 
     with bt2_up:
         pdf_files = st.file_uploader("", type=["pdf","png","jpeg","docx","xlsx"], accept_multiple_files=True)
-        st.session_state.pdf_files = pdf_files
+        pdf_files.append(pdf_files)
         # showing files
         for uploaded_file in pdf_files:
             #This code is to show pdf files
@@ -126,6 +127,7 @@ def data_fetched_uploaded(directory_path,fetched_files):
 
 #creating temp directory to have all the files at one place for accessing
 
+def create_temp_file(directory_path,fetched_files):
 
     for uploaded_file in pdf_files:
         file_ext = tuple("pdf")
