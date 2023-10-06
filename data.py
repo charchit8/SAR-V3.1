@@ -124,25 +124,21 @@ def data_display(directory_path,fetched_files):
                 # This is showing png,jpeg files
                 st.image(uploaded_file, use_column_width=True)
 
-def debug(fetched_files):
-    for files in fetched_files:
-        st.write(files)
 
 
 
-
-#creating temp directory to have all the files at one place for accessing
 
 def create_temp_file(directory_path,fetched_files):
+
+    #creating temp directory to have all the files at one place for accessing
     tmp_dir_ = tempfile.mkdtemp()
     temp_file_path= []
 
     for fetched_pdf in fetched_files:
-        st.write(fetched_pdf)
         file_ext = tuple("pdf")
         if fetched_pdf.endswith(file_ext):
             file_pth = os.path.join(directory_path, fetched_pdf)
-            st.write(file_pth)
+            # st.write(file_pth)
             temp_file_path.append(file_pth) 
         else:
             pass   
