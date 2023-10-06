@@ -5,24 +5,6 @@ from utils import *
 from data import data_display,create_temp_file
 from closed_source import generate_insights
 
-@st.cache_resource
-def embed(model_name):
-    hf_embeddings = HuggingFaceEmbeddings(model_name=model_name)
-    return hf_embeddings
-
-@st.cache_data
-def embedding_store(temp_file_path):
-    merged_pdf = merge_pdfs(temp_file_path)
-    final_pdf = PyPDF2.PdfReader(merged_pdf)
-    text = ""
-    for page in final_pdf.pages:
-        text += page.extract_text()
-    texts =  text_splitter.split_text(text)
-    docs = text_to_docs(texts)
-    docsearch = FAISS.from_documents(docs, hf_embeddings)
-    return docs, docsearch
-
-
 
 # Setting Config for Llama-2
 login(token=st.secrets["HUGGINGFACEHUB_API_TOKEN"])
@@ -325,35 +307,8 @@ elif selected_option_case_type == "Fraud transaction dispute":
             data_display(directory_path,fetched_files)
             temp_file_path =  create_temp_file(directory_path,fetched_files)
 
-        with col2_up:
-            model_name = "thenlper/gte-small"
-            # Adding condition on embedding
-            try:
-                if temp_file_path:
-                    hf_embeddings = embed(model_name) 
-                else:
-                    pass
-            except NameError:
-                pass
-            
-            # Chunking with overlap
-            text_splitter = RecursiveCharacterTextSplitter(
-                chunk_size = 1000,
-                chunk_overlap  = 100,
-                length_function = len,
-                separators=["\n\n", "\n", " ", ""]
-            )
-  
-    
-            try:
-                if temp_file_path:
-                    docs, docsearch = embedding_store(temp_file_path)
-                else:
-                    pass
-            except Exception:
-                pass
-            
-            generate_insights(docsearch)
+        with col2_up:           
+            generate_insights(temp_file_path)
         
 
     if st.session_state.case_num == "SAR-2023-13579":
@@ -365,35 +320,9 @@ elif selected_option_case_type == "Fraud transaction dispute":
             data_display(directory_path,fetched_files)
             temp_file_path =  create_temp_file(directory_path,fetched_files)   
         
-        with col2_up:
-            model_name = "thenlper/gte-small"
-          # Adding condition on embedding
-            try:
-                if temp_file_path:
-                    hf_embeddings = embed(model_name) 
-                else:
-                    pass
-            except NameError:
-                pass
+        with col2_up:   
             
-            # Chunking with overlap
-            text_splitter = RecursiveCharacterTextSplitter(
-                chunk_size = 1000,
-                chunk_overlap  = 100,
-                length_function = len,
-                separators=["\n\n", "\n", " ", ""]
-            )
-  
-    
-            try:
-                if temp_file_path:
-                    docs, docsearch = embedding_store(temp_file_path)
-                else:
-                    pass
-            except Exception:
-                pass
-            
-            generate_insights(docsearch)
+            generate_insights(temp_file_path)
         
 
     

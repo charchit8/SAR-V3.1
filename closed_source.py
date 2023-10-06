@@ -7,41 +7,41 @@ else:
     os.environ["OPENAI_API_KEY"] = os.environ.get("OPENAI_API_KEY")
 
 
-# # Chunking with overlap
-# text_splitter = RecursiveCharacterTextSplitter(
-# chunk_size = 1000,
-# chunk_overlap  = 100,
-# length_function = len,
-# separators=["\n\n", "\n", " ", ""]
-# )
+# Chunking with overlap
+text_splitter = RecursiveCharacterTextSplitter(
+chunk_size = 1000,
+chunk_overlap  = 100,
+length_function = len,
+separators=["\n\n", "\n", " ", ""]
+)
 
 
-# #This is the embedding model
-# model_name = "thenlper/gte-small"
-# # model_name = "sentence-transformers/all-MiniLM-L6-v2"
-# # model_name = "hkunlp/instructor-large"
+#This is the embedding model
+model_name = "thenlper/gte-small"
+# model_name = "sentence-transformers/all-MiniLM-L6-v2"
+# model_name = "hkunlp/instructor-large"
 
 
 
 
-# @st.cache_resource
-# def embed(model_name):
-#     hf_embeddings = HuggingFaceEmbeddings(model_name=model_name)
-#     return hf_embeddings
+@st.cache_resource
+def embed(model_name):
+    hf_embeddings = HuggingFaceEmbeddings(model_name=model_name)
+    return hf_embeddings
 
 
-# @st.cache_data
-# def embedding_store(pdf_files,hf_embeddings):
-#     merged_pdf = merge_pdfs(pdf_files)
-#     final_pdf = PyPDF2.PdfReader(merged_pdf)
-#     text = ""
-#     for page in final_pdf.pages:
-#         text += page.extract_text()
+@st.cache_data
+def embedding_store(pdf_files,hf_embeddings):
+    merged_pdf = merge_pdfs(pdf_files)
+    final_pdf = PyPDF2.PdfReader(merged_pdf)
+    text = ""
+    for page in final_pdf.pages:
+        text += page.extract_text()
 
-#     texts =  text_splitter.split_text(text)
-#     docs = text_to_docs(texts)
-#     docsearch = FAISS.from_documents(docs, hf_embeddings)
-#     return docs, docsearch
+    texts =  text_splitter.split_text(text)
+    docs = text_to_docs(texts)
+    docsearch = FAISS.from_documents(docs, hf_embeddings)
+    return docs, docsearch
     
     
 # Memory setup for gpt-3.5
@@ -67,7 +67,33 @@ def usellm(prompt):
 
 
 
-def generate_insights(docsearch):
+def generate_insights(temp_file_path):
+
+    # Adding condition on embedding
+    try:
+        if temp_file_path:
+            hf_embeddings = embed(model_name) 
+        else:
+            pass
+    except NameError:
+        pass
+
+    # # Chunking with overlap
+    # text_splitter = RecursiveCharacterTextSplitter(
+    #     chunk_size = 1000,
+    #     chunk_overlap  = 100,
+    #     length_function = len,
+    #     separators=["\n\n", "\n", " ", ""]
+    # )
+
+    
+    try:
+        if temp_file_path:
+            docs, docsearch = embedding_store(temp_file_path)
+        else:
+            pass
+    except Exception:
+        pass
     
     # Creating header
     col1,col2 = st.columns(2)
