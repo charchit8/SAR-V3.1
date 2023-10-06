@@ -309,26 +309,6 @@ elif selected_option_case_type == "Fraud transaction dispute":
             temp_file_path =  create_temp_file(directory_path,fetched_files)
 
         with col2_up:
-            model_name = "thenlper/gte-small"
-            # Adding condition on embedding
-            try:
-                if temp_file_path:
-                    hf_embeddings = embed(model_name) 
-                else:
-                    pass
-            except NameError:
-                pass
-
-
-
-            try:
-                if temp_file_path:
-                    docs, docsearch = embedding_store(temp_file_path)
-                else:
-                    pass
-            except Exception:
-                pass
-
             generate_insights(temp_file_path)
         
 
@@ -342,26 +322,6 @@ elif selected_option_case_type == "Fraud transaction dispute":
             temp_file_path =  create_temp_file(directory_path,fetched_files)   
         
         with col2_up:
-            model_name = "thenlper/gte-small"
-            # Adding condition on embedding
-            try:
-                if temp_file_path:
-                    hf_embeddings = embed(model_name) 
-                else:
-                    pass
-            except NameError:
-                pass
-
-
-
-            try:
-                if temp_file_path:
-                    docs, docsearch = embedding_store(temp_file_path)
-                else:
-                    pass
-            except Exception:
-                pass
-            
             generate_insights(temp_file_path)
 
     

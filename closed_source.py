@@ -12,35 +12,20 @@ model_name = "thenlper/gte-small"
 # model_name = "sentence-transformers/all-MiniLM-L6-v2"
 # model_name = "hkunlp/instructor-large"
 
+# Memory setup for gpt-3.5
+llm = ChatOpenAI(temperature=0.1)
+memory = ConversationSummaryBufferMemory(llm=llm, max_token_limit=500)
+conversation = ConversationChain(llm=llm, memory =memory,verbose=False)
+
+
 
 def generate_insights(temp_file_path):
 
-    # Memory setup for gpt-3.5
-    llm = ChatOpenAI(temperature=0.1)
-    memory = ConversationSummaryBufferMemory(llm=llm, max_token_limit=500)
-    conversation = ConversationChain(llm=llm, memory =memory,verbose=False)
-
-
-
-    # Adding condition on embedding
-    try:
-        if temp_file_path:
-            hf_embeddings = embed(model_name) 
-        else:
-            pass
-    except NameError:
+    if temp_file_path:
+        hf_embeddings = embed(model_name) 
+        docs, docsearch = embedding_store(temp_file_path)
+    else:
         pass
-
-
-
-    try:
-        if temp_file_path:
-            docs, docsearch = embedding_store(temp_file_path)
-        else:
-            pass
-    except Exception:
-        pass
-
     
     # Creating header
     col1,col2 = st.columns(2)
