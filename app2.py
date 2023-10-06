@@ -917,7 +917,8 @@ with col2_up:
                         Context: {contexts}\n\
                         Response (Give me a concise response in three-four pointers.)"
                     response1 = usellm(prompt) 
-
+                    
+                    # This replace text is basically to stop rendering of $ to katex (that creates the text messy, hence replacing $)
                     response1 = response1.replace("$", " ")
                     response1 = response1.replace("5,000", "5,000 USD")
                     response1 = response1.replace("5,600", "5,600 USD")
@@ -1613,7 +1614,9 @@ with col_d2:
                 
                 
                 response_sara_gpt = usellm(prompt) 
-                response_sara_gpt = response_sara_gpt.replace("$", "USD")
+                response_sara_gpt = response_sara_gpt.replace("$", " ")
+                response_sara_gpt = response_sara_gpt.replace("5,000", "5,000 USD")
+                response_sara_gpt = response_sara_gpt.replace("5,600", "5,600 USD")
                 st.markdown(f'''<em>{response_sara_gpt}</em>''',unsafe_allow_html=True)
 
                 st.warning('Please carefully review the recommendation and case details before the final submission',icon="⚠️")
