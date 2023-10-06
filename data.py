@@ -77,7 +77,6 @@ def data_display(directory_path,fetched_files):
             
             
             #select box to select file
-            st.write(fetched_files)
             selected_file_name = st.selectbox(":blue[Select a file to View]",fetched_files)
             st.write("Selected File: ", selected_file_name)
             st.session_state.disabled = False
@@ -131,7 +130,8 @@ def data_display(directory_path,fetched_files):
 def create_temp_file(directory_path,fetched_files):
     tmp_dir_ = tempfile.mkdtemp()
     temp_file_path= []
-
+    st.write(directory_path)
+    st.write(fetched_files)
     for uploaded_file in st.session_state.pdf_files:
         file_ext = tuple("pdf")
         if uploaded_file.name.endswith(file_ext):
