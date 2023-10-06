@@ -1601,10 +1601,9 @@ with col_d2:
                 context_1 = docsearch.similarity_search(query, k=5)
                 prompt = f'''Act as a financial analyst and give concise answer to the question, with given Context.\n\n\
                 which is a document that financial institutions must file with the Financial Crimes Enforcement Network (FinCEN) based on the Bank Secrecy Act whenever there is a suspicious activity.\n\n\
-                If the transaction/disputed amount is > 5000 USD threshold, then check below points to address this as a suspicious activity:
-                1.Identify multiple individual name in the context compare with the customer name (customer name can be identified from cardholder information). If details match then there is no suspicious activity, else if details donot match, this can be considered as suspicious activity.
-                2.A potential suspect name is identified? Suspect is the Person who has committed the fraud with the Customer (customer is the cardholder).\n\n\
-                If transaction/disputed amount is < 5000 USD threshold and no suspicious activity is detected based on above mentioned points, write your response as - There is no indication of suspicious activity.Therefore,no requirement to file SAR with FinCEN.\n\n\
+                If The transaction/disputed amount > 5,000 USD value threshold and a potential suspect name is identified? Then this can be addressed as a suspicious activity.\n\n\
+                Suspect is the person who has committed the fraud with the Customer (customer is the cardholder).\n\n\
+                If transaction/disputed amount is < 5000 USD threshold and no suspect is identified, write your response as - There is no indication of suspicious activity.Therefore,no requirement to file SAR with FinCEN.\n\n\
                         Question: {query}\n\
                         Context: {context_1}\n\                      
                         Response: (Based on your analysis give a concise response in pointers.Mention whom to file based on Bank Secrecy Act.)'''
