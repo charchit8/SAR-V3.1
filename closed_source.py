@@ -31,7 +31,7 @@ def embed(model_name):
 
 
 @st.cache_data
-def embedding_store(temp_file_path,hf_embeddings):
+def embedding_store(temp_file_path):
     merged_pdf = merge_pdfs(temp_file_path)
     final_pdf = PyPDF2.PdfReader(merged_pdf)
     text = ""
@@ -71,7 +71,7 @@ def generate_insights(temp_file_path):
 
   
     hf_embeddings = embed(model_name) 
-    docs, docsearch = embedding_store(temp_file_path,hf_embeddings)
+    docs, docsearch = embedding_store(temp_file_path)
  
 
     # Creating header
