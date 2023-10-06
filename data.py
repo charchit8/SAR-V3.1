@@ -130,7 +130,7 @@ def data_display(directory_path,fetched_files):
 def debug():
         for files in pdf_files:
             st.write(files)
-            st.write(files.name)
+            st.write(files[0].name)
 
 #creating temp directory to have all the files at one place for accessing
 
