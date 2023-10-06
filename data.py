@@ -3,7 +3,7 @@ from utils import *
 
 
 def data_fetched_uploaded():
-    
+
     directory_path = "data/"
     fetched_files = read_pdf_files(directory_path)
     
@@ -66,7 +66,7 @@ def data_fetched_uploaded():
             st.session_state.disabled = False
             file_ext = tuple("pdf")
             if selected_file_name.endswith(file_ext):
-                selected_file_path = os.path.join(directoty_path, selected_file_name)
+                selected_file_path = os.path.join(directory_path, selected_file_name)
                 #converting pdf data to bytes so that render_pdf_as_images could read it
                 file = pdf_to_bytes(selected_file_path)
                 pdf_images = render_pdf_as_images(file)
@@ -75,7 +75,7 @@ def data_fetched_uploaded():
                 for img_bytes in pdf_images:
                     st.image(img_bytes, use_column_width=True)
             else:
-                selected_file_path = os.path.join(directoty_path, selected_file_name)
+                selected_file_path = os.path.join(directory_path, selected_file_name)
                 # This is showing png,jpeg files
                 st.image(selected_file_path, use_column_width=True)
 
@@ -129,7 +129,7 @@ def data_fetched_uploaded():
     for fetched_pdf in fetched_files:
         file_ext = tuple("pdf")
         if fetched_pdf.endswith(file_ext):
-            file_pth = os.path.join(directoty_path, fetched_pdf)
+            file_pth = os.path.join(directory_path, fetched_pdf)
             # st.write(file_pth)
             temp_file_path.append(file_pth) 
         else:
