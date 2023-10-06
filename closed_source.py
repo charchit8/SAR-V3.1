@@ -5,25 +5,65 @@ if st.secrets["OPENAI_API_KEY"] is not None:
     os.environ["OPENAI_API_KEY"] = st.secrets["OPENAI_API_KEY"]
 else:
     os.environ["OPENAI_API_KEY"] = os.environ.get("OPENAI_API_KEY")
-    
+
+
+# Chunking with overlap
+text_splitter = RecursiveCharacterTextSplitter(
+chunk_size = 1000,
+chunk_overlap  = 100,
+length_function = len,
+separators=["\n\n", "\n", " ", ""]
+)
+
 
 #This is the embedding model
 model_name = "thenlper/gte-small"
 # model_name = "sentence-transformers/all-MiniLM-L6-v2"
 # model_name = "hkunlp/instructor-large"
 
+
+
+
+@st.cache_resource
+def embed(model_name):
+    hf_embeddings = HuggingFaceEmbeddings(model_name=model_name)
+    return hf_embeddings
+
+
+@st.cache_data
+def embedding_store(pdf_files,hf_embeddings):
+    merged_pdf = merge_pdfs(pdf_files)
+    final_pdf = PyPDF2.PdfReader(merged_pdf)
+    text = ""
+    for page in final_pdf.pages:
+        text += page.extract_text()
+
+    texts =  text_splitter.split_text(text)
+    docs = text_to_docs(texts)
+    docsearch = FAISS.from_documents(docs, hf_embeddings)
+    return docs, docsearch
+    
+    
 # Memory setup for gpt-3.5
 llm = ChatOpenAI(temperature=0.1)
 memory = ConversationSummaryBufferMemory(llm=llm, max_token_limit=500)
 conversation = ConversationChain(llm=llm, memory =memory,verbose=False)
 
 
-text_splitter = RecursiveCharacterTextSplitter(
-    chunk_size = 1000,
-    chunk_overlap  = 100,
-    length_function = len,
-    separators=["\n\n", "\n", " ", ""]
-)
+@st.cache_data
+def usellm(prompt):
+    """
+    Getting GPT-3.5 Model into action
+    """
+    service = UseLLM(service_url="https://usellm.org/api/llm")
+    messages = [
+      Message(role="system", content="You are a fraud analyst, who is an expert at finding out suspicious activities"),
+      Message(role="user", content=f"{prompt}"),
+      ]
+    options = Options(messages=messages)
+    response = service.chat(options)
+    return response.content
+
 
 
 
