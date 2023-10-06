@@ -95,10 +95,6 @@ if "llm" not in st.session_state:
 if "pdf_files" not in st.session_state:
     st.session_state.pdf_files = []
 
-# reading files from local directory from fetch evidence button
-directory_path = "data/"
-fetched_files = read_pdf_files(directory_path)
-
 
 # Apply CSS styling to resize the buttons
 st.markdown("""
@@ -365,5 +361,5 @@ if selected_option:
     col1_up, col2_up, col3_up, col4_up, col5_up = st.tabs(["Data", "Generate Insights","Summarization","Download Report", "Make a Decision"])
 
     with col1_up:
-        data_fetched_uploaded(directory_path,fetched_files)
+        data_fetched_uploaded()
 
