@@ -101,7 +101,6 @@ def data_display(directory_path,fetched_files):
     with bt2_up:
         pdf_file = st.file_uploader("", type=["pdf","png","jpeg","docx","xlsx"], accept_multiple_files=True)
         pdf_files.append(pdf_file)
-        st.write(pdf_files)
 
         # showing files
         for uploaded_file in pdf_files:
@@ -126,6 +125,11 @@ def data_display(directory_path,fetched_files):
             else:
                 # This is showing png,jpeg files
                 st.image(uploaded_file, use_column_width=True)
+
+
+def debug():
+        for files in pdf_files:
+            st.write(pdf_files.name)
 
 #creating temp directory to have all the files at one place for accessing
 
