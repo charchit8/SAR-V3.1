@@ -335,4 +335,7 @@ elif selected_option_case_type == "Insider Trading":
 
       #Add code for IT here
 
+if st.button('reset_session'):
+    reset_session_state()
+
 
