@@ -909,7 +909,7 @@ with col2_up:
                     contexts = docsearch.similarity_search(query, k=5) 
                     prompt = f" You are professional Fraud Analyst. Find answer to the questions as truthfully and in as detailed as possible as per given context only,\n\n\
                         If The transaction/disputed amount > 5,000 USD value threshold, then check below points to address this as a suspicious activity.\n\n\
-                        1. If Merchant Invoice is billed to customer or not (Customer details can be identified from Cardholder Information)\n\n\
+                        1. There is indication of suspicion if Merchant Invoice is not billed to customer(Customer details can be identified from Cardholder Information)\n\n\
                         2. A potential suspect is identified.\n\n\
                         Based the above findings, identify if this can be consider as Suspicious Activity or not.\n\n\
                         If transaction/disputed amount is < 5000 USD threshold and no suspicious activity is detected based on above mentioned points, write your response as - There is no indication of suspicious activity.\n\n\
@@ -1616,7 +1616,7 @@ with col_d2:
                 prompt = f'''Act as a financial analyst and give concise answer to the question, with given Context.\n\n\
                 which is a document that financial institutions must file with the Financial Crimes Enforcement Network (FinCEN) based on the Bank Secrecy Act whenever there is a suspicious activity.\n\n\
                 If the transaction/disputed amount is > 5000 USD threshold, then check below points to address this as a suspicious activity:
-                1.If Merchant Invoice is billed to customer or not (Customer details can be identified from Cardholder Information)\n\n\
+                1.There is an indication of suspicion if Merchant Invoice is not billed to customer (Customer details can be identified from Cardholder Information)\n\n\
                 2.A potential suspect is identified who made the transaction. \n\n\
                 If transaction/disputed amount is < 5000 USD threshold and no suspicious activity is detected based on above mentioned points, write your response as - There is no indication of suspicious activity.Therefore,no requirement to file SAR with FinCEN.\n\n\
                         Question: {query}\n\
