@@ -1,6 +1,6 @@
 from utils import *
 
-    
+   
 tmp_dir_ = tempfile.mkdtemp()
 temp_file_path= []
 pdf_files = []
@@ -99,8 +99,10 @@ def data_display(directory_path,fetched_files):
 
 
     with bt2_up:
-        pdf_files = st.file_uploader("", type=["pdf","png","jpeg","docx","xlsx"], accept_multiple_files=True)
-        pdf_files.append(pdf_files)
+        pdf_file = st.file_uploader("", type=["pdf","png","jpeg","docx","xlsx"], accept_multiple_files=True)
+        pdf_files.append(pdf_file)
+        st.write(pdf_files)
+
         # showing files
         for uploaded_file in pdf_files:
             #This code is to show pdf files
@@ -127,27 +129,27 @@ def data_display(directory_path,fetched_files):
 
 #creating temp directory to have all the files at one place for accessing
 
-def create_temp_file(directory_path,fetched_files):
+# def create_temp_file(directory_path,fetched_files):
 
-    for uploaded_file in pdf_files:
-        file_ext = tuple("pdf")
-        if uploaded_file.name.endswith(file_ext):
-            file_pth = os.path.join(tmp_dir_, uploaded_file.name)
-            with open(file_pth, "wb") as file_opn:
-                file_opn.write(uploaded_file.getbuffer())
-                temp_file_path.append(file_pth)
-        else:
-            pass
+#     for uploaded_file in pdf_files:
+#         file_ext = tuple("pdf")
+#         if uploaded_file.name.endswith(file_ext):
+#             file_pth = os.path.join(tmp_dir_, uploaded_file.name)
+#             with open(file_pth, "wb") as file_opn:
+#                 file_opn.write(uploaded_file.getbuffer())
+#                 temp_file_path.append(file_pth)
+#         else:
+#             pass
 
 
-    for fetched_pdf in fetched_files:
-        file_ext = tuple("pdf")
-        if fetched_pdf.endswith(file_ext):
-            file_pth = os.path.join(directory_path, fetched_pdf)
-            # st.write(file_pth)
-            temp_file_path.append(file_pth) 
-        else:
-            pass   
+#     for fetched_pdf in fetched_files:
+#         file_ext = tuple("pdf")
+#         if fetched_pdf.endswith(file_ext):
+#             file_pth = os.path.join(directory_path, fetched_pdf)
+#             # st.write(file_pth)
+#             temp_file_path.append(file_pth) 
+#         else:
+#             pass   
  
 
     #Adding pytesseract here
