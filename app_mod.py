@@ -357,16 +357,16 @@ if selected_option_case_type == "Fraud transaction dispute":
 
 
 
-        if selected_option:
+        if st.session_state.case_num is not None:
             col1_up, col2_up, col3_up, col4_up, col5_up = st.tabs(["Data", "Generate Insights","Summarization","Download Report", "Make a Decision"])
     
             with col1_up:
-                if selected_option == "SAR-2023-24680":
+                if st.session_state.case_num == "SAR-2023-24680":
                     directory_path = "data/"
                     fetched_files = read_pdf_files(directory_path)
                     data_fetched_uploaded(directory_path,fetched_files)
             
-                elif selected_option == "SAR-2023-13579":
+                elif st.session_state.case_num == "SAR-2023-13579":
                     directory_path = "data2/"
                     fetched_files = read_pdf_files(directory_path)
                     data_fetched_uploaded(directory_path,fetched_files)
