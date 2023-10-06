@@ -71,7 +71,7 @@ def generate_insights(temp_file_path):
 
   
     hf_embeddings = embed(model_name) 
-    docs, docsearch = embedding_store(temp_file_path)
+    docs, docsearch = embedding_store(temp_file_path,hf_embeddings)
  
 
     # Creating header
