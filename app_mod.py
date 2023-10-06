@@ -306,7 +306,6 @@ elif selected_option_case_type == "Fraud transaction dispute":
             fetched_files = read_pdf_files(directory_path)
             data_display(directory_path,fetched_files)
             temp_file_path =  create_temp_file(directory_path,fetched_files)
-            st.write(temp_file_path)
         with col2_up:
             generate_insights(temp_file_path)
         
@@ -317,8 +316,7 @@ elif selected_option_case_type == "Fraud transaction dispute":
             directory_path = "data2/"
             fetched_files = read_pdf_files(directory_path)
             data_display(directory_path,fetched_files)
-            temp_file_path =  create_temp_file(directory_path,fetched_files)
-            st.write(temp_file_path)
+            temp_file_path =  create_temp_file(directory_path,fetched_files)   
         with col2_up:
             generate_insights(temp_file_path)
 
