@@ -919,7 +919,7 @@ with col2_up:
                     response1 = usellm(prompt) 
 
                  
-
+                    response1 = response1.replace("$", "USD")
                     st.session_state["sara_recommendation_gpt"] = response1                
                     
                     st.markdown("### SARA Recommendation")
@@ -1612,7 +1612,7 @@ with col_d2:
                 
                 
                 response_sara_gpt = usellm(prompt) 
-                response_sara_gpt = response_sara_gpt.replace("$", "/$")
+                response_sara_gpt = response_sara_gpt.replace("$", "USD")
                 st.markdown(f'''<em>{response_sara_gpt}</em>''',unsafe_allow_html=True)
 
                 st.warning('Please carefully review the recommendation and case details before the final submission',icon="⚠️")
