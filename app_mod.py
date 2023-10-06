@@ -374,7 +374,12 @@ elif selected_option_case_type == "Fraud transaction dispute":
 
 elif selected_option_case_type == "Money Laundering":
     st.markdown("### :red[Money Laundering]")
+     
+       #Add code for AML here
+
 elif selected_option_case_type == "Insider Trading":
     st.markdown("### :red[Insider Trading]")
+
+      #Add code for IT here
 
 
