@@ -5,67 +5,12 @@ from utils import *
 from data import data_fetched_uploaded
 from closed_source import generate_insights
 
-# Setting Env
-if st.secrets["OPENAI_API_KEY"] is not None:
-    os.environ["OPENAI_API_KEY"] = st.secrets["OPENAI_API_KEY"]
-else:
-    os.environ["OPENAI_API_KEY"] = os.environ.get("OPENAI_API_KEY")
 
-
-@st.cache_data
-def usellm(prompt):
-    """
-    Getting GPT-3.5 Model into action
-    """
-    service = UseLLM(service_url="https://usellm.org/api/llm")
-    messages = [
-      Message(role="system", content="You are a fraud analyst, who is an expert at finding out suspicious activities"),
-      Message(role="user", content=f"{prompt}"),
-      ]
-    options = Options(messages=messages)
-    response = service.chat(options)
-    return response.content
 
 # Setting Config for Llama-2
 login(token=st.secrets["HUGGINGFACEHUB_API_TOKEN"])
 os.environ["HUGGINGFACEHUB_API_TOKEN"] = st.secrets["HUGGINGFACEHUB_API_TOKEN"]
 
-
-
-llama_13b = HuggingFaceHub(
-            repo_id="meta-llama/Llama-2-13b-chat-hf",
-            model_kwargs={"temperature":0.01, 
-                        "min_new_tokens":100, 
-                        "max_new_tokens":500})
-
-memory = ConversationSummaryBufferMemory(llm= llama_13b, max_token_limit=500)
-conversation = ConversationChain(llm= llama_13b, memory=memory,verbose=False)
-
-
-@st.cache_data
-def llama_llm(_llm,prompt):
-
-    response = _llm.predict(prompt)
-    return response
-
-
-@st.cache_resource
-def embed(model_name):
-    hf_embeddings = HuggingFaceEmbeddings(model_name=model_name)
-    return hf_embeddings
-
-@st.cache_data
-def embedding_store(pdf_files):
-    merged_pdf = merge_pdfs(pdf_files)
-    final_pdf = PyPDF2.PdfReader(merged_pdf)
-    text = ""
-    for page in final_pdf.pages:
-        text += page.extract_text()
-    texts =  text_splitter.split_text(text)
-    docs = text_to_docs(texts)
-    docsearch = FAISS.from_documents(docs, hf_embeddings)
-    return docs, docsearch
-    
 
 # Setting globals
 if "visibility" not in st.session_state:
