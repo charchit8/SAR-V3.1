@@ -2,7 +2,7 @@
 #!/usr/bin/python
 
 from utils import *
-from data import data_display,create_temp_file
+from data import data_display
 from closed_source import generate_insights
 
 
@@ -38,8 +38,7 @@ if "context_1" not in st.session_state:
     st.session_state.context_1 = ''
 if "llm" not in st.session_state:
     st.session_state.llm = 'Closed-Source'
-if "pdf_files" not in st.session_state:
-    st.session_state.pdf_files = []
+
 
 
 # Apply CSS styling to resize the buttons
@@ -306,10 +305,10 @@ elif selected_option_case_type == "Fraud transaction dispute":
             directory_path = "data/"
             fetched_files = read_pdf_files(directory_path)
             data_display(directory_path,fetched_files)
-            temp_file_path =  create_temp_file(directory_path,fetched_files)
-            st.write(temp_file_path)
+            # temp_file_path =  create_temp_file(directory_path,fetched_files)
+            # st.write(temp_file_path)
         with col2_up:
-            generate_insights(temp_file_path)
+            # generate_insights(temp_file_path)
         
 
     if st.session_state.case_num == "SAR-2023-13579":
@@ -318,10 +317,11 @@ elif selected_option_case_type == "Fraud transaction dispute":
             directory_path = "data2/"
             fetched_files = read_pdf_files(directory_path)
             data_display(directory_path,fetched_files)
-            temp_file_path =  create_temp_file(directory_path,fetched_files)
-            st.write(temp_file_path)
+            # temp_file_path =  create_temp_file(directory_path,fetched_files)
+            # st.write(temp_file_path)
         with col2_up:
-            generate_insights(temp_file_path)
+            pass
+            # generate_insights(temp_file_path)
 
     
 
