@@ -18,6 +18,14 @@ memory = ConversationSummaryBufferMemory(llm=llm, max_token_limit=500)
 conversation = ConversationChain(llm=llm, memory =memory,verbose=False)
 
 
+text_splitter = RecursiveCharacterTextSplitter(
+    chunk_size = 1000,
+    chunk_overlap  = 100,
+    length_function = len,
+    separators=["\n\n", "\n", " ", ""]
+)
+
+
 
 def generate_insights(temp_file_path):
 
