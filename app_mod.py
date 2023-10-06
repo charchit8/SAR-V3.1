@@ -362,7 +362,7 @@ elif selected_option_case_type == "Fraud transaction dispute":
             fetched_files = read_pdf_files(directory_path)
             temp_file_path = data_fetched_uploaded(directory_path,fetched_files)
         with col2_up:
-            generate_insights(temp_file_path)
+            generate_insights()
         
 
     if st.session_state.case_num == "SAR-2023-13579":
@@ -372,7 +372,7 @@ elif selected_option_case_type == "Fraud transaction dispute":
             fetched_files = read_pdf_files(directory_path)
             temp_file_path = data_fetched_uploaded(directory_path,fetched_files)
         with col2_up:
-            generate_insights(temp_file_path)
+            generate_insights()
 
     
 
