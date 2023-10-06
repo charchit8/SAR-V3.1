@@ -1,5 +1,7 @@
 from utils import *
 
+if "pdf_files" not in st.session_state:
+    st.session_state.pdf_files = ''
    
 tmp_dir_ = tempfile.mkdtemp()
 temp_file_path= []
@@ -101,6 +103,7 @@ def data_display(directory_path,fetched_files):
     with bt2_up:
         pdf_file = st.file_uploader("", type=["pdf","png","jpeg","docx","xlsx"], accept_multiple_files=True)
         pdf_files.append(pdf_file)
+        st.session_state.pdf_files = pdf_file
 
         # showing files
         for uploaded_file in pdf_file:
@@ -128,9 +131,10 @@ def data_display(directory_path,fetched_files):
 
 
 def debug():
-        for files in pdf_files:
-            st.write(files)
-            st.write(files[0].name)
+    st.write(st.session_state.pdf_files)
+    for files in pdf_files:
+        st.write(files)
+        st.write(files[0].name)
 
 #creating temp directory to have all the files at one place for accessing
 
