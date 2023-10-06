@@ -153,6 +153,8 @@ def create_temp_file(directory_path,fetched_files):
                 temp_file_path.append(file_pth)
         else:
             pass
+    st.write(temp_file_path)
+    return temp_file_path
 
 
 
@@ -223,6 +225,6 @@ def create_temp_file(directory_path,fetched_files):
         #         pass
         
     
-        return temp_file_path
+        
 
 
