@@ -502,6 +502,10 @@ st.markdown("""
     word-break: normal;
 }
 
+.css-uvn0xz p {
+     word-break: normal;
+}
+
 .st-d5 {
     line-height: 1;
 }
