@@ -908,9 +908,9 @@ with col2_up:
                     query ="Is this is a Suspicious activity or not?"
                     contexts = docsearch.similarity_search(query, k=5) 
                     prompt = f" You are professional Fraud Analyst. Find answer to the questions as truthfully and in as detailed as possible as per given context only,\n\n\
-                        If The transaction/disputed amount > 5,000 USD value threshold and a potential suspect name is identified? Then this can be addressed as a suspicious activity.\n\n\
+                        If The transaction/disputed amount > 5,000 USD value threshold and a potential suspect name is identified? Then only this can be addressed as a suspicious activity.\n\n\
                         Suspect is the person who has committed the fraud with the Customer (customer is the cardholder).\n\n\
-                        If transaction/disputed amount > 5,000 USD and no suspect is identified, then this cannot be considered as a suspicious activity. \n\n\
+                        Even if transaction/disputed amount > 5,000 USD but if no suspect is identified, then this cannot be considered as a suspicious activity. \n\n\
                         If transaction/disputed amount is < 5000 USD threshold and no suspect is identified, write your response as - There is no indication of suspicious activity.\n\n\
                         Based the above findings, identify if this can be consider as Suspicious Activity or not.\n\n\
                         Context: {contexts}\n\
@@ -1602,6 +1602,7 @@ with col_d2:
                 prompt = f'''Act as a financial analyst and give concise answer to the question, with given Context.\n\n\
                 which is a document that financial institutions must file with the Financial Crimes Enforcement Network (FinCEN) based on the Bank Secrecy Act whenever there is a suspicious activity.\n\n\
                 If The transaction/disputed amount > 5,000 USD value threshold and a potential suspect name is identified? Then this can be addressed as a suspicious activity.\n\n\
+                Even if the transaction/disputed amount > 5,000 USD value threshold, but no suspect is identified then this cannot be considered as a suspicious activity. \n\n\
                 Suspect is the person who has committed the fraud with the Customer (customer is the cardholder).\n\n\
                 If transaction/disputed amount is < 5000 USD threshold and no suspect is identified, write your response as - There is no indication of suspicious activity.Therefore,no requirement to file SAR with FinCEN.\n\n\
                         Question: {query}\n\
