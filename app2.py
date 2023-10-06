@@ -918,8 +918,9 @@ with col2_up:
                         Response (Give me a concise response in three-four pointers.)"
                     response1 = usellm(prompt) 
 
-                 
-                    response1 = response1.replace("$", "USD")
+                    response1 = response1.replace("$", " ")
+                    response1 = response1.replace("5,000", "5,000 USD")
+                    response1 = response1.replace("5,600", "5,600 USD")
                     st.session_state["sara_recommendation_gpt"] = response1                
                     
                     st.markdown("### SARA Recommendation")
