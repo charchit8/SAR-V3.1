@@ -29,11 +29,9 @@ text_splitter = RecursiveCharacterTextSplitter(
 
 def generate_insights(temp_file_path):
 
-    if temp_file_path:
-        hf_embeddings = embed(model_name) 
-        docs, docsearch = embedding_store(temp_file_path,hf_embeddings)
-    else:
-        pass
+    hf_embeddings = embed(model_name) 
+    docs, docsearch = embedding_store(temp_file_path,hf_embeddings)
+
     
     # Creating header
     col1,col2 = st.columns(2)
