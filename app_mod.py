@@ -299,12 +299,8 @@ if selected_option_case_type == "Select Case Type":
     st.header("")
 elif selected_option_case_type == "Fraud transaction dispute":
     st.markdown("### :blue[Fraud transaction dispute]")
-elif selected_option_case_type == "Money Laundering":
-    st.markdown("### :red[Money Laundering]")
-elif selected_option_case_type == "Insider Trading":
-    st.markdown("### :red[Insider Trading]")
-# st.markdown('---')
 
+# st.markdown('---')
 
 # Selecting case type here
     
@@ -372,5 +368,13 @@ elif selected_option_case_type == "Insider Trading":
                 directory_path = "data2/"
                 fetched_files = read_pdf_files(directory_path)
                 data_fetched_uploaded(directory_path,fetched_files)
+
+    
+
+
+elif selected_option_case_type == "Money Laundering":
+    st.markdown("### :red[Money Laundering]")
+elif selected_option_case_type == "Insider Trading":
+    st.markdown("### :red[Insider Trading]")
 
 
