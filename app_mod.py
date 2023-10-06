@@ -301,23 +301,67 @@ elif selected_option_case_type == "Fraud transaction dispute":
             
     if st.session_state.case_num == "SAR-2023-24680":
         col1_up, col2_up, col3_up, col4_up, col5_up = st.tabs(["Data", "Generate Insights","Summarization","Download Report", "Make a Decision"])
+        
         with col1_up:
             directory_path = "data/"
             fetched_files = read_pdf_files(directory_path)
             data_display(directory_path,fetched_files)
             temp_file_path =  create_temp_file(directory_path,fetched_files)
+
         with col2_up:
+            model_name = "thenlper/gte-small"
+            # Adding condition on embedding
+            try:
+                if temp_file_path:
+                    hf_embeddings = embed(model_name) 
+                else:
+                    pass
+            except NameError:
+                pass
+
+
+
+            try:
+                if temp_file_path:
+                    docs, docsearch = embedding_store(temp_file_path)
+                else:
+                    pass
+            except Exception:
+                pass
+
             generate_insights(temp_file_path)
         
 
     if st.session_state.case_num == "SAR-2023-13579":
         col1_up, col2_up, col3_up, col4_up, col5_up = st.tabs(["Data", "Generate Insights","Summarization","Download Report", "Make a Decision"])
+        
         with col1_up:
             directory_path = "data2/"
             fetched_files = read_pdf_files(directory_path)
             data_display(directory_path,fetched_files)
             temp_file_path =  create_temp_file(directory_path,fetched_files)   
+        
         with col2_up:
+            model_name = "thenlper/gte-small"
+            # Adding condition on embedding
+            try:
+                if temp_file_path:
+                    hf_embeddings = embed(model_name) 
+                else:
+                    pass
+            except NameError:
+                pass
+
+
+
+            try:
+                if temp_file_path:
+                    docs, docsearch = embedding_store(temp_file_path)
+                else:
+                    pass
+            except Exception:
+                pass
+            
             generate_insights(temp_file_path)
 
     
