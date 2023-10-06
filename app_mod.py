@@ -2,7 +2,7 @@
 #!/usr/bin/python
 
 from utils import *
-from data import data_display,create_temp_file,debug
+from data import data_display,create_temp_file
 from closed_source import generate_insights
 
 
@@ -307,7 +307,6 @@ elif selected_option_case_type == "Fraud transaction dispute":
             data_display(directory_path,fetched_files)
             temp_file_path =  create_temp_file(directory_path,fetched_files)
             st.write(temp_file_path)
-            st.write(debug(fetched_files))
         with col2_up:
             generate_insights(temp_file_path)
         
@@ -320,7 +319,6 @@ elif selected_option_case_type == "Fraud transaction dispute":
             data_display(directory_path,fetched_files)
             temp_file_path =  create_temp_file(directory_path,fetched_files)
             st.write(temp_file_path)
-            st.write(debug(fetched_files))
         with col2_up:
             generate_insights(temp_file_path)
 
