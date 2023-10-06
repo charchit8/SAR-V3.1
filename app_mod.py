@@ -347,6 +347,7 @@ elif selected_option_case_type == "Fraud transaction dispute":
     
             try:
                 if temp_file_path:
+                    st.write(temp_file_path)
                     docs, docsearch = embedding_store(temp_file_path)
                 else:
                     pass
