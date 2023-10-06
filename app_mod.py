@@ -353,22 +353,23 @@ if selected_option_case_type == "Fraud transaction dispute":
         with col2:
             st.markdown("##### **Case Status&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:** Open")
 
-        st.markdown("---")
+    st.markdown("---")
 
 
 
-        if st.session_state.case_num is not None:
-            col1_up, col2_up, col3_up, col4_up, col5_up = st.tabs(["Data", "Generate Insights","Summarization","Download Report", "Make a Decision"])
-    
-            with col1_up:
-                if st.session_state.case_num == "SAR-2023-24680":
-                    directory_path = "data/"
-                    fetched_files = read_pdf_files(directory_path)
-                    data_fetched_uploaded(directory_path,fetched_files)
+    if st.session_state.case_num is not None:
             
-                elif st.session_state.case_num == "SAR-2023-13579":
-                    directory_path = "data2/"
-                    fetched_files = read_pdf_files(directory_path)
-                    data_fetched_uploaded(directory_path,fetched_files)
+        col1_up, col2_up, col3_up, col4_up, col5_up = st.tabs(["Data", "Generate Insights","Summarization","Download Report", "Make a Decision"])
+
+        with col1_up:
+            if st.session_state.case_num == "SAR-2023-24680":
+                directory_path = "data/"
+                fetched_files = read_pdf_files(directory_path)
+                data_fetched_uploaded(directory_path,fetched_files)
         
+            elif st.session_state.case_num == "SAR-2023-13579":
+                directory_path = "data2/"
+                fetched_files = read_pdf_files(directory_path)
+                data_fetched_uploaded(directory_path,fetched_files)
+
 
