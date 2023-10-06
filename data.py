@@ -1,9 +1,11 @@
 from utils import *
 
-directory_path = "data/"
-fetched_files = read_pdf_files(directory_path)
 
-def data_fetched_uploaded(directory_path,fetched_files):
+
+def data_fetched_uploaded():
+    
+    directory_path = "data/"
+    fetched_files = read_pdf_files(directory_path)
     
     # reading files from local directory from fetch evidence button
 
