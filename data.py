@@ -103,20 +103,20 @@ def data_display(directory_path,fetched_files):
         pdf_files.append(pdf_file)
 
         # showing files
-        for uploaded_file in pdf_files:
+        for uploaded_file in pdf_file:
             #This code is to show pdf files
             file_ext = tuple("pdf")
             if uploaded_file.name.endswith(file_ext):
                 # Show uploaded files in a dropdown
                 # if pdf_files:
                 st.subheader("Uploaded Files")
-                file_names = [file.name for file in pdf_files]
+                file_names = [file.name for file in pdf_file]
                 selected_file = st.selectbox(":blue[Select a file]", file_names)
                 # Enabling the button
                 st.session_state.disabled = False
                 # Display selected PDF contents
                 if selected_file:
-                    selected_pdf = [pdf for pdf in pdf_files if pdf.name == selected_file][0]
+                    selected_pdf = [pdf for pdf in pdf_file if pdf.name == selected_file][0]
                     pdf_images = render_pdf_as_images(selected_pdf)
                     st.subheader(f"Contents of {selected_file}")
                     for img_bytes in pdf_images:
@@ -129,7 +129,8 @@ def data_display(directory_path,fetched_files):
 
 def debug():
         for files in pdf_files:
-            st.write(pdf_files.name)
+            st.write(files)
+            st.write(files.name)
 
 #creating temp directory to have all the files at one place for accessing
 
