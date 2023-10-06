@@ -908,11 +908,11 @@ with col2_up:
                     query ="Is this is a Suspicious activity or not?"
                     contexts = docsearch.similarity_search(query, k=5) 
                     prompt = f" You are professional Fraud Analyst. Find answer to the questions as truthfully and in as detailed as possible as per given context only,\n\n\
-                        If The transaction/disputed amount > 5,000 USD value threshold, then check below points to address this as a suspicious activity.\n\n\
-                        1. There is an indication of suspicion based on involvement of multiple individuals other than the customer (customer details can be identified from cardholder information)\n\n\
-                        2. A potential suspect name is identified? Suspect is the Person who has committed the fraud with the Customer (customer is the cardholder).\n\n\
+                        If The transaction/disputed amount > 5,000 USD value threshold and a potential suspect name is identified? Then this can be addressed as a suspicious activity.\n\n\
+                        Suspect is the person who has committed the fraud with the Customer (customer is the cardholder).\n\n\
+                        If transaction/disputed amount > 5,000 USD and no suspect is identified, then this cannot be considered as a suspicious activity. \n\n\
+                        If transaction/disputed amount is < 5000 USD threshold and no suspect is identified, write your response as - There is no indication of suspicious activity.\n\n\
                         Based the above findings, identify if this can be consider as Suspicious Activity or not.\n\n\
-                        If transaction/disputed amount is < 5000 USD threshold and no suspicious activity is detected based on above mentioned points, write your response as - There is no indication of suspicious activity.\n\n\
                         Context: {contexts}\n\
                         Response (Give your response in pointers.)"
                     response1 = usellm(prompt) 
