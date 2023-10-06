@@ -132,7 +132,7 @@ def data_display(directory_path,fetched_files):
 
 def debug():
     st.write(st.session_state.pdf_files)
-    for files in pdf_files:
+    for files in st.session_state.pdf_files:
         st.write(files)
         st.write(files[0].name)
 
