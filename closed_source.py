@@ -24,13 +24,13 @@ model_name = "thenlper/gte-small"
 
 
 
-@st.cache_resource
+
 def embed(model_name):
     hf_embeddings = HuggingFaceEmbeddings(model_name=model_name)
     return hf_embeddings
 
 
-@st.cache_resource
+
 def embedding_store(temp_file_path,hf_embeddings):
     merged_pdf = merge_pdfs(temp_file_path)
     final_pdf = PyPDF2.PdfReader(merged_pdf)
