@@ -69,32 +69,11 @@ def usellm(prompt):
 
 def generate_insights(temp_file_path):
 
-    # Adding condition on embedding
-    try:
-        if temp_file_path:
-            hf_embeddings = embed(model_name) 
-        else:
-            pass
-    except NameError:
-        pass
+  
+    hf_embeddings = embed(model_name) 
+    docs, docsearch = embedding_store(temp_file_path,hf_embeddings)
+ 
 
-    # # Chunking with overlap
-    # text_splitter = RecursiveCharacterTextSplitter(
-    #     chunk_size = 1000,
-    #     chunk_overlap  = 100,
-    #     length_function = len,
-    #     separators=["\n\n", "\n", " ", ""]
-    # )
-
-    
-    try:
-        if temp_file_path:
-            docs, docsearch = embedding_store(temp_file_path)
-        else:
-            pass
-    except Exception:
-        pass
-    
     # Creating header
     col1,col2 = st.columns(2)
     with col1:
