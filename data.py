@@ -143,6 +143,7 @@ def create_temp_file(directory_path,fetched_files):
 
 
     for fetched_pdf in fetched_files:
+        st.write(fetched_pdf)
         file_ext = tuple("pdf")
         if fetched_pdf.endswith(file_ext):
             file_pth = os.path.join(directory_path, fetched_pdf)
