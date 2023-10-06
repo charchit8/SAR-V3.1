@@ -354,7 +354,7 @@ elif selected_option_case_type == "Fraud transaction dispute":
 
 
 
-    if st.session_state.case_num is not None:
+    if selected_option:
             
         col1_up, col2_up, col3_up, col4_up, col5_up = st.tabs(["Data", "Generate Insights","Summarization","Download Report", "Make a Decision"])
 
