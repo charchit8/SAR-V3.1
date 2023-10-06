@@ -2,9 +2,7 @@ from utils import *
 
 if "pdf_files" not in st.session_state:
     st.session_state.pdf_files = ''
-   
-tmp_dir_ = tempfile.mkdtemp()
-temp_file_path= []
+
 
 # To convert generated to pdf and save in temp direc.
 def create_pdf(text,file_name):
@@ -130,6 +128,8 @@ def data_display(directory_path,fetched_files):
 #creating temp directory to have all the files at one place for accessing
 
 def create_temp_file(directory_path,fetched_files):
+    tmp_dir_ = tempfile.mkdtemp()
+    temp_file_path= []
 
     for uploaded_file in st.session_state.pdf_files:
         file_ext = tuple("pdf")
