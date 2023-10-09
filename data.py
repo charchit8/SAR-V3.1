@@ -150,7 +150,7 @@ def pytesseract_code(directory_path,fetched_files):
     temp_file_path= []
 
         
-    # To convert generated to pdf and save in temp direc.
+    # To convert generated text to pdf and save in temp direc.
     def create_pdf(text,file_name):
         # Create a new FPDF object
         pdf = FPDF()
@@ -166,7 +166,6 @@ def pytesseract_code(directory_path,fetched_files):
         file_pth = os.path.join(tmp_dir_,file_name)
         temp_file_path.append(file_pth)
 
-    # Pytesseract code 
     #file path for uploaded files
     file_pth = []
     for uploaded_file in st.session_state.pdf_files:
