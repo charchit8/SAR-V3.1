@@ -276,7 +276,7 @@ def summarize_gpt():
 
         st.markdown("""<span style="font-size: 24px; ">Summarize key findings of the case.</span>""", unsafe_allow_html=True)
         st.write()
-        st.button("Summarize",on_click=set_clicked2,disabled=st.session_state.disabled):
+        st.button("Summarize",on_click=set_clicked2,disabled=st.session_state.disabled)
         
         if st.session_state.clicked2:
             st.session_state.disabled=False
