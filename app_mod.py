@@ -3,7 +3,7 @@
 
 from utils import *
 from data import data_display,create_temp_file
-from closed_source import generate_insights_gpt,summarize_gpt
+from closed_source import generate_insights_gpt,summarize_gpt,key_questions
 from report import summ_table_report,save_report1,save_report2,download_report
 from decision import decision_gpt,decision_llama,selection1,selection2
 
@@ -279,18 +279,21 @@ elif selected_option_case_type == "Fraud transaction dispute":
             temp_file_path =  create_temp_file(directory_path,fetched_files)
 
         with col2_up:  
-                   
-             tmp_table_gpt, sara_recommendation_gpt,generate_button = generate_insights_gpt(temp_file_path)
+            if st.session_state.llm == "Closed-Source":
+                key_questions()      
+                tmp_table_gpt, sara_recommendation_gpt,generate_button = generate_insights_gpt(temp_file_path)
 
         with col3_up:
-            tmp_summary_gpt = summarize_gpt()
+            if st.session_state.llm == "Closed-Source":
+                tmp_summary_gpt = summarize_gpt()
         
         with col4_up:
+            
             col_d1, col_d2 = st.tabs(["Download Report", "Download Case Package"])
 
             with col_d1:
                 if st.session_state.llm == "Closed-Source":
-                # Applying to download button -> download_button
+                    # Applying to download button -> download_button
                     st.markdown("""
                         <style>
                             .stButton download_button {
@@ -335,6 +338,7 @@ elif selected_option_case_type == "Fraud transaction dispute":
             temp_file_path =  create_temp_file(directory_path,fetched_files)   
 
         with col2_up:
+            key_questions()
             if st.session_state.llm == "Closed-Source":
                 tmp_table_gpt, sara_recommendation_gpt, generate_button = generate_insights_gpt(temp_file_path)
         

@@ -16,12 +16,8 @@ llm = ChatOpenAI(temperature=0.1)
 memory = ConversationSummaryBufferMemory(llm=llm, max_token_limit=500)
 conversation = ConversationChain(llm=llm, memory =memory,verbose=False)
 
-def generate_insights_gpt(temp_file_path):
-
-    hf_embeddings = embed(model_name) 
-    docs, docsearch = embedding_store(temp_file_path,hf_embeddings)   
-
-    # Creating header
+def key_questions():
+    # creating columns
     col1,col2 = st.columns(2)
     with col1:
         st.markdown("""<span style="font-size: 24px; ">Key Questions</span>""", unsafe_allow_html=True)
@@ -49,6 +45,12 @@ def generate_insights_gpt(temp_file_path):
             df_fixed["S.No."] = df_fixed.index
             df_fixed = df_fixed.loc[:,['S.No.','Questions']]
             st.markdown(df_fixed.style.hide(axis="index").to_html(), unsafe_allow_html=True)
+            
+
+def generate_insights_gpt(temp_file_path):
+
+    hf_embeddings = embed(model_name) 
+    docs, docsearch = embedding_store(temp_file_path,hf_embeddings)   
 
     with st.spinner('Wait for it...'):
         if 'clicked1' not in st.session_state:
