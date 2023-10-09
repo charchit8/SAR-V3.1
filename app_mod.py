@@ -356,11 +356,11 @@ elif selected_option_case_type == "Fraud transaction dispute":
         with col5_up:
             st.markdown("""<span style="font-size: 24px;color:#0000FF">Is SAR filing required?</span>""", unsafe_allow_html=True)
             if st.session_state.llm == "Closed-Source": 
-                decision_gpt(summ_gpt,temp_file_path)
-                selection1()
+                response = decision_gpt(summ_gpt,temp_file_path)
+                selection1(response)
             elif st.session_state.llm == "Open-Source": 
-                decision_llama(summ_llama,temp_file_path)
-                selection1()
+                response = decision_llama(summ_llama,temp_file_path)
+                selection1(response)
             
 
 ## Case where Suspect is not mentioned
@@ -447,11 +447,11 @@ elif selected_option_case_type == "Fraud transaction dispute":
         with col5_up:
             st.markdown("""<span style="font-size: 24px;color:#0000FF">Is SAR filing required?</span>""", unsafe_allow_html=True)     
             if st.session_state.llm == "Closed-Source": 
-                decision_gpt(summ_gpt,temp_file_path)
-                selection2()
+                response = decision_gpt(summ_gpt,temp_file_path)
+                selection2(response)
             elif st.session_state.llm == "Open-Source": 
-                decision_llama(summ_llama,temp_file_path)
-                selection2()
+                response = decision_llama(summ_llama,temp_file_path)
+                selection2(response)
             
             
         

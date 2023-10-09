@@ -41,6 +41,7 @@ def decision_gpt(summ_gpt,temp_file_path):
 
         st.warning('Please carefully review the recommendation and case details before the final submission',icon="⚠️")
 
+    return response_sara_gpt
             
 def decision_llama(summ_llama,temp_file_path):
     hf_embeddings = embed(model_name) 
@@ -68,43 +69,46 @@ def decision_llama(summ_llama,temp_file_path):
         st.markdown(f'''<em>{response_sara_llama}</em>''',unsafe_allow_html=True)
 
         st.warning('Please carefully review the recommendation and case details before the final submission',icon="⚠️")
+    
+    return response_sara_llama
+
+def selection1(response):  
+    if response: 
+        selected_rad = st.radio(":blue", ["Yes", "No", "Refer for review"], horizontal=True,disabled=st.session_state.disabled)
+        if selected_rad == "Refer for review":
+            email_regex = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
+            email_id = st.text_input("Enter email ID")
+            if email_id and not re.match(email_regex, email_id):
+                st.error("Please enter a valid email ID")
 
 
-def selection1():       
-    selected_rad = st.radio(":blue", ["Yes", "No", "Refer for review"], horizontal=True,disabled=st.session_state.disabled)
-    if selected_rad == "Refer for review":
-        email_regex = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
-        email_id = st.text_input("Enter email ID")
-        if email_id and not re.match(email_regex, email_id):
-            st.error("Please enter a valid email ID")
+        if st.button("Submit"):
+            if selected_rad in ("Yes"):
+                st.warning("Thanks for your review, your response has been submitted")
+            elif selected_rad in ("No"):
+                st.success("Thanks for your review, your response has been submitted")
+
+            else:
+                st.info("Thanks for your review, Case has been assigned to the next reviewer")
 
 
-    if st.button("Submit"):
-        if selected_rad in ("Yes"):
-            st.warning("Thanks for your review, your response has been submitted")
-        elif selected_rad in ("No"):
-            st.success("Thanks for your review, your response has been submitted")
-
-        else:
-            st.info("Thanks for your review, Case has been assigned to the next reviewer")
-
-
-def selection2():       
-    selected_rad = st.radio(":blue", ["No", "Yes", "Refer for review"], horizontal=True,disabled=st.session_state.disabled)
-    if selected_rad == "Refer for review":
-        email_regex = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
-        email_id = st.text_input("Enter email ID")
-        if email_id and not re.match(email_regex, email_id):
-            st.error("Please enter a valid email ID")
+def selection2(response):
+    if response:       
+        selected_rad = st.radio(":blue", ["No", "Yes", "Refer for review"], horizontal=True,disabled=st.session_state.disabled)
+        if selected_rad == "Refer for review":
+            email_regex = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
+            email_id = st.text_input("Enter email ID")
+            if email_id and not re.match(email_regex, email_id):
+                st.error("Please enter a valid email ID")
 
 
-    if st.button("Submit"):
-        if selected_rad in ("Yes"):
-            st.warning("Thanks for your review, your response has been submitted")
-        elif selected_rad in ("No"):
-            st.success("Thanks for your review, your response has been submitted")
-        else:
-            st.info("Thanks for your review, Case has been assigned to the next reviewer")
+        if st.button("Submit"):
+            if selected_rad in ("Yes"):
+                st.warning("Thanks for your review, your response has been submitted")
+            elif selected_rad in ("No"):
+                st.success("Thanks for your review, your response has been submitted")
+            else:
+                st.info("Thanks for your review, Case has been assigned to the next reviewer")
 
 
 
