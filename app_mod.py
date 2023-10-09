@@ -278,15 +278,15 @@ elif selected_option_case_type == "Fraud transaction dispute":
             fetched_files = read_pdf_files(directory_path)
             data_display(directory_path,fetched_files)
             # temp_file_path =  create_temp_file(directory_path,fetched_files)
-            with st.spinner("Running Pytesseract"):
-                temp_file_path = pytesseract_code(directory_path,fetched_files)
+            temp_file_path = pytesseract_code(directory_path,fetched_files)
 
         with col2_up:  
             key_questions()
-            if st.session_state.llm == "Closed-Source":    
-                tmp_table_gpt, sara_recommendation_gpt = generate_insights_gpt(temp_file_path)
-            elif st.session_state.llm == "Open-Source":
-                tmp_table_llama, sara_recommendation_llama = generate_insights_llama(temp_file_path)
+            with st.spinner("Running Pytesseract"):
+                if st.session_state.llm == "Closed-Source":    
+                    tmp_table_gpt, sara_recommendation_gpt = generate_insights_gpt(temp_file_path)
+                elif st.session_state.llm == "Open-Source":
+                    tmp_table_llama, sara_recommendation_llama = generate_insights_llama(temp_file_path)
 
         with col3_up:
             if st.session_state.llm == "Closed-Source":
