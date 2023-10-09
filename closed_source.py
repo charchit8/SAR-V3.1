@@ -111,7 +111,7 @@ def generate_insights(temp_file_path):
             st.session_state.clicked = True
             st.session_state.disabled = True
 
-        generate_button =  st.button("Generate Insights",on_click=set_clicked)
+        generate_button =  st.button("Generate Insights",on_click=set_clicked, disabled=st.session_state.disabled)
 
         if st.session_state.clicked:
                             
