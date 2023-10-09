@@ -316,7 +316,8 @@ elif selected_option_case_type == "Fraud transaction dispute":
                         disabled=st.session_state.disabled
                          )
             with col_d2:
-                if st.session_state.llm == "Closed-Source":           
+                if st.session_state.llm == "Closed-Source": 
+                    st.write("")            
                     download_report(doc,directory_path,fetched_files)
         
         with col5_up:
@@ -370,7 +371,8 @@ elif selected_option_case_type == "Fraud transaction dispute":
                         disabled=st.session_state.disabled
                          )
             with col_d2:
-                if st.session_state.llm == "Closed-Source":           
+                if st.session_state.llm == "Closed-Source":   
+                    st.write("")        
                     download_report(doc,directory_path,fetched_files)
         
         with col5_up:
