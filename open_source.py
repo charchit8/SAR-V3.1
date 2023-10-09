@@ -15,16 +15,16 @@ def generate_insights_llama(temp_file_path):
     docs, docsearch = embedding_store(temp_file_path,hf_embeddings) 
 
     with st.spinner('Wait for it...'):
-        if 'clicked3' not in st.session_state:
-            st.session_state.clicked3 = False
+        # if 'clicked3' not in st.session_state:
+        #     st.session_state.clicked3 = False
         
-        def set_clicked3():
-            st.session_state.clicked3 = True
-            st.session_state.disabled = True
+        # def set_clicked3():
+        #     st.session_state.clicked3 = True
+        #     st.session_state.disabled = True
 
-        generate_button_llama =  st.button("Generate Insights",on_click=set_clicked3, disabled=st.session_state.disabled)
+        generate_button_llama =  st.button("Generate Insights", disabled=st.session_state.disabled)
 
-        if st.session_state.clicked3:
+        if generate_button_llama:
             chat_history = {}
 
             query = "What is the victim's name?"
@@ -311,17 +311,15 @@ def generate_insights_llama(temp_file_path):
 
 def summarize_llama():
     with st.spinner('Summarization ...'):
-        if 'clicked4' not in st.session_state:
-            st.session_state.clicked4 = False
+        # if 'clicked4' not in st.session_state:
+        #     st.session_state.clicked4 = False
         
-        def set_clicked4():
-            st.session_state.clicked4 = True
-            st.session_state.disabled = True
+        # def set_clicked4():
+        #     st.session_state.clicked4 = True
+        #     st.session_state.disabled = True
 
         st.markdown("""<span style="font-size: 24px; ">Summarize key findings of the case.</span>""", unsafe_allow_html=True)
-        st.button("Summarize",on_click=set_clicked4,disabled=st.session_state.disabled)
-
-        if st.session_state.clicked4:
+        if st.button("Summarize",disabled=st.session_state.disabled):
             st.session_state.disabled=False
             template = """Write a detailed summary of the text provided.
             ```{text}```

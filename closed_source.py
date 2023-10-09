@@ -53,16 +53,16 @@ def generate_insights_gpt(temp_file_path):
     docs, docsearch = embedding_store(temp_file_path,hf_embeddings)   
 
     with st.spinner('Wait for it...'):
-        if 'clicked1' not in st.session_state:
-            st.session_state.clicked1 = False
+        # if 'clicked1' not in st.session_state:
+        #     st.session_state.clicked1 = False
         
-        def set_clicked1():
-            st.session_state.clicked1 = True
-            st.session_state.disabled = True
+        # def set_clicked1():
+        #     st.session_state.clicked1 = True
+        #     st.session_state.disabled = True
 
-        generate_button_gpt =  st.button("Generate Insights",on_click=set_clicked1, disabled=st.session_state.disabled)
+        generate_button_gpt =  st.button("Generate Insights", disabled=st.session_state.disabled)
 
-        if st.session_state.clicked1:
+        if generate_button_gpt:
                             
             queries ="Please provide the following information regarding the possible fraud case: What is the name of the customer name,\
             has any suspect been reported, list the merchant name, how was the bank notified, when was the bank notified, what is the fraud type,\
@@ -267,18 +267,16 @@ def generate_insights_gpt(temp_file_path):
 
 def summarize_gpt():
     with st.spinner('Summarization ...'):
-        if 'clicked2' not in st.session_state:
-            st.session_state.clicked2 = False
+        # if 'clicked2' not in st.session_state:
+        #     st.session_state.clicked2 = False
         
-        def set_clicked2():
-            st.session_state.clicked2 = True
-            st.session_state.disabled = True
+        # def set_clicked2():
+        #     st.session_state.clicked2 = True
+        #     st.session_state.disabled = True
 
         st.markdown("""<span style="font-size: 24px; ">Summarize key findings of the case.</span>""", unsafe_allow_html=True)
         st.write()
-        st.button("Summarize",on_click=set_clicked2,disabled=st.session_state.disabled)
-        
-        if st.session_state.clicked2:
+        if st.button("Summarize",disabled=st.session_state.disabled):
             st.session_state.disabled=False
             summ_dict_gpt = st.session_state.tmp_table_gpt.set_index('Question')['Answer'].to_dict()
             # chat_history = resp_dict_obj['Summary']
