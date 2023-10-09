@@ -104,9 +104,18 @@ def generate_insights(temp_file_path):
             st.markdown(df_fixed.style.hide(axis="index").to_html(), unsafe_allow_html=True)
 
     with st.spinner('Wait for it...'):
-          generate_button =  st.button("Generate Insights",disabled=st.session_state.disabled)
+        if 'clicked' not in st.session_state:
+            st.session_state.clicked = False
+        
+        def set_clicked():
+            st.session_state.clicked = True
+            st.session_state.disabled = True
 
-          if generate_button:
+        generate_button =  st.button("Generate Insights",on_click=set_clicked, disabled=st.session_state.disabled)
+
+        if generate_button:
+
+            st.session_state.disabled = False
                             
             queries ="Please provide the following information regarding the possible fraud case: What is the name of the customer name,\
             has any suspect been reported, list the merchant name, how was the bank notified, when was the bank notified, what is the fraud type,\
