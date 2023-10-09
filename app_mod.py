@@ -3,14 +3,10 @@
 
 from utils import *
 from data import data_display,create_temp_file
-from closed_source import generate_insights,summarize,run_doc
+from closed_source import generate_insights_gpt,summarize_gpt
 from report import summ_table_report,save_report1,save_report2,download_report
 from decision import decision_gpt,decision_llama,selection1,selection2
 
-
-# Setting Config for Llama-2
-login(token=st.secrets["HUGGINGFACEHUB_API_TOKEN"])
-os.environ["HUGGINGFACEHUB_API_TOKEN"] = st.secrets["HUGGINGFACEHUB_API_TOKEN"]
 
 
 # Setting globals
@@ -284,10 +280,10 @@ elif selected_option_case_type == "Fraud transaction dispute":
 
         with col2_up:  
                    
-             tmp_table_gpt, sara_recommendation_gpt,generate_button = generate_insights(temp_file_path)
+             tmp_table_gpt, sara_recommendation_gpt,generate_button = generate_insights_gpt(temp_file_path)
 
         with col3_up:
-            tmp_summary_gpt = summarize()
+            tmp_summary_gpt = summarize_gpt()
         
         with col4_up:
             col_d1, col_d2 = st.tabs(["Download Report", "Download Case Package"])
@@ -340,11 +336,11 @@ elif selected_option_case_type == "Fraud transaction dispute":
 
         with col2_up:
             if st.session_state.llm == "Closed-Source":
-                tmp_table_gpt, sara_recommendation_gpt, generate_button = generate_insights(temp_file_path)
+                tmp_table_gpt, sara_recommendation_gpt, generate_button = generate_insights_gpt(temp_file_path)
         
         with col3_up:
             if st.session_state.llm == "Closed-Source":
-                tmp_summary_gpt = summarize()
+                tmp_summary_gpt = summarize_gpt()
 
         with col4_up:
             col_d1, col_d2 = st.tabs(["Download Report", "Download Case Package"])
