@@ -315,7 +315,7 @@ elif selected_option_case_type == "Fraud transaction dispute":
                         mime="docx",
                         disabled=st.session_state.disabled
                          )
-            with col_d1:
+            with col_d2:
                 if st.session_state.llm == "Closed-Source":           
                     download_report(doc,directory_path,fetched_files)
         
@@ -369,7 +369,7 @@ elif selected_option_case_type == "Fraud transaction dispute":
                         mime="docx",
                         disabled=st.session_state.disabled
                          )
-            with col_d1:
+            with col_d2:
                 if st.session_state.llm == "Closed-Source":           
                     download_report(doc,directory_path,fetched_files)
         
