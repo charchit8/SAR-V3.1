@@ -22,7 +22,7 @@ def generate_insights_llama(temp_file_path):
             st.session_state.clicked2 = True
             st.session_state.disabled = True
 
-        generate_button =  st.button("Generate Insights",on_click=set_clicked2, disabled=st.session_state.disabled)
+        generate_button_llama =  st.button("Generate Insights",on_click=set_clicked2, disabled=st.session_state.disabled)
 
         if st.session_state.clicked2:
             chat_history = {}

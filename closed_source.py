@@ -60,7 +60,7 @@ def generate_insights_gpt(temp_file_path):
             st.session_state.clicked1 = True
             st.session_state.disabled = True
 
-        generate_button =  st.button("Generate Insights",on_click=set_clicked1, disabled=st.session_state.disabled)
+        generate_button_gpt =  st.button("Generate Insights",on_click=set_clicked1, disabled=st.session_state.disabled)
 
         if st.session_state.clicked1:
                             
