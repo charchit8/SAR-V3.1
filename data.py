@@ -143,7 +143,7 @@ def create_temp_file(directory_path,fetched_files):
 
 
 
-
+#This is pytesseract code, which converts image/scanned pdf to text
 def pytesseract_code(directory_path,fetched_files):
 
     tmp_dir_ = tempfile.mkdtemp()
@@ -166,7 +166,7 @@ def pytesseract_code(directory_path,fetched_files):
         file_pth = os.path.join(tmp_dir_,file_name)
         temp_file_path.append(file_pth)
 
-    #file path for uploaded files
+    #file path for uploaded files, getting files at one direc
     file_pth = []
     for uploaded_file in st.session_state.pdf_files:
         file_ext1 = tuple("pdf")
@@ -184,7 +184,8 @@ def pytesseract_code(directory_path,fetched_files):
 
 
 
-    # For uploaded files
+    # For uploaded files, reading files from the created direc and using pytesseract to convert
+    # This is not working for images, but only for scanned pdfs
     for file in file_pth:
         st.write(file.name)
         file_ext1 = tuple("pdf")
@@ -204,7 +205,7 @@ def pytesseract_code(directory_path,fetched_files):
             pass          
     
     
-    #for fetched files
+    #for fetched files, This is working for scanned pdf as well as images
     for fetched_pdf in fetched_files:
         file_ext1 = tuple("pdf")
         file_ext2 = tuple(["png","jpeg"])
