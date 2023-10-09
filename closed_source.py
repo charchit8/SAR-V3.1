@@ -69,7 +69,10 @@ def run_doc(temp_file_path):
     docs, docsearch = embedding_store(temp_file_path,hf_embeddings)
 
 
-def generate_insights():
+def generate_insights(temp_file_path):
+
+    hf_embeddings = embed(model_name) 
+    docs, docsearch = embedding_store(temp_file_path,hf_embeddings)   
 
     # Creating header
     col1,col2 = st.columns(2)
