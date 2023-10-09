@@ -356,14 +356,9 @@ elif selected_option_case_type == "Fraud transaction dispute":
         with col5_up:
             st.markdown("""<span style="font-size: 24px;color:#0000FF">Is SAR filing required?</span>""", unsafe_allow_html=True)
             if st.session_state.llm == "Closed-Source": 
-                response_sara_gpt = decision_gpt(generate_button_gpt,temp_file_path)
-                st.markdown(f'''<em>{response_sara_gpt}</em>''',unsafe_allow_html=True)
-                st.warning('Please carefully review the recommendation and case details before the final submission',icon="⚠️")
+                decision_gpt(generate_button_gpt,temp_file_path)
             elif st.session_state.llm == "Open-Source": 
-                response_sara_llama = decision_gpt(generate_button_llama,temp_file_path)
-                st.markdown(f'''<em>{response_sara_llama}</em>''',unsafe_allow_html=True)
-                st.warning('Please carefully review the recommendation and case details before the final submission',icon="⚠️")
-
+                decision_gpt(generate_button_llama,temp_file_path)
             selection1()
 
 ## Case where Suspect is not mentioned
@@ -379,14 +374,14 @@ elif selected_option_case_type == "Fraud transaction dispute":
         with col2_up:
             key_questions()
             if st.session_state.llm == "Closed-Source":
-                tmp_table_gpt, sara_recommendation_gpt, generate_button_gpt = generate_insights_gpt(temp_file_path)
+                tmp_table_gpt, sara_recommendation_gpt = generate_insights_gpt(temp_file_path)
             elif st.session_state.llm == "Open-Source":
-                tmp_table_llama, sara_recommendation_llama, generate_button_llama = generate_insights_gpt(temp_file_path)       
+                tmp_table_llama, sara_recommendation_llama = generate_insights_gpt(temp_file_path)       
         with col3_up:
             if st.session_state.llm == "Closed-Source":
-                tmp_summary_gpt = summarize_gpt()
+                tmp_summary_gpt, summ_gpt = summarize_gpt()
             elif st.session_state.llm == "Open-Source":
-                tmp_summary_llama = summarize_llama()
+                tmp_summary_llama, summ_llama = summarize_llama()
 
         with col4_up:
             col_d1, col_d2 = st.tabs(["Download Report", "Download Case Package"])
@@ -450,9 +445,9 @@ elif selected_option_case_type == "Fraud transaction dispute":
         with col5_up:
             st.markdown("""<span style="font-size: 24px;color:#0000FF">Is SAR filing required?</span>""", unsafe_allow_html=True)     
             if st.session_state.llm == "Closed-Source": 
-                decision_gpt(generate_button_gpt,temp_file_path)
+                decision_gpt(summ_gpt,temp_file_path)
             elif st.session_state.llm == "Open-Source": 
-                decision_gpt(generate_button_llama,temp_file_path)
+                decision_gpt(summ_llama,temp_file_path)
             
             selection2()
         

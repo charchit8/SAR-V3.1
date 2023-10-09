@@ -60,9 +60,7 @@ def generate_insights_gpt(temp_file_path):
         #     st.session_state.clicked1 = True
         #     st.session_state.disabled = True
 
-        generate_button_gpt =  st.button("Generate Insights", disabled=st.session_state.disabled)
-
-        if generate_button_gpt:
+        if st.button("Generate Insights", disabled=st.session_state.disabled):
                             
             queries ="Please provide the following information regarding the possible fraud case: What is the name of the customer name,\
             has any suspect been reported, list the merchant name, how was the bank notified, when was the bank notified, what is the fraud type,\
@@ -261,7 +259,7 @@ def generate_insights_gpt(temp_file_path):
             st.session_state["tmp_table_gpt"] = pd.concat([st.session_state.tmp_table_gpt, df], ignore_index=True)
             st.session_state.tmp_table_gpt.drop_duplicates(subset=['Question'])
 
-    return st.session_state["tmp_table_gpt"], st.session_state["sara_recommendation_gpt"], generate_button_gpt
+    return st.session_state["tmp_table_gpt"], st.session_state["sara_recommendation_gpt"]
 
 
 
@@ -276,7 +274,9 @@ def summarize_gpt():
 
         st.markdown("""<span style="font-size: 24px; ">Summarize key findings of the case.</span>""", unsafe_allow_html=True)
         st.write()
-        if st.button("Summarize",disabled=st.session_state.disabled):
+        summ_gpt = st.button("Summarize",disabled=st.session_state.disabled)
+
+        if summ_gpt:
             st.session_state.disabled=False
             summ_dict_gpt = st.session_state.tmp_table_gpt.set_index('Question')['Answer'].to_dict()
             # chat_history = resp_dict_obj['Summary']
@@ -290,7 +290,7 @@ def summarize_gpt():
             st.session_state["tmp_summary_gpt"] = conversation.predict(input="Provide a detailed summary of the text provided by reframing the sentences. Provide the summary in a single paragraph. Please don't include words like these: 'chat summary', 'includes information' in my final summary.")
             st.write(st.session_state["tmp_summary_gpt"])
     
-    return st.session_state["tmp_summary_gpt"]
+    return st.session_state["tmp_summary_gpt"], summ_gpt
 
 
 

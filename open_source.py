@@ -22,9 +22,8 @@ def generate_insights_llama(temp_file_path):
         #     st.session_state.clicked3 = True
         #     st.session_state.disabled = True
 
-        generate_button_llama =  st.button("Generate Insights", disabled=st.session_state.disabled)
+        if st.button("Generate Insights", disabled=st.session_state.disabled):
 
-        if generate_button_llama:
             chat_history = {}
 
             query = "What is the victim's name?"
@@ -306,7 +305,7 @@ def generate_insights_llama(temp_file_path):
             st.session_state.tmp_table_llama.drop_duplicates(subset=['Question'])
             st.write(st.session_state.tmp_table_llama)
     
-    return st.session_state["tmp_table_llama"], st.session_state["sara_recommendation_llama"], generate_button_llama
+    return st.session_state["tmp_table_llama"], st.session_state["sara_recommendation_llama"]
 
 
 def summarize_llama():
@@ -319,7 +318,8 @@ def summarize_llama():
         #     st.session_state.disabled = True
 
         st.markdown("""<span style="font-size: 24px; ">Summarize key findings of the case.</span>""", unsafe_allow_html=True)
-        if st.button("Summarize",disabled=st.session_state.disabled):
+        summ_llama = st.button("Summarize",disabled=st.session_state.disabled)
+        if summ_llama:
             st.session_state.disabled=False
             template = """Write a detailed summary of the text provided.
             ```{text}```
@@ -334,4 +334,4 @@ def summarize_llama():
             st.session_state["tmp_summary_llama"] = llm_chain_llama.run(text)
             st.write(st.session_state["tmp_summary_llama"])
         
-    return st.session_state["tmp_summary_llama"]  
+    return st.session_state["tmp_summary_llama"],summ_llama
