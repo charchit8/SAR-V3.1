@@ -6,14 +6,6 @@ model_name = "thenlper/gte-small"
 # model_name = "sentence-transformers/all-MiniLM-L6-v2"
 # model_name = "hkunlp/instructor-large"
 
-if "sara_recommendation_gpt1" not in st.session_state:
-    st.session_state["sara_recommendation_gpt1"] = ''
-
-
-if "sara_recommendation_llama1" not in st.session_state:
-    st.session_state["sara_recommendation_llama1"] = ''
-
-
 
 def decision_gpt(summ_gpt,temp_file_path):
     hf_embeddings = embed(model_name) 
@@ -44,15 +36,11 @@ def decision_gpt(summ_gpt,temp_file_path):
         response_sara_gpt = response_sara_gpt.replace("5,000", "5,000 USD")
         response_sara_gpt = response_sara_gpt.replace("5,600", "5,600 USD")
 
-
-
-        st.session_state["sara_recommendation_gpt1"] = response_sara_gpt
-
-        st.markdown(f'''<em>{st.session_state["sara_recommendation_gpt1"]}</em>''',unsafe_allow_html=True)
+        st.markdown(f'''<em>{response_sara_gpt}</em>''',unsafe_allow_html=True)
 
         st.warning('Please carefully review the recommendation and case details before the final submission',icon="⚠️")
 
-    return st.session_state["sara_recommendation_gpt1"] 
+   
             
 def decision_llama(summ_llama,temp_file_path):
     hf_embeddings = embed(model_name) 
@@ -77,16 +65,13 @@ def decision_llama(summ_llama,temp_file_path):
         response_sara_llama = response_sara_llama.replace("5,000", "5,000 USD")
         response_sara_llama = response_sara_llama.replace("5,600", "5,600 USD")
         
-        st.session_state["sara_recommendation_llama1"] = response_sara_llama
  
-        st.markdown(f'''<em>{st.session_state["sara_recommendation_llama1"]}</em>''',unsafe_allow_html=True)
+        st.markdown(f'''<em>{response_sara_llama}</em>''',unsafe_allow_html=True)
 
         st.warning('Please carefully review the recommendation and case details before the final submission',icon="⚠️")
-    
-    return st.session_state["sara_recommendation_llama1"]
 
-def selection1(response):  
-    if response: 
+def selection1(summ):  
+    if summ: 
         selected_rad = st.radio(":blue", ["Yes", "No", "Refer for review"], horizontal=True,disabled=st.session_state.disabled)
         if selected_rad == "Refer for review":
             email_regex = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
@@ -105,8 +90,8 @@ def selection1(response):
                 st.info("Thanks for your review, Case has been assigned to the next reviewer")
 
 
-def selection2(response):
-    if response:       
+def selection2(summ):
+    if summ:       
         selected_rad = st.radio(":blue", ["No", "Yes", "Refer for review"], horizontal=True,disabled=st.session_state.disabled)
         if selected_rad == "Refer for review":
             email_regex = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
