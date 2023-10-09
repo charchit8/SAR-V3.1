@@ -324,12 +324,13 @@ elif selected_option_case_type == "Fraud transaction dispute":
             data_display(directory_path,fetched_files)
             temp_file_path =  create_temp_file(directory_path,fetched_files)   
         
-        with col2_up:   
-          
-            generate_insights(temp_file_path)
+        with col2_up:
+            if st.session_state.llm == "Closed-Source":
+                generate_insights(temp_file_path)
         
         with col3_up:
-            summarize()
+            if st.session_state.llm == "Closed-Source":
+                summarize()
 
     
 
