@@ -41,6 +41,21 @@ from pdf2image import convert_from_path
 from fpdf import FPDF
 import base64
 
+@st.cache_data
+def usellm(prompt):
+    """
+    Getting GPT-3.5 Model into action
+    """
+    service = UseLLM(service_url="https://usellm.org/api/llm")
+    messages = [
+      Message(role="system", content="You are a fraud analyst, who is an expert at finding out suspicious activities"),
+      Message(role="user", content=f"{prompt}"),
+      ]
+    options = Options(messages=messages)
+    response = service.chat(options)
+    return response.content
+
+
 
 @st.cache_data
 def show_pdf(file_path):
