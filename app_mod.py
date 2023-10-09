@@ -28,6 +28,10 @@ if "sara_recommendation_gpt" not in st.session_state:
     st.session_state["sara_recommendation_gpt"] = ''
 if "sara_recommendation_llama" not in st.session_state:
     st.session_state["sara_recommendation_llama"] = ''
+if "sara_recommendation_gpt1" not in st.session_state:
+    st.session_state["sara_recommendation_gpt1"] = ''
+if "sara_recommendation_llama1" not in st.session_state:
+    st.session_state["sara_recommendation_llama1"] = ''
 if "case_num" not in st.session_state:
     st.session_state.case_num = ''
 if "fin_opt" not in st.session_state:
