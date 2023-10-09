@@ -1,5 +1,6 @@
 from utils import *
 
+
 # Setting Env
 if st.secrets["OPENAI_API_KEY"] is not None:
     os.environ["OPENAI_API_KEY"] = st.secrets["OPENAI_API_KEY"]
@@ -123,9 +124,8 @@ def generate_insights_gpt(temp_file_path):
                 If The transaction/disputed amount > 5,000 USD value threshold, then check below points to make sure if it is a suspicious activity or not: \n\n\
                 1. Details mentioned in Invoice doesnot matches the customer (Customer details can be identified from cardholder information).\n\n\
                 2. A potential suspect is identified? \n\n\
-                Even if transaction/disputed amount > 5,000 USD but if no suspect is identified, then this cannot be considered as a suspicious activity. \n\n\
+                Even if transaction/disputed amount > 5,000 USD but no suspect is identified, then this cannot be considered as a suspicious activity. \n\n\
                 If transaction/disputed amount is < 5000 USD threshold and no suspect is identified, write your response as - There is no indication of suspicious activity.\n\n\
-                Based the above findings, identify if this can be consider as Suspicious Activity or not.\n\n\
                 Context: {contexts}\n\
                 Response (Give me a concise response in three-four pointers.)"
             response1 = usellm(prompt) 
