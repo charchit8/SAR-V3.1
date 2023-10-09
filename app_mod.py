@@ -307,6 +307,7 @@ elif selected_option_case_type == "Fraud transaction dispute":
                     tmp_summary, tmp_table = summ_table_report(tmp_table_gpt,tmp_summary_gpt)
                     doc = save_report1(tmp_table,tmp_summary,sara_recommendation_gpt)
                     bio = io.BytesIO()
+                    doc.save(bio)
                     if doc:
                         st.download_button(
                         label="Download Report",
@@ -363,6 +364,7 @@ elif selected_option_case_type == "Fraud transaction dispute":
                     tmp_summary, tmp_table = summ_table_report(tmp_table_gpt,tmp_summary_gpt)
                     doc = save_report1(tmp_table,tmp_summary,sara_recommendation_gpt)
                     bio = io.BytesIO()
+                    doc.save(bio)
                     if doc:
                         st.download_button(
                         label="Download Report",
