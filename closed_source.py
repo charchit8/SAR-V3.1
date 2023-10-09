@@ -122,9 +122,9 @@ def generate_insights_gpt(temp_file_path):
             contexts = docsearch.similarity_search(query, k=5) 
             prompt = f" You are professional Fraud Analyst. Find answer to the questions as truthfully and in as detailed as possible as per given context only,\n\n\
                 If The transaction/disputed amount > 5,000 USD value threshold, then check below points to make sure if it is a suspicious activity or not: \n\n\
-                1. Details mentioned in Invoice doesnot matches the customer,Invoice is billed to someone other than the customer(Customer details can be identified from cardholder information).\n\n\
+                1. Details mentioned in Invoice doesnot matches the customer,check if invoice is billed customer or not (Customer details can be identified from cardholder information).\n\n\
                 2. A potential suspect is identified? \n\n\
-                Even if transaction/disputed amount > 5,000 USD but no suspect is identified, then this can not be considered as a suspicious activity. \n\n\
+                Even if transaction/disputed amount > 5,000 USD but other criteria does not met, then this can not be considered as a suspicious activity. \n\n\
                 If transaction/disputed amount is < 5000 USD threshold and no suspect is identified, write your response as - There is no indication of suspicious activity.\n\n\
                 Based on above points identify if this is a case of suspicious activity or not? \n\n\
                 Context: {contexts}\n\
