@@ -104,11 +104,11 @@ def generate_insights(temp_file_path):
             st.markdown(df_fixed.style.hide(axis="index").to_html(), unsafe_allow_html=True)
 
     with st.spinner('Wait for it...'):
-        if 'clicked' not in st.session_state:
-            st.session_state.clicked = False
+        if 'clicked1' not in st.session_state:
+            st.session_state.clicked1 = False
         
         def set_clicked1():
-            st.session_state.clicked = True
+            st.session_state.clicked1 = True
             st.session_state.disabled = True
 
         generate_button =  st.button("Generate Insights",on_click=set_clicked1, disabled=st.session_state.disabled)
