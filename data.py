@@ -146,90 +146,92 @@ def create_temp_file(directory_path,fetched_files):
 #This is pytesseract code, which converts image/scanned pdf to text
 def pytesseract_code(directory_path,fetched_files):
 
-    tmp_dir_ = tempfile.mkdtemp()
-    temp_file_path= []
+    with st.spinner("Running Pytesseract"):
 
-        
-    # To convert generated text to pdf and save in temp direc.
-    def create_pdf(text,file_name):
-        # Create a new FPDF object
-        pdf = FPDF()
-        # Add a new page to the PDF
-        pdf.add_page()
-        # Set the font and font size
-        pdf.set_font('Arial', size=12)
-        pdf.cell(200, 10, txt=text.encode('utf-8').decode('latin-1'), ln = 1, align = 'C')
-        # Write the text to the PDF
-        # pdf.write(text.encode('utf-8').decode('latin-1'), ln = 1, align = 'C')
-        # Save the PDF
-        pdf.output(os.path.join(tmp_dir_,file_name))
-        file_pth = os.path.join(tmp_dir_,file_name)
-        temp_file_path.append(file_pth)
+        tmp_dir_ = tempfile.mkdtemp()
+        temp_file_path= []
 
-    #file path for uploaded files, getting files at one direc
-    file_pth = []
-    for uploaded_file in st.session_state.pdf_files:
-        file_ext1 = tuple("pdf")
-        file_ext2 = tuple(["png","jpeg"])
-        if uploaded_file.name.endswith(file_ext1):
-            file_pth_= os.path.join(tmp_dir_, uploaded_file.name)
-            with open(file_pth_, "wb") as file_opn:
-                file_opn.write(uploaded_file.getbuffer())
-                file_pth.append(file_opn)
-        elif uploaded_file.name.endswith(file_ext2):
-            file_pth_= os.path.join(tmp_dir_, uploaded_file.name)
-            file_pth.append(file_pth_)
-        else:
-            pass
+            
+        # To convert generated text to pdf and save in temp direc.
+        def create_pdf(text,file_name):
+            # Create a new FPDF object
+            pdf = FPDF()
+            # Add a new page to the PDF
+            pdf.add_page()
+            # Set the font and font size
+            pdf.set_font('Arial', size=12)
+            pdf.cell(200, 10, txt=text.encode('utf-8').decode('latin-1'), ln = 1, align = 'C')
+            # Write the text to the PDF
+            # pdf.write(text.encode('utf-8').decode('latin-1'), ln = 1, align = 'C')
+            # Save the PDF
+            pdf.output(os.path.join(tmp_dir_,file_name))
+            file_pth = os.path.join(tmp_dir_,file_name)
+            temp_file_path.append(file_pth)
 
-
-
-    # For uploaded files, reading files from the created direc and using pytesseract to convert
-    # This is not working for images, but only for scanned pdfs
-    for file in file_pth:
-        st.write(file.name)
-        file_ext1 = tuple("pdf")
-        file_ext2 = tuple(["png","jpeg"])
-        if file.endswith(file_ext1):
-            if is_searchable_pdf(file)==False:
-                text = convert_scanned_pdf_to_searchable_pdf(file)
-                create_pdf(text,'uploaded_file.pdf')
+        #file path for uploaded files, getting files at one direc
+        file_pth = []
+        for uploaded_file in st.session_state.pdf_files:
+            file_ext1 = tuple("pdf")
+            file_ext2 = tuple(["png","jpeg"])
+            if uploaded_file.name.endswith(file_ext1):
+                file_pth_= os.path.join(tmp_dir_, uploaded_file.name)
+                with open(file_pth_, "wb") as file_opn:
+                    file_opn.write(uploaded_file.getbuffer())
+                    file_pth.append(file_opn)
+            elif uploaded_file.name.endswith(file_ext2):
+                file_pth_= os.path.join(tmp_dir_, uploaded_file.name)
+                file_pth.append(file_pth_)
             else:
-                with open(file, "wb") as file_opn:
-                    file_opn.write(file.getbuffer())
-                    temp_file_path.append(file_opn)           
-        elif file.endswith(file_ext2):
-            text = convert_image_to_searchable_pdf(file)
-            create_pdf(text,'uploaded_file.pdf') 
-        else:
-            pass          
-    
-    
-    #for fetched files, This is working for scanned pdf as well as images
-    for fetched_pdf in fetched_files:
-        file_ext1 = tuple("pdf")
-        file_ext2 = tuple(["png","jpeg"])
-        if fetched_pdf.endswith(file_ext1):
-            selected_file_path = os.path.join(directory_path, fetched_pdf)
-            if is_searchable_pdf(selected_file_path)==False:
-                text = convert_scanned_pdf_to_searchable_pdf(selected_file_path)
+                pass
+
+
+
+        # For uploaded files, reading files from the created direc and using pytesseract to convert
+        # This is not working for images, but only for scanned pdfs
+        for file in file_pth:
+            st.write(file.name)
+            file_ext1 = tuple("pdf")
+            file_ext2 = tuple(["png","jpeg"])
+            if file.endswith(file_ext1):
+                if is_searchable_pdf(file)==False:
+                    text = convert_scanned_pdf_to_searchable_pdf(file)
+                    create_pdf(text,'uploaded_file.pdf')
+                else:
+                    with open(file, "wb") as file_opn:
+                        file_opn.write(file.getbuffer())
+                        temp_file_path.append(file_opn)           
+            elif file.endswith(file_ext2):
+                text = convert_image_to_searchable_pdf(file)
+                create_pdf(text,'uploaded_file.pdf') 
+            else:
+                pass          
+        
+        
+        #for fetched files, This is working for scanned pdf as well as images
+        for fetched_pdf in fetched_files:
+            file_ext1 = tuple("pdf")
+            file_ext2 = tuple(["png","jpeg"])
+            if fetched_pdf.endswith(file_ext1):
+                selected_file_path = os.path.join(directory_path, fetched_pdf)
+                if is_searchable_pdf(selected_file_path)==False:
+                    text = convert_scanned_pdf_to_searchable_pdf(selected_file_path)
+                    file_name = os.path.basename(selected_file_path)
+                    split_name = file_name.split('.')
+                    create_pdf(text,f'{split_name[0]}.pdf')
+                else:
+                    file_pth = os.path.join(directory_path, fetched_pdf)
+                    temp_file_path.append(file_pth)
+            elif fetched_pdf.endswith(file_ext2):
+                selected_file_path = os.path.join(directory_path, fetched_pdf)
+                text = convert_image_to_searchable_pdf(selected_file_path)
                 file_name = os.path.basename(selected_file_path)
                 split_name = file_name.split('.')
                 create_pdf(text,f'{split_name[0]}.pdf')
+
             else:
-                file_pth = os.path.join(directory_path, fetched_pdf)
-                temp_file_path.append(file_pth)
-        elif fetched_pdf.endswith(file_ext2):
-            selected_file_path = os.path.join(directory_path, fetched_pdf)
-            text = convert_image_to_searchable_pdf(selected_file_path)
-            file_name = os.path.basename(selected_file_path)
-            split_name = file_name.split('.')
-            create_pdf(text,f'{split_name[0]}.pdf')
+                pass
 
-        else:
-            pass
-
-    return temp_file_path
+        return temp_file_path
     
 
     
