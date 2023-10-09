@@ -4,22 +4,6 @@ if "pdf_files" not in st.session_state:
     st.session_state.pdf_files = ''
 
 
-# To convert generated to pdf and save in temp direc.
-def create_pdf(text,file_name,tmp_dir_,temp_file_path):
-    # Create a new FPDF object
-    pdf = FPDF()
-    # Add a new page to the PDF
-    pdf.add_page()
-    # Set the font and font size
-    pdf.set_font('Arial', size=12)
-    pdf.cell(200, 10, txt=text.encode('utf-8').decode('latin-1'), ln = 1, align = 'C')
-    # Write the text to the PDF
-    # pdf.write(text.encode('utf-8').decode('latin-1'), ln = 1, align = 'C')
-    # Save the PDF
-    pdf.output(os.path.join(tmp_dir_,file_name))
-    file_pth = os.path.join(tmp_dir_,file_name)
-    temp_file_path.append(file_pth)
-
 
 def data_display(directory_path,fetched_files):
     
@@ -164,6 +148,23 @@ def pytesseract_code(directory_path,fetched_files):
 
     tmp_dir_ = tempfile.mkdtemp()
     temp_file_path= []
+
+        
+    # To convert generated to pdf and save in temp direc.
+    def create_pdf(text,file_name):
+        # Create a new FPDF object
+        pdf = FPDF()
+        # Add a new page to the PDF
+        pdf.add_page()
+        # Set the font and font size
+        pdf.set_font('Arial', size=12)
+        pdf.cell(200, 10, txt=text.encode('utf-8').decode('latin-1'), ln = 1, align = 'C')
+        # Write the text to the PDF
+        # pdf.write(text.encode('utf-8').decode('latin-1'), ln = 1, align = 'C')
+        # Save the PDF
+        pdf.output(os.path.join(tmp_dir_,file_name))
+        file_pth = os.path.join(tmp_dir_,file_name)
+        temp_file_path.append(file_pth)
 
     # Pytesseract code 
     #file path for uploaded files
