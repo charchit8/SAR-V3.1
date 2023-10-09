@@ -3,7 +3,7 @@
 
 from utils import *
 from data import data_display,create_temp_file
-from closed_source import generate_insights
+from closed_source import generate_insights,summarize
 
 
 # Setting Config for Llama-2
@@ -310,6 +310,9 @@ elif selected_option_case_type == "Fraud transaction dispute":
         with col2_up:  
                    
             generate_insights(temp_file_path)
+
+        with col3_up:
+            summarize()
         
 
     if st.session_state.case_num == "SAR-2023-13579":
@@ -325,6 +328,8 @@ elif selected_option_case_type == "Fraud transaction dispute":
           
             generate_insights(temp_file_path)
         
+        with col3_up:
+            summarize()
 
     
 
@@ -339,7 +344,6 @@ elif selected_option_case_type == "Insider Trading":
 
       #Add code for IT here
 
-if st.button('reset_session'):
-    reset_session_state()
+
 
 

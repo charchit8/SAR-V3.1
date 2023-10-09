@@ -306,3 +306,26 @@ def generate_insights(temp_file_path):
                 st.session_state.tmp_table_gpt.drop_duplicates(subset=['Question'])
 
     
+
+    def summarize():
+        with st.spinner('Summarization ...'):
+            st.markdown("""<span style="font-size: 24px; ">Summarize key findings of the case.</span>""", unsafe_allow_html=True)
+            st.write()
+            if st.button("Summarize",disabled=st.session_state.disabled):
+                if st.session_state.llm == "Closed-Source":
+                    st.session_state.disabled=False
+                    summ_dict_gpt = st.session_state.tmp_table_gpt.set_index('Question')['Answer'].to_dict()
+                    # chat_history = resp_dict_obj['Summary']
+                    memory = ConversationSummaryBufferMemory(llm=llm, max_token_limit=300)
+                    memory.save_context({"input": "This is the entire summary"}, 
+                                    {"output": f"{summ_dict_gpt}"})
+                    conversation = ConversationChain(
+                    llm=llm, 
+                    memory = memory,
+                    verbose=True)
+                    st.session_state["tmp_summary_gpt"] = conversation.predict(input="Provide a detailed summary of the text provided by reframing the sentences. Provide the summary in a single paragraph. Please don't include words like these: 'chat summary', 'includes information' in my final summary.")
+                    # showing the text in a textbox
+                    # usr_review = st.text_area("", value=st.session_state["tmp_summary_gpt"])
+                    # if st.button("Update Summary"):
+                    #     st.session_state["fin_opt"] = usr_review
+                    st.write(st.session_state["tmp_summary_gpt"])
