@@ -267,10 +267,18 @@ def generate_insights_gpt(temp_file_path):
 
 def summarize_gpt():
     with st.spinner('Summarization ...'):
+        if 'clicked2' not in st.session_state:
+            st.session_state.clicked2 = False
+        
+        def set_clicked2():
+            st.session_state.clicked2 = True
+            st.session_state.disabled = True
+
         st.markdown("""<span style="font-size: 24px; ">Summarize key findings of the case.</span>""", unsafe_allow_html=True)
         st.write()
-        if st.button("Summarize",disabled=st.session_state.disabled):
+        st.button("Summarize",on_click=set_clicked2,disabled=st.session_state.disabled):
         
+        if st.session_state.clicked2:
             st.session_state.disabled=False
             summ_dict_gpt = st.session_state.tmp_table_gpt.set_index('Question')['Answer'].to_dict()
             # chat_history = resp_dict_obj['Summary']
