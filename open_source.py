@@ -159,7 +159,10 @@ def generate_insights_llama(temp_file_path):
                 Response (Give your response in pointers.)"
                     
                                     
-            response1 = llama_llm(llama_13b,prompt)           
+            response1 = llama_llm(llama_13b,prompt) 
+            response1 = response1.replace("$", " ")
+            response1 = response1.replace("5,000", "5,000 USD")
+            response1 = response1.replace("5,600", "5,600 USD")          
             
             
             st.session_state["sara_recommendation_llama"] = response1                    
@@ -307,18 +310,22 @@ def generate_insights_llama(temp_file_path):
 
 
 def summarize_llama():
-    st.session_state.disabled=False
-    template = """Write a detailed summary of the text provided.
-    ```{text}```
-    Response: (Return your response in a single paragraph.) """
-    prompt = PromptTemplate(template=template,input_variables=["text"])
-    llm_chain_llama = LLMChain(prompt=prompt,llm=llama_13b)
+    with st.spinner('Summarization ...'):
+        st.markdown("""<span style="font-size: 24px; ">Summarize key findings of the case.</span>""", unsafe_allow_html=True)
+        st.write()
+        if st.button("Summarize",disabled=st.session_state.disabled):
+            st.session_state.disabled=False
+            template = """Write a detailed summary of the text provided.
+            ```{text}```
+            Response: (Return your response in a single paragraph.) """
+            prompt = PromptTemplate(template=template,input_variables=["text"])
+            llm_chain_llama = LLMChain(prompt=prompt,llm=llama_13b)
 
-    summ_dict_llama = st.session_state.tmp_table_llama.set_index('Question')['Answer']
-    text = []
-    for key,value in summ_dict_llama.items():
-        text.append(value)
-    st.session_state["tmp_summary_llama"] = llm_chain_llama.run(text)
-    st.write(st.session_state["tmp_summary_llama"])
-    
+            summ_dict_llama = st.session_state.tmp_table_llama.set_index('Question')['Answer']
+            text = []
+            for key,value in summ_dict_llama.items():
+                text.append(value)
+            st.session_state["tmp_summary_llama"] = llm_chain_llama.run(text)
+            st.write(st.session_state["tmp_summary_llama"])
+        
     return st.session_state["tmp_summary_llama"]  
