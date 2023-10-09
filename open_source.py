@@ -331,7 +331,11 @@ def summarize_llama():
             text = []
             for key,value in summ_dict_llama.items():
                 text.append(value)
-            st.session_state["tmp_summary_llama"] = llm_chain_llama.run(text)
+            response_summ_llama = llm_chain_llama.run(text)
+            response_summ_llama = response_summ_llama.replace("$", " ")
+            response_summ_llama = response_summ_llama.replace("5,000", "5,000 USD")
+            response_summ_llama = response_summ_llama.replace("5,600", "5,600 USD")
+            st.session_state["tmp_summary_llama"] = response_summ_llama
             st.write(st.session_state["tmp_summary_llama"])
         
     return st.session_state["tmp_summary_llama"],summ_llama

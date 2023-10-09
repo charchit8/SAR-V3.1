@@ -287,10 +287,14 @@ def summarize_gpt():
             llm=llm, 
             memory = memory,
             verbose=True)
-            st.session_state["tmp_summary_gpt"] = conversation.predict(input="Provide a detailed summary of the text provided by reframing the sentences. Provide the summary in a single paragraph. Please don't include words like these: 'chat summary', 'includes information' in my final summary.")
+            response_summ_gpt = conversation.predict(input="Provide a detailed summary of the text provided by reframing the sentences. Provide the summary in a single paragraph. Please don't include words like these: 'chat summary', 'includes information' in my final summary.")
+            response_summ_gpt = response_summ_gpt.replace("$", " ")
+            response_summ_gpt = response_summ_gpt.replace("5,000", "5,000 USD")
+            response_summ_gpt = response_summ_gpt.replace("5,600", "5,600 USD")
+            st.session_state["tmp_summary_gpt"] = response_summ_gpt
             st.write(st.session_state["tmp_summary_gpt"])
     
-    return st.session_state["tmp_summary_gpt"], summ_gpt
+    return st.session_state["tmp_summary_gpt"],summ_gpt
 
 
 
