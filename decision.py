@@ -23,7 +23,7 @@ def decision_gpt(summ_gpt,temp_file_path):
         prompt = f'''Act as a financial analyst and give concise answer to the question, with given Context.\n\n\
         SAR is a document that financial institutions must file with the Financial Crimes Enforcement Network (FinCEN) based on the Bank Secrecy Act whenever there is a suspicious activity.\n\n\
         If The transaction/disputed amount > 5,000 USD value threshold, then check below points to make sure if it is a suspicious activity or not: 
-        1. Details mentioned in Invoice doesnot matches the customer, Invoice is billed to someone other than the customer(Customer details can be identified from cardholder information).\n\n\
+        1. Check if Invoice is billed to customer? (Customer details can be identified from cardholder information).\n\n\
         2. A potential suspect is identified? \n\n\
         Even if transaction/disputed amount > 5,000 USD but no suspect is identified, then this can not be considered as a suspicious activity and no SAR filling is required. \n\n\
         Based the above findings, identify if this can be considered as Suspicious Activity or not.\n\n\
