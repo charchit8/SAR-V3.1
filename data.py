@@ -160,7 +160,7 @@ def create_temp_file(directory_path,fetched_files):
 
 
 
-def pytesseract(directory_path,fetched_files):
+def pytesseract_code(directory_path,fetched_files):
 
     tmp_dir_ = tempfile.mkdtemp()
     temp_file_path= []

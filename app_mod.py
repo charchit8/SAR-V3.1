@@ -2,7 +2,7 @@
 #!/usr/bin/python
 
 from utils import *
-from data import data_display,create_temp_file
+from data import data_display,create_temp_file,pytesseract_code
 from closed_source import generate_insights_gpt,summarize_gpt,key_questions
 from open_source import generate_insights_llama,summarize_llama
 from report import summ_table_report,save_report1,save_report2,download_report
@@ -278,7 +278,7 @@ elif selected_option_case_type == "Fraud transaction dispute":
             fetched_files = read_pdf_files(directory_path)
             data_display(directory_path,fetched_files)
             # temp_file_path =  create_temp_file(directory_path,fetched_files)
-            temp_file_path = pytesseract(directory_path,fetched_files)
+            temp_file_path = pytesseract_code(directory_path,fetched_files)
 
         with col2_up:  
             key_questions()
@@ -373,7 +373,7 @@ elif selected_option_case_type == "Fraud transaction dispute":
             fetched_files = read_pdf_files(directory_path)
             data_display(directory_path,fetched_files)
             # temp_file_path =  create_temp_file(directory_path,fetched_files)  
-            temp_file_path = pytesseract(directory_path,fetched_files) 
+            temp_file_path = pytesseract_code(directory_path,fetched_files) 
 
         with col2_up:
             key_questions()
