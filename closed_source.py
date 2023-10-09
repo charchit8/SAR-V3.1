@@ -198,10 +198,17 @@ def generate_insights(temp_file_path):
 
     # Text Input
     # st.markdown("""<span style="font-size: 24px; ">Ask Additional Questions</span>""", unsafe_allow_html=True)
-    query = st.text_input(':black[Ask Additional Questions]',disabled=st.session_state.disabled)
+    if 'clicked3' not in st.session_state:
+        st.session_state.clicked3 = False
+        
+    def set_clicked3():
+        st.session_state.clicked3 = True
+        st.session_state.disabled = False
+
+    query = st.text_input(':black[Ask Additional Questions]',on_click =set_clicked3, disabled=st.session_state.disabled)
     text_dict = {}
     @st.cache_data
-    def LLM_Response():
+    def LLM_Response(query,context):
         llm_chain = LLMChain(prompt=prompt, llm=llm)
         response = llm_chain.run({"query":query, "context":context})
         return response
