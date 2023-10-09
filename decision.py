@@ -1,9 +1,16 @@
 from utils import *
 from closed_source import *
 
+#This is the embedding model
+model_name = "thenlper/gte-small"
+# model_name = "sentence-transformers/all-MiniLM-L6-v2"
+# model_name = "hkunlp/instructor-large"
 
 
-def decision_gpt(generate_button):
+
+def decision_gpt(generate_button,temp_file_path):
+    hf_embeddings = embed(model_name) 
+    docs, docsearch = embedding_store(temp_file_path,hf_embeddings)   
       
     if generate_button:
          
@@ -34,7 +41,9 @@ def decision_gpt(generate_button):
         st.warning('Please carefully review the recommendation and case details before the final submission',icon="⚠️")
 
             
-def decision_llama(generate_button):
+def decision_llama(generate_button,temp_file_path):
+    hf_embeddings = embed(model_name) 
+    docs, docsearch = embedding_store(temp_file_path,hf_embeddings) 
     if generate_button:  
         query = "Give your recommendation if SAR filling is required or not?"
         context_1 = docsearch.similarity_search(query, k=5)
