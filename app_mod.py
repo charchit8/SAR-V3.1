@@ -321,10 +321,11 @@ elif selected_option_case_type == "Fraud transaction dispute":
                     download_report(doc,directory_path,fetched_files)
         
         with col5_up:
+            st.markdown("""<span style="font-size: 24px;color:#0000FF">Is SAR filing required?</span>""", unsafe_allow_html=True)
             if st.session_state.llm == "Closed-Source": 
                 decision_gpt(generate_button,temp_file_path)
             
-            selection2()
+            selection1()
 
 ## Case where Suspect is not mentioned
     elif st.session_state.case_num == "SAR-2023-13579":
@@ -376,6 +377,7 @@ elif selected_option_case_type == "Fraud transaction dispute":
                     download_report(doc,directory_path,fetched_files)
         
         with col5_up:
+            st.markdown("""<span style="font-size: 24px;color:#0000FF">Is SAR filing required?</span>""", unsafe_allow_html=True)     
             if st.session_state.llm == "Closed-Source": 
                 decision_gpt(generate_button,temp_file_path)
             

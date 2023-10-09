@@ -36,6 +36,7 @@ def decision_gpt(generate_button,temp_file_path):
         response_sara_gpt = response_sara_gpt.replace("$", " ")
         response_sara_gpt = response_sara_gpt.replace("5,000", "5,000 USD")
         response_sara_gpt = response_sara_gpt.replace("5,600", "5,600 USD")
+
         st.markdown(f'''<em>{response_sara_gpt}</em>''',unsafe_allow_html=True)
 
         st.warning('Please carefully review the recommendation and case details before the final submission',icon="⚠️")
@@ -60,7 +61,10 @@ def decision_llama(generate_button,temp_file_path):
         
         
         response_sara_llama = llama_llm(llama_13b,prompt)
-        # st.markdown(response1)
+        response_sara_llama = response_sara_llama.replace("$", " ")
+        response_sara_llama = response_sara_llama.replace("5,000", "5,000 USD")
+        response_sara_llama = response_sara_llama.replace("5,600", "5,600 USD")
+ 
         st.markdown(f'''<em>{response_sara_llama}</em>''',unsafe_allow_html=True)
 
         st.warning('Please carefully review the recommendation and case details before the final submission',icon="⚠️")
