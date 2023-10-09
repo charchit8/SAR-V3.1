@@ -301,6 +301,7 @@ def generate_insights_llama(temp_file_path):
 
             st.session_state["tmp_table_llama"] = pd.concat([st.session_state.tmp_table_llama, df], ignore_index=True)
             st.session_state.tmp_table_llama.drop_duplicates(subset=['Question'])
+            st.write(st.session_state.tmp_table_llama)
     
     return st.session_state["tmp_table_llama"], st.session_state["sara_recommendation_llama"], generate_button_llama
 
