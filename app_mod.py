@@ -337,7 +337,7 @@ elif selected_option_case_type == "Fraud transaction dispute":
         
         with col2_up:
             if st.session_state.llm == "Closed-Source":
-                tmp_table_gpt, generate_button, docsearch, sara_recommendation_gpt = generate_insights(temp_file_path)
+                tmp_table_gpt, generate_button, docsearch, sara_recommendation_gpt, x = generate_insights(temp_file_path)
         
         with col3_up:
             if st.session_state.llm == "Closed-Source":
