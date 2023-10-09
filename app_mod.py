@@ -3,7 +3,7 @@
 
 from utils import *
 from data import data_display,create_temp_file
-from closed_source import generate_insights,summarize
+from closed_source import generate_insights,summarize,run_doc
 from report import summ_table_report,save_report1,save_report2,download_report
 from decision import decision_gpt,decision_llama,selection1,selection2
 
@@ -334,10 +334,10 @@ elif selected_option_case_type == "Fraud transaction dispute":
             fetched_files = read_pdf_files(directory_path)
             data_display(directory_path,fetched_files)
             temp_file_path =  create_temp_file(directory_path,fetched_files)   
-        
+            run_doc(temp_file_path)
         with col2_up:
             if st.session_state.llm == "Closed-Source":
-                tmp_table_gpt, sara_recommendation_gpt, generate_button, docsearch = generate_insights(temp_file_path)
+                tmp_table_gpt, sara_recommendation_gpt, generate_button = generate_insights(temp_file_path)
         
         with col3_up:
             if st.session_state.llm == "Closed-Source":

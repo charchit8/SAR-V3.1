@@ -1,7 +1,9 @@
 from utils import *
 from closed_source import *
 
-def decision_gpt(generate_button,docsearch):
+
+
+def decision_gpt(generate_button):
       
     if generate_button:
          
@@ -32,7 +34,7 @@ def decision_gpt(generate_button,docsearch):
         st.warning('Please carefully review the recommendation and case details before the final submission',icon="⚠️")
 
             
-def decision_llama(generate_button,docsearch):
+def decision_llama(generate_button):
     if generate_button:  
         query = "Give your recommendation if SAR filling is required or not?"
         context_1 = docsearch.similarity_search(query, k=5)

@@ -64,15 +64,12 @@ def usellm(prompt):
     response = service.chat(options)
     return response.content
 
-
-
-
-def generate_insights(temp_file_path):
-
-  
+def run_doc(temp_file_path):
     hf_embeddings = embed(model_name) 
     docs, docsearch = embedding_store(temp_file_path,hf_embeddings)
- 
+
+
+def generate_insights():
 
     # Creating header
     col1,col2 = st.columns(2)
