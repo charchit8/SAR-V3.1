@@ -6,6 +6,13 @@ model_name = "thenlper/gte-small"
 # model_name = "sentence-transformers/all-MiniLM-L6-v2"
 # model_name = "hkunlp/instructor-large"
 
+if "sara_recommendation_gpt1" not in st.session_state:
+    st.session_state["sara_recommendation_gpt1"] = ''
+
+
+if "sara_recommendation_llama1" not in st.session_state:
+    st.session_state["sara_recommendation_llama1"] = ''
+
 
 
 def decision_gpt(summ_gpt,temp_file_path):
@@ -37,8 +44,7 @@ def decision_gpt(summ_gpt,temp_file_path):
         response_sara_gpt = response_sara_gpt.replace("5,000", "5,000 USD")
         response_sara_gpt = response_sara_gpt.replace("5,600", "5,600 USD")
 
-        if "sara_recommendation_gpt1" not in st.session_state:
-            st.session_state["sara_recommendation_gpt1"] = ''
+
 
         st.session_state["sara_recommendation_gpt1"] = response_sara_gpt
 
@@ -70,9 +76,6 @@ def decision_llama(summ_llama,temp_file_path):
         response_sara_llama = response_sara_llama.replace("$", " ")
         response_sara_llama = response_sara_llama.replace("5,000", "5,000 USD")
         response_sara_llama = response_sara_llama.replace("5,600", "5,600 USD")
-
-        if "sara_recommendation_llama1" not in st.session_state:
-            st.session_state["sara_recommendation_llama1"] = ''
         
         st.session_state["sara_recommendation_llama1"] = response_sara_llama
  
