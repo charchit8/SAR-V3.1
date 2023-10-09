@@ -8,11 +8,11 @@ model_name = "thenlper/gte-small"
 
 
 
-def decision_gpt(generate_button_gpt,temp_file_path):
+def decision_gpt(temp_file_path):
     hf_embeddings = embed(model_name) 
     docs, docsearch = embedding_store(temp_file_path,hf_embeddings)   
       
-    if generate_button_gpt:
+    if st.session_state.clicked1:
          
         st.write("#### *SARA Recommendation*")
         # st.markdown("""<span style="font-size: 18px;">*Based on the following findings for the underlying case, under Bank Secrecy Act, it is recommended to file this case as a suspicious activity:*</span>""", unsafe_allow_html=True)
@@ -42,10 +42,10 @@ def decision_gpt(generate_button_gpt,temp_file_path):
         st.warning('Please carefully review the recommendation and case details before the final submission',icon="⚠️")
 
             
-def decision_llama(generate_button_llama,temp_file_path):
+def decision_llama(temp_file_path):
     hf_embeddings = embed(model_name) 
     docs, docsearch = embedding_store(temp_file_path,hf_embeddings) 
-    if generate_button_llama:  
+    if st.session_state.clicked3: 
         query = "Give your recommendation if SAR filling is required or not?"
         context_1 = docsearch.similarity_search(query, k=5)
         prompt = f'''Act as a financial analyst and give concise answer to the question, with given Context.\n\n\
