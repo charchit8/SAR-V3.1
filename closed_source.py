@@ -107,13 +107,13 @@ def generate_insights(temp_file_path):
         if 'clicked' not in st.session_state:
             st.session_state.clicked = False
         
-        def set_clicked():
+        def set_clicked1():
             st.session_state.clicked = True
             st.session_state.disabled = True
 
-        generate_button =  st.button("Generate Insights",on_click=set_clicked, disabled=st.session_state.disabled)
+        generate_button =  st.button("Generate Insights",on_click=set_clicked1, disabled=st.session_state.disabled)
 
-        if st.session_state.clicked:
+        if st.session_state.clicked1:
                             
             queries ="Please provide the following information regarding the possible fraud case: What is the name of the customer name,\
             has any suspect been reported, list the merchant name, how was the bank notified, when was the bank notified, what is the fraud type,\
