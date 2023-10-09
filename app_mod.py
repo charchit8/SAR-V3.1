@@ -281,10 +281,11 @@ elif selected_option_case_type == "Fraud transaction dispute":
             fetched_files = read_pdf_files(directory_path)
             data_display(directory_path,fetched_files)
             temp_file_path =  create_temp_file(directory_path,fetched_files)
+            run_doc(temp_file_path)
 
         with col2_up:  
                    
-             tmp_table_gpt, generate_button, docsearch, sara_recommendation_gpt = generate_insights(temp_file_path)
+             tmp_table_gpt, generate_button, docsearch, sara_recommendation_gpt = generate_insights()
 
         with col3_up:
             tmp_summary_gpt = summarize()
@@ -321,7 +322,7 @@ elif selected_option_case_type == "Fraud transaction dispute":
         
         with col5_up:
             if st.session_state.llm == "Closed-Source": 
-                decision_gpt(generate_button,docsearch)
+                decision_gpt(generate_button)
             
             selection2()
 
@@ -337,7 +338,7 @@ elif selected_option_case_type == "Fraud transaction dispute":
             run_doc(temp_file_path)
         with col2_up:
             if st.session_state.llm == "Closed-Source":
-                tmp_table_gpt, sara_recommendation_gpt, generate_button = generate_insights(temp_file_path)
+                tmp_table_gpt, sara_recommendation_gpt, generate_button = generate_insights()
         
         with col3_up:
             if st.session_state.llm == "Closed-Source":
@@ -375,7 +376,7 @@ elif selected_option_case_type == "Fraud transaction dispute":
         
         with col5_up:
             if st.session_state.llm == "Closed-Source": 
-                decision_gpt(generate_button,docsearch)
+                decision_gpt(generate_button)
             
             selection2()
         

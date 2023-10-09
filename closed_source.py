@@ -301,7 +301,7 @@ def generate_insights():
             st.session_state["tmp_table_gpt"] = pd.concat([st.session_state.tmp_table_gpt, df], ignore_index=True)
             st.session_state.tmp_table_gpt.drop_duplicates(subset=['Question'])
 
-    return st.session_state["tmp_table_gpt"], st.session_state["sara_recommendation_gpt"], generate_button, docsearch
+    return st.session_state["tmp_table_gpt"], st.session_state["sara_recommendation_gpt"], generate_button
 
 
 
