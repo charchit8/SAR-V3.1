@@ -282,15 +282,15 @@ elif selected_option_case_type == "Fraud transaction dispute":
         with col2_up:  
             key_questions()
             if st.session_state.llm == "Closed-Source":    
-                tmp_table_gpt, sara_recommendation_gpt,generate_button_gpt = generate_insights_gpt(temp_file_path)
+                tmp_table_gpt, sara_recommendation_gpt = generate_insights_gpt(temp_file_path)
             elif st.session_state.llm == "Open-Source":
-                tmp_table_llama, sara_recommendation_llama,generate_button_llama = generate_insights_llama(temp_file_path)
+                tmp_table_llama, sara_recommendation_llama = generate_insights_llama(temp_file_path)
 
         with col3_up:
             if st.session_state.llm == "Closed-Source":
-                tmp_summary_gpt = summarize_gpt()
+                tmp_summary_gpt, summ_gpt = summarize_gpt()
             elif st.session_state.llm == "Open-Source":
-                tmp_summary_llama = summarize_llama()
+                tmp_summary_llama, summ_llama = summarize_llama()
 
         
         with col4_up:
