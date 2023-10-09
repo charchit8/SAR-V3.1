@@ -45,7 +45,7 @@ def key_questions():
             df_fixed["S.No."] = df_fixed.index
             df_fixed = df_fixed.loc[:,['S.No.','Questions']]
             st.markdown(df_fixed.style.hide(axis="index").to_html(), unsafe_allow_html=True)
-            
+
 
 def generate_insights_gpt(temp_file_path):
 
@@ -261,7 +261,7 @@ def generate_insights_gpt(temp_file_path):
             st.session_state["tmp_table_gpt"] = pd.concat([st.session_state.tmp_table_gpt, df], ignore_index=True)
             st.session_state.tmp_table_gpt.drop_duplicates(subset=['Question'])
 
-    return st.session_state["tmp_table_gpt"], st.session_state["sara_recommendation_gpt"], generate_button
+    return st.session_state["tmp_table_gpt"], st.session_state["sara_recommendation_gpt"], generate_button_gpt
 
 
 

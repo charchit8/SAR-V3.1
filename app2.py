@@ -1081,7 +1081,7 @@ with col2_up:
     query = st.text_input(':black[Ask Additional Questions]',disabled=st.session_state.disabled)
     text_dict = {}
     @st.cache_data
-    def LLM_Response():
+    def LLM_Response(query,context):
         llm_chain = LLMChain(prompt=prompt, llm=llm)
         response = llm_chain.run({"query":query, "context":context})
         return response

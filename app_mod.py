@@ -4,6 +4,7 @@
 from utils import *
 from data import data_display,create_temp_file
 from closed_source import generate_insights_gpt,summarize_gpt,key_questions
+from open_source import generate_insights_llama,summarize_llama
 from report import summ_table_report,save_report1,save_report2,download_report
 from decision import decision_gpt,decision_llama,selection1,selection2
 
@@ -279,13 +280,18 @@ elif selected_option_case_type == "Fraud transaction dispute":
             temp_file_path =  create_temp_file(directory_path,fetched_files)
 
         with col2_up:  
-            if st.session_state.llm == "Closed-Source":
-                key_questions()      
-                tmp_table_gpt, sara_recommendation_gpt,generate_button = generate_insights_gpt(temp_file_path)
+            key_questions()
+            if st.session_state.llm == "Closed-Source":    
+                tmp_table_gpt, sara_recommendation_gpt,generate_button_gpt = generate_insights_gpt(temp_file_path)
+            elif st.session_state.llm == "Open-Source":
+                tmp_table_llama, sara_recommendation_llama,generate_button_llama = generate_insights_llama(temp_file_path)
 
         with col3_up:
             if st.session_state.llm == "Closed-Source":
                 tmp_summary_gpt = summarize_gpt()
+            elif st.session_state.llm == "Open-Source":
+                tmp_summary_llama = summarize_llama()
+
         
         with col4_up:
             
@@ -315,16 +321,44 @@ elif selected_option_case_type == "Fraud transaction dispute":
                         mime="docx",
                         disabled=st.session_state.disabled
                          )
+                        
+                elif st.session_state.llm == "Open-Source":
+                    # Applying to download button -> download_button
+                    st.markdown("""
+                        <style>
+                            .stButton download_button {
+                                width: 100%;
+                                height: 70%;
+                            }
+                        </style>
+                    """, unsafe_allow_html=True)
+
+                    tmp_summary, tmp_table = summ_table_report(tmp_table_llama,tmp_summary_llama)
+                    doc = save_report1(tmp_table,tmp_summary,sara_recommendation_llama)
+                    bio = io.BytesIO()
+                    doc.save(bio)
+                    if doc:
+                        st.download_button(
+                        label="Download Report",
+                        data=bio.getvalue(),
+                        file_name="Report.docx",
+                        mime="docx",
+                        disabled=st.session_state.disabled
+                         )
+                        
             with col_d2:
                 if st.session_state.llm == "Closed-Source": 
                     st.write("")            
                     download_report(doc,directory_path,fetched_files)
-        
+                elif st.session_state.llm == "Open-Source": 
+                    st.write("")            
+                    download_report(doc,directory_path,fetched_files)   
         with col5_up:
             st.markdown("""<span style="font-size: 24px;color:#0000FF">Is SAR filing required?</span>""", unsafe_allow_html=True)
             if st.session_state.llm == "Closed-Source": 
-                decision_gpt(generate_button,temp_file_path)
-            
+                decision_gpt(generate_button_gpt,temp_file_path)
+            elif st.session_state.llm == "Open-Source": 
+                decision_gpt(generate_button_llama,temp_file_path)
             selection1()
 
 ## Case where Suspect is not mentioned
@@ -340,11 +374,14 @@ elif selected_option_case_type == "Fraud transaction dispute":
         with col2_up:
             key_questions()
             if st.session_state.llm == "Closed-Source":
-                tmp_table_gpt, sara_recommendation_gpt, generate_button = generate_insights_gpt(temp_file_path)
-        
+                tmp_table_gpt, sara_recommendation_gpt, generate_button_gpt = generate_insights_gpt(temp_file_path)
+            elif st.session_state.llm == "Open-Source":
+                tmp_table_llama, sara_recommendation_llama, generate_button_llama = generate_insights_gpt(temp_file_path)       
         with col3_up:
             if st.session_state.llm == "Closed-Source":
                 tmp_summary_gpt = summarize_gpt()
+            elif st.session_state.llm == "Open-Source":
+                tmp_summary_llama = summarize_llama()
 
         with col4_up:
             col_d1, col_d2 = st.tabs(["Download Report", "Download Case Package"])
@@ -373,15 +410,44 @@ elif selected_option_case_type == "Fraud transaction dispute":
                         mime="docx",
                         disabled=st.session_state.disabled
                          )
+                elif st.session_state.llm == "Open-Source":
+                # Applying to download button -> download_button
+                    st.markdown("""
+                        <style>
+                            .stButton download_button {
+                                width: 100%;
+                                height: 70%;
+                            }
+                        </style>
+                    """, unsafe_allow_html=True)
+
+                    tmp_summary, tmp_table = summ_table_report(tmp_table_llama,tmp_summary_llama)
+                    doc = save_report1(tmp_table,tmp_summary,sara_recommendation_llama)
+                    bio = io.BytesIO()
+                    doc.save(bio)
+                    if doc:
+                        st.download_button(
+                        label="Download Report",
+                        data=bio.getvalue(),
+                        file_name="Report.docx",
+                        mime="docx",
+                        disabled=st.session_state.disabled
+                         )
+                        
             with col_d2:
                 if st.session_state.llm == "Closed-Source":   
                     st.write("")        
                     download_report(doc,directory_path,fetched_files)
-        
+                elif st.session_state.llm == "Open-Source":   
+                    st.write("")        
+                    download_report(doc,directory_path,fetched_files)
+                
         with col5_up:
             st.markdown("""<span style="font-size: 24px;color:#0000FF">Is SAR filing required?</span>""", unsafe_allow_html=True)     
             if st.session_state.llm == "Closed-Source": 
-                decision_gpt(generate_button,temp_file_path)
+                decision_gpt(generate_button_gpt,temp_file_path)
+            elif st.session_state.llm == "Open-Source": 
+                decision_gpt(generate_button_llama,temp_file_path)
             
             selection2()
         
