@@ -42,7 +42,7 @@ def decision_gpt(summ_gpt,temp_file_path):
 
         st.session_state["sara_recommendation_gpt1"] = response_sara_gpt
 
-        st.markdown(f'''<em>{response_sara_gpt}</em>''',unsafe_allow_html=True)
+        st.markdown(f'''<em>{st.session_state["sara_recommendation_gpt1"]}</em>''',unsafe_allow_html=True)
 
         st.warning('Please carefully review the recommendation and case details before the final submission',icon="⚠️")
 
@@ -76,7 +76,7 @@ def decision_llama(summ_llama,temp_file_path):
         
         st.session_state["sara_recommendation_llama1"] = response_sara_llama
  
-        st.markdown(f'''<em>{response_sara_llama}</em>''',unsafe_allow_html=True)
+        st.markdown(f'''<em>{st.session_state["sara_recommendation_llama1"]}</em>''',unsafe_allow_html=True)
 
         st.warning('Please carefully review the recommendation and case details before the final submission',icon="⚠️")
     
