@@ -5,7 +5,7 @@ if "pdf_files" not in st.session_state:
 
 
 # To convert generated to pdf and save in temp direc.
-def create_pdf(text,file_name):
+def create_pdf(text,file_name,tmp_dir_,temp_file_path):
     # Create a new FPDF object
     pdf = FPDF()
     # Add a new page to the PDF

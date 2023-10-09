@@ -151,7 +151,30 @@ def extract_text_from_pdf(file_path):
             all_text.append(text)
     return "\n".join(all_text)
 
+@st.cache_data
+def add_footer_with_fixed_text(doc, footer_text):
+    # Create a footer object
+    footer = doc.sections[0].footer
 
+    # Add a paragraph to the footer
+    paragraph = footer.paragraphs[0] if footer.paragraphs else footer.add_paragraph()
+
+    # Set the fixed text in the footer
+    paragraph.text = footer_text
+
+    # Add a page number field to the footer
+    run = paragraph.add_run()
+    fld_xml = f'<w:fldSimple {nsdecls("w")} w:instr="PAGE"/>'
+    fld_simple = parse_xml(fld_xml)
+    run._r.append(fld_simple)
+    # Set the alignment of the footer text
+    paragraph.alignment = docx.enum.text.WD_PARAGRAPH_ALIGNMENT.CENTER
+
+    
+@st.cache_data
+def create_filled_box_with_text(color, text):
+    box_html = f'<div style="flex: 1; height: 100px; background-color: {color}; display: flex; align-items: center; justify-content: center;">{text}</div>'
+    st.markdown(box_html, unsafe_allow_html=True)
 
 
 # Function to add checkboxes to the DataFrame

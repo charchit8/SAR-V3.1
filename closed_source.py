@@ -304,6 +304,8 @@ def generate_insights(temp_file_path):
             st.session_state["tmp_table_gpt"] = pd.concat([st.session_state.tmp_table_gpt, df], ignore_index=True)
             st.session_state.tmp_table_gpt.drop_duplicates(subset=['Question'])
 
+    return st.session_state["tmp_table_gpt"], generate_button, docsearch
+
 
 
 def summarize():
@@ -324,3 +326,8 @@ def summarize():
             verbose=True)
             st.session_state["tmp_summary_gpt"] = conversation.predict(input="Provide a detailed summary of the text provided by reframing the sentences. Provide the summary in a single paragraph. Please don't include words like these: 'chat summary', 'includes information' in my final summary.")
             st.write(st.session_state["tmp_summary_gpt"])
+    
+    return st.session_state["tmp_summary_gpt"]
+
+
+

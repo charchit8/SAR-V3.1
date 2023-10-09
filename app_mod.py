@@ -50,36 +50,8 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-@st.cache_data
-def add_footer_with_fixed_text(doc, footer_text):
-    # Create a footer object
-    footer = doc.sections[0].footer
 
-    # Add a paragraph to the footer
-    paragraph = footer.paragraphs[0] if footer.paragraphs else footer.add_paragraph()
 
-    # Set the fixed text in the footer
-    paragraph.text = footer_text
-
-    # Add a page number field to the footer
-    run = paragraph.add_run()
-    fld_xml = f'<w:fldSimple {nsdecls("w")} w:instr="PAGE"/>'
-    fld_simple = parse_xml(fld_xml)
-    run._r.append(fld_simple)
-
-    # Set the alignment of the footer text
-    paragraph.alignment = docx.enum.text.WD_PARAGRAPH_ALIGNMENT.CENTER
-
-@st.cache_data
-def create_filled_box_with_text(color, text):
-    box_html = f'<div style="flex: 1; height: 100px; background-color: {color}; display: flex; align-items: center; justify-content: center;">{text}</div>'
-    st.markdown(box_html, unsafe_allow_html=True)
-
-@st.cache_data
-def create_zip_file(file_paths, zip_file_name):
-    with zipfile.ZipFile(zip_file_name, 'w') as zipf:
-        for file_path in file_paths:
-            zipf.write(file_path, os.path.basename(file_path))
 
 ####### This markdown is to manage app style
 st.markdown("""
@@ -326,11 +298,11 @@ elif selected_option_case_type == "Fraud transaction dispute":
         
         with col2_up:
             if st.session_state.llm == "Closed-Source":
-                generate_insights(temp_file_path)
+                tmp_table_gpt, generate_button, docsearch = generate_insights(temp_file_path)
         
         with col3_up:
             if st.session_state.llm == "Closed-Source":
-                summarize()
+                tmp_summary_gpt = summarize()
 
     
 
