@@ -192,30 +192,30 @@ def convert_scanned_pdf_to_searchable_pdf(input_file):
 
     """
     # Convert PDF to images
-    with st.spinner("Running Pytesseract"):
-        images = convert_from_path(input_file)
+    # print("Running OCR")
+    images = convert_from_path(input_file)
 
-        # Preprocess images using OpenCV
-        for i, image in enumerate(images):
-            # Convert image to grayscale
-            image = cv2.cvtColor(np.array(image), cv2.COLOR_RGB2GRAY)
+    # Preprocess images using OpenCV
+    for i, image in enumerate(images):
+        # Convert image to grayscale
+        image = cv2.cvtColor(np.array(image), cv2.COLOR_RGB2GRAY)
 
-            # Apply thresholding to remove noise
-            _, image = cv2.threshold(image, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
+        # Apply thresholding to remove noise
+        _, image = cv2.threshold(image, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
 
-            # Enhance contrast
-            image = cv2.equalizeHist(image)
+        # Enhance contrast
+        image = cv2.equalizeHist(image)
 
-            # Save preprocessed image
-            cv2.imwrite(f'{i}.png', image)
+        # Save preprocessed image
+        cv2.imwrite(f'{i}.png', image)
 
-        # Perform OCR on preprocessed images using Tesseract
-        text = ''
-        for i in range(len(images)):
-            image = cv2.imread(f'{i}.png')
-            text += pytesseract.image_to_string(image)
-        
-        return text
+    # Perform OCR on preprocessed images using Tesseract
+    text = ''
+    for i in range(len(images)):
+        image = cv2.imread(f'{i}.png')
+        text += pytesseract.image_to_string(image)
+    
+    return text
 
 
 
@@ -347,28 +347,27 @@ def convert_image_to_searchable_pdf(input_file):
     # # Preprocess images using OpenCV
     # for i, image in enumerate(input_file):
     # Convert image to grayscale
-    with st.spinner("Running Pytesseract"):
-        image = cv2.imread(input_file)
-        image = cv2.cvtColor(np.array(image), cv2.COLOR_RGB2GRAY)
+    image = cv2.imread(input_file)
+    image = cv2.cvtColor(np.array(image), cv2.COLOR_RGB2GRAY)
 
-        # Apply thresholding to remove noise
-        _, image = cv2.threshold(image, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
+    # Apply thresholding to remove noise
+    _, image = cv2.threshold(image, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
 
-        # Enhance contrast
-        image = cv2.equalizeHist(image)
+    # Enhance contrast
+    image = cv2.equalizeHist(image)
 
-        for files in input_file:
-            file = os.path.basename(files)
-            # Save preprocessed image
-            cv2.imwrite(f'{file}.png', image)
+    for files in input_file:
+        file = os.path.basename(files)
+        # Save preprocessed image
+        cv2.imwrite(f'{file}.png', image)
 
-        # Perform OCR on preprocessed images using Tesseract
-        text = ''
-        for i in range(len(input_file)):
-            image = cv2.imread(f'{file}.png')
-            text += pytesseract.image_to_string(image)
+    # Perform OCR on preprocessed images using Tesseract
+    text = ''
+    for i in range(len(input_file)):
+        image = cv2.imread(f'{file}.png')
+        text += pytesseract.image_to_string(image)
 
-        return text
+    return text
 
 
 
@@ -440,19 +439,7 @@ def embedding_store(temp_file_path,hf_embeddings):
     return docs, docsearch
 
 
-@st.cache_data
-def usellm(prompt):
-    """
-    Getting GPT-3.5 Model into action
-    """
-    service = UseLLM(service_url="https://usellm.org/api/llm")
-    messages = [
-      Message(role="system", content="You are a fraud analyst, who is an expert at finding out suspicious activities"),
-      Message(role="user", content=f"{prompt}"),
-      ]
-    options = Options(messages=messages)
-    response = service.chat(options)
-    return response.content
+
 
 
 
