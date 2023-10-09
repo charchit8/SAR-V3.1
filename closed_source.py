@@ -212,7 +212,6 @@ def generate_insights(temp_file_path):
                             Question: {query}\n\
                             Context: {context_1}\n\
                             Response: '''
-
                 
             elif query.lower() == "what is the suspect's name?":
                 prompt_1 = f'''Perform Name Enitity Recognition to identify the Suspect name as accurately as possible, given the context. Suspect is the Person who has committed the fraud with the Customer. Respond saying "The Suspect Name is not Present" if there is no suspect in the given context.\n\n\
@@ -296,6 +295,7 @@ def generate_insights(temp_file_path):
             text_dict[query] = response
             # resp_dict_obj.update(text_dict)
             st.write(response)
+            
             if response:
                 df = pd.DataFrame(text_dict.items(), columns=['Question','Answer'])
             else:
@@ -304,7 +304,7 @@ def generate_insights(temp_file_path):
             st.session_state["tmp_table_gpt"] = pd.concat([st.session_state.tmp_table_gpt, df], ignore_index=True)
             st.session_state.tmp_table_gpt.drop_duplicates(subset=['Question'])
 
-    return st.session_state["tmp_table_gpt"], generate_button, docsearch
+    return st.session_state["tmp_table_gpt"], st.session_state["sara_recommendation_gpt"], generate_button, docsearch
 
 
 
