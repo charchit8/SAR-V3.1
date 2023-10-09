@@ -4,6 +4,8 @@
 from utils import *
 from data import data_display,create_temp_file
 from closed_source import generate_insights,summarize
+from report import summ_table_report,save_report1,save_report2,download_report
+from decision import decision_gpt,decision_llama,selection1,selection2
 
 
 # Setting Config for Llama-2
@@ -269,7 +271,8 @@ elif selected_option_case_type == "Fraud transaction dispute":
     st.markdown("---")
 
 
-            
+ 
+## Case where Suspect is not mentioned           
     if st.session_state.case_num == "SAR-2023-24680":
         col1_up, col2_up, col3_up, col4_up, col5_up = st.tabs(["Data", "Generate Insights","Summarization","Download Report", "Make a Decision"])
         
@@ -281,13 +284,49 @@ elif selected_option_case_type == "Fraud transaction dispute":
 
         with col2_up:  
                    
-            generate_insights(temp_file_path)
+             tmp_table_gpt, generate_button, docsearch,sara_recommendation_gpt = generate_insights(temp_file_path)
 
         with col3_up:
-            summarize()
+            tmp_summary_gpt = summarize()
         
+        with col4_up:
+            col_d1, col_d2 = st.tabs(["Download Report", "Download Case Package"])
 
-    if st.session_state.case_num == "SAR-2023-13579":
+            with col_d1:
+                if st.session_state.llm == "Closed-Source":
+                # Applying to download button -> download_button
+                    st.markdown("""
+                        <style>
+                            .stButton download_button {
+                                width: 100%;
+                                height: 70%;
+                            }
+                        </style>
+                    """, unsafe_allow_html=True)
+
+                    tmp_summary, tmp_table = summ_table_report(tmp_table_gpt,tmp_summary_gpt)
+                    doc = save_report1(tmp_table,tmp_summary,sara_recommendation_gpt)
+                    bio = io.BytesIO()
+                    if doc:
+                        st.download_button(
+                        label="Download Report",
+                        data=bio.getvalue(),
+                        file_name="Report.docx",
+                        mime="docx",
+                        disabled=st.session_state.disabled
+                         )
+            with col_d1:
+                if st.session_state.llm == "Closed-Source":           
+                    download_report(doc,directory_path,fetched_files)
+        
+        with col5_up:
+            if st.session_state.llm == "Closed-Source": 
+                decision_gpt(generate_button,docsearch)
+            
+            selection2()
+
+## Case where Suspect is not mentioned
+    elif st.session_state.case_num == "SAR-2023-13579":
         col1_up, col2_up, col3_up, col4_up, col5_up = st.tabs(["Data", "Generate Insights","Summarization","Download Report", "Make a Decision"])
         
         with col1_up:
@@ -298,11 +337,49 @@ elif selected_option_case_type == "Fraud transaction dispute":
         
         with col2_up:
             if st.session_state.llm == "Closed-Source":
-                tmp_table_gpt, generate_button, docsearch = generate_insights(temp_file_path)
+                tmp_table_gpt, generate_button, docsearch, sara_recommendation_gpt = generate_insights(temp_file_path)
         
         with col3_up:
             if st.session_state.llm == "Closed-Source":
                 tmp_summary_gpt = summarize()
+
+        with col4_up:
+            col_d1, col_d2 = st.tabs(["Download Report", "Download Case Package"])
+
+            with col_d1:
+                if st.session_state.llm == "Closed-Source":
+                # Applying to download button -> download_button
+                    st.markdown("""
+                        <style>
+                            .stButton download_button {
+                                width: 100%;
+                                height: 70%;
+                            }
+                        </style>
+                    """, unsafe_allow_html=True)
+
+                    tmp_summary, tmp_table = summ_table_report(tmp_table_gpt,tmp_summary_gpt)
+                    doc = save_report1(tmp_table,tmp_summary,sara_recommendation_gpt)
+                    bio = io.BytesIO()
+                    if doc:
+                        st.download_button(
+                        label="Download Report",
+                        data=bio.getvalue(),
+                        file_name="Report.docx",
+                        mime="docx",
+                        disabled=st.session_state.disabled
+                         )
+            with col_d1:
+                if st.session_state.llm == "Closed-Source":           
+                    download_report(doc,directory_path,fetched_files)
+        
+        with col5_up:
+            if st.session_state.llm == "Closed-Source": 
+                decision_gpt(generate_button,docsearch)
+            
+            selection2()
+        
+
 
     
 
@@ -316,6 +393,37 @@ elif selected_option_case_type == "Insider Trading":
     st.markdown("### :red[Insider Trading]")
 
       #Add code for IT here
+
+
+# Footer
+st.markdown(
+    """
+    <style>
+    #MainMenu {visibility: hidden;}
+    footer {visibility: hidden;}
+    </style>
+    """
+    , unsafe_allow_html=True)
+st.markdown('<div class="footer"><p></p></div>', unsafe_allow_html=True)
+
+hide_st_style = """
+            <style>
+            #MainMenu {visibility: hidden;}
+            footer {visibility: hidden;}
+            header {visibility: hidden;}
+            </style>
+            """
+st.markdown(hide_st_style, unsafe_allow_html=True)
+
+
+padding = 0
+st.markdown(f""" <style>
+    .reportview-container .main .block-container{{
+        padding-top: {padding}rem;
+        padding-right: {padding}rem;
+        padding-left: {padding}rem;
+        padding-bottom: {padding}rem;
+    }} </style> """, unsafe_allow_html=True)
 
 
 
