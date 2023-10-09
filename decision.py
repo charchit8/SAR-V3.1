@@ -37,11 +37,16 @@ def decision_gpt(summ_gpt,temp_file_path):
         response_sara_gpt = response_sara_gpt.replace("5,000", "5,000 USD")
         response_sara_gpt = response_sara_gpt.replace("5,600", "5,600 USD")
 
+        if "sara_recommendation_gpt1" not in st.session_state:
+            st.session_state["sara_recommendation_gpt1"] = ''
+
+        st.session_state["sara_recommendation_gpt1"] = response_sara_gpt
+
         st.markdown(f'''<em>{response_sara_gpt}</em>''',unsafe_allow_html=True)
 
         st.warning('Please carefully review the recommendation and case details before the final submission',icon="⚠️")
 
-    return response_sara_gpt
+    return st.session_state["sara_recommendation_gpt1"] 
             
 def decision_llama(summ_llama,temp_file_path):
     hf_embeddings = embed(model_name) 
@@ -65,12 +70,17 @@ def decision_llama(summ_llama,temp_file_path):
         response_sara_llama = response_sara_llama.replace("$", " ")
         response_sara_llama = response_sara_llama.replace("5,000", "5,000 USD")
         response_sara_llama = response_sara_llama.replace("5,600", "5,600 USD")
+
+        if "sara_recommendation_llama1" not in st.session_state:
+            st.session_state["sara_recommendation_llama1"] = ''
+        
+        st.session_state["sara_recommendation_llama1"] = response_sara_llama
  
         st.markdown(f'''<em>{response_sara_llama}</em>''',unsafe_allow_html=True)
 
         st.warning('Please carefully review the recommendation and case details before the final submission',icon="⚠️")
     
-    return response_sara_llama
+    return st.session_state["sara_recommendation_llama1"]
 
 def selection1(response):  
     if response: 
