@@ -25,9 +25,8 @@ def decision_gpt(summ_gpt,temp_file_path):
         If The transaction/disputed amount > 5,000 USD value threshold, then check below points to make sure if it is a suspicious activity or not: 
         1. Details mentioned in Invoice doesnot matches the customer, Invoice is billed to someone other than the customer(Customer details can be identified from cardholder information).\n\n\
         2. A potential suspect is identified? \n\n\
-        Even if transaction/disputed amount > 5,000 USD but no suspect is identified, then this cannot be considered as a suspicious activity and no SAR filling is required. \n\n\
+        Even if transaction/disputed amount > 5,000 USD but no suspect is identified, then this can not be considered as a suspicious activity and no SAR filling is required. \n\n\
         Based the above findings, identify if this can be considered as Suspicious Activity or not.\n\n\
-        If transaction/disputed amount is < 5000 USD threshold and no suspect is identified, write your response as - There is no indication of suspicious activity.Therefore,no requirement to file SAR with FinCEN.\n\n\
                 Question: {query}\n\
                 Context: {context_1}\n\                      
                 Response: (Based on your analysis give a concise response in pointers.Mention whom to file based on Bank Secrecy Act.)'''
