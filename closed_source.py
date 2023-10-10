@@ -123,7 +123,7 @@ def generate_insights_gpt(temp_file_path):
             prompt = f" You are professional Fraud Analyst. Find answer to the questions as truthfully and in as detailed as possible as per given context only,\n\n\
             cardholder's name,adress can be identified from cardholder information. Customer is the person who is the owner of the card, customer can also be referenced as the victim with home fraud has taken place.\n\n\
             Identify name and details mentioned in merchant invoice (Detials mentioned in invoice is of the person who made the transaction,it may be or may not be of the customer)\n\n\
-            Compare both the details, if details mentioned in invoice matches customer details, then invoice is billed to customer else it is billed to someone else who misued the card.\n\n\
+            Compare both the details, if details mentioned in invoice matches the cardholder details, then invoice is billed to customer else it is billed to someone else who misued the card.\n\n\
                 Context: {contexts}\n\
                 Response (Give me a concise response.)"
             response_1 = usellm(prompt) 
@@ -135,7 +135,7 @@ def generate_insights_gpt(temp_file_path):
             contexts = docsearch.similarity_search(query, k=5) 
             prompt = f" You are professional Fraud Analyst. Find answer to the questions as truthfully and in as detailed as possible as per given context only,\n\n\
                 If The transaction/disputed amount > 5,000 USD value threshold, then check below points to make sure if it is a suspicious activity or not: \n\
-                1. There is an indication of suspicion due to mismatch of customer details on merchant invoice (Perform name entity recoginition to identify names, customer details can be identified from cardholder information).\n\n\
+                1. There is an indication of suspicion due to mismatch of cardholder details with details mentioned in merchant invoice (Perform name entity recoginition to identify name,address.) Also provide the mismatched details.\n\n\
                 2. A potential suspect is identified? \n\n\
                 Even if transaction/disputed amount > 5,000 USD but if other criteria does not met, then this can not be considered as a suspicious activity. \n\n\
                 Based on above points identify if this is a case of suspicious activity or not? \n\n\
@@ -149,8 +149,8 @@ def generate_insights_gpt(temp_file_path):
             response1 = response1.replace("5,600", "5,600 USD")
             st.session_state["sara_recommendation_gpt"] = response1                
             
-            # st.markdown("### SARA Recommendation")
-            # st.markdown(response1)
+            st.markdown("### SARA Recommendation")
+            st.markdown(response1)
 
     st.markdown("---")
 
