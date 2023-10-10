@@ -148,8 +148,8 @@ def generate_insights_gpt(temp_file_path):
             response1 = response1.replace("5,600", "5,600 USD")
             st.session_state["sara_recommendation_gpt"] = response1                
             
-            st.markdown("### SARA Recommendation")
-            st.markdown(response1)
+            # st.markdown("### SARA Recommendation")
+            # st.markdown(response1)
 
     st.markdown("---")
 
