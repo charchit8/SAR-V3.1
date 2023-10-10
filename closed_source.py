@@ -151,7 +151,7 @@ def generate_insights_gpt(temp_file_path):
                 Even if transaction/disputed amount > 5,000 USD but if above criteria does not met, then this can not be considered as a suspicious activity. \n\n\
                 Based on above points identify if this is a case of suspicious activity or not? \n\n\
                 Context: {contexts}\n\
-                Response (Give me a concise response in three-four pointers.)"
+                Response (Give me a concise response in three pointers.)"
             response1 = usellm(prompt) 
             
             # This replace text is basically to stop rendering of $ to katex (that creates the text messy, hence replacing $)
