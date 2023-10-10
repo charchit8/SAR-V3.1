@@ -25,6 +25,7 @@ def decision_gpt(summ_gpt,temp_file_path):
         If The transaction/disputed amount > 5,000 USD value threshold, then check below points to make sure if it is a suspicious activity or not: 
         1. Perform Name Enitity Recognition to identify the names given in the context as accurately as possible. If multiple individuals are involved in teh transaction. This can be considered as suspicious activity.\n\n\
         2. A potential suspect is identified? \n\n\
+        3. If Invoice is billed to customer? Perform Name Enitity Recognition to identify the customer. Customer is the cardholder. \n\n\
         You need to keep in account that even if transaction/disputed amount > 5,000 USD but if no potential suspect is identified, then this can not be considered as a suspicious activity and no SAR filling is required. \n\n\
                 Question: {query}\n\
                 Context: {context_1}\n\                      
