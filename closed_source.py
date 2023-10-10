@@ -121,8 +121,8 @@ def generate_insights_gpt(temp_file_path):
             query ="Is invoice is billed to customer or someone else?"
             contexts = docsearch.similarity_search(query, k=5) 
             prompt = f" You are professional Fraud Analyst. Find answer to the questions as truthfully and in as detailed as possible as per given context only,\n\n\
-            To identify customer name and address perform name entity recognition, customer details can be identified from cardholder information. Customer is the person who is the owner of the card.\n\n\
-            Identify name and details mentioned in merchant invoice (Detials mentioned in invoice is of the person who made the transaction)\n\n\
+            customer name,adress can be identified from cardholder information. Customer is the person who is the owner of the card.\n\n\
+            Identify name and details mentioned in merchant invoice (Detials mentioned in invoice is of the person who made the transaction,it may be or may not be of the customer)\n\n\
             Compare both the details, if details mentioned in invoice matches customer details, then invoice is billed to customer else it is billed to someone else who misued the card.\n\n\
                 Context: {contexts}\n\
                 Response (Give me a concise response.)"
