@@ -118,10 +118,10 @@ def generate_insights_gpt(temp_file_path):
             st.session_state["tmp_table_gpt"] = pd.concat([st.session_state.tmp_table_gpt, res_df_gpt], ignore_index=True)
 
 
-            query ="Is invoice is billed to customer or someone else?"
+            query ="Is invoice is billed to cardholder or someone else?"
             contexts = docsearch.similarity_search(query, k=5) 
             prompt = f" You are professional Fraud Analyst. Find answer to the questions as truthfully and in as detailed as possible as per given context only,\n\n\
-            customer name,adress can be identified from cardholder information. Customer is the person who is the owner of the card, customer can also be referenced as the victim with home fraud has taken place.\n\n\
+            cardholder's name,adress can be identified from cardholder information. Customer is the person who is the owner of the card, customer can also be referenced as the victim with home fraud has taken place.\n\n\
             Identify name and details mentioned in merchant invoice (Detials mentioned in invoice is of the person who made the transaction,it may be or may not be of the customer)\n\n\
             Compare both the details, if details mentioned in invoice matches customer details, then invoice is billed to customer else it is billed to someone else who misued the card.\n\n\
                 Context: {contexts}\n\
