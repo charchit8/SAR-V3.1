@@ -40,7 +40,7 @@ def generate_insights_llama(temp_file_path):
             query = "What is the suspect's name?"
             context_1 = docsearch.similarity_search(query, k=5)
             prompt_1 =  f'''Act as a professional fraud analyst.You need to check the document and compare if any name discrepencies are present that points towards the suspect who used the card without the consent of the cardholder.
-                        Take the provided information as accurate. Reply the name of the person who is the suspect. \n\n\
+                        Perform Name Enitity Recognition to identify the Suspect name as accurately as possible, given the context. Suspect is the Person who has committed the fraud with the Customer. Respond saying :The Suspect Name is not Present, if there is no suspect in the given context.\n\n\
                         Context: {context_1}\n\
                         Response: (Give a short response in a single sentence.Do not add any extra Information, Explanation,Note.)'''
             response = llama_llm(llama_13b,prompt_1)
@@ -151,6 +151,8 @@ def generate_insights_llama(temp_file_path):
                 Response (Give me a concise response.)"
             response_3 = usellm(prompt) 
 
+            st.write(response_3)
+
             
             query ="Is there a mention of potential suspect?"
             contexts = docsearch.similarity_search(query, k=5) 
@@ -159,6 +161,8 @@ def generate_insights_llama(temp_file_path):
                 Context: {contexts}\n\
                 Response (Give me a concise response.)"
             response_4 = usellm(prompt) 
+
+            st.write(response_4)
 
 
             query ="Is this is a Suspicious activity or not?"
