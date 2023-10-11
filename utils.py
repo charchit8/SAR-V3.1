@@ -416,7 +416,7 @@ llama_13b = HuggingFaceHub(
             repo_id="meta-llama/Llama-2-13b-chat-hf",
             model_kwargs={"temperature":0.01, 
                         "min_new_tokens":100, 
-                        "max_new_tokens":500})
+                        "max_new_tokens":1000})
 
 
 @st.cache_data
@@ -426,8 +426,8 @@ def llama_llm(_llm,prompt):
 
 # Chunking with overlap
 text_splitter = RecursiveCharacterTextSplitter(
-chunk_size = 300,
-chunk_overlap  = 50,
+chunk_size = 1000,
+chunk_overlap  = 100,
 length_function = len,
 separators=["\n\n", "\n", " ", ""]
 )
