@@ -53,7 +53,7 @@ def generate_insights_llama(temp_file_path):
                 Take the provided information as accurate.\n\n\
                         Question: {query}\n\
                         Context: {context_1}\n\
-                        Response: (Give a short response in a single sentence. Do not add any extra Information,Explanation,Note.)'''
+                        Response: (Give a short response in a single sentence. Do not add any extra Note.)'''
             response = llama_llm(llama_13b,prompt_1)
             chat_history[query] = response
 
