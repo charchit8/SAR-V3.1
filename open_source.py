@@ -172,7 +172,7 @@ def generate_insights_llama(temp_file_path):
                 1. {response_3} analyse this response,if details matches then there is no suspicion else, it can be a suspicipos activity. (kindly mention the mismatched details in your response).\n\n\
                 2. {response_4} analyse this response,If a potential suspect is identified then this can be a suspicious activity, else not.\n\n\
                 Even if transaction/disputed amount > 5,000 USD but if above criteria does not met, then this can not be considered as a suspicious activity. \n\n\
-                Based on above points identify if this is a case of suspicious activity or not? \n\n\
+                Based on above points identify if this is a case of suspicious activity or not based on the given context only? \n\n\
                 Context: {contexts}\n\
                 Response (Give me a concise response in few pointers.)"
                     
