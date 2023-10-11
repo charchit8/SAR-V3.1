@@ -39,16 +39,16 @@ def decision_gpt(summ_gpt,temp_file_path):
         st.write(response_5)
 
 
-        query ="Is this is a Suspicious activity or not?"
+        query ="Give your recommendation if SAR filling is required or not?"
         contexts = docsearch.similarity_search(query, k=5) 
         prompt = f" You are professional Fraud Analyst. Find answer to the questions as truthfully and in as detailed as possible as per given context only,\n\n\
-            If The transaction/disputed amount > 5,000 USD value threshold, then check below points to make sure if it is a suspicious activity or not: \n\
-            1. {response_4} analyse this response,if details matches or not? If matches then there is no suspicion else, it can be a suspicipos activity. (Also mention the mismatched details).\n\n\
-            2. {response_5} analyse this response, if a potential suspect is identified or not? If identified then this can be a suspicious activity, else not.\n\n\
-            Even if transaction/disputed amount > 5,000 USD but if above criteria does not met, then this can not be considered as a suspicious activity. \n\n\
-            Based on above points identify if this is a case of suspicious activity or not? \n\n\
-            Context: {contexts}\n\
-            Response (Give me a concise response in few pointers.)"       
+        SAR refers to Suspicious activity Report, which is a document that financial institutions must file with the Financial Crimes Enforcement Network (FinCEN) based on the Bank Secrecy Act whenever there is a suspicious activity.\n\n\
+        If The transaction/disputed amount > 5,000 USD value threshold, then check below points to make sure if it is a suspicious activity or not: \n\
+        1. {response_4} analyse this response,if details matches or not? If matches then there is no suspicion else, it can be a suspicipos activity. (Also mention the mismatched details).\n\n\
+        2. {response_5} analyse this response, if a potential suspect is identified or not? If identified then this can be a suspicious activity, else not.\n\n\
+        If no suspicious activity is detected based on above mentioned points, write your response as - There is no indication of suspicious activity.Therefore,no requirement to file SAR with FinCEN.\n\n\
+        Context: {contexts}\n\
+        Response (Give me a concise response in few pointers.)"       
         
         response_sara_gpt = usellm(prompt) 
         response_sara_gpt = response_sara_gpt.replace("$", " ")
