@@ -426,8 +426,8 @@ def llama_llm(_llm,prompt):
 
 # Chunking with overlap
 text_splitter = RecursiveCharacterTextSplitter(
-chunk_size = 1000,
-chunk_overlap  = 100,
+chunk_size = 300,
+chunk_overlap  = 50,
 length_function = len,
 separators=["\n\n", "\n", " ", ""]
 )
