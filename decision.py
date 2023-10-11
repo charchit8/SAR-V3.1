@@ -25,8 +25,6 @@ def decision_gpt(summ_gpt,temp_file_path):
             Response (Give me a concise response.)"
         response_4 = usellm(prompt) 
 
-        st.write(response_4)
-
         
         query ="Is there a mention of potential suspect?"
         contexts = docsearch.similarity_search(query, k=5) 
@@ -35,8 +33,6 @@ def decision_gpt(summ_gpt,temp_file_path):
             Context: {contexts}\n\
             Response (Give me a concise response.)"
         response_5 = usellm(prompt) 
-
-        st.write(response_5)
 
 
         query ="Give your recommendation if SAR filling is required or not?"
