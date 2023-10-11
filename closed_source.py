@@ -128,8 +128,6 @@ def generate_insights_gpt(temp_file_path):
                 Response (Give me a concise response.)"
             response_1 = usellm(prompt) 
 
-            st.write(response_1)
-
             
             query ="Is there a mention of potential suspect?"
             contexts = docsearch.similarity_search(query, k=5) 
@@ -138,8 +136,6 @@ def generate_insights_gpt(temp_file_path):
                 Context: {contexts}\n\
                 Response (Give me a concise response.)"
             response_2 = usellm(prompt) 
-
-            st.write(response_2)
 
 
             query ="Is this is a Suspicious activity or not?"
