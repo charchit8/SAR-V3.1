@@ -29,7 +29,7 @@ def generate_insights_llama(temp_file_path):
             query = "What is the victim's name?"
             context_1 = docsearch.similarity_search(query, k=5)
             prompt_1 = f'''You are professional Fraud Analyst. Find answer to the questions as truthfully and in as detailed as possible as per given context only,\n\n\
-            Perform Name Enitity Recognition to identify the cardholder's name. Name the document from which you are getting the information.\n\n\
+            Perform Name Enitity Recognition to identify the cardholder's name. Victim is the person with whom fraud has taken place and who is the owner of the account.\n\n\
                     Question: {query}\n\
                     Context: {context_1}\n\
                     Response: (Give me response in one sentence. Do not give me any Explanation or Note)'''
@@ -42,7 +42,7 @@ def generate_insights_llama(temp_file_path):
             prompt_1 =  f'''Act as a professional fraud analyst.You need to check the document and compare if any name discrepencies are present that points towards the suspect who used the card without the consent of the cardholder.
                         Perform Name Enitity Recognition to identify the Suspect Name as accurately as possible, given the context. Suspect is the Person who has committed the fraud with the Customer, and misused the card.\n\n\
                         Context: {context_1}\n\
-                        Response: (Give a short response in a single sentence.Do not add any extra Information, Explanation,Note.)'''
+                        Response: (Give a short response in a single sentence.Do not add any extra Note.)'''
             response = llama_llm(llama_13b,prompt_1)
             chat_history[query] = response
             
