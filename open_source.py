@@ -160,7 +160,7 @@ def generate_insights_llama(temp_file_path):
                         Perform Name Enitity Recognition to identify the Suspect Name as accurately as possible, given the context.Suspect is the person who has committed the fraud with the customer/cardholder. If suspect name is not present, respond saying: Suspect name is not mentioned.\n\n\
                         Context: {context_1}\n\
                         Response: (Give a short response in a single sentence.Do not give me any Explanation or Note)'''
-            response_4 = llama_llm(llama_13b,prompt) 
+            response_4 = llama_llm(llama_13b,prompt_1) 
 
             st.write(response_4)
 
