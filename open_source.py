@@ -29,7 +29,7 @@ def generate_insights_llama(temp_file_path):
             query = "What is the victim's name?"
             context_1 = docsearch.similarity_search(query, k=5)
             prompt_1 = f'''You are professional Fraud Analyst. Find answer to the questions as truthfully and in as detailed as possible as per given context only,\n\n\
-            Victim is the cardholder with whom fraud has taken place. cardholder's name can be identified from cardholder information.\n\n\
+            Perform Name Enitity Recognition to identify the cardholder's name. Victim is the cardholder with whom fraud has taken place.\n\n\
                     Question: {query}\n\
                     Context: {context_1}\n\
                     Response: (Give me response in one sentence. Do not give me any Explanation or Note)'''
@@ -141,53 +141,41 @@ def generate_insights_llama(temp_file_path):
             st.session_state["tmp_table_llama"] = pd.concat([st.session_state.tmp_table_llama, res_df_llama], ignore_index=True)
         
             ## SARA Recommendation
-            # query ="Is invoice is billed to cardholder or someone else?"
-            # contexts = docsearch.similarity_search(query, k=5) 
-            # prompt = f" You are professional Fraud Analyst. Find answer to the questions as truthfully and in as detailed as possible as per given context only,\n\n\
-            # cardholder's name,adress can be identified from cardholder information. Customer is the person who is the owner of the card.\n\n\
-            # Identify name and address to whom merchant invoice is billed \n\n\
-            # Compare both the details, if details mentioned in invoice matches the cardholder details, then invoice is billed to customer else it is billed to someone else who misued the card.\n\n\
-            #     Context: {contexts}\n\
-            #     Response (Give me a concise response.)"
-            # response_3 = llama_llm(llama_13b,prompt) 
+            query ="Is invoice is billed to cardholder or someone else?"
+            contexts = docsearch.similarity_search(query, k=5) 
+            prompt = f" You are professional Fraud Analyst. Find answer to the questions as truthfully and in as detailed as possible as per given context only,\n\n\
+            cardholder's name,adress can be identified from cardholder information. Customer is the person who is the owner of the card.\n\n\
+            Identify name and address to whom merchant invoice is billed \n\n\
+            Compare both the details, if details mentioned in invoice matches the cardholder details, then invoice is billed to customer else it is billed to someone else who misued the card.\n\n\
+                Context: {contexts}\n\
+                Response (Give me a concise response.)"
+            response_3 = llama_llm(llama_13b,prompt) 
 
-            # st.write(response_3)
+            st.write(response_3)
 
             
-            # query ="Is there a mention of potential suspect?"
-            # contexts = docsearch.similarity_search(query, k=5) 
-            # prompt = f" You are professional Fraud Analyst. Find answer to the questions as truthfully and in as detailed as possible as per given context only,\n\n\
-            # Perform Name Enitity Recognition to identify the Suspect name as accurately as possible, given the context. Suspect is the Person who has committed the fraud with the Customer. Respond saying :The Suspect Name is not Present, if there is no suspect in the given context.\n\n\
-            #     Context: {contexts}\n\
-            #     Response (Give me a concise response.)"
-            # response_4 = llama_llm(llama_13b,prompt) 
+            query ="Is there a mention of potential suspect?"
+            contexts = docsearch.similarity_search(query, k=5) 
+            prompt = f" You are professional Fraud Analyst. Find answer to the questions as truthfully and in as detailed as possible as per given context only,\n\n\
+            Perform Name Enitity Recognition to identify the Suspect name as accurately as possible, given the context. Suspect is the Person who has committed the fraud with the Customer. Respond saying :The Suspect Name is not Present, if there is no suspect in the given context.\n\n\
+                Context: {contexts}\n\
+                Response (Give me a concise response.)"
+            response_4 = llama_llm(llama_13b,prompt) 
 
-            # st.write(response_4)
+            st.write(response_4)
 
 
-            # query ="Is this is a Suspicious activity or not?"
-            # contexts = docsearch.similarity_search(query, k=5) 
-            # prompt = f" You are professional Fraud Analyst. Find answer to the questions as truthfully and in as detailed as possible as per given context only,\n\n\
-            #     If The transaction/disputed amount > 5,000 USD value threshold, then check below points to make sure if it is a suspicious activity or not: \n\
-            #     1. {response_3} analyse this response,if details matches then there is no suspicion else, it can be a suspicipos activity. (kindly mention the mismatched details in your response).\n\n\
-            #     2. {response_4} analyse this response,If a potential suspect is identified then this can be a suspicious activity, else not.\n\n\
-            #     Even if transaction/disputed amount > 5,000 USD but if above criteria does not met, then this can not be considered as a suspicious activity. \n\n\
-            #     Based on above points identify if this is a case of suspicious activity or not based on the given context only? \n\n\
-            #     Context: {contexts}\n\
-            #     Response (Give me a concise response in few pointers.)"
+            query ="Is this is a Suspicious activity or not?"
+            contexts = docsearch.similarity_search(query, k=5) 
+            prompt = f" You are professional Fraud Analyst. Find answer to the questions as truthfully and in as detailed as possible as per given context only,\n\n\
+                If The transaction/disputed amount > 5,000 USD value threshold, then check below points to make sure if it is a suspicious activity or not: \n\
+                1. {response_3} analyse this response,if details matches then there is no suspicion else, it can be a suspicipos activity. (kindly mention the mismatched details in your response).\n\n\
+                2. {response_4} analyse this response,If a potential suspect is identified then this can be a suspicious activity, else not.\n\n\
+                Even if transaction/disputed amount > 5,000 USD but if above criteria does not met, then this can not be considered as a suspicious activity. \n\n\
+                Based on above points identify if this is a case of suspicious activity or not based on the given context only? \n\n\
+                Context: {contexts}\n\
+                Response (Give me a concise response in few pointers.)"
 
-            query = "Is this is a Suspicious activity or not?"
-            context_1 = docsearch.similarity_search(query, k=5)
-            prompt = f'''Act as a financial analyst and give concise answer to the question, with given Context.\n\n\
-            SAR refers to Suspicious activity Report, which is a document that financial institutions must file with the Financial Crimes Enforcement Network (FinCEN) based on the Bank Secrecy Act whenever there is a suspicious activity.\n\n\
-            You need to act as a Financial analyst, to check below points to confirm this as a suspicious activity or not-
-            1. Identify the disputed amount and perform a mathematical calculation to check if the disputed amount is greater than 5000 or not? If amount is < 5000 USD then there is no suspicious activity, else if amount is > 5000 USD,this can be considered as suspicious activity. 
-            2. Identify multiple individual name in the context compare with the customer name (customer name can be identified from cardholder information). If details match then there is no suspicious activity, else if details donot match, this can be considered as suspicious activity.
-            3. A potential suspect name is identified? Suspect is the Person who has committed the fraud with the Customer (customer is the cardholder).\n\n\
-            If no suspicious activity is detected based on above mentioned points, write your response as - There is no indication of suspicious activity.Therefore,no requirement to file SAR with FinCEN.\n\n\
-                    Question: {query}\n\
-                    Context: {context_1}\n\                      
-                    Response: (Give me a concise response in points.)'''
                         
                                     
             response1 = llama_llm(llama_13b,prompt) 
