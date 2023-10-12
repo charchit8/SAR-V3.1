@@ -154,7 +154,7 @@ def generate_insights_llama(temp_file_path):
             st.write(response_3)
 
             
-            query ="Is there a mention of potential suspect name?"
+            query ="What is the suspect's name?"
             contexts = docsearch.similarity_search(query, k=5) 
             prompt = f" You are professional Fraud Analyst. Find answer to the questions as truthfully as possible as per given context only,\n\n\
             Perform Name Enitity Recognition to identify the Suspect name from the context. Suspect is the person who has committed the fraud with the customer/cardholder and have misused the card. Respond saying :The Suspect Name is not Present, if there is no suspect in the given context.\n\n\
