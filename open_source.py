@@ -174,7 +174,7 @@ def generate_insights_llama(temp_file_path):
                 Even if transaction/disputed amount > 5,000 USD but if above criteria does not met, then this can not be considered as a suspicious activity. \n\n\
                 Based on above points identify if this is a case of suspicious activity or not based on the given context only? \n\n\
                 Context: {contexts}\n\
-                Response (Give me a concise response in few pointers.)"
+                Response (Give me a concise response in 2-3 pointers.)"
 
                         
                                     
