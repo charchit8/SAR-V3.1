@@ -98,7 +98,7 @@ def decision_llama(summ_llama,temp_file_path):
         response_sara_llama = response_sara_llama.replace("5,000", "5,000 USD")
         response_sara_llama = response_sara_llama.replace("5,600", "5,600 USD")
         
- 
+        st.write(len(prompt))
         st.markdown(f'''<em>{response_sara_llama}</em>''',unsafe_allow_html=True)
 
         st.warning('Please carefully review the recommendation and case details before the final submission',icon="⚠️")
