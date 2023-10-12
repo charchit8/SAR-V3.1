@@ -151,7 +151,7 @@ def generate_insights_llama(temp_file_path):
                 Response (Give me a concise response.)"
             response_3 = usellm(prompt) 
 
-            st.write(response_3)
+            # st.write(response_3)
 
             
             query ="Is there a mention of potential suspect?"
@@ -162,7 +162,7 @@ def generate_insights_llama(temp_file_path):
                 Response (Give me a concise response.)"
             response_4 = usellm(prompt) 
 
-            st.write(response_4)
+            # st.write(response_4)
 
 
             query ="Is this is a Suspicious activity or not?"
@@ -356,5 +356,6 @@ def summarize_llama():
             response_summ_llama = response_summ_llama.replace("5,600", "5,600 USD")
             st.session_state["tmp_summary_llama"] = response_summ_llama
             st.write(st.session_state["tmp_summary_llama"])
+            st.write(len(st.session_state["tmp_summary_llama"]))
         
     return st.session_state["tmp_summary_llama"],summ_llama
