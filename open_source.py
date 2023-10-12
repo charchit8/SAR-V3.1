@@ -186,7 +186,7 @@ def generate_insights_llama(temp_file_path):
             st.session_state["sara_recommendation_llama"] = response1                    
 
             st.markdown("### SARA Recommendation")
-            # st.markdown(response1)
+            st.markdown(response1)
 
 
     st.markdown("---")
