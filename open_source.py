@@ -154,12 +154,12 @@ def generate_insights_llama(temp_file_path):
             st.write(response_3)
 
             
-            query ="What is the suspect's name?"
-            contexts = docsearch.similarity_search(query, k=5) 
-            prompt = f" You are professional Fraud Analyst. Find answer to the questions as truthfully as possible as per given context only,\n\n\
-            Perform Name Enitity Recognition to identify the Suspect name from the context. Suspect is the person who has committed the fraud with the customer/cardholder and have misused the card. Respond saying :The Suspect Name is not Present, if there is no suspect in the given context.\n\n\
-                Context: {contexts}\n\
-                Response (Give me a concise response.)"
+            query = "What is the suspect's name?"
+            context_1 = docsearch.similarity_search(query, k=5)
+            prompt_1 =  f'''Act as a professional fraud analyst.You need to check the document and compare if any name discrepencies are present that points towards the suspect who used the card without the consent of the cardholder.
+                        Perform Name Enitity Recognition to identify the Suspect Name as accurately as possible, given the context.Suspect is the person who has committed the fraud with the customer/cardholder. If suspect name is not present, respond saying: Suspect name is not mentioned.\n\n\
+                        Context: {context_1}\n\
+                        Response: (Give a short response in a single sentence.Do not give me any Explanation or Note)'''
             response_4 = llama_llm(llama_13b,prompt) 
 
             st.write(response_4)
