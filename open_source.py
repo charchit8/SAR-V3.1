@@ -42,7 +42,7 @@ def generate_insights_llama(temp_file_path):
             prompt_1 =  f'''Act as a professional fraud analyst.You need to check the document and compare if any name discrepencies are present that points towards the suspect who used the card without the consent of the cardholder.
                         Perform Name Enitity Recognition to identify the Suspect Name as accurately as possible, given the context.\n\n\
                         Context: {context_1}\n\
-                        Response: (Give a short response in a single sentence.Do not add any extra Note.)'''
+                        Response: (Give a short response in a single sentence.Do not give me any Explanation or Note)'''
             response = llama_llm(llama_13b,prompt_1)
             chat_history[query] = response
             
