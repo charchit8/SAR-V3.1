@@ -154,10 +154,10 @@ def generate_insights_llama(temp_file_path):
             st.write(response_3)
 
             
-            query ="Is there a mention of potential suspect?"
+            query ="Is there a mention of potential suspect name?"
             contexts = docsearch.similarity_search(query, k=5) 
             prompt = f" You are professional Fraud Analyst. Find answer to the questions as truthfully and in as detailed as possible as per given context only,\n\n\
-            Perform Name Enitity Recognition to identify the Suspect name as accurately as possible, given the context. Suspect is the Person who has committed the fraud with the Customer. Respond saying :The Suspect Name is not Present, if there is no suspect in the given context.\n\n\
+            Perform Name Enitity Recognition to identify the Suspect name as accurately as possible, given the context. Suspect is the Person who has committed the fraud with the customer/cardholder. Respond saying :The Suspect Name is not Present, if there is no suspect in the given context.\n\n\
                 Context: {contexts}\n\
                 Response (Give me a concise response.)"
             response_4 = llama_llm(llama_13b,prompt) 
