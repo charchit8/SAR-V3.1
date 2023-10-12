@@ -28,8 +28,8 @@ def generate_insights_llama(temp_file_path):
 
             query = "What is the victim's name?"
             context_1 = docsearch.similarity_search(query, k=5)
-            prompt_1 = f'''You are a professional fraud analyst. Perform Name Enitity Recognition to identify the victim's name as accurately as possible, given the context. The victim can also be referenced as the customer with whom the Fraud has taken place.
-            victim's name is the Name provided in Cardholder Information. Victim can also be referred as cardholder.\n\n\
+            prompt_1 = f'''You are professional Fraud Analyst. Find answer to the questions as truthfully and in as detailed as possible as per given context only,\n\n\
+            Victim is the cardholder with whom fraud has taken place. cardholder's name can be identified from cardholder information.\n\n\
                     Question: {query}\n\
                     Context: {context_1}\n\
                     Response: (Give me response in one sentence. Do not give me any Explanation or Note)'''
