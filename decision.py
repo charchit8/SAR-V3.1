@@ -70,7 +70,7 @@ def decision_llama(summ_llama,temp_file_path):
         Compare both the details, if details mentioned in invoice matches the cardholder details, then invoice is billed to customer else it is billed to someone else who misued the card.\n\n\
             Context: {contexts}\n\
             Response (Give me a concise response.)"
-        response_6 = usellm(prompt) 
+        response_6 = llama_llm(llama_13b,prompt) 
 
         
         query ="Is there a mention of potential suspect?"
@@ -79,7 +79,7 @@ def decision_llama(summ_llama,temp_file_path):
         Perform Name Enitity Recognition to identify the Suspect name as accurately as possible, given the context. Suspect is the Person who has committed the fraud with the Customer. Respond saying :The Suspect Name is not Present, if there is no suspect in the given context.\n\n\
             Context: {contexts}\n\
             Response (Give me a concise response.)"
-        response_7 = usellm(prompt) 
+        response_7 = llama_llm(llama_13b,prompt) 
 
 
         query ="Give your recommendation if SAR filling is required or not?"
