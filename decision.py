@@ -71,9 +71,10 @@ def decision_llama(summ_llama,temp_file_path):
             Context: {contexts}\n\
             Response (Give me a concise response.)"
         response_6 = llama_llm(llama_13b,prompt) 
-        st.write(len(response_6))
 
-        
+        # st.write(response_6)
+
+            
         query ="Is there a mention of potential suspect?"
         contexts = docsearch.similarity_search(query, k=5) 
         prompt = f" You are professional Fraud Analyst. Find answer to the questions as truthfully and in as detailed as possible as per given context only,\n\n\
@@ -81,19 +82,20 @@ def decision_llama(summ_llama,temp_file_path):
             Context: {contexts}\n\
             Response (Give me a concise response.)"
         response_7 = llama_llm(llama_13b,prompt) 
-        st.write(len(response_7))
+
+        # st.write(response_7)
 
 
         query ="Give your recommendation if SAR filling is required or not?"
         contexts = docsearch.similarity_search(query, k=5) 
         prompt = f" You are professional Fraud Analyst. Find answer to the questions as truthfully and in as detailed as possible as per given context only,\n\n\
-        SAR refers to Suspicious activity Report, which is a document that financial institutions must file with the Financial Crimes Enforcement Network (FinCEN) based on the Bank Secrecy Act whenever there is a suspicious activity.\n\n\
-        If The transaction/disputed amount > 5,000 USD value threshold, then check below points to make sure if it is a suspicious activity or not: \n\
-        1. {response_6} analyse this response,if dettails matches then there is no suspicion else, it can be a suspicipos activity.\n\n\
-        2. {response_7} analyse this response, if a potential suspect is identified then this can be a suspicious activity, else not.\n\n\
-        If no suspicious activity is detected based on above mentioned points, write your response as - There is no indication of suspicious activity.Therefore,no requirement to file SAR with FinCEN.\n\n\
-        Context: {contexts}\n\
-        Response (Give me a concise response in few pointers.)"       
+            SAR refers to Suspicious activity Report, which is a document that financial institutions must file with the Financial Crimes Enforcement Network (FinCEN) based on the Bank Secrecy Act whenever there is a suspicious activity.\n\n\
+            1. {response_6} analyse this response,if details matches then there is no suspicion else, it can be a suspicipos activity. (kindly mention the mismatched details in your response).\n\n\
+            2. {response_7} analyse this response,If a potential suspect is identified then this can be a suspicious activity, else not.\n\n\
+            Even if transaction/disputed amount > 5,000 USD but if above criteria does not met, then this can not be considered as a suspicious activity and no SAR filing is required.\n\n\
+            Context: {contexts}\n\
+            Response (Give me a concise response in few pointers.)"
+      
         
         st.write(len(prompt))
         # response_sara_llama = llama_llm(llama_13b,prompt)
