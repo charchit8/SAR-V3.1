@@ -72,7 +72,7 @@ def decision_llama(summ_llama,temp_file_path):
             Response (Give me a concise response.)"
         response_6 = llama_llm(llama_13b,prompt) 
 
-        # st.write(response_6)
+        st.write(response_6)
 
             
         query ="Is there a mention of potential suspect?"
@@ -83,7 +83,7 @@ def decision_llama(summ_llama,temp_file_path):
             Response (Give me a concise response.)"
         response_7 = llama_llm(llama_13b,prompt) 
 
-        # st.write(response_7)
+        st.write(response_7)
 
 
         query ="Give your recommendation if SAR filling is required or not?"
@@ -96,17 +96,16 @@ def decision_llama(summ_llama,temp_file_path):
             Context: {contexts}\n\
             Response (Give me a concise response in few pointers.)"
       
-        
-        st.write(len(prompt))
-        # response_sara_llama = llama_llm(llama_13b,prompt)
-        # response_sara_llama = response_sara_llama.replace("$", " ")
-        # response_sara_llama = response_sara_llama.replace("5,000", "5,000 USD")
-        # response_sara_llama = response_sara_llama.replace("5,600", "5,600 USD")
+        # st.write(len(prompt))
+        response_sara_llama = llama_llm(llama_13b,prompt)
+        response_sara_llama = response_sara_llama.replace("$", " ")
+        response_sara_llama = response_sara_llama.replace("5,000", "5,000 USD")
+        response_sara_llama = response_sara_llama.replace("5,600", "5,600 USD")
         
        
-        # st.markdown(f'''<em>{response_sara_llama}</em>''',unsafe_allow_html=True)
+        st.markdown(f'''<em>{response_sara_llama}</em>''',unsafe_allow_html=True)
 
-        # st.warning('Please carefully review the recommendation and case details before the final submission',icon="⚠️")
+        st.warning('Please carefully review the recommendation and case details before the final submission',icon="⚠️")
 
 def selection1(summ):  
     if summ: 
