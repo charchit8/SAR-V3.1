@@ -173,7 +173,7 @@ def generate_insights_llama(temp_file_path):
                 2. {response_4} analyse this response,If a potential suspect is identified then this can be a suspicious activity, else not.\n\n\
                 Even if transaction/disputed amount > 5,000 USD but if above criteria does not met, then this can not be considered as a suspicious activity. \n\n\
                 Context: {contexts}\n\
-                Response (Give me a conciseand relevant response in few pointers only.)"
+                Response (Give me a concise response in few pointers only.)"
 
                         
                                     
