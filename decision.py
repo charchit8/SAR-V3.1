@@ -62,36 +62,36 @@ def decision_llama(summ_llama,temp_file_path):
     docs, docsearch = embedding_store(temp_file_path,hf_embeddings) 
     if summ_llama: 
 
-        query ="Is invoice is billed to cardholder or someone else?"
-        contexts = docsearch.similarity_search(query, k=5) 
-        prompt = f" You are professional Fraud Analyst. Find answer to the questions as truthfully and in as detailed as possible as per given context only,\n\n\
-        cardholder's name,adress can be identified from cardholder information. Customer is the person who is the owner of the card, customer can also be referenced as the victim with home fraud has taken place.\n\n\
-        Identify name and details mentioned in merchant invoice (Detials mentioned in invoice is of the person who made the transaction,it may be or may not be of the customer)\n\n\
-        Compare both the details, if details mentioned in invoice matches the cardholder details, then invoice is billed to customer else it is billed to someone else who misued the card.\n\n\
-            Context: {contexts}\n\
-            Response (Give me a concise response.Provide your response from the context only.)"
-        response_6 = llama_llm(llama_13b,prompt) 
+        # query ="Is invoice is billed to cardholder or someone else?"
+        # contexts = docsearch.similarity_search(query, k=5) 
+        # prompt = f" You are professional Fraud Analyst. Find answer to the questions as truthfully and in as detailed as possible as per given context only,\n\n\
+        # cardholder's name,adress can be identified from cardholder information. Customer is the person who is the owner of the card, customer can also be referenced as the victim with home fraud has taken place.\n\n\
+        # Identify name and details mentioned in merchant invoice (Detials mentioned in invoice is of the person who made the transaction,it may be or may not be of the customer)\n\n\
+        # Compare both the details, if details mentioned in invoice matches the cardholder details, then invoice is billed to customer else it is billed to someone else who misued the card.\n\n\
+        #     Context: {contexts}\n\
+        #     Response (Give me a concise response.Provide your response from the context only.)"
+        # response_6 = llama_llm(llama_13b,prompt) 
 
-        st.write(response_6)
+        # st.write(response_6)
 
             
-        query ="Is there a mention of potential suspect?"
-        contexts = docsearch.similarity_search(query, k=5) 
-        prompt = f" You are professional Fraud Analyst. Find answer to the questions as truthfully and in as detailed as possible as per given context only,\n\n\
-        Perform Name Enitity Recognition to identify the Suspect name as accurately as possible, given the context. Suspect is the Person who has committed the fraud with the Customer. Respond saying :The Suspect Name is not Present, if there is no suspect in the given context.\n\n\
-            Context: {contexts}\n\
-            Response (Give me a concise response.)"
-        response_7 = llama_llm(llama_13b,prompt) 
+        # query ="Is there a mention of potential suspect?"
+        # contexts = docsearch.similarity_search(query, k=5) 
+        # prompt = f" You are professional Fraud Analyst. Find answer to the questions as truthfully and in as detailed as possible as per given context only,\n\n\
+        # Perform Name Enitity Recognition to identify the Suspect name as accurately as possible, given the context. Suspect is the Person who has committed the fraud with the Customer. Respond saying :The Suspect Name is not Present, if there is no suspect in the given context.\n\n\
+        #     Context: {contexts}\n\
+        #     Response (Give me a concise response.)"
+        # response_7 = llama_llm(llama_13b,prompt) 
 
-        st.write(response_7)
+        # st.write(response_7)
 
 
         query ="Give your recommendation if SAR filling is required or not?"
         contexts = docsearch.similarity_search(query, k=5) 
         prompt = f" You are professional Fraud Analyst. Find answer to the questions as truthfully and in as detailed as possible as per given context only,\n\n\
             SAR refers to Suspicious activity Report, which is a document that financial institutions must file with the Financial Crimes Enforcement Network (FinCEN) based on the Bank Secrecy Act whenever there is a suspicious activity.\n\n\
-            1. {response_6} analyse this response,if details matches then there is no suspicion else, it can be a suspicipos activity. (kindly mention the mismatched details in your response).\n\n\
-            2. {response_7} analyse this response,If a potential suspect is identified then this can be a suspicious activity, else not.\n\n\
+            1. analyse this response,if details matches then there is no suspicion else, it can be a suspicipos activity. (kindly mention the mismatched details in your response).\n\n\
+            2. analyse this response,If a potential suspect is identified then this can be a suspicious activity, else not.\n\n\
             Even if transaction/disputed amount > 5,000 USD but if above criteria does not met, then this can not be considered as a suspicious activity and no SAR filing is required.\n\n\
             Context: {contexts}\n\
             Response (Give me a concise response in few pointers.)"
