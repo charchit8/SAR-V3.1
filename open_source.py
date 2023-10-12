@@ -350,6 +350,7 @@ def summarize_llama():
             text = []
             for key,value in summ_dict_llama.items():
                 text.append(value)
+                st.write(len(value))
             response_summ_llama = llm_chain_llama.run(text)
             response_summ_llama = response_summ_llama.replace("$", " ")
             response_summ_llama = response_summ_llama.replace("5,000", "5,000 USD")
