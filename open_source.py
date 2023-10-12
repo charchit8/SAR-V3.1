@@ -149,9 +149,9 @@ def generate_insights_llama(temp_file_path):
             Compare both the details, if details mentioned in invoice matches the cardholder details, then invoice is billed to customer else it is billed to someone else who misued the card.\n\n\
                 Context: {contexts}\n\
                 Response (Give me a concise response.)"
-            response_3 = usellm(prompt) 
+            response_3 = llama_llm(llama_13b,prompt) 
 
-            # st.write(response_3)
+            st.write(response_3)
 
             
             query ="Is there a mention of potential suspect?"
@@ -160,9 +160,9 @@ def generate_insights_llama(temp_file_path):
             Perform Name Enitity Recognition to identify the Suspect name as accurately as possible, given the context. Suspect is the Person who has committed the fraud with the Customer. Respond saying :The Suspect Name is not Present, if there is no suspect in the given context.\n\n\
                 Context: {contexts}\n\
                 Response (Give me a concise response.)"
-            response_4 = usellm(prompt) 
+            response_4 = llama_llm(llama_13b,prompt) 
 
-            # st.write(response_4)
+            st.write(response_4)
 
 
             query ="Is this is a Suspicious activity or not?"
@@ -186,7 +186,7 @@ def generate_insights_llama(temp_file_path):
             st.session_state["sara_recommendation_llama"] = response1                    
 
             st.markdown("### SARA Recommendation")
-            st.markdown(response1)
+            # st.markdown(response1)
 
 
     st.markdown("---")

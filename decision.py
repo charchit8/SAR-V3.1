@@ -69,7 +69,7 @@ def decision_llama(summ_llama,temp_file_path):
         Identify name and details mentioned in merchant invoice (Detials mentioned in invoice is of the person who made the transaction,it may be or may not be of the customer)\n\n\
         Compare both the details, if details mentioned in invoice matches the cardholder details, then invoice is billed to customer else it is billed to someone else who misued the card.\n\n\
             Context: {contexts}\n\
-            Response (Give me a concise response.)"
+            Response (Give me a concise response.Provide your response from the context only.)"
         response_6 = llama_llm(llama_13b,prompt) 
 
         st.write(response_6)
