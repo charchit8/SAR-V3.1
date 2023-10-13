@@ -82,7 +82,7 @@ def decision_llama(summ_llama,temp_file_path):
                     Response: (Give a short response in a single sentence.Do not give me any Explanation or Note)'''
         response_8 = llama_llm(llama_13b,prompt_1) 
 
-        query = "Is SAR filling is required or not?"
+        query = "Give your recommendation if SAR filling is required or not?"
         context_1 = docsearch.similarity_search(query, k=5)
         prompt = f'''Act as a financial analyst and give concise answer to the question, with given Context.\n\n\
         SAR refers to Suspicious activity Report, which is a document that financial institutions must file with the Financial Crimes Enforcement Network (FinCEN) based on the Bank Secrecy Act whenever there is a suspicious activity.\n\n\
