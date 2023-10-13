@@ -276,10 +276,10 @@ elif selected_option_case_type == "Fraud transaction dispute":
         with col1_up:
             directory_path = "data/"
             fetched_files = read_pdf_files(directory_path)
-            selected_file_name,pdf_file = data_display(directory_path,fetched_files)
+            data_display(directory_path,fetched_files)
             # temp_file_path =  create_temp_file(directory_path,fetched_files)
             with st.spinner("Running Pytesseract"):
-                temp_file_path = pytesseract_code(directory_path,fetched_files,selected_file_name,pdf_file)
+                temp_file_path = pytesseract_code(directory_path,fetched_files)
 
         with col2_up:  
             key_questions()
@@ -372,9 +372,9 @@ elif selected_option_case_type == "Fraud transaction dispute":
         with col1_up:
             directory_path = "data2/"
             fetched_files = read_pdf_files(directory_path)
-            selected_file_name,pdf_file=data_display(directory_path,fetched_files)
+            data_display(directory_path,fetched_files)
             # temp_file_path =  create_temp_file(directory_path,fetched_files)  
-            temp_file_path = pytesseract_code(directory_path,fetched_files,selected_file_name,pdf_file) 
+            temp_file_path = pytesseract_code(directory_path,fetched_files) 
 
         with col2_up:
             key_questions()
