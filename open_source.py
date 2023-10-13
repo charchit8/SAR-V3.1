@@ -144,7 +144,9 @@ def generate_insights_llama(temp_file_path):
             query ="Is invoice is billed to cardholder or someone else?"
             contexts = docsearch.similarity_search(query, k=5) 
             prompt = f" You are professional Fraud Analyst. Find answer to the questions as truthfully and in as detailed as possible as per given context only,\n\n\
-            Identify if Invoice is billed to cardholder or someone else. (cardholder details can be identified from the cardholder information)\n\n\
+            Identify cardholder's name,adress from cardholder information. Customer is the person who is the owner of the card.\n\n\
+            Identify name and address to whom merchant invoice is billed \n\n\
+            Identify if Invoice is billed to cardholder or someone else based on above information. \n\n\
                 Context: {contexts}\n\
                 Response (Give me a concise response.)"
             response_3 = llama_llm(llama_13b,prompt) 
@@ -170,9 +172,9 @@ def generate_insights_llama(temp_file_path):
                 1. {response_3} analyse this response,if invoice is billed to cardholder then there is no suspicion else, it can be a suspicious activity. (kindly mention the mismatched details in your response).\n\n\
                 2. {response_4} analyse this response,If a potential suspect is identified then this can be a suspicious activity, else it is not a suspicious activity.\n\n\
                 Even if transaction/disputed amount > 5,000 USD but if above criteria does not met, then this can not be considered as a suspicious activity. \n\n\
-                Based only on above points, identify if this is a case of suspicious activity or not? \n\n\
+                Analyse above points properly and identify if this is a case of suspicious activity or not? \n\n\
                 Context: {contexts}\n\
-                Response (Give me a concise response in 3-4 pointers and in proper sequence as mentioned above.)"
+                Response (Give me a concise response in few pointers only.)"
 
                         
                                     
