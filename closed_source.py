@@ -128,8 +128,6 @@ def generate_insights_gpt(temp_file_path):
                 Response (Give me a concise response.)"
             response_1 = usellm(prompt) 
 
-            st.write(response_1)
-
             
             query ="Is there a mention of potential suspect?"
             contexts = docsearch.similarity_search(query, k=5) 
@@ -139,8 +137,6 @@ def generate_insights_gpt(temp_file_path):
                 Response (Give me a concise response.)"
             response_2 = usellm(prompt) 
 
-            st.write(response_2)
-
 
             query ="Is this is a Suspicious activity or not?"
             contexts = docsearch.similarity_search(query, k=5) 
@@ -149,7 +145,7 @@ def generate_insights_gpt(temp_file_path):
                 1. {response_1} analyse this response,if details matches or not? If matches then there is no suspicion else, it can be a suspicipos activity. (Also mention the mismatched details).\n\n\
                 2. {response_2} analyse this response, if a potential suspect is identified or not? If identified then this can be a suspicious activity, else not.\n\n\
                 Even if transaction/disputed amount > 5,000 USD but if above criteria does not met, then this can not be considered as a suspicious activity. \n\n\
-                Based on above points identify if this is a case of suspicious activity or not? \n\n\
+                Based on above points, give your recommendation if this is a case of suspicious activity or not? \n\n\
                 Context: {contexts}\n\
                 Response (Give me a concise response in few pointers.)"
             response1 = usellm(prompt) 
