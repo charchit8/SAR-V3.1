@@ -15,14 +15,16 @@ def generate_insights_llama(temp_file_path):
     docs, docsearch = embedding_store(temp_file_path,hf_embeddings) 
 
     with st.spinner('Wait for it...'):
-        # if 'clicked3' not in st.session_state:
-        #     st.session_state.clicked3 = False
+        if 'clicked3' not in st.session_state:
+            st.session_state.clicked3 = False
         
-        # def set_clicked3():
-        #     st.session_state.clicked3 = True
-        #     st.session_state.disabled = True
+        def set_clicked3():
+            st.session_state.clicked3 = True
+            st.session_state.disabled = True
 
-        if st.button("Generate Insights", disabled=st.session_state.disabled):
+        st.button("Generate Insights",on_click=set_clicked3, disabled=st.session_state.disabled)
+        
+        if st.session_state.clicked3:
 
             chat_history = {}
 
@@ -186,6 +188,19 @@ def generate_insights_llama(temp_file_path):
             st.markdown("### SARA Recommendation")
             st.markdown(response1)
 
+            st.markdown("#### Recommendation Feedback:")
+            col_1, col_2, col_3, col_4 = st.columns(4)
+
+            with col_1:
+                if st.button("👍🏻",key=5):
+                    st.write("*Feedback is recorded*")
+    
+
+            with col_2:
+                if st.button("👎🏻",key=6):
+                    st.write("*Feedback is recorded*")
+
+
 
     st.markdown("---")
     
@@ -327,16 +342,16 @@ def generate_insights_llama(temp_file_path):
 
 def summarize_llama():
     with st.spinner('Summarization ...'):
-        # if 'clicked4' not in st.session_state:
-        #     st.session_state.clicked4 = False
+        if 'clicked4' not in st.session_state:
+            st.session_state.clicked4 = False
         
-        # def set_clicked4():
-        #     st.session_state.clicked4 = True
-        #     st.session_state.disabled = True
+        def set_clicked4():
+            st.session_state.clicked4 = True
+            st.session_state.disabled = True
 
         st.markdown("""<span style="font-size: 24px; ">Summarize key findings of the case.</span>""", unsafe_allow_html=True)
-        summ_llama = st.button("Summarize",disabled=st.session_state.disabled)
-        if summ_llama:
+        summ_llama = st.button("Summarize",on_click=set_clicked4,disabled=st.session_state.disabled)
+        if st.session_state.clicked4:
             st.session_state.disabled=False
             template = """Write a detailed summary of the text provided.
             ```{text}```
@@ -354,5 +369,17 @@ def summarize_llama():
             response_summ_llama = response_summ_llama.replace("5,600", "5,600 USD")
             st.session_state["tmp_summary_llama"] = response_summ_llama
             st.write(st.session_state["tmp_summary_llama"])
+
+            st.markdown("#### Summarization Feedback:")
+            col_1, col_2, col_3, col_4 = st.columns(4)
+
+            with col_1:
+                if st.button("👍🏻",key=5):
+                    st.write("*Feedback is recorded*")
+    
+
+            with col_2:
+                if st.button("👎🏻",key=6):
+                    st.write("*Feedback is recorded*")
         
     return st.session_state["tmp_summary_llama"],summ_llama
