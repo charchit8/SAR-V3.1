@@ -192,12 +192,12 @@ def generate_insights_llama(temp_file_path):
             col_1, col_2, col_3, col_4 = st.columns(4)
 
             with col_1:
-                if st.button("👍🏻",key=5):
+                if st.button("👍🏻",key=6):
                     st.write("*Feedback is recorded*")
     
 
             with col_2:
-                if st.button("👎🏻",key=6):
+                if st.button("👎🏻",key=7):
                     st.write("*Feedback is recorded*")
 
 
@@ -374,12 +374,12 @@ def summarize_llama():
             col_1, col_2, col_3, col_4 = st.columns(4)
 
             with col_1:
-                if st.button("👍🏻",key=5):
+                if st.button("👍🏻",key=8):
                     st.write("*Feedback is recorded*")
     
 
             with col_2:
-                if st.button("👎🏻",key=6):
+                if st.button("👎🏻",key=9):
                     st.write("*Feedback is recorded*")
         
     return st.session_state["tmp_summary_llama"],summ_llama
