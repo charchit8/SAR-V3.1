@@ -144,9 +144,7 @@ def generate_insights_llama(temp_file_path):
             query ="Is invoice is billed to cardholder or someone else?"
             contexts = docsearch.similarity_search(query, k=5) 
             prompt = f" You are professional Fraud Analyst. Find answer to the questions as truthfully and in as detailed as possible as per given context only,\n\n\
-            Identify cardholder's name,adress from cardholder information. Customer is the person who is the owner of the card.\n\n\
-            Identify name and address to whom merchant invoice is billed \n\n\
-            Compare both the details identified above and check if invoice is billed to customer or not.\n\n\
+            Identify if Invoice is billed to cradholder or someone else.\n\n\
                 Context: {contexts}\n\
                 Response (Give me a concise response.)"
             response_3 = llama_llm(llama_13b,prompt) 
