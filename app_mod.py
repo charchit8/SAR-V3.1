@@ -372,7 +372,7 @@ elif selected_option_case_type == "Fraud transaction dispute":
 
             if cols[1].button('set'):
                 # call search_1 in session state and set it
-                st.session_state.search_1 = options[0]
+                st.session_state.search_1 = options[1,2]
                         
 
 ## Case where Suspect is not mentioned
