@@ -363,7 +363,17 @@ elif selected_option_case_type == "Fraud transaction dispute":
             elif st.session_state.llm == "Open-Source": 
                 decision_llama(summ_llama,temp_file_path)
                 selection1(summ_llama)
-            
+
+
+            options=[1,2,3]
+            cols = st.columns([1, 2])
+            # when you create the selectbox with a key it automatically tracks it in the session state
+            search = cols[0].selectbox('', options, key='search_1')
+
+            if cols[1].button('set'):
+                # call search_1 in session state and set it
+                st.session_state.search_1 = options[0]
+                        
 
 ## Case where Suspect is not mentioned
     elif st.session_state.case_num == "SAR-2023-13579":
