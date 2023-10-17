@@ -362,27 +362,6 @@ elif selected_option_case_type == "Fraud transaction dispute":
                 selection1(summ_gpt)
             elif st.session_state.llm == "Open-Source": 
                 decision_llama(summ_llama,temp_file_path)
-                selection1(summ_llama)
-
-
-
-            col1,col2 = st.columns([1, 2])
-
-            if 'search_1' not in st.session_state:
-                st.session_state.search_1=[1,2,3]
-            
-            with col1:
-                def but_():
-                    # call search_1 in session state and set it
-                    st.session_state.search_1 = [1,2]
-            
-            red = st.button('set',on_click=but_)
-       
-            with col2:
-              
-                # when you create the selectbox with a key it automatically tracks it in the session state
-                search = st.selectbox('', st.session_state.search_1)
-
            
                         
 
