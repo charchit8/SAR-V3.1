@@ -364,17 +364,22 @@ elif selected_option_case_type == "Fraud transaction dispute":
                 decision_llama(summ_llama,temp_file_path)
                 selection1(summ_llama)
 
-            if 'search_1' not in st.session_state:
-                st.session_state.search_1=[1,2,3]
 
-            cols = st.columns([1, 2])
 
-            if cols[1].button('set'):
-                # call search_1 in session state and set it
-                st.session_state.search_1 = [1,2]
-                
-            # when you create the selectbox with a key it automatically tracks it in the session state
-            search = cols[0].selectbox('', st.session_state.search_1)
+            col1,col2 = st.columns([1, 2])
+            
+            with col1:
+                def but_():
+                    # call search_1 in session state and set it
+                    st.session_state.search_1 = [1,2]
+            
+            red = st.button('set',on_click=but_)
+       
+            with col2:
+                if 'search_1' not in st.session_state:
+                    st.session_state.search_1=[1,2,3]
+                # when you create the selectbox with a key it automatically tracks it in the session state
+                search = st.selectbox('', st.session_state.search_1)
 
            
                         
