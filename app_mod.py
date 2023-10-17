@@ -368,12 +368,15 @@ elif selected_option_case_type == "Fraud transaction dispute":
                 st.session_state.search_1=[1,2,3]
 
             cols = st.columns([1, 2])
-            # when you create the selectbox with a key it automatically tracks it in the session state
-            search = cols[0].selectbox('', st.session_state.search_1)
 
             if cols[1].button('set'):
                 # call search_1 in session state and set it
                 st.session_state.search_1 = [1,2]
+                
+            # when you create the selectbox with a key it automatically tracks it in the session state
+            search = cols[0].selectbox('', st.session_state.search_1)
+
+           
                         
 
 ## Case where Suspect is not mentioned
