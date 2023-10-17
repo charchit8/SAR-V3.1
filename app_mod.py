@@ -367,6 +367,9 @@ elif selected_option_case_type == "Fraud transaction dispute":
 
 
             col1,col2 = st.columns([1, 2])
+
+            if 'search_1' not in st.session_state:
+                st.session_state.search_1=[1,2,3]
             
             with col1:
                 def but_():
@@ -376,8 +379,7 @@ elif selected_option_case_type == "Fraud transaction dispute":
             red = st.button('set',on_click=but_)
        
             with col2:
-                if 'search_1' not in st.session_state:
-                    st.session_state.search_1=[1,2,3]
+              
                 # when you create the selectbox with a key it automatically tracks it in the session state
                 search = st.selectbox('', st.session_state.search_1)
 
