@@ -1,4 +1,4 @@
-from utils import *
+from components.utils import *
 
 # Setting Config for Llama-2
 login(token=st.secrets["HUGGINGFACEHUB_API_TOKEN"])

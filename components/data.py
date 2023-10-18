@@ -1,4 +1,4 @@
-from utils import *
+from components.utils import *
 
 if "pdf_files" not in st.session_state:
     st.session_state.pdf_files = ''

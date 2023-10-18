@@ -1,4 +1,4 @@
-from utils import *
+from components.utils import *
 
 @st.cache_data
 def create_zip_file(file_paths, zip_file_name):
