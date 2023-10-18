@@ -1,4 +1,4 @@
-from components.utils import *
+from utils import *
 
 
 # Setting Env

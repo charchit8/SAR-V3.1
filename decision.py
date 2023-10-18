@@ -1,5 +1,5 @@
-from components.utils import *
-from core.closed_source import *
+from utils import *
+from closed_source import *
 
 #This is the embedding model
 model_name = "thenlper/gte-small"
