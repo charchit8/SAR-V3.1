@@ -189,7 +189,7 @@ def generate_insights_llama(temp_file_path):
             st.markdown(response1)
 
             st.markdown("#### Recommendation Feedback:")
-            col_1, col_2, col_3, col_4 = st.columns(4)
+            col_1, col_2, col_3, col_4, col_5, col_6 = st.columns(6)
 
             with col_1:
                 if st.button("👍🏻",key=6):
@@ -371,7 +371,7 @@ def summarize_llama():
             st.write(st.session_state["tmp_summary_llama"])
 
             st.markdown("#### Summarization Feedback:")
-            col_1, col_2, col_3, col_4 = st.columns(4)
+            col_1, col_2, col_3, col_4, col_5, col_6 = st.columns(6)
 
             with col_1:
                 if st.button("👍🏻",key=8):

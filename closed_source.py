@@ -163,7 +163,7 @@ def generate_insights_gpt(temp_file_path):
 
             
             st.markdown("#### Recommendation Feedback:")
-            col_1, col_2, col_3, col_4 = st.columns(4)
+            col_1, col_2, col_3, col_4, col_5, col_6 = st.columns(6)
 
             with col_1:
                 if st.button("👍🏻",key=2):
@@ -328,7 +328,7 @@ def summarize_gpt():
             st.write(st.session_state["tmp_summary_gpt"])
 
             st.markdown("#### Summarization Feedback:")
-            col_1, col_2, col_3, col_4 = st.columns(4)
+            col_1, col_2, col_3, col_4, col_5, col_6 = st.columns(6)
 
             with col_1:
                 if st.button("👍🏻",key=4):
