@@ -1,12 +1,12 @@
 #-*- coding: utf-8 -*-
 #!/usr/bin/python
 
-from utils import *
-from data import data_display,create_temp_file,pytesseract_code
-from closed_source import generate_insights_gpt,summarize_gpt,key_questions
-from open_source import generate_insights_llama,summarize_llama
-from report import summ_table_report,save_report1,save_report2,download_report
-from decision import decision_gpt,decision_llama,selection1,selection2
+from components.utils import *
+from components.data import data_display,create_temp_file,pytesseract_code
+from core.closed_source import generate_insights_gpt,summarize_gpt,key_questions
+from core.open_source import generate_insights_llama,summarize_llama
+from core.report import summ_table_report,save_report1,save_report2,download_report
+from core.decision import decision_gpt,decision_llama,selection1,selection2
 
 
 
