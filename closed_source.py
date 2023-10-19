@@ -13,6 +13,11 @@ llm = ChatOpenAI(temperature=0.1)
 memory = ConversationSummaryBufferMemory(llm=llm, max_token_limit=500)
 conversation = ConversationChain(llm=llm, memory =memory,verbose=False)
 
+#This is the embedding model
+model_name = "thenlper/gte-small"
+# model_name = "sentence-transformers/all-MiniLM-L6-v2"
+# model_name = "hkunlp/instructor-large" 
+
 def key_questions():
     # creating columns
     col1,col2 = st.columns(2)
@@ -41,9 +46,10 @@ def key_questions():
             st.markdown(df_fixed.style.hide(axis="index").to_html(), unsafe_allow_html=True)
 
 
-def generate_insights_gpt(temp_file_path,hf_embeddings):
+def generate_insights_gpt(temp_file_path):
 
-    with st.spinner('Wait for it...'): 
+    with st.spinner('Wait for it...'):
+        hf_embeddings = embed(model_name)   
         docs, docsearch = embedding_store(temp_file_path,hf_embeddings)   
 
         if 'clicked1' not in st.session_state:
