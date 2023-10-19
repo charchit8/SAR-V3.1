@@ -40,7 +40,7 @@ from pdf2image import convert_from_path
 from fpdf import FPDF
 import base64
 
-@st.cache_data
+@st.cache_data(show_spinner=False)
 def usellm(prompt):
     """
     Getting GPT-3.5 Model into action
@@ -200,7 +200,7 @@ def add_checkboxes_to_dataframe(df):
     return df
 
 # convert scanned pdf to searchable pdf
-@st.cache_data
+@st.cache_data(show_spinner=False)
 def convert_scanned_pdf_to_searchable_pdf(input_file):
     """
      Convert a Scanned PDF to Searchable PDF
@@ -349,7 +349,7 @@ def text_to_docs(text: str) -> List[Document]:
 #     for i in range(len(images)):
 #         os.remove(f'{i}.png')
 
-@st.cache_data
+@st.cache_data(show_spinner=False)
 def convert_image_to_searchable_pdf(input_file):
     """
      Convert a Scanned PDF to Searchable PDF
@@ -384,7 +384,7 @@ def convert_image_to_searchable_pdf(input_file):
     return text
 
 
-@st.cache_data
+@st.cache_data(show_spinner=False)
 def LLM_Response(query,context,prompt,llm):
     llm_chain = LLMChain(prompt,llm)
     response = llm_chain.run({"query":query, "context":context})
@@ -398,7 +398,7 @@ llama_13b = HuggingFaceHub(
                         "max_new_tokens":300})
 
 
-@st.cache_data
+@st.cache_data(show_spinner=False)
 def llama_llm(_llm,prompt):
     response = _llm.predict(prompt)
     return response
@@ -413,7 +413,7 @@ separators=["\n\n", "\n", " ", ""]
 
 
 
-@st.cache_resource
+@st.cache_resource(show_spinner=False)
 def embed(model_name):
     hf_embeddings = HuggingFaceEmbeddings(model_name=model_name)
     return hf_embeddings
@@ -433,7 +433,7 @@ def embed(model_name):
 #     return docs, docsearch
 
 
-@st.cache_data
+@st.cache_data(show_spinner=False)
 def embedding_store(text,_hf_embeddings):
     texts =  text_splitter.split_text(text)
     docs = []
