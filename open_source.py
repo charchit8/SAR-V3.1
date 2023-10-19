@@ -343,7 +343,7 @@ def generate_insights_llama(temp_file_path):
     return st.session_state["tmp_table_llama"], st.session_state["sara_recommendation_llama"]
 
 @st.cache_data(show_spinner=False)
-def summ_llama():
+def summ_llama_():
     template = """Write a detailed summary of the text provided.
     ```{text}```
     Response: (Return your response in a single paragraph.) """
@@ -371,7 +371,7 @@ def summarize_llama():
     summ_llama = st.button("Summarize",on_click=set_clicked4,disabled=st.session_state.disabled)
     with st.spinner("Summarize...."):
         if st.session_state.clicked4:
-            response_summ_llama = summ_llama()
+            response_summ_llama = summ_llama_()
             response_summ_llama = response_summ_llama.replace("$", " ")
             response_summ_llama = response_summ_llama.replace("5,000", "5,000 USD")
             response_summ_llama = response_summ_llama.replace("5,600", "5,600 USD")
