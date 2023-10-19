@@ -283,7 +283,7 @@ elif selected_option_case_type == "Fraud transaction dispute":
             data_display(directory_path,fetched_files)
             with st.spinner("Running..."):
                 temp_file_path = pytesseract_code2(directory_path,fetched_files)
-                st.write(temp_file_path[1])
+                st.write(temp_file_path[0])
                 #This is the embedding model
                 model_name = "thenlper/gte-small"
                 # model_name = "sentence-transformers/all-MiniLM-L6-v2"
