@@ -358,10 +358,11 @@ elif selected_option_case_type == "Fraud transaction dispute":
         with col5_up:
             st.markdown("""<span style="font-size: 24px;color:#0000FF">Is SAR filing required?</span>""", unsafe_allow_html=True)
             if st.session_state.llm == "Closed-Source": 
-                decision_gpt(summ_gpt,temp_file_path)
-                selection1(summ_gpt)
+                decision_gpt(sara_recommendation_gpt,temp_file_path)
+                selection1(sara_recommendation_gpt)
             elif st.session_state.llm == "Open-Source": 
-                decision_llama(summ_llama,temp_file_path)
+                decision_llama(sara_recommendation_llama,temp_file_path)
+                selection1(sara_recommendation_llama)
            
                         
 
@@ -450,17 +451,14 @@ elif selected_option_case_type == "Fraud transaction dispute":
         with col5_up:
             st.markdown("""<span style="font-size: 24px;color:#0000FF">Is SAR filing required?</span>""", unsafe_allow_html=True)     
             if st.session_state.llm == "Closed-Source": 
-                decision_gpt(summ_gpt,temp_file_path)
-                selection2(summ_gpt)
+                decision_gpt(sara_recommendation_gpt,temp_file_path)
+                selection2(sara_recommendation_gpt)
             elif st.session_state.llm == "Open-Source": 
-                decision_llama(summ_llama,temp_file_path)
-                selection2(summ_llama)
+                decision_llama(sara_recommendation_llama,temp_file_path)
+                selection2(sara_recommendation_llama)
+               
             
-            
-        
-
-
-    
+              
 
 
 elif selected_option_case_type == "Money Laundering":
