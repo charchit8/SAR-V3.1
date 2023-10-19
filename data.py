@@ -2,15 +2,6 @@ from utils import *
 
 
 def fetch_evidence(directory_path,fetched_files):
-    # Set the color
-    # st.markdown(
-    #     """
-    #     <div style="display: flex; justify-content: center; align-items: center; height: 48px; border: 1px solid #ccc; border-radius: 5px; background-color: #f2f2f2;">
-    #         <span style="font-size: 16px;  ">Fetch Evidence</span>
-    #     </div>
-    #     """,
-    #     unsafe_allow_html=True
-    # )
     if 'clicked' not in st.session_state:
         st.session_state.clicked = False
 
@@ -116,7 +107,7 @@ def data_display(directory_path,fetched_files):
 
 
 
-
+@st.cache_data
 def create_temp_file(directory_path,fetched_files):
 
     #creating temp directory to have all the files at one place for accessing
@@ -151,6 +142,7 @@ def create_temp_file(directory_path,fetched_files):
 
 
 #This is pytesseract code, which converts image/scanned pdf to text and then converts back to pdf and make a list of all pdf
+@st.cache_data
 def pytesseract_code1(directory_path,fetched_files):
 
     tmp_dir_ = tempfile.mkdtemp()
@@ -237,6 +229,7 @@ def pytesseract_code1(directory_path,fetched_files):
 
 
 #This is pytesseract code, which converts image/scanned pdf to text and return text
+@st.cache_data
 def pytesseract_code2(directory_path,fetched_files):
 
     tmp_dir_ = tempfile.mkdtemp()
