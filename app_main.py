@@ -277,15 +277,17 @@ elif selected_option_case_type == "Fraud transaction dispute":
         with col1_up:
             directory_path = "data/"
             fetched_files = read_pdf_files(directory_path)
-            data_display(directory_path,fetched_files)
-            # temp_file_path =  create_temp_file(directory_path,fetched_files)
             with st.spinner("Running..."):
+                # temp_file_path =  create_temp_file(directory_path,fetched_files)
                 temp_file_path = pytesseract_code(directory_path,fetched_files)
                 #This is the embedding model
                 model_name = "thenlper/gte-small"
                 # model_name = "sentence-transformers/all-MiniLM-L6-v2"
                 # model_name = "hkunlp/instructor-large" 
                 hf_embeddings = embed(model_name)
+            data_display(directory_path,fetched_files)
+            
+            
             
 
         with col2_up:  
