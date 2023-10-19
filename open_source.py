@@ -342,17 +342,16 @@ def generate_insights_llama(temp_file_path):
 
 def summarize_llama():
 
+    if 'clicked4' not in st.session_state:
+        st.session_state.clicked4 = False
+    
+    def set_clicked4():
+        st.session_state.clicked4 = True
+        st.session_state.disabled = True
+
+    st.markdown("""<span style="font-size: 24px; ">Summarize key findings of the case.</span>""", unsafe_allow_html=True)
+    summ_llama = st.button("Summarize",on_click=set_clicked4,disabled=st.session_state.disabled)
     with st.spinner("Summarize...."):
-
-        if 'clicked4' not in st.session_state:
-            st.session_state.clicked4 = False
-        
-        def set_clicked4():
-            st.session_state.clicked4 = True
-            st.session_state.disabled = True
-
-        st.markdown("""<span style="font-size: 24px; ">Summarize key findings of the case.</span>""", unsafe_allow_html=True)
-        summ_llama = st.button("Summarize",on_click=set_clicked4,disabled=st.session_state.disabled)
         if st.session_state.clicked4:
             st.session_state.disabled=False
             template = """Write a detailed summary of the text provided.
