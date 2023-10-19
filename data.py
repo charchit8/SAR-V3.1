@@ -1,7 +1,5 @@
 from utils import *
 
-if "pdf_files" not in st.session_state:
-    st.session_state.pdf_files = ''
 
 def fetch_evidence(directory_path,fetched_files):
     # Set the color
@@ -73,6 +71,8 @@ def fetch_evidence(directory_path,fetched_files):
 
 
 def upload_evidence():
+    if "pdf_files" not in st.session_state:
+        st.session_state.pdf_files = ''
     pdf_file = st.file_uploader("", type=["pdf","png","jpeg","docx","xlsx"], accept_multiple_files=True)
     st.session_state.pdf_files = pdf_file
     # showing files
