@@ -192,6 +192,7 @@ def pytesseract_code(directory_path,fetched_files):
     # For uploaded files, reading files from the created direc and using pytesseract to convert
     # This is not working for images, but only for scanned pdfs
     for file in file_pth:
+        st.write(file_pth)
         st.write(file)
         st.write(file.name)
         file_ext1 = tuple("pdf")
