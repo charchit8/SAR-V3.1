@@ -58,7 +58,7 @@ def decision_gpt(decision,temp_file_path):
 
    
             
-def decision_llama(summ_llama,temp_file_path):
+def decision_llama(decision,temp_file_path):
     hf_embeddings = embed(model_name) 
     docs, docsearch = embedding_store(temp_file_path,hf_embeddings) 
     if decision: 
@@ -119,8 +119,8 @@ def decision_llama(summ_llama,temp_file_path):
 
         st.warning('Please carefully review the recommendation and case details before the final submission',icon="⚠️")
 
-def selection1(summ):  
-    if summ: 
+def selection1(decision):  
+    if decision: 
         selected_rad = st.radio(":blue", ["Yes", "No", "Refer for review"], horizontal=True,disabled=st.session_state.disabled)
         if selected_rad == "Refer for review":
             email_regex = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
@@ -139,8 +139,8 @@ def selection1(summ):
                 st.info("Thanks for your review, Case has been assigned to the next reviewer")
 
 
-def selection2(summ):
-    if summ:       
+def selection2(decision):
+    if decision:       
         selected_rad = st.radio(":blue", ["No", "Yes", "Refer for review"], horizontal=True,disabled=st.session_state.disabled)
         if selected_rad == "Refer for review":
             email_regex = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
