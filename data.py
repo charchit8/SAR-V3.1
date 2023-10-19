@@ -135,6 +135,7 @@ def create_temp_file(directory_path,fetched_files):
         
     if st.session_state.pdf_files:
         for uploaded_file in st.session_state.pdf_files:
+            st.write(uploaded_file)
             file_ext = tuple("pdf")
             if uploaded_file.name.endswith(file_ext):
                 file_pth = os.path.join(tmp_dir_, uploaded_file.name)
