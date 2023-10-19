@@ -182,7 +182,7 @@ def pytesseract_code(directory_path,fetched_files):
         file_ext2 = tuple(["png","jpeg"])
         if uploaded_file.name.endswith(file_ext1):
             file_pth_= os.path.join(tmp_dir_, uploaded_file.name)
-            st.write(file_pth_)
+            # st.write(file_pth_)
             with open(file_pth_, "wb") as file_opn:
                 file_opn.write(uploaded_file.getbuffer())
                 file_pth.append(file_pth_)
@@ -195,9 +195,6 @@ def pytesseract_code(directory_path,fetched_files):
     # For uploaded files, reading files from the created direc and using pytesseract to convert
     # This is not working for images, but only for scanned pdfs
     for file in file_pth:
-        st.write(file_pth)
-        st.write(file)
-        st.write(file.name)
         file_ext1 = tuple("pdf")
         file_ext2 = tuple(["png","jpeg"])
         if file.endswith(file_ext1):
