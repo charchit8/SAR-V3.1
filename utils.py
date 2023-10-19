@@ -386,30 +386,6 @@ def convert_image_to_searchable_pdf(input_file):
 
 
 
-@st.cache_data
-def merge_and_extract_text(pdf_list):
-    """
-    Helper function to merge PDFs and extract text
-    """
-    pdf_merger = PyPDF2.PdfMerger()
-    for pdf in pdf_list:
-        with open(pdf, 'rb') as file:
-            pdf_merger.append(file)
-    output_pdf = BytesIO()
-    pdf_merger.write(output_pdf)
-    pdf_merger.close()
-    
-    # Extract text from merged PDF
-    merged_pdf = PyPDF2.PdfReader(output_pdf)
-    all_text = []
-    for page in merged_pdf.pages:
-        text = page.extract_text()
-        all_text.append(text)
-    
-    return ' '.join(all_text)
-
-
-
 
 llama_13b = HuggingFaceHub(
             repo_id="meta-llama/Llama-2-13b-chat-hf",
