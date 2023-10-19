@@ -285,7 +285,7 @@ elif selected_option_case_type == "Fraud transaction dispute":
             # st.write(temp_file_path)
             data_display(directory_path,fetched_files)
             with st.spinner("Running..."):
-                temp_file_path = pytesseract_code1(directory_path,fetched_files)
+                temp_file_path = pytesseract_code2(directory_path,fetched_files)
                 # #To debug
                 # st.write("It is pdf list:")
                 # st.write(temp_file_path)

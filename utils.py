@@ -416,23 +416,34 @@ def embed(model_name):
 
 
 
-def embedding_store(temp_file_path,hf_embeddings):
-    merged_pdf = merge_pdfs(temp_file_path)
-    final_pdf = PyPDF2.PdfReader(merged_pdf)
-    text = ""
-    for page in final_pdf.pages:
-        text += page.extract_text()
+# def embedding_store(temp_file_path,hf_embeddings):
+#     merged_pdf = merge_pdfs(temp_file_path)
+#     final_pdf = PyPDF2.PdfReader(merged_pdf)
+#     text = ""
+#     for page in final_pdf.pages:
+#         text += page.extract_text()
 
-    texts =  text_splitter.split_text(text)
-    docs = text_to_docs(texts)
-    docsearch = FAISS.from_documents(docs, hf_embeddings)
-    return docs, docsearch
-
-# def embedding_store(text,hf_embeddings):
 #     texts =  text_splitter.split_text(text)
 #     docs = text_to_docs(texts)
 #     docsearch = FAISS.from_documents(docs, hf_embeddings)
 #     return docs, docsearch
+
+def embedding_store(text,hf_embeddings):
+    texts =  text_splitter.split_text(text)
+    docs = []
+    for i, chunk in enumerate(texts):
+        doc = Document(
+            page_content = chunk,
+            metadata = {
+                "page": i + 1,
+                "chunk": i}
+        )
+        # Add sources a metadata
+        doc.metadata["source"] = f"{doc.metadata['page']}-{doc.metadata['chunk']}"
+        docs.append(doc)
+    docs = text_to_docs(texts)
+    docsearch = FAISS.from_documents(docs, hf_embeddings)
+    return docs, docsearch
 
 
 
