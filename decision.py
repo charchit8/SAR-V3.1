@@ -93,7 +93,7 @@ def decision_llama(summ_llama,temp_file_path):
                 Context: {context_1}\n\                      
                 Response: (Give me a concise response in points.)'''
         
-        st.write(len(prompt_1))
+        st.write(len(prompt))
                 
                 
         response_sara_llama = llama_llm(llama_13b,prompt)
