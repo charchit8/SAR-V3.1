@@ -92,7 +92,7 @@ def decision_llama(decision,temp_file_path):
         Response: (Return your response in pointers.) """
         prompt = PromptTemplate(template=template,input_variables=["response_7","response_8"])
         llm_chain_llama = LLMChain(prompt=prompt,llm=llama_13b)
-        response_sara_llama1 = llm_chain_llama.run(["response_7","response_8"])
+        response_sara_llama1 = llm_chain_llama.run({response_7},{response_8})
 
         st.write(response_sara_llama1)
 

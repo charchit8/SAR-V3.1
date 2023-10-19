@@ -7,11 +7,7 @@ if st.secrets["OPENAI_API_KEY"] is not None:
 else:
     os.environ["OPENAI_API_KEY"] = os.environ.get("OPENAI_API_KEY")
 
-#This is the embedding model
-model_name = "thenlper/gte-small"
-# model_name = "sentence-transformers/all-MiniLM-L6-v2"
-# model_name = "hkunlp/instructor-large"   
-    
+
 # Memory setup for gpt-3.5
 llm = ChatOpenAI(temperature=0.1)
 memory = ConversationSummaryBufferMemory(llm=llm, max_token_limit=500)
@@ -45,12 +41,11 @@ def key_questions():
             st.markdown(df_fixed.style.hide(axis="index").to_html(), unsafe_allow_html=True)
 
 
-def generate_insights_gpt(temp_file_path):
+def generate_insights_gpt(temp_file_path,hf_embeddings):
 
-    hf_embeddings = embed(model_name) 
-    docs, docsearch = embedding_store(temp_file_path,hf_embeddings)   
+    with st.spinner('Wait for it...'): 
+        docs, docsearch = embedding_store(temp_file_path,hf_embeddings)   
 
-    with st.spinner('Wait for it...'):
         if 'clicked1' not in st.session_state:
             st.session_state.clicked1 = False
         
