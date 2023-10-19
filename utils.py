@@ -384,7 +384,11 @@ def convert_image_to_searchable_pdf(input_file):
     return text
 
 
-
+@st.cache_data
+def LLM_Response(query,context,prompt,llm):
+    llm_chain = LLMChain(prompt,llm)
+    response = llm_chain.run({"query":query, "context":context})
+    return response
 
 
 llama_13b = HuggingFaceHub(
