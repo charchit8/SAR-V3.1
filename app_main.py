@@ -283,17 +283,13 @@ elif selected_option_case_type == "Fraud transaction dispute":
             data_display(directory_path,fetched_files)
             with st.spinner("Running..."):
                 temp_file_path = pytesseract_code2(directory_path,fetched_files)
-                st.write(temp_file_path)
+                st.write(temp_file_path[1])
                 #This is the embedding model
                 model_name = "thenlper/gte-small"
                 # model_name = "sentence-transformers/all-MiniLM-L6-v2"
                 # model_name = "hkunlp/instructor-large" 
-                hf_embeddings = embed(model_name)
-
-
-            
-            
-
+                hf_embeddings = embed(model_name)     
+ 
         with col2_up:  
             key_questions()
             if st.session_state.llm == "Closed-Source":    
