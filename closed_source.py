@@ -45,7 +45,7 @@ def key_questions():
             df_fixed = df_fixed.loc[:,['S.No.','Questions']]
             st.markdown(df_fixed.style.hide(axis="index").to_html(), unsafe_allow_html=True)
 
-@st.cache_data
+
 def generate_insights_gpt(temp_file_path):
 
     with st.spinner('Wait for it...'):
@@ -292,7 +292,7 @@ def generate_insights_gpt(temp_file_path):
     return st.session_state["tmp_table_gpt"], st.session_state["sara_recommendation_gpt"]
 
 
-@st.cache_data
+
 def summarize_gpt():
 
     if 'clicked2' not in st.session_state:
@@ -306,8 +306,7 @@ def summarize_gpt():
     st.write()
     summ_gpt = st.button("Summarize",on_click=set_clicked2,disabled=st.session_state.disabled)
     with st.spinner("Summarize...."):
-        if st.session_state.clicked2:
-            st.session_state.disabled=False
+        if summ_gpt:
             summ_dict_gpt = st.session_state.tmp_table_gpt.set_index('Question')['Answer'].to_dict()
             # chat_history = resp_dict_obj['Summary']
             memory = ConversationSummaryBufferMemory(llm=llm, max_token_limit=300)
