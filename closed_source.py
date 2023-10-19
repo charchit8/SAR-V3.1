@@ -307,6 +307,7 @@ def summarize_gpt():
     summ_gpt = st.button("Summarize",on_click=set_clicked2,disabled=st.session_state.disabled)
     with st.spinner("Summarize...."):
         if summ_gpt:
+            st.session_state.disabled=False
             summ_dict_gpt = st.session_state.tmp_table_gpt.set_index('Question')['Answer'].to_dict()
             # chat_history = resp_dict_obj['Summary']
             memory = ConversationSummaryBufferMemory(llm=llm, max_token_limit=300)
