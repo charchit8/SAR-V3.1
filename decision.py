@@ -62,7 +62,7 @@ def decision_llama(decision,temp_file_path):
     hf_embeddings = embed(model_name) 
     docs, docsearch = embedding_store(temp_file_path,hf_embeddings) 
     if decision: 
-
+        res = []
         query ="Is invoice is billed to cardholder or someone else?"
         contexts = docsearch.similarity_search(query, k=5) 
         prompt = f" You are professional Fraud Analyst. Find answer to the questions as truthfully and in as detailed as possible as per given context only,\n\n\
@@ -72,9 +72,10 @@ def decision_llama(decision,temp_file_path):
             Context: {contexts}\n\
             Response (Give me a concise response.)"
         response_7 = llama_llm(llama_13b,prompt) 
+        res.append(response_7)
 
 
-            
+        
         query = "What is the suspect's name?"
         context_1 = docsearch.similarity_search(query, k=5)
         prompt_1 =  f'''Act as a professional fraud analyst.You need to check the document and compare if any name discrepencies are present that points towards the suspect who used the card without the consent of the cardholder.
@@ -83,16 +84,18 @@ def decision_llama(decision,temp_file_path):
                     Response: (Give a short response in a single sentence.Do not give me any Explanation or Note)'''
         response_8 = llama_llm(llama_13b,prompt_1) 
 
+        res.append(response_8)
+
         template = """Give your recommendation if SAR filling is required or not?.
         ```
         SAR refers to Suspicious activity Report, which is a document that financial institutions must file with the Financial Crimes Enforcement Network (FinCEN) based on the Bank Secrecy Act whenever there is a suspicious activity.
-        {response_7}, if invoice is billed to cardholder then there is no suspicion else, it can be a suspicious activity.
-        {response_8}, If a potential suspect is identified then this can be a suspicious activity, else it is not a suspicious activity.
+        {text} Analyse this text,if invoice is billed to cardholder then there is no suspicion else, it can be a suspicious activity.
+        and If a potential suspect is identified then this can be a suspicious activity, else it is not a suspicious activity.
         ```
         Response: (Return your response in pointers.) """
-        prompt = PromptTemplate(template=template,input_variables=["response_7","response_8"])
+        prompt = PromptTemplate(template=template,input_variables=["text"])
         llm_chain_llama = LLMChain(prompt=prompt,llm=llama_13b)
-        response_sara_llama1 = llm_chain_llama.run({response_7},{response_8})
+        response_sara_llama1 = llm_chain_llama.run({res})
 
         st.write(response_sara_llama1)
 
