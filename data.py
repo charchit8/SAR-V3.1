@@ -177,7 +177,7 @@ def pytesseract_code(directory_path,fetched_files):
     #file path for uploaded files, getting files at one direc
     file_pth = []
     for uploaded_file in st.session_state.pdf_files:
-        st.write(uploaded_file)
+        # st.write(uploaded_file)
         file_ext1 = tuple("pdf")
         file_ext2 = tuple(["png","jpeg"])
         if uploaded_file.name.endswith(file_ext1):
@@ -185,8 +185,7 @@ def pytesseract_code(directory_path,fetched_files):
             st.write(file_pth_)
             with open(file_pth_, "wb") as file_opn:
                 file_opn.write(uploaded_file.getbuffer())
-                st.write(file_opn)
-                file_pth.append(file_opn)
+                file_pth.append(file_pth_)
         elif uploaded_file.name.endswith(file_ext2):
             file_pth_= os.path.join(tmp_dir_, uploaded_file.name)
             file_pth.append(file_pth_)
