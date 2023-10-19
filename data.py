@@ -240,6 +240,7 @@ def pytesseract_code1(directory_path,fetched_files):
 def pytesseract_code2(directory_path,fetched_files):
 
     tmp_dir_ = tempfile.mkdtemp()
+    all_text = []
    
     #file path for uploaded files, getting files at one direc
     file_pth = []
@@ -262,46 +263,44 @@ def pytesseract_code2(directory_path,fetched_files):
     # For uploaded files, reading files from the created direc and using pytesseract to convert
     # This is not working for images, but only for scanned pdfs
     for file in file_pth:
-        all_text = ""
         file_ext1 = tuple("pdf")
         file_ext2 = tuple(["png","jpeg"])
         if file.endswith(file_ext1):
             if is_searchable_pdf(file)==False:
                 text = convert_scanned_pdf_to_searchable_pdf(file)
-                all_text += text
+                all_text.append(text)
             else:
                 text = extract_text_from_pdf(file)
-                st.write(text)
-                all_text += text                   
+                # st.write(text)
+                all_text.append(text)                   
         elif file.endswith(file_ext2):
             text = convert_image_to_searchable_pdf(file)
-            all_text += text
+            all_text.append(text)
         else:
             pass          
         
         
     #for fetched files, This is working for scanned pdf as well as images
     for fetched_pdf in fetched_files:
-        all_text = ""
         file_ext1 = tuple("pdf")
         file_ext2 = tuple(["png","jpeg"])
         if fetched_pdf.endswith(file_ext1):
             selected_file_path = os.path.join(directory_path, fetched_pdf)
             if is_searchable_pdf(selected_file_path)==False:
                 text = convert_scanned_pdf_to_searchable_pdf(selected_file_path)
-                all_text += text
+                all_text.append(text)
             else:
                 file_pth = os.path.join(directory_path, fetched_pdf)
                 text = extract_text_from_pdf(file_pth)
-                all_text += text
+                all_text.append(text)
         elif fetched_pdf.endswith(file_ext2):
             selected_file_path = os.path.join(directory_path, fetched_pdf)
             text = convert_image_to_searchable_pdf(selected_file_path)
-            all_text += text
+            all_text.append(text)
         else:
             pass
 
-    return all_text
+    return "\n".join(all_text)
 
     
 
