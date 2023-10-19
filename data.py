@@ -151,7 +151,7 @@ def create_temp_file(directory_path,fetched_files):
 
 
 #This is pytesseract code, which converts image/scanned pdf to text and then converts back to pdf and make a list of all pdf
-def pytesseract_code(directory_path,fetched_files):
+def pytesseract_code1(directory_path,fetched_files):
 
     tmp_dir_ = tempfile.mkdtemp()
     temp_file_path= []
