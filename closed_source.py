@@ -60,7 +60,7 @@ def generate_insights_gpt(temp_file_path):
 
     
     st.button("Generate Insights", on_click=set_clicked1,disabled=st.session_state.disabled)
-    
+
     with st.spinner('Wait for it...'):
         if st.session_state.clicked1:
                             
@@ -121,7 +121,8 @@ def generate_insights_gpt(temp_file_path):
             st.table(res_df_gpt)
             st.session_state["tmp_table_gpt"] = pd.concat([st.session_state.tmp_table_gpt, res_df_gpt], ignore_index=True)
 
-
+    with st.spinner('Getting Recommendatoion...'): 
+        if st.session_state.clicked1:
             query ="Is invoice is billed to cardholder or someone else?"
             contexts = docsearch.similarity_search(query, k=5) 
             prompt = f" You are professional Fraud Analyst. Find answer to the questions as truthfully and in as detailed as possible as per given context only,\n\n\
@@ -293,7 +294,7 @@ def generate_insights_gpt(temp_file_path):
     return st.session_state["tmp_table_gpt"], st.session_state["sara_recommendation_gpt"]
 
 
-
+@st.cache_data(show_spinner=False)
 def summarize_gpt():
 
     if 'clicked2' not in st.session_state:
