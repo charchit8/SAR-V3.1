@@ -207,7 +207,6 @@ def convert_scanned_pdf_to_searchable_pdf(input_file):
 
     """
     # Convert PDF to images
-    # print("Running OCR")
     images = convert_from_path(input_file)
 
     # Preprocess images using OpenCV
@@ -410,7 +409,7 @@ separators=["\n\n", "\n", " ", ""]
 
 
 
-@st.cache_data
+@st.cache_resource
 def embed(model_name):
     hf_embeddings = HuggingFaceEmbeddings(model_name=model_name)
     return hf_embeddings
