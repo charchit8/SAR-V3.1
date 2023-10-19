@@ -121,7 +121,7 @@ def generate_insights_gpt(temp_file_path):
             st.table(res_df_gpt)
             st.session_state["tmp_table_gpt"] = pd.concat([st.session_state.tmp_table_gpt, res_df_gpt], ignore_index=True)
 
-    with st.spinner('Getting Recommendatoion...'): 
+    with st.spinner('Getting Recommendation...'): 
         if st.session_state.clicked1:
             query ="Is invoice is billed to cardholder or someone else?"
             contexts = docsearch.similarity_search(query, k=5) 
