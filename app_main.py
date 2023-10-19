@@ -36,6 +36,8 @@ if "context_1" not in st.session_state:
     st.session_state.context_1 = ''
 if "llm" not in st.session_state:
     st.session_state.llm = 'Closed-Source'
+if "pdf_files" not in st.session_state:
+    st.session_state.pdf_files = ''
 
 
 
