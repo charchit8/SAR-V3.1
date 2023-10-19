@@ -14,16 +14,17 @@ def generate_insights_llama(temp_file_path):
     hf_embeddings = embed(model_name) 
     docs, docsearch = embedding_store(temp_file_path,hf_embeddings) 
 
-    with st.spinner('Wait for it...'):
-        if 'clicked3' not in st.session_state:
-            st.session_state.clicked3 = False
-        
-        def set_clicked3():
-            st.session_state.clicked3 = True
-            st.session_state.disabled = True
+    
+    if 'clicked3' not in st.session_state:
+        st.session_state.clicked3 = False
+    
+    def set_clicked3():
+        st.session_state.clicked3 = True
+        st.session_state.disabled = True
 
         st.button("Generate Insights",on_click=set_clicked3, disabled=st.session_state.disabled)
-        
+    
+        with st.spinner('Wait for it...'):
         if st.session_state.clicked3:
 
             chat_history = {}

@@ -58,9 +58,10 @@ def generate_insights_gpt(temp_file_path):
         st.session_state.clicked1 = True
         st.session_state.disabled = True
 
+    
+    st.button("Generate Insights", on_click=set_clicked1,disabled=st.session_state.disabled)
+    
     with st.spinner('Wait for it...'):
-        st.button("Generate Insights", on_click=set_clicked1,disabled=st.session_state.disabled)
-
         if st.session_state.clicked1:
                             
             queries ="Please provide the following information regarding the possible fraud case: What is the name of the customer name,\
