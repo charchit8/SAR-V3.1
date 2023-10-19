@@ -183,7 +183,7 @@ def pytesseract_code1(directory_path,fetched_files):
             file_pth_= os.path.join(tmp_dir_, uploaded_file.name)
             with open(file_pth_, "wb") as file_opn:
                 file_opn.write(uploaded_file.getbuffer())
-                file_pth.append(file_opn)
+                file_pth.append(file_pth_)
         elif uploaded_file.name.endswith(file_ext2):
             file_pth_= os.path.join(tmp_dir_, uploaded_file.name)
             file_pth.append(file_pth_)
@@ -193,7 +193,6 @@ def pytesseract_code1(directory_path,fetched_files):
         # For uploaded files, reading files from the created direc and using pytesseract to convert
         # This is not working for images, but only for scanned pdfs
     for file in file_pth:
-        st.write(file.name)
         file_ext1 = tuple("pdf")
         file_ext2 = tuple(["png","jpeg"])
         if file.endswith(file_ext1):
@@ -201,9 +200,7 @@ def pytesseract_code1(directory_path,fetched_files):
                 text = convert_scanned_pdf_to_searchable_pdf(file)
                 create_pdf(text,'uploaded_file.pdf')
             else:
-                with open(file, "wb") as file_opn:
-                    file_opn.write(file.getbuffer())
-                    temp_file_path.append(file_opn)           
+                temp_file_path.append(file)           
         elif file.endswith(file_ext2):
             text = convert_image_to_searchable_pdf(file)
             create_pdf(text,'uploaded_file.pdf') 
@@ -237,11 +234,6 @@ def pytesseract_code1(directory_path,fetched_files):
 
     return temp_file_path
     
-
-    
-
-
-
 
 
 #This is pytesseract code, which converts image/scanned pdf to text and return text
