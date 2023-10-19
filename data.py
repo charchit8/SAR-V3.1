@@ -71,8 +71,6 @@ def fetch_evidence(directory_path,fetched_files):
 
 
 def upload_evidence():
-    if "pdf_files" not in st.session_state:
-        st.session_state.pdf_files = ''
     pdf_file = st.file_uploader("", type=["pdf","png","jpeg","docx","xlsx"], accept_multiple_files=True)
     st.session_state.pdf_files = pdf_file
     # showing files
@@ -191,9 +189,10 @@ def pytesseract_code(directory_path,fetched_files):
         else:
             pass
 
-        # For uploaded files, reading files from the created direc and using pytesseract to convert
-        # This is not working for images, but only for scanned pdfs
+    # For uploaded files, reading files from the created direc and using pytesseract to convert
+    # This is not working for images, but only for scanned pdfs
     for file in file_pth:
+        st.write(file)
         st.write(file.name)
         file_ext1 = tuple("pdf")
         file_ext2 = tuple(["png","jpeg"])
