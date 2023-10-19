@@ -342,44 +342,46 @@ def generate_insights_llama(temp_file_path):
 
 def summarize_llama():
 
-    if 'clicked4' not in st.session_state:
-        st.session_state.clicked4 = False
-    
-    def set_clicked4():
-        st.session_state.clicked4 = True
-        st.session_state.disabled = True
+    with st.spinner("Summarize...."):
 
-    st.markdown("""<span style="font-size: 24px; ">Summarize key findings of the case.</span>""", unsafe_allow_html=True)
-    summ_llama = st.button("Summarize",on_click=set_clicked4,disabled=st.session_state.disabled)
-    if st.session_state.clicked4:
-        st.session_state.disabled=False
-        template = """Write a detailed summary of the text provided.
-        ```{text}```
-        Response: (Return your response in a single paragraph.) """
-        prompt = PromptTemplate(template=template,input_variables=["text"])
-        llm_chain_llama = LLMChain(prompt=prompt,llm=llama_13b)
+        if 'clicked4' not in st.session_state:
+            st.session_state.clicked4 = False
+        
+        def set_clicked4():
+            st.session_state.clicked4 = True
+            st.session_state.disabled = True
 
-        summ_dict_llama = st.session_state.tmp_table_llama.set_index('Question')['Answer']
-        text = []
-        for key,value in summ_dict_llama.items():
-            text.append(value)
-        response_summ_llama = llm_chain_llama.run(text)
-        response_summ_llama = response_summ_llama.replace("$", " ")
-        response_summ_llama = response_summ_llama.replace("5,000", "5,000 USD")
-        response_summ_llama = response_summ_llama.replace("5,600", "5,600 USD")
-        st.session_state["tmp_summary_llama"] = response_summ_llama
-        st.write(st.session_state["tmp_summary_llama"])
+        st.markdown("""<span style="font-size: 24px; ">Summarize key findings of the case.</span>""", unsafe_allow_html=True)
+        summ_llama = st.button("Summarize",on_click=set_clicked4,disabled=st.session_state.disabled)
+        if st.session_state.clicked4:
+            st.session_state.disabled=False
+            template = """Write a detailed summary of the text provided.
+            ```{text}```
+            Response: (Return your response in a single paragraph.) """
+            prompt = PromptTemplate(template=template,input_variables=["text"])
+            llm_chain_llama = LLMChain(prompt=prompt,llm=llama_13b)
 
-        st.markdown("#### Summarization Feedback:")
-        col_1, col_2, col_3, col_4, col_5, col_6 = st.columns(6)
+            summ_dict_llama = st.session_state.tmp_table_llama.set_index('Question')['Answer']
+            text = []
+            for key,value in summ_dict_llama.items():
+                text.append(value)
+            response_summ_llama = llm_chain_llama.run(text)
+            response_summ_llama = response_summ_llama.replace("$", " ")
+            response_summ_llama = response_summ_llama.replace("5,000", "5,000 USD")
+            response_summ_llama = response_summ_llama.replace("5,600", "5,600 USD")
+            st.session_state["tmp_summary_llama"] = response_summ_llama
+            st.write(st.session_state["tmp_summary_llama"])
 
-        with col_1:
-            if st.button("👍🏻",key=8):
-                st.write("*Feedback is recorded*")
+            st.markdown("#### Summarization Feedback:")
+            col_1, col_2, col_3, col_4, col_5, col_6 = st.columns(6)
+
+            with col_1:
+                if st.button("👍🏻",key=8):
+                    st.write("*Feedback is recorded*")
 
 
-        with col_2:
-            if st.button("👎🏻",key=9):
-                st.write("*Feedback is recorded*")
-    
+            with col_2:
+                if st.button("👎🏻",key=9):
+                    st.write("*Feedback is recorded*")
+        
     return st.session_state["tmp_summary_llama"],summ_llama
