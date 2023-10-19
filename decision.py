@@ -82,13 +82,25 @@ def decision_llama(summ_llama,temp_file_path):
                     Response: (Give a short response in a single sentence.Do not give me any Explanation or Note)'''
         response_8 = llama_llm(llama_13b,prompt_1) 
 
+        template = """Give your recommendation if SAR filling is required or not?.
+        ```
+        SAR refers to Suspicious activity Report, which is a document that financial institutions must file with the Financial Crimes Enforcement Network (FinCEN) based on the Bank Secrecy Act whenever there is a suspicious activity.
+        {response_7}, if invoice is billed to cardholder then there is no suspicion else, it can be a suspicious activity.
+        {response_8}, If a potential suspect is identified then this can be a suspicious activity, else it is not a suspicious activity.
+        ```
+        Response: (Return your response in pointers.) """
+        prompt = PromptTemplate(template=template,input_variables=["response_7","response_8"])
+        llm_chain_llama = LLMChain(prompt=prompt,llm=llama_13b)
+        response_sara_llama1 = llm_chain_llama.run(["response_7","response_8"])
+
+        st.write(response_sara_llama1)
+
         query = "Recommend if SAR filling is required or not?"
         context_1 = docsearch.similarity_search(query, k=5)
         prompt = f'''Act as a financial analyst and give concise answer to the question, with given Context.\n\n\
-        SAR refers to Suspicious activity Report, which is a document that financial institutions must file with the Financial Crimes Enforcement Network (FinCEN) based on the Bank Secrecy Act whenever there is a suspicious activity.\n\n\
+        SAR refers to Suspicious activity Report, which is a document that financial institutions must file with the Financial Crimes Enforcement Network (FinCEN) based on the Bank Secrecy Act.\n\n\
         1. if invoice is billed to cardholder then there is no suspicion else, it can be a suspicious activity. (kindly mention the mismatched details in your response).\n\n\
         2. If a potential suspect is identified then this can be a suspicious activity, else it is not a suspicious activity. Suspect is a person who has commited fraud with the cardholder.\\n\n\
-        If no suspicious activity is detected based on above mentioned points, write your response as - There is no indication of suspicious activity.Therefore,no requirement to file SAR with FinCEN.\n\n\
                 Question: {query}\n\
                 Context: {context_1}\n\                      
                 Response: (Give me a concise response in points.)'''
