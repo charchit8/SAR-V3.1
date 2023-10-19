@@ -156,7 +156,7 @@ def is_searchable_pdf(file_path):
     return False
 
 
-
+@st.cache_data
 def extract_text_from_pdf(file_path):
     with pdfplumber.open(file_path) as pdf:
         all_text = []
@@ -200,6 +200,7 @@ def add_checkboxes_to_dataframe(df):
     return df
 
 # convert scanned pdf to searchable pdf
+@st.cache_data
 def convert_scanned_pdf_to_searchable_pdf(input_file):
     """
      Convert a Scanned PDF to Searchable PDF
@@ -349,7 +350,7 @@ def text_to_docs(text: str) -> List[Document]:
 #     for i in range(len(images)):
 #         os.remove(f'{i}.png')
 
-
+@st.cache_data
 def convert_image_to_searchable_pdf(input_file):
     """
      Convert a Scanned PDF to Searchable PDF
@@ -428,8 +429,9 @@ def embed(model_name):
 #     docsearch = FAISS.from_documents(docs, hf_embeddings)
 #     return docs, docsearch
 
+
 @st.cache_data
-def embedding_store(text,hf_embeddings):
+def embedding_store(text,_hf_embeddings):
     texts =  text_splitter.split_text(text)
     docs = []
     for i, chunk in enumerate(texts):
@@ -443,7 +445,7 @@ def embedding_store(text,hf_embeddings):
         doc.metadata["source"] = f"{doc.metadata['page']}-{doc.metadata['chunk']}"
         docs.append(doc)
     docs = text_to_docs(texts)
-    docsearch = FAISS.from_documents(docs, hf_embeddings)
+    docsearch = FAISS.from_documents(docs, _hf_embeddings)
     return docs, docsearch
 
 
