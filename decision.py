@@ -6,14 +6,9 @@ model_name = "thenlper/gte-small"
 # model_name = "sentence-transformers/all-MiniLM-L6-v2"
 # model_name = "hkunlp/instructor-large"
 
-decision=""
-if st.session_state["sara_recommendation_llama"]:
-    decision = st.session_state["sara_recommendation_llama"]
-elif st.session_state["sara_recommendation_gpt"]:
-    decision = st.session_state["sara_recommendation_gpt"]
-    
 
-def decision_gpt(summ_gpt,temp_file_path):
+
+def decision_gpt(decision,temp_file_path):
     hf_embeddings = embed(model_name) 
     docs, docsearch = embedding_store(temp_file_path,hf_embeddings)   
       
