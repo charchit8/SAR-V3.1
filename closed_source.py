@@ -308,36 +308,36 @@ def summarize_gpt():
     st.markdown("""<span style="font-size: 24px; ">Summarize key findings of the case.</span>""", unsafe_allow_html=True)
     st.write()
     summ_gpt = st.button("Summarize",on_click=set_clicked2,disabled=st.session_state.disabled)
+    with st.spinner("Summarize...."):
+        if st.session_state.clicked2:
+            st.session_state.disabled=False
+            summ_dict_gpt = st.session_state.tmp_table_gpt.set_index('Question')['Answer'].to_dict()
+            # chat_history = resp_dict_obj['Summary']
+            memory = ConversationSummaryBufferMemory(llm=llm, max_token_limit=300)
+            memory.save_context({"input": "This is the entire summary"}, 
+                                {"output": f"{summ_dict_gpt}"})
+            conversation = ConversationChain(
+            llm=llm, 
+            memory = memory,
+            verbose=True)
+            response_summ_gpt = conversation.predict(input="Provide a detailed summary of the text provided by reframing the sentences. Provide the summary in a single paragraph. Please don't include words like these: 'chat summary', 'includes information' in my final summary.")
+            response_summ_gpt = response_summ_gpt.replace("$", " ")
+            response_summ_gpt = response_summ_gpt.replace("5,000", "5,000 USD")
+            response_summ_gpt = response_summ_gpt.replace("5,600", "5,600 USD")
+            st.session_state["tmp_summary_gpt"] = response_summ_gpt
+            st.write(st.session_state["tmp_summary_gpt"])
 
-    if st.session_state.clicked2:
-        st.session_state.disabled=False
-        summ_dict_gpt = st.session_state.tmp_table_gpt.set_index('Question')['Answer'].to_dict()
-        # chat_history = resp_dict_obj['Summary']
-        memory = ConversationSummaryBufferMemory(llm=llm, max_token_limit=300)
-        memory.save_context({"input": "This is the entire summary"}, 
-                            {"output": f"{summ_dict_gpt}"})
-        conversation = ConversationChain(
-        llm=llm, 
-        memory = memory,
-        verbose=True)
-        response_summ_gpt = conversation.predict(input="Provide a detailed summary of the text provided by reframing the sentences. Provide the summary in a single paragraph. Please don't include words like these: 'chat summary', 'includes information' in my final summary.")
-        response_summ_gpt = response_summ_gpt.replace("$", " ")
-        response_summ_gpt = response_summ_gpt.replace("5,000", "5,000 USD")
-        response_summ_gpt = response_summ_gpt.replace("5,600", "5,600 USD")
-        st.session_state["tmp_summary_gpt"] = response_summ_gpt
-        st.write(st.session_state["tmp_summary_gpt"])
+            st.markdown("#### Summarization Feedback:")
+            col_1, col_2, col_3, col_4, col_5, col_6 = st.columns(6)
 
-        st.markdown("#### Summarization Feedback:")
-        col_1, col_2, col_3, col_4, col_5, col_6 = st.columns(6)
-
-        with col_1:
-            if st.button("👍🏻",key=4):
-                st.write("*Feedback is recorded*")
+            with col_1:
+                if st.button("👍🏻",key=4):
+                    st.write("*Feedback is recorded*")
 
 
-        with col_2:
-            if st.button("👎🏻",key=5):
-                st.write("*Feedback is recorded*")
+            with col_2:
+                if st.button("👎🏻",key=5):
+                    st.write("*Feedback is recorded*")
 
 
     return st.session_state["tmp_summary_gpt"],summ_gpt
