@@ -279,10 +279,10 @@ elif selected_option_case_type == "Fraud transaction dispute":
         with col1_up:
             directory_path = "data/"
             fetched_files = read_pdf_files(directory_path)
-            # temp_file_path =  create_temp_file(directory_path,fetched_files)
+            temp_file_path =  create_temp_file(directory_path,fetched_files)
             data_display(directory_path,fetched_files)
             with st.spinner("Running..."):
-                temp_file_path = pytesseract_code2(directory_path,fetched_files)
+                # temp_file_path = pytesseract_code2(directory_path,fetched_files)
                 st.write(temp_file_path[0])
                 #This is the embedding model
                 model_name = "thenlper/gte-small"
