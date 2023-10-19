@@ -340,7 +340,7 @@ def generate_insights_llama(temp_file_path):
     
     return st.session_state["tmp_table_llama"], st.session_state["sara_recommendation_llama"]
 
-
+@st.cache_data(show_spinner=False)
 def summarize_llama():
 
     if 'clicked4' not in st.session_state:
