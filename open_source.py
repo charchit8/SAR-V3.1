@@ -142,7 +142,9 @@ def generate_insights_llama(temp_file_path):
                 pass
             st.table(res_df_llama)
             st.session_state["tmp_table_llama"] = pd.concat([st.session_state.tmp_table_llama, res_df_llama], ignore_index=True)
-        
+    
+    with st.spinner('Getting Recommendatoion...'):   
+        if st.session_state.clicked3:
             ## SARA Recommendation
             query ="Is invoice is billed to cardholder or someone else?"
             contexts = docsearch.similarity_search(query, k=5) 
@@ -340,7 +342,7 @@ def generate_insights_llama(temp_file_path):
     
     return st.session_state["tmp_table_llama"], st.session_state["sara_recommendation_llama"]
 
-@st.cache_data(show_spinner=False)
+# @st.cache_data(show_spinner=False)
 def summarize_llama():
 
     if 'clicked4' not in st.session_state:

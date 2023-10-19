@@ -295,6 +295,18 @@ def generate_insights_gpt(temp_file_path):
 
 
 @st.cache_data(show_spinner=False)
+def summ(input):
+    summ_dict_gpt = st.session_state.tmp_table_gpt.set_index('Question')['Answer'].to_dict()
+    memory = ConversationSummaryBufferMemory(llm=llm, max_token_limit=300)
+    memory.save_context({"input": "This is the entire summary"}, 
+                        {"output": f"{summ_dict_gpt}"})
+    conversation = ConversationChain(
+    llm=llm, 
+    memory = memory,
+    verbose=True)
+    response_summ_gpt = conversation.predict(input)
+    return response_summ_gpt
+
 def summarize_gpt():
 
     if 'clicked2' not in st.session_state:
@@ -309,15 +321,7 @@ def summarize_gpt():
     summ_gpt = st.button("Summarize",on_click=set_clicked2,disabled=st.session_state.disabled)
     with st.spinner("Summarize...."):
         if st.session_state.clicked2:
-            summ_dict_gpt = st.session_state.tmp_table_gpt.set_index('Question')['Answer'].to_dict()
-            memory = ConversationSummaryBufferMemory(llm=llm, max_token_limit=300)
-            memory.save_context({"input": "This is the entire summary"}, 
-                                {"output": f"{summ_dict_gpt}"})
-            conversation = ConversationChain(
-            llm=llm, 
-            memory = memory,
-            verbose=True)
-            response_summ_gpt = conversation.predict(input="Provide a detailed summary of the text provided by reframing the sentences. Provide the summary in a single paragraph. Please don't include words like these: 'chat summary', 'includes information' in my final summary.")
+            summ(input="Provide a detailed summary of the text provided by reframing the sentences. Provide the summary in a single paragraph. Please don't include words like these: 'chat summary', 'includes information' in my final summary.")
             response_summ_gpt = response_summ_gpt.replace("$", " ")
             response_summ_gpt = response_summ_gpt.replace("5,000", "5,000 USD")
             response_summ_gpt = response_summ_gpt.replace("5,600", "5,600 USD")
