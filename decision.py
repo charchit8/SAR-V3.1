@@ -88,7 +88,7 @@ def decision_llama(summ_llama,temp_file_path):
         SAR refers to Suspicious activity Report, which is a document that financial institutions must file with the Financial Crimes Enforcement Network (FinCEN) based on the Bank Secrecy Act whenever there is a suspicious activity.\n\n\
         If The transaction/disputed amount > 5,000 USD value threshold, then check below points to make sure if it is a suspicious activity or not: \n\
         1. {response_7} analyse this response,if invoice is billed to cardholder then there is no suspicion else, it can be a suspicious activity. (kindly mention the mismatched details in your response).\n\n\
-        2. {response_8} analyse this response,If a potential suspect is identified then this can be a suspicious activity, else it is not a suspicious activity.\n\n\
+        2. If a potential suspect is identified then this can be a suspicious activity, else it is not a suspicious activity. Suspect is a person who has commited fraud with the cardholder.\\n\n\
         If no suspicious activity is detected based on above mentioned points, write your response as - There is no indication of suspicious activity.Therefore,no requirement to file SAR with FinCEN.\n\n\
                 Question: {query}\n\
                 Context: {context_1}\n\                      
