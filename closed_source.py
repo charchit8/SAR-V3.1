@@ -48,17 +48,17 @@ def key_questions():
 
 def generate_insights_gpt(temp_file_path):
 
+    hf_embeddings = embed(model_name)   
+    docs, docsearch = embedding_store(temp_file_path,hf_embeddings)   
+
+    if 'clicked1' not in st.session_state:
+        st.session_state.clicked1 = False
+    
+    def set_clicked1():
+        st.session_state.clicked1 = True
+        st.session_state.disabled = True
+
     with st.spinner('Wait for it...'):
-        hf_embeddings = embed(model_name)   
-        docs, docsearch = embedding_store(temp_file_path,hf_embeddings)   
-
-        if 'clicked1' not in st.session_state:
-            st.session_state.clicked1 = False
-        
-        def set_clicked1():
-            st.session_state.clicked1 = True
-            st.session_state.disabled = True
-
         st.button("Generate Insights", on_click=set_clicked1,disabled=st.session_state.disabled)
 
         if st.session_state.clicked1:
@@ -303,12 +303,11 @@ def summarize_gpt():
         st.session_state.disabled = True
 
     st.markdown("""<span style="font-size: 24px; ">Summarize key findings of the case.</span>""", unsafe_allow_html=True)
-    st.write()
+    st.write() #This is to have gap between 
     summ_gpt = st.button("Summarize",on_click=set_clicked2,disabled=st.session_state.disabled)
     with st.spinner("Summarize...."):
         if st.session_state.clicked2:
             summ_dict_gpt = st.session_state.tmp_table_gpt.set_index('Question')['Answer'].to_dict()
-            # chat_history = resp_dict_obj['Summary']
             memory = ConversationSummaryBufferMemory(llm=llm, max_token_limit=300)
             memory.save_context({"input": "This is the entire summary"}, 
                                 {"output": f"{summ_dict_gpt}"})
