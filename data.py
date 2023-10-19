@@ -202,9 +202,10 @@ def pytesseract_code(directory_path,fetched_files):
                 text = convert_scanned_pdf_to_searchable_pdf(file)
                 create_pdf(text,'uploaded_file.pdf')
             else:
-                with open(file, "wb") as file_opn:
-                    file_opn.write(file.getbuffer())
-                    temp_file_path.append(file_opn)           
+                temp_file_path.append(file)           
+                # with open(file, "wb") as file_opn:
+                #     file_opn.write(file.getbuffer())
+                #     temp_file_path.append(file_opn)           
         elif file.endswith(file_ext2):
             text = convert_image_to_searchable_pdf(file)
             create_pdf(text,'uploaded_file.pdf') 
