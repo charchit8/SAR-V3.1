@@ -280,6 +280,7 @@ elif selected_option_case_type == "Fraud transaction dispute":
             directory_path = "data/"
             fetched_files = read_pdf_files(directory_path)
             # temp_file_path =  create_temp_file(directory_path,fetched_files)
+            data_display(directory_path,fetched_files)
             with st.spinner("Running..."):
                 temp_file_path = pytesseract_code(directory_path,fetched_files)
                 #This is the embedding model
@@ -288,7 +289,6 @@ elif selected_option_case_type == "Fraud transaction dispute":
                 # model_name = "hkunlp/instructor-large" 
                 hf_embeddings = embed(model_name)
 
-            data_display(directory_path,fetched_files)
 
             
             
