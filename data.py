@@ -292,8 +292,8 @@ def pytesseract_code2(directory_path,fetched_files):
                 all_text += text
             else:
                 file_pth = os.path.join(directory_path, fetched_pdf)
-                for page in file.pages:
-                    all_text += page.extract_text()  
+                text = extract_text_from_pdf(file_pth)
+                all_text += text
         elif fetched_pdf.endswith(file_ext2):
             selected_file_path = os.path.join(directory_path, fetched_pdf)
             text = convert_image_to_searchable_pdf(selected_file_path)
