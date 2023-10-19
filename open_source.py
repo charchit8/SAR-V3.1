@@ -22,9 +22,9 @@ def generate_insights_llama(temp_file_path):
         st.session_state.clicked3 = True
         st.session_state.disabled = True
 
-        st.button("Generate Insights",on_click=set_clicked3, disabled=st.session_state.disabled)
+    st.button("Generate Insights",on_click=set_clicked3, disabled=st.session_state.disabled)
     
-        with st.spinner('Wait for it...'):
+    with st.spinner('Wait for it...'):
         if st.session_state.clicked3:
 
             chat_history = {}
