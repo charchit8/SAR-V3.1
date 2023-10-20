@@ -66,7 +66,7 @@ def generate_insights_gpt(temp_file_path):
                             
             queries ="Please provide the following information regarding the possible fraud case: What is the name of the customer name,\
             has any suspect been reported, list the merchant name, how was the bank notified, when was the bank notified, what is the fraud type,\
-            when did the fraud occur, was the disputed amount greater than 5000 USD, what type of cards are involved, was the police report filed,\
+            when did the fraud occur, was the disputed amount greater than 5000 USD, what type of debit/credit cards are involved, was the police report filed,\
             and based on the evidence, is this a suspicious activity(Summarize all the questions asked prior to this in a detailed manner),that's the answer of\
             whether this is a suspicious activity\
             "
